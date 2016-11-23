@@ -1,0 +1,19 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="choose_mode_button_textsize">30dp</dimen>
+    <dimen name="data_text_size_live">20dp</dimen>
+    <dimen name="margin_fromFreq_to_peak">70dp</dimen>
+    <dimen name="margin_fromFreq_to_rms">330dp</dimen>
+    <dimen name="valueBarHight">30dp</dimen>
+    <dimen name="hightOfListElement">30dp</dimen>
+    <dimen name="button_distance_to_top">7dp</dimen>
+    <item name="dropDown_duration" type="dimen" format="float">500</item>
+    <item format="float" name="dropDown_fromXScale" type="dimen" >1.0</item>
+    <item format="float" name="dropDown_fromYScale" type="dimen">0.0</item>
+    <item name="set_weight_between_mode_buttons" type="dimen" format="float">0.1</item>
+    <item name="dropDown_toXScale" type="dimen" format="float">1.0</item>
+    <item name="dropDown_toYScale" type="dimen" format="float">1.0</item>
+
+</resources>

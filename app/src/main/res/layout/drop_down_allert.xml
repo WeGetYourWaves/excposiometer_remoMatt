@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_dropDown"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dropDown_Background"
+    >
+
+
+
+    <TextView
+        android:id="@+id/textView_dropDownAllert"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textSize="20dp"
+        android:text="No Wifi Connection"
+        android:textColor="#ffffff"
+        android:background="@color/allert"
+        android:layout_gravity="top|center_horizontal|center_vertical"
+        android:gravity="center_horizontal|center_vertical"
+        />
+
+
+</LinearLayout>

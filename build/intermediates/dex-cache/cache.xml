@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_4741fbcf083f06c43f5b2f902e605ac2e87edb02/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-24.2.1_66758a02a95d5cbc67562c4f904a93a6613c1984/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-24.2.1_a093958bd33fe36b4eb15dd6e6f69072e7947828/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-24.2.1_98d57f9a91d55c44792a3677606a45251e7af4e5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-24.2.1_8b021eb535e367a97b39872ab4d71f7a93f0bce1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_c9f1fcf7627a6670d1d8e5ca448e21c7358a6941/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_7524f4241aa8313a0947c93b5ca46ef85d9adfc5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-24.2.1_82ef4be69b0018334531e0dd793f7a75d58fc874/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-24.2.1_f93cc580a07282f39954c30dc09c989a6cbba5b2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="69b8bca0eae5c513fd0e1cff0bead4852463438c">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_118d5b1de2af560f097f8204543e426469a8a272/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/Android_SDK/Sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.2.1_c3c2afe70298ee777897072ff41da3e9b3e3479a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-appindexing-8.4.0_0e9aa6a37378e81070577ef8908f2169c2e53495/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-basement-8.4.0_b885d6e88e2b0956d5b264b114069588d388fb4a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_60c8a6860269cf5df09181b0c61abca44a7a3595/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-24.2.1_43db09564489130fdf800ff62201d2010cd689bd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.android.support/design/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-24.2.1_97699bb494e4d6f60374df50a52dc8cf2cffc5ad/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-24.2.1_56e1b99b9545bad8c54ce0e9bb90ceec423c384a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-base-8.4.0_79fc5d2b413b8b771f6628d3fc2ece47e527d4ee/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-24.2.1_6d97114b7bf5fb431e398407833d10dd4f2a5704/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="c9458cc2df83005b2b2a241b671c9b3eb682c1f9">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_068d3d6eacf209efd4efe5e9588e9c5b6ac3f3be/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-24.2.1_6617d53244e05a2ccdeb6210daebb62f5603f52e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_ca0aef6c652a31d469790b4d14e84f1dbbfa503e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/opt/android-studio/gradle/m2repository/commons-io/commons-io/2.4/commons-io-2.4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
+        <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/commons-io-2.4_903097326c585ffbfceccce27d1c923b16154ba6/classes.dex" />
+    </item>
+
+</items>

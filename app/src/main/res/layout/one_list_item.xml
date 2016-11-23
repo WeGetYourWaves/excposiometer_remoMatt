@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/background_listview">
+
+
+    <TextView
+        android:id="@+id/textview_freq"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:textSize="25dp"
+        android:text="freq"
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true"
+        android:gravity="left"
+        />
+
+    <TextView
+        android:id="@+id/textview_peak"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/valueBarHight"
+        android:background="@color/liveValues"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/textview_freq"
+        android:layout_marginLeft="@dimen/margin_fromFreq_to_peak"
+         />
+
+    <TextView
+    android:id="@+id/textview_rms"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/valueBarHight"
+    android:background="@color/liveValues"
+    android:layout_centerVertical="true"
+    android:layout_toRightOf="@+id/textview_freq"
+    android:layout_marginLeft="@dimen/margin_fromFreq_to_rms"
+    />
+
+
+
+
+    <TextView
+        android:id="@+id/show_peak"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/valueBarHight"
+        android:layout_alignLeft="@+id/textview_peak"
+        android:layout_marginLeft="5dp"
+        android:textSize="@dimen/data_text_size_live"
+        android:layout_centerInParent="true"
+
+        />
+
+    <TextView
+        android:id="@+id/show_rms"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/valueBarHight"
+        android:layout_alignLeft="@+id/textview_rms"
+        android:layout_marginLeft="5dp"
+        android:textSize="@dimen/data_text_size_live"
+        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
+
+        />
+
+
+</RelativeLayout>

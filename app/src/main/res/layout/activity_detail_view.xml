@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_detail_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+
+    tools:context="com.example.matthustahli.radarexposimeter.DetailViewActivity">
+
+    <ListView
+        android:id="@+id/list_live_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_rms"
+        android:layout_marginTop="10dp"
+        android:layout_above="@+id/edittext_new_freq"
+        />
+
+    <include
+        layout="@layout/settings"
+        android:visibility="gone"
+
+        />
+
+
+    <ImageButton
+        android:id="@+id/setting_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="@dimen/button_distance_to_top"
+        android:background="@drawable/oval_settings"
+        android:src="@drawable/button_setting"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:padding="10dp"
+        />
+
+
+
+    <ImageButton
+        android:id="@+id/b_add_freq_to_list"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/oval"
+        android:src="@drawable/ic_add"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/text_freq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FREQ"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="50dp"
+        />
+    <TextView
+        android:id="@+id/text_peak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PEAK"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:id="@+id/text_rms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RMS"
+        android:textSize="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="5dp"
+
+        />
+
+    <EditText
+        android:id="@+id/edittext_new_freq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="add FREQ"
+        android:textSize="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:inputType="number"
+        android:focusable="true"
+        android:visibility="gone"
+        />
+
+
+</RelativeLayout>

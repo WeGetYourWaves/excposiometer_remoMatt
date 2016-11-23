@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_setting"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" >
+    </Space>
+
+    <Button
+        android:id="@+id/b_mode_normal"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/choose_mode_button_color"
+        android:text="Normal"
+        android:textSize="@dimen/choose_mode_button_textsize"
+        />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="@dimen/set_weight_between_mode_buttons" >
+    </Space>
+
+    <Button
+        android:id="@+id/b_mode_21db"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/choose_mode_button_color"
+        android:text="21dB"
+        android:textSize="@dimen/choose_mode_button_textsize"
+
+        />
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="@dimen/set_weight_between_mode_buttons" >
+    </Space>
+
+    <Button
+        android:id="@+id/b_mode_42db"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/choose_mode_button_color"
+        android:text="42dB"
+        android:textSize="@dimen/choose_mode_button_textsize"
+
+        />
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="@dimen/set_weight_between_mode_buttons" >
+    </Space>
+    <Button
+        android:id="@+id/b_mode_accumulator"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/choose_mode_button_color"
+        android:text="Accumulate"
+        android:textSize="@dimen/choose_mode_button_textsize"
+
+        />
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" >
+    </Space>
+
+</LinearLayout>

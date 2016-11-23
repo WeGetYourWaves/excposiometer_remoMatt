@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_attenuator_main"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.matthustahli.radarexposimeter.AttenuatorMainActivity">
+
+
+    <ProgressBar
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:id="@+id/progress_bar"
+        style="?android:progressBarStyleHorizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+
+<LinearLayout
+
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_alignParentLeft="true"
+    >
+
+    <ImageButton
+        android:id="@+id/b_batterie"
+        android:layout_width="60dp"
+        android:layout_height="35dp"
+        android:background="@drawable/ic_batterie_empty"
+        />
+
+    <TextView
+        android:id="@+id/id_device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID: 125"
+        android:textSize="18dp"
+        />
+
+</LinearLayout>
+
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/b_chico"
+        android:background="@android:color/transparent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="25dp"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/settings_atStart"
+        >
+
+
+        <Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" >
+        </Space>
+
+        <Button
+        android:id="@+id/b_mode_normal"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/choose_mode_button_color"
+        android:text="Normal"
+        android:textSize="@dimen/choose_mode_button_textsize"
+        />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="@dimen/set_weight_between_mode_buttons" >
+    </Space>
+
+    <Button
+        android:id="@+id/b_mode_21db"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/choose_mode_button_color"
+        android:text="21dB"
+        android:textSize="@dimen/choose_mode_button_textsize"
+
+        />
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="@dimen/set_weight_between_mode_buttons" >
+    </Space>
+
+    <Button
+        android:id="@+id/b_mode_42db"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/choose_mode_button_color"
+        android:text="42dB"
+        android:textSize="@dimen/choose_mode_button_textsize"
+
+        />
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="@dimen/set_weight_between_mode_buttons" >
+    </Space>
+    <Button
+        android:id="@+id/b_mode_accumulator"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/choose_mode_button_color"
+        android:text="Accumulate"
+        android:textSize="@dimen/choose_mode_button_textsize"
+
+        />
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" >
+    </Space>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/andi"
+        android:visibility="gone"
+        android:src="@drawable/chico_andre"
+        />
+</RelativeLayout>

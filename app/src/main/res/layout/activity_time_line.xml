@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_time_line"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.matthustahli.radarexposimeter.TimeLineActivity">
+
+    <ImageView
+        android:id="@+id/imageView_timeline_bitmap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PEAK"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ImageButton
+        android:id="@+id/setting_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/switch_to_peak"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="@dimen/button_distance_to_top"
+        android:background="@drawable/oval_settings"
+        android:src="@drawable/button_setting"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:padding="10dp"
+        />
+
+    <Button
+        android:id="@+id/switch_to_peak"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="@dimen/button_distance_to_top"
+        android:background="@drawable/oval_status_plot"
+        android:text="RMS" />
+
+    <include
+        layout="@layout/settings"
+        android:visibility="gone"
+        />
+
+    <include
+        layout="@layout/drop_down_allert"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>
