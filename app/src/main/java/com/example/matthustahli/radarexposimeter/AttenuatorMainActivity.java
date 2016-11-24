@@ -1,6 +1,7 @@
 package com.example.matthustahli.radarexposimeter;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -35,9 +36,11 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
     Handler h = new Handler();
     Integer progress=0;
     Intent service;
-
+    final String LOG_TAG = "AttenuatorMainActivity";
     WifiDataBuffer buffer = new WifiDataBuffer();
-    TCP_SERVER server = new Fake_TCP_Server(buffer);
+    MyActivityReceiver AttenuattorMainActivityReceiver = new MyActivityReceiver(LOG_TAG, buffer);
+
+
 
 
     @Override
@@ -50,19 +53,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         activateClickListener();
 
         if (savedInstanceState == null) {
-            // todo activate OnStartCommand in service only once..
-            if (Intent.ACTION_MAIN.equals(this.getIntent().getAction())) {
-                // service = new Intent(this, MasterSlaveService.class);
-                // startService(service);
-
                 //testToLetprogressRun();
-                Toast.makeText(this, "again-.-", Toast.LENGTH_SHORT).show();
-
-                //HotSpot einschalten und TCPServer starten
-                turn_on_hotspot();
-
-                //todo create calibration table
-            }
         }
         calibration = new Calibration_Activity(buffer);
     }
@@ -131,29 +122,18 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         startActivity(intent);
     }
 
-    void turn_on_hotspot() {
-        //HotSpot einschalten
-        wifi_manager = (WifiManager) this.getSystemService(AttenuatorMainActivity.this.WIFI_SERVICE);
-        WifiConfiguration wifi_configuration = null;
-        wifi_manager.setWifiEnabled(false);
-        try {
-            // Source http://stackoverflow.com/questions/13946607/android-how-to-turn-on-hotspot-in-android-programmatically
-            Method method = wifi_manager.getClass().getMethod("setWifiApEnabled", WifiConfiguration.class, boolean.class);
-            method.invoke(wifi_manager, wifi_configuration, true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
     @Override
     public void onStart() {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(CommunicationService.TRIGGER_Serv2Act);
+        registerReceiver(AttenuattorMainActivityReceiver, intentFilter);
+        StartService();
         super.onStart();
     }
 
     @Override
     public void onStop() {
+        unregisterReceiver(AttenuattorMainActivityReceiver);
         super.onStop();
     }
 
@@ -199,5 +179,10 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
                     image.setVisibility(ImageView.GONE);
                 }
         }
+    }
+
+    private void StartService() {
+        Intent intent = new Intent(this, CommunicationService.class);
+        startService(intent);
     }
 }
