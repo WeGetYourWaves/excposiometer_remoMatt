@@ -8,7 +8,7 @@ import android.content.IntentFilter;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 

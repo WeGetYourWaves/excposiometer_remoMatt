@@ -1,11 +1,13 @@
 package com.example.matthustahli.radarexposimeter;
 
+import android.support.v7.app.AppCompatActivity;
+
 import java.io.Serializable;
 
 /**
  * Created by Remo on 20.10.2016.
  */
-public class Activity_Superclass implements Serializable{
+public class Activity_Superclass extends AppCompatActivity implements Serializable{
 
     public Calibration cali_NormRMS;
     public Calibration cali_NormPeak;

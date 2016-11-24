@@ -1,6 +1,7 @@
 package com.example.matthustahli.radarexposimeter;
 
 import android.content.Intent;
+import android.os.Looper;
 import android.util.Log;
 import android.content.Context;
 import java.io.StringReader;
@@ -13,11 +14,18 @@ import static java.lang.Thread.sleep;
 public class Calibration_Activity extends Activity_Superclass{
 
     public WifiDataBuffer buffer;
-    int progress = 0;
+    public int progress = 0;
 
     Calibration_Activity(WifiDataBuffer buf) {
        buffer = buf;
-        set_calibration();
+       Thread calithread = new Thread(new Runnable() {
+           @Override
+           public void run() {
+               Looper.prepare();
+               set_calibration();
+            }
+       });
+        calithread.start();
      }
 
 
@@ -39,8 +47,7 @@ public class Calibration_Activity extends Activity_Superclass{
         //send Cali Trigger
         Cal_Packet_Trigger calTrigger = new Cal_Packet_Trigger(device_id, attenuator);
         byte[] triggerPacket = calTrigger.get_packet();
-        MyActivityBroadcaster broadcaster = new MyActivityBroadcaster();
-        broadcaster.sendTrigger(triggerPacket);
+        sendTrigger(triggerPacket);
 
         //get Progress Packages
         for (int i = 0; i <27; i++){
@@ -131,6 +138,14 @@ public class Calibration_Activity extends Activity_Superclass{
                 cali_LNA_RMS = new Calibration(cali_table);
             }
         }
+    }
+
+    public void sendTrigger(byte[] TriggerPack) {
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
+        intent.putExtra(CommunicationService.TRIGGER_Act2Serv, TriggerPack);
+        sendBroadcast(intent);
     }
 
 }

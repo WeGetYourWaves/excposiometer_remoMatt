@@ -8,12 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 
 public class MyActivityBroadcaster extends AppCompatActivity {
 
+    MyActivityBroadcaster(){
+
+    }
+
     public void sendTrigger(byte[] TriggerPack) {
         Intent intent = new Intent();
         intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
         intent.putExtra(CommunicationService.TRIGGER_Act2Serv, TriggerPack);
         sendBroadcast(intent);
-
-
     }
 }

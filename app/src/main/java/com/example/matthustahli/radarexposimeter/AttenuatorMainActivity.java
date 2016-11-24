@@ -8,6 +8,7 @@ import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -34,7 +35,6 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
     ProgressBar progressBar;
     LinearLayout layout_settings;
     Handler h = new Handler();
-    Integer progress=0;
     Intent service;
     final String LOG_TAG = "AttenuatorMainActivity";
     WifiDataBuffer buffer = new WifiDataBuffer();
@@ -53,13 +53,16 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         activateClickListener();
 
         if (savedInstanceState == null) {
-                //testToLetprogressRun();
+            testToLetprogressRun();
         }
+        //calibration = new Calibration_Activity(buffer);
         calibration = new Calibration_Activity(buffer);
+        Log.d("AttenuatorMainActivity" , "onCreate finished");
     }
 
 
     private void initializeButtons(){
+        Log.d("AttenuatorMainActivity" , "initializeButtons called");
         b_modeNormal = (Button) findViewById(R.id.b_mode_normal);
         b_mode21dB = (Button) findViewById(R.id.b_mode_21db);
         b_mode41dB = (Button) findViewById(R.id.b_mode_42db);
@@ -77,7 +80,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         b_mode41dB.setOnClickListener(this);
         b_mode21dB.setOnClickListener(this);
         b_chico.setOnClickListener(this);
-        //layout_settings.setVisibility(View.GONE);
+        layout_settings.setVisibility(View.GONE);
         progressBar.setVisibility(ProgressBar.GONE);
 
     }
@@ -87,15 +90,24 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         Thread timer = new Thread(new Runnable() {
             @Override
             public void run() {
-                progressBar.setProgress(progress);
-                while (progress < 100) {
+                Log.d("AttenuatorMainActivity" , "progressbar called");
+                progressBar.setMax(26);
+                while (calibration == null){
+                    progressBar.setProgress(0);
                     try{
                         sleep(50);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    progress = 2 + progress;
-                    progressBar.setProgress(progress,true);
+                }
+                progressBar.setProgress(calibration.progress);
+                while (calibration.progress < progressBar.getMax()) {
+                    try{
+                        sleep(50);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    progressBar.setProgress(calibration.progress);
                 }
                 runOnUiThread(new Runnable() {
                     @Override
@@ -124,6 +136,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onStart() {
+        Log.d("AttenuatorMainActivity" , "onStart called");
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(CommunicationService.TRIGGER_Serv2Act);
         registerReceiver(AttenuattorMainActivityReceiver, intentFilter);
