@@ -1,15 +1,19 @@
 package com.example.matthustahli.radarexposimeter;
 
-import java.io.Serializable;
+import android.content.Intent;
+import android.util.Log;
+import android.content.Context;
+import java.io.StringReader;
 
 import static java.lang.Thread.sleep;
 
 /**
  * Created by Remo on 20.10.2016.
  */
-public class Calibration_Activity extends Activity_Superclass implements Serializable{
+public class Calibration_Activity extends Activity_Superclass{
 
     public WifiDataBuffer buffer;
+    int progress = 0;
 
     Calibration_Activity(WifiDataBuffer buf) {
        buffer = buf;
@@ -20,6 +24,7 @@ public class Calibration_Activity extends Activity_Superclass implements Seriali
 
 
     synchronized public void set_calibration(){
+        //get Ready Packet
         while (!buffer.isDataWaiting_FromESP()) {
             try {
                 sleep(10);
@@ -31,10 +36,27 @@ public class Calibration_Activity extends Activity_Superclass implements Seriali
         int device_id = packet_ready.get_device_id();
         int attenuator = packet_ready.get_attenuator();
 
+        //send Cali Trigger
         Cal_Packet_Trigger calTrigger = new Cal_Packet_Trigger(device_id, attenuator);
         byte[] triggerPacket = calTrigger.get_packet();
-        buffer.enqueue_ToESP(triggerPacket);
+        MyActivityBroadcaster broadcaster = new MyActivityBroadcaster();
+        broadcaster.sendTrigger(triggerPacket);
 
+        //get Progress Packages
+        for (int i = 0; i <27; i++){
+            while (!buffer.isDataWaiting_FromESP()) {
+                try {
+                    sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            Progress_Packet_Exposi progPacket = new Progress_Packet_Exposi(buffer.deque_FromESP());
+            progress = progPacket.get_progress();
+            Log.d("Progress", Integer.toString(progress));
+        }
+
+        //get Cali Tables
         while (!buffer.isDataWaiting_FromESP()) {
             try {
                 sleep(10);
@@ -42,9 +64,9 @@ public class Calibration_Activity extends Activity_Superclass implements Seriali
                 e.printStackTrace();
             }
         }
-
         byte[] packet_in = buffer.deque_FromESP();
 
+        //store Cali Tables
         Cal_Packet_Exposi exposiPacket = new Cal_Packet_Exposi(packet_in);
         init_tables(packet_in);
     }
