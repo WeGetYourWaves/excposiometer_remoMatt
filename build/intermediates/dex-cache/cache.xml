@@ -3,84 +3,12 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="867dad63c33388ff8c7644b236579355036d075f">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_cb2fe84a4a756ba673c03677e355b068cddb6788\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\design\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-24.2.1_02c57ff2ba4d6a79ebb0254426ba8ae9c3fd3ecc\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_bfa1f988df998db3876a9b879c5356adea26aba2\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-24.2.1_7d9ce1a72b756fdacd4f260a1b9fc345dd2f74fa\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
         sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
         <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_3a4a659fb1280d8db867975124846ab2504877d6\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.2.1_3456071a96a8f3a8aa02d6c087f21c484cea2407\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_111fbb97d9d36be7762c7cd860d1a3dad104a07b\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-8.4.0_4f707164313ba91eda91e735be1a13a728449b8d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\.gradle\caches\modules-2\files-2.1\org.jetbrains\annotations-java5\15.0\7011b4551a8451906759b05814c58b9eb829ea9b\annotations-java5-15.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="7011b4551a8451906759b05814c58b9eb829ea9b">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\annotations-java5-15.0_2a411796aa9d117ce4ad89cad4e5156664088a20\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -102,21 +30,75 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jar="C:\Program Files\Android\Android Studio\gradle\m2repository\commons-io\commons-io\2.4\commons-io-2.4.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="70d0e652740bcd9bb4f209bc5c65246388e3ad59">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_8fbf39bd9c82523274d16561e29558d029e01121\classes.dex" />
+        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
+        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\commons-io-2.4_b2955a73e8fdec69863902c786dced8321b28c5c\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="2f78b45f7d2b3fcba5bae56c5ae2592b378da0d7">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_6bfe878b9283481358178e64ad0ebb19966c724d\classes.dex" />
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_a1e9b68de4bc493a3e8ed5fe05f97b54af4f3e9b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_4038fc4f73c0cfd3a938820c43a26a38de6b9aef\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Remo\.gradle\caches\modules-2\files-2.1\org.jetbrains\annotations-java5\15.0\7011b4551a8451906759b05814c58b9eb829ea9b\annotations-java5-15.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="7011b4551a8451906759b05814c58b9eb829ea9b">
+        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\annotations-java5-15.0_2a411796aa9d117ce4ad89cad4e5156664088a20\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_1002284e924c5436e256c9b86b8dd5f3f22fa7cd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_bfa1f988df998db3876a9b879c5356adea26aba2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.2.1_3456071a96a8f3a8aa02d6c087f21c484cea2407\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_111fbb97d9d36be7762c7cd860d1a3dad104a07b\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -135,33 +117,6 @@
         revision="24.0.3"
         sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
         <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_1b134ed25c21fa8cf29e259a1372898655913576\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_c4fdc7fb90c3b07ec64c6dbd00e612d67d81b486\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_1002284e924c5436e256c9b86b8dd5f3f22fa7cd\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Program Files\Android\Android Studio\gradle\m2repository\commons-io\commons-io\2.4\commons-io-2.4.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\commons-io-2.4_b2955a73e8fdec69863902c786dced8321b28c5c\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -192,21 +147,66 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
+        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_a1e9b68de4bc493a3e8ed5fe05f97b54af4f3e9b\classes.dex" />
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_cb2fe84a4a756ba673c03677e355b068cddb6788\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
+        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\design\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_4038fc4f73c0cfd3a938820c43a26a38de6b9aef\classes.dex" />
+        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
+        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-24.2.1_02c57ff2ba4d6a79ebb0254426ba8ae9c3fd3ecc\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-24.2.1_7d9ce1a72b756fdacd4f260a1b9fc345dd2f74fa\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
+        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-8.4.0_4f707164313ba91eda91e735be1a13a728449b8d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="58bdb109901b4a27c1bb6d0df4aac6d642167826">
+        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_8fbf39bd9c82523274d16561e29558d029e01121\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="41c4b5d955c2369fabfca31da960874b0b457eb4">
+        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_6bfe878b9283481358178e64ad0ebb19966c724d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_c4fdc7fb90c3b07ec64c6dbd00e612d67d81b486\classes.dex" />
     </item>
     <item
         is-multidex="true"

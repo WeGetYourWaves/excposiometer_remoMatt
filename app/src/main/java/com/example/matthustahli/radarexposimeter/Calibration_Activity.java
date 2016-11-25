@@ -1,3 +1,4 @@
+/*
 package com.example.matthustahli.radarexposimeter;
 
 import android.content.Intent;
@@ -8,9 +9,11 @@ import java.io.StringReader;
 
 import static java.lang.Thread.sleep;
 
+*/
 /**
  * Created by Remo on 20.10.2016.
- */
+ *//*
+
 public class Calibration_Activity extends Activity_Superclass{
 
     public WifiDataBuffer buffer;
@@ -47,7 +50,7 @@ public class Calibration_Activity extends Activity_Superclass{
         //send Cali Trigger
         Cal_Packet_Trigger calTrigger = new Cal_Packet_Trigger(device_id, attenuator);
         byte[] triggerPacket = calTrigger.get_packet();
-        sendTrigger(triggerPacket);
+        //sendTrigger(triggerPacket);
 
         //get Progress Packages
         for (int i = 0; i <27; i++){
@@ -140,12 +143,5 @@ public class Calibration_Activity extends Activity_Superclass{
         }
     }
 
-    public void sendTrigger(byte[] TriggerPack) {
-        Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
-        intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
-        intent.putExtra(CommunicationService.TRIGGER_Act2Serv, TriggerPack);
-        sendBroadcast(intent);
-    }
-
 }
+*/

@@ -1,12 +1,17 @@
+/*
 package com.example.matthustahli.radarexposimeter;
+
+import android.content.Intent;
 
 import java.util.Arrays;
 
 import static java.lang.Thread.sleep;
 
+*/
 /**
  * Created by Remo on 20.10.2016.
- */
+ *//*
+
 public class DetailView_Activity extends Activity_Superclass{
 
     Thread thread;
@@ -95,4 +100,6 @@ public class DetailView_Activity extends Activity_Superclass{
     public synchronized void stop(){
         thread.stop();
     }
+
 }
+*/

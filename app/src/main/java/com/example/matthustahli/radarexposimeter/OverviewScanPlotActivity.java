@@ -1,24 +1,19 @@
 package com.example.matthustahli.radarexposimeter;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.os.PersistableBundle;
-import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -28,17 +23,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
+
+import static java.lang.Thread.sleep;
 
 public class OverviewScanPlotActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -47,7 +37,11 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     public int[] peak = {302, 203, 340, 196, 191, 305, 256, 385, 119, 403, 304, 252, 152, 243, 254, 276, 131, 312, 116, 337, 457, 251, 330, 314, 201, 107, 235, 280, 470, 460, 394, 418, 378, 437, 260, 130, 449, 446, 277, 182, 240, 147, 316, 184, 350, 466, 441, 328, 411, 166, 127, 471, 248, 112, 226, 426, 319, 358, 149, 115, 408, 172, 436, 476, 361, 266, 366, 202, 375, 151, 171, 207, 106, 103, 224, 110, 410, 258, 297, 307, 209, 211, 262, 292, 370, 405, 417, 170, 220, 444, 176, 331, 190, 406, 430, 416, 494, 387, 348, 431, 246, 117, 145, 393, 129, 100, 447, 490, 404, 175, 395, 125, 478, 198, 159, 354, 452, 360, 162, 114, 433, 272, 222, 264, 458, 349, 329, 270, 438, 309, 100};
     public int[] rms = {348, 435, 332, 368, 271, 404, 346, 320, 371, 217, 126, 201, 118, 121, 199, 316, 310, 115, 361, 213, 196, 173, 114, 152, 480, 300, 285, 146, 194, 278, 353, 102, 179, 296, 182, 192, 272, 347, 407, 161, 448, 207, 256, 240, 253, 472, 153, 424, 323, 266, 185, 344, 484, 423, 134, 349, 209, 321, 269, 198, 302, 414, 254, 120, 224, 379, 488, 168, 382, 497, 359, 381, 243, 128, 410, 125, 291, 212, 276, 445, 474, 260, 362, 181, 372, 341, 401, 438, 406, 340, 113, 117, 363, 210, 178, 354, 314, 318, 384, 108, 400, 338, 233, 251, 208, 467, 479, 328, 288, 148, 216, 297, 265, 337, 249, 145, 174, 206, 277, 230, 171, 373, 186, 351, 376, 188, 315, 279, 331, 232, 100};
     public int[] valueToShow;
-    WifiDataBuffer buffer;
+    WifiDataBuffer buffer = new WifiDataBuffer();
+    final String LOG_TAG = "overview";
+    MyActivityReceiver OverviewReceiver = new MyActivityReceiver(LOG_TAG, buffer);
+    Activity_Superclass calibration;
+
 
 
     //----------------------------------------------------------------------
@@ -64,7 +58,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     Integer activeBar = 0;
     TextView selectedFreq;
     ArrayList<Integer> fixedBars = new ArrayList<Integer>();
-    Calibration_Activity calibration;
     LinearLayout settings;
     private String myMode;
     private ArrayList<LiveMeasure> measures = new ArrayList<LiveMeasure>();
@@ -99,7 +92,54 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         Log.d("activeBar(onCreate): ", String.valueOf(activeBar));
 
         // todo elements from Remo
-        View_Activity view_activity = new View_Activity(buffer, calibration, 125, 0, 'R'); //todo attenuator and type define Remo
+        // View_Activity view_activity = new View_Activity(buffer, calibration, 125, 0, 'R'); //todo attenuator and type define Remo
+    }
+
+    private void RequestCALD(){
+        Log.d(LOG_TAG, "Requesteded Callipack");
+        Intent intent = new Intent();
+        intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
+        intent.putExtra(CommunicationService.COMMAND_Act2Serv, CommunicationService.CMD_getCALI);
+        sendBroadcast(intent);
+    }
+
+    public void onStart() {
+        Log.d(LOG_TAG , "onStart called");
+        super.onStart();
+
+        boolean gotCALDPack = false;
+        //while(!gotCALDPack){
+            RequestCALD();
+            Log.d(LOG_TAG, "Requested Callipack");
+            if(!buffer.isDataWaiting_FromESP()){
+                Log.d(LOG_TAG, "No Data");
+                try {
+                    sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                Log.d(LOG_TAG, "Got Data !!!!!!!!!");
+                byte[] received = buffer.deque_FromESP();
+                if(new String(split_packet(4, 7, received)).equals("CALD")){
+                    calibration = new Activity_Superclass(received);
+                    gotCALDPack = true;
+                    Log.d(LOG_TAG, "got Calidata");
+                }
+            }
+        //}
+    }
+
+    protected byte[] split_packet (int start, int end, byte[] packet){
+
+        int length = end - start + 1;
+        byte[] splitted = new byte[length];
+        for (int i = 0; i < length; i++){
+            splitted[i] = packet[i + start];
+        }
+
+        return splitted;
     }
 
 
@@ -113,8 +153,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         Bundle bundle = intent.getExtras();
         myMode = intent.getStringExtra("MODE");
         Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
-        buffer = (WifiDataBuffer) bundle.getSerializable("Buffer");
-        calibration = (Calibration_Activity) bundle.getSerializable("Calibration");
     }
 
 
@@ -487,6 +525,10 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         imageView.setImageBitmap(bitmap);
     }
 
+    private void StartService() {
+        Intent intent = new Intent(this, CommunicationService.class);
+        startService(intent);
+    }
 
 }
 

@@ -3,7 +3,6 @@ package com.example.matthustahli.radarexposimeter;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
-import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +14,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
-
-import java.lang.reflect.Method;
 
 import static java.lang.Thread.sleep;
 
@@ -25,8 +21,6 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
 
 
     ImageButton b_batterie;
-
-    Calibration_Activity calibration;
 
     String myMode;
     Integer counter=0;
@@ -38,7 +32,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
     Intent service;
     final String LOG_TAG = "AttenuatorMainActivity";
     WifiDataBuffer buffer = new WifiDataBuffer();
-    MyActivityReceiver AttenuattorMainActivityReceiver = new MyActivityReceiver(LOG_TAG, buffer);
+    final MyActivityReceiver myActivityReceiver = new MyActivityReceiver(LOG_TAG, buffer);
 
 
 
@@ -51,12 +45,8 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         initializeButtons();
         activateClickListener();
+        testToLetprogressRun();
 
-        if (savedInstanceState == null) {
-            testToLetprogressRun();
-        }
-        //calibration = new Calibration_Activity(buffer);
-        calibration = new Calibration_Activity(buffer);
         Log.d("AttenuatorMainActivity" , "onCreate finished");
     }
 
@@ -81,7 +71,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         b_mode21dB.setOnClickListener(this);
         b_chico.setOnClickListener(this);
         layout_settings.setVisibility(View.GONE);
-        progressBar.setVisibility(ProgressBar.GONE);
+        progressBar.setVisibility(ProgressBar.VISIBLE);
 
     }
 
@@ -91,34 +81,44 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
             @Override
             public void run() {
                 Log.d("AttenuatorMainActivity" , "progressbar called");
-                progressBar.setMax(26);
-                while (calibration == null){
-                    progressBar.setProgress(0);
-                    try{
-                        sleep(50);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                progressBar.setMax(100);
+                boolean gotCALD_DRDY = false;
+                while(!gotCALD_DRDY){
+                    if(!buffer.isDataWaiting_FromESP()){
+                        try {
+                            sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        byte[] received = buffer.deque_FromESP();
+                        if(new String(split_packet(4, 7, received)).equals("PROG")){
+                            Progress_Packet_Exposi progPack = new Progress_Packet_Exposi(received);
+                            progressBar.setProgress(progPack.get_progress());
+                            Log.d(LOG_TAG, "setProgressbar");
+                        }
+                        else {
+                            buffer.enque_FromESP(received);
+                            gotCALD_DRDY = true;
+                            Log.d(LOG_TAG, "setProgressbar");
+                        }
                     }
                 }
-                progressBar.setProgress(calibration.progress);
-                while (calibration.progress < progressBar.getMax()) {
-                    try{
-                        sleep(50);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    progressBar.setProgress(calibration.progress);
-                }
+                Log.d(LOG_TAG, "ProgressThread done");
                 runOnUiThread(new Runnable() {
+
                     @Override
                     public void run() {
                         progressBar.setVisibility(ProgressBar.GONE);
                         layout_settings.setVisibility(View.VISIBLE);
                     }
                 });
+
             }
         });
         timer.start();
+
     }
 
 
@@ -127,26 +127,48 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         myMode = mode;
         Intent intent = new Intent(AttenuatorMainActivity.this, OverviewScanPlotActivity.class);
         intent.putExtra("MODE", myMode);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("Buffer", buffer);
-        bundle.putSerializable("Calibration", calibration);
-        intent.putExtras(bundle);
         startActivity(intent);
     }
 
     @Override
     public void onStart() {
+
+
         Log.d("AttenuatorMainActivity" , "onStart called");
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(CommunicationService.TRIGGER_Serv2Act);
-        registerReceiver(AttenuattorMainActivityReceiver, intentFilter);
+        registerReceiver(myActivityReceiver, intentFilter);
+
         StartService();
+
+        sendTrigger(new byte[] {1, 2});
+
         super.onStart();
+    }
+
+    private void StartService() {
+        Intent intent = new Intent(this, CommunicationService.class);
+        startService(intent);
+    }
+
+    private void RequestCALD(){
+        Log.d(LOG_TAG, "StopService called");
+        Intent intent = new Intent();
+        intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
+        intent.putExtra(CommunicationService.COMMAND_Act2Serv, CommunicationService.CMD_getCALI);
+        sendBroadcast(intent);
+    }
+
+    private void sendTrigger(byte[] TriggerPack) {
+        Intent intent = new Intent();
+        intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
+        intent.putExtra(CommunicationService.TRIGGER_Act2Serv, TriggerPack);
+        sendBroadcast(intent);
     }
 
     @Override
     public void onStop() {
-        unregisterReceiver(AttenuattorMainActivityReceiver);
+        unregisterReceiver(myActivityReceiver);
         super.onStop();
     }
 
@@ -194,8 +216,15 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         }
     }
 
-    private void StartService() {
-        Intent intent = new Intent(this, CommunicationService.class);
-        startService(intent);
+
+    protected byte[] split_packet (int start, int end, byte[] packet){
+
+        int length = end - start + 1;
+        byte[] splitted = new byte[length];
+        for (int i = 0; i < length; i++){
+            splitted[i] = packet[i + start];
+        }
+
+        return splitted;
     }
 }

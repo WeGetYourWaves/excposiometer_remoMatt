@@ -1,12 +1,18 @@
+/*
+
 package com.example.matthustahli.radarexposimeter;
 
 import java.util.Arrays;
 
 import static java.lang.Thread.sleep;
 
+
+*/
 /**
  * Created by Remo on 18.10.2016.
- */
+ *//*
+
+
 public class View_Activity extends Activity_Superclass{
     Thread thread;
     private double[] Peak;
@@ -82,3 +88,5 @@ public class View_Activity extends Activity_Superclass{
         thread.stop();
     }
 }
+
+*/

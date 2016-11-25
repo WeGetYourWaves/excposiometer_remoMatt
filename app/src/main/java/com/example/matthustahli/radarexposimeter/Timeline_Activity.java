@@ -1,10 +1,13 @@
+/*
 package com.example.matthustahli.radarexposimeter;
 
 import java.util.Arrays;
 
+*/
 /**
  * Created by Remo on 20.10.2016.
- */
+ *//*
+
 public class Timeline_Activity extends Activity_Superclass {
 
     Thread thread;
@@ -89,3 +92,4 @@ public class Timeline_Activity extends Activity_Superclass {
         thread.stop();
     }
 }
+*/

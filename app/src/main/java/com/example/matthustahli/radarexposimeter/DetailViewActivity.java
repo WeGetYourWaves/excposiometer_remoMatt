@@ -421,4 +421,13 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             return itemView;
         }
     }
+
+
+    public void sendTrigger(byte[] TriggerPack) {
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
+        intent.putExtra(CommunicationService.TRIGGER_Act2Serv, TriggerPack);
+        sendBroadcast(intent);
+    }
 }

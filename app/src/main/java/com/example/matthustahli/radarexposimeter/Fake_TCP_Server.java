@@ -158,7 +158,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                                         break;
                                     case Callibrate:
                                         for(int i = 0; i < 27; ++i){
-                                            sleep(500);
+                                            sleep(50);
                                             ByteArrayOutputStream ProgressPack = new ByteArrayOutputStream(14);
                                             ProgressPack.write(RD16);
                                             ProgressPack.write(PROG);

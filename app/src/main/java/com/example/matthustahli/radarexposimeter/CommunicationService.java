@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import java.lang.reflect.Method;
 
+import static java.lang.Math.pow;
+
 /**
  * Created by André Eggli on 20.11.16.
  */
@@ -26,18 +28,21 @@ public class CommunicationService extends Service {
     Boolean WifiWasOnWhenServiceWasStarted = false;
     static WifiDataBuffer wifiDataBuffer = new WifiDataBuffer();
     TCP_Data_dequeue_Thread TCP_Data_Sender = new TCP_Data_dequeue_Thread();
+    byte[] callipack;
 
     static TCP_SERVER Socket = new Fake_TCP_Server(wifiDataBuffer); // Initialise Fake TCP to test
     // static TCP_SERVER Socket = new TCPServer(wifiDataBuffer); // Initialise real TCP_Server to test ESP8266
     // static TCP_SERVER Socket = new Excel_Facke_TCP_Server(wifiDataBuffer);
 
     IntentListenerForActivity ListenerForActivity; // receives Data from Activity via Broadcast
+
     private static final String LOG_TAG = "Service";
 
     public static final String ACTION_FROM_ACTIVITY = "ACTION_FROM_ACTIVITY";
     public static final String TRIGGER_Serv2Act = "Service -> Activity";
     public static final String COMMAND_Act2Serv = "COMMAND_Act2Serv";
     public static final int CMD_STOP = 1;
+    public static final int CMD_getCALI = 2;
     public static final String TRIGGER_Act2Serv = "Activity -> Service";
     public static final String DATA_BACK = "DATA_BACK";
 
@@ -70,6 +75,7 @@ public class CommunicationService extends Service {
         else {
             WifiWasOnWhenServiceWasStarted = false; Log.d(LOG_TAG, "Wifi was turned off @ OnCreate");}
         Log.d(LOG_TAG, "onCreate");
+
         ListenerForActivity = new IntentListenerForActivity();
 
         super.onCreate();
@@ -78,10 +84,12 @@ public class CommunicationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d(LOG_TAG, "onStartCommand");
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(ACTION_FROM_ACTIVITY);
         registerReceiver(ListenerForActivity, intentFilter);
+
         wifi_manager = (WifiManager) this.getSystemService(this.WIFI_SERVICE);
         WifiConfiguration wifi_configuration = null;
         wifi_manager.setWifiEnabled(false);
@@ -126,18 +134,58 @@ public class CommunicationService extends Service {
 
     }
 
+    protected byte[] split_packet (int start, int end, byte[] packet){
+
+        int length = end - start + 1;
+        byte[] splitted = new byte[length];
+        for (int i = 0; i < length; i++){
+            splitted[i] = packet[i + start];
+        }
+
+        return splitted;
+    }
+
+    private int byteArray2int (byte[] byteArray){
+        int Integr = 0;
+        if (byteArray.length == 1) {
+            Integr = byteArray[0] & 0xFF;
+        }
+        else if (byteArray.length == 2){
+            Integr = (int) ((byteArray[0] & 0xFF) * pow(2, 8));
+            Integr += byteArray[1] & 0xFF;
+        }
+        else if (byteArray.length == 4){
+            Integr = (int) ((byteArray[0] & 0xFF) * pow(2, 24));
+            Integr += (int) ((byteArray[1] & 0xFF) * pow(2, 16));
+            Integr += (int) ((byteArray[2] & 0xFF) * pow(2, 8));
+            Integr += byteArray[1] & 0xFF;
+        }
+        else {
+            throw new IllegalArgumentException("byteArray must have length 1,2 or 3");
+        }
+        return Integr;
+    }
+
     public class TCP_Data_dequeue_Thread extends Thread{
         final String Log_tag = "Service_dequeue_Thread";
         @Override
         public void run() {
             Log.d(Log_tag, "Thread started");
             while(running){ // && !TCP_Data_Sender.isInterrupted()
+                Log.d(LOG_TAG, "Thread runns");
                 try {
                     if(!wifiDataBuffer.isDataWaiting_FromESP()){
-                        Thread.sleep(50);
+                        Thread.sleep(500);
                     }
                     else {
-                        SendDataToActivity(wifiDataBuffer.deque_FromESP());
+                        byte[] received = wifiDataBuffer.deque_FromESP();
+                        if(new String(split_packet(4, 7, received)).equals("DRDY")){
+                            int device_id = byteArray2int(split_packet(8, 11, received));
+                            Cal_Packet_Trigger trigger = new Cal_Packet_Trigger(device_id, 0);
+                            wifiDataBuffer.enqueue_ToESP(trigger.get_packet());
+                        }else {
+                            SendDataToActivity(received);
+                        }
                     }
                 } catch (InterruptedException e) {
                     // TODO Auto-generated catch block
@@ -148,14 +196,19 @@ public class CommunicationService extends Service {
             stopSelf(); // Stop the Service
         }
     }
+
     public class IntentListenerForActivity extends BroadcastReceiver {
         @Override
         public void onReceive(Context arg0, Intent intent) {
-            if(intent.hasExtra(COMMAND_Act2Serv)){
+            Log.d(LOG_TAG, "onReceive");
+            if(intent.hasExtra(COMMAND_Act2Serv)) {
                 int hostCmd = intent.getIntExtra(COMMAND_Act2Serv, 0);
-                if(hostCmd == CMD_STOP){
+                if (hostCmd == CMD_STOP) {
                     running = false;
                     // stopSelf();
+                } else if (hostCmd == CMD_getCALI) {
+                    SendDataToActivity(callipack);
+                    Log.d(LOG_TAG, "someActivity requested callipack");
                 }
             }
             else if (intent.hasExtra(TRIGGER_Act2Serv)){
@@ -165,7 +218,6 @@ public class CommunicationService extends Service {
             }
         }
     }
-
 }
 
 
