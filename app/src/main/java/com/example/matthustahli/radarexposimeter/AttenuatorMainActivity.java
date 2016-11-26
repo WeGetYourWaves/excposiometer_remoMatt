@@ -158,7 +158,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
             case R.id.b_mode_LNA:
                 goToNextActivityWithSpecifivMode("LNA on");
                 break;
-/*            case R.id.b_batterie:
+/*           case R.id.b_batterie:
                 counter++;
                 if (counter % 4 == 0)
                     b_batterie.setBackgroundResource(R.drawable.ic_batterie_empty);

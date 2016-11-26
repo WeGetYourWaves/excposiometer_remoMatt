@@ -42,7 +42,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
     final byte[] PROG = "PROG".getBytes();
 
     final byte[] device_id = int2byteArray(125, 4);
-    byte[] battery_charge = int2byteArray(77, 1); // in Prozent
+    byte[] battery_charge = int2byteArray(50, 1); // in Prozent
     byte[] battery_voltage = int2byteArray(1677, 2); // in mV
     int seq_nbr = 1;
 
@@ -329,6 +329,9 @@ public class Fake_TCP_Server implements TCP_SERVER {
                 byteArray[1] = (byte)Integr;
             }
             // problems with wifiDataBuffer overflow: byteArray = ByteBuffer.allocate(byteArray_length).putInt(Integr).array();
+            else if (byteArray.length == 1){
+                byteArray[0] = (byte) Integr;
+            }
         }
         return byteArray;
     }

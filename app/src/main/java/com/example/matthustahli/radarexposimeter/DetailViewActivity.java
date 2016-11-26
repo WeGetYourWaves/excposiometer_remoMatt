@@ -37,6 +37,9 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     Float maxPeak = 0f;
     Float maxRMS = 0f;
     String myMode;
+    private int attenuator;
+    private int device_id;
+    private char measurement_type = 'P';
 
 
     //Everything about buttons
@@ -358,10 +361,14 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         fixedFreq = bundle.getIntegerArrayList(CHOOSENFREQ);
-        String hello = fixedFreq.toString();
-        Toast.makeText(DetailViewActivity.this, hello, Toast.LENGTH_SHORT).show();
+        //String hello = fixedFreq.toString();
+        //Toast.makeText(DetailViewActivity.this, hello, Toast.LENGTH_SHORT).show();
         //get my mode
         myMode = intent.getStringExtra("MODE");
+        if (myMode == "-21 dB")  attenuator = 1;
+        else if (myMode == "LNA on")  attenuator = 3;
+        else if(myMode == "normal mode")   attenuator = 0;
+        else attenuator = 2;
         Toast.makeText(DetailViewActivity.this,myMode,Toast.LENGTH_SHORT).show();
     }
 
