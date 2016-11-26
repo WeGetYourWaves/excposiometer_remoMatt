@@ -33,8 +33,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
     Handler h = new Handler();
     Intent service;
     final String LOG_TAG = "AttenuatorMainActivity";
-    final WifiDataBuffer buffer = new WifiDataBuffer();
-    final AttenuatorMainActivityReceiver attenuatorMainActivityReceiver = new AttenuatorMainActivityReceiver(LOG_TAG, buffer);
+    final AttenuatorMainActivityReceiver attenuatorMainActivityReceiver = new AttenuatorMainActivityReceiver(LOG_TAG);
 
 
 
@@ -48,7 +47,6 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
 
         initializeButtons();
         activateClickListener();
-        testToLetprogressRun();
 
         Log.d("AttenuatorMainActivity" , "onCreate finished");
     }
@@ -74,51 +72,10 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         b_mode21dB.setOnClickListener(this);
         b_chico.setOnClickListener(this);
         layout_settings.setVisibility(View.GONE);
+        progressBar.setMax(100);
         progressBar.setVisibility(ProgressBar.VISIBLE);
 
     }
-
-    private void testToLetprogressRun() {
-
-        Thread timer = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Log.d(LOG_TAG, "progressbar called");
-                progressBar.setMax(100);
-                while(progressBar.getProgress() < progressBar.getMax()){
-                    if(!buffer.isDataWaiting_FromESP()){
-                        try {
-                            sleep(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    else {
-                        byte[] received = buffer.deque_FromESP();
-                        if(new String(split_packet(4, 7, received)).equals("PROG")){
-                            Progress_Packet_Exposi progPack = new Progress_Packet_Exposi(received);
-                            progressBar.setProgress(progPack.get_progress());
-                            Log.d(LOG_TAG, "setProgressbar");
-                        }
-                    }
-                }
-                Log.d(LOG_TAG, "ProgressThread done");
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        progressBar.setVisibility(ProgressBar.GONE);
-                        layout_settings.setVisibility(View.VISIBLE);
-                    }
-                });
-
-            }
-        });
-        timer.start();
-
-    }
-
-
 
     private void goToNextActivityWithSpecifivMode(String mode) {
         myMode = mode;
@@ -190,10 +147,10 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
                 goToNextActivityWithSpecifivMode("normal");
                 break;
             case R.id.b_mode_21db:
-                goToNextActivityWithSpecifivMode("21dB");
+                goToNextActivityWithSpecifivMode("-21dB");
                 break;
             case R.id.b_mode_42db:
-                goToNextActivityWithSpecifivMode("41dB");
+                goToNextActivityWithSpecifivMode("-41dB");
                 break;
             case R.id.b_mode_accumulator:
                 goToNextActivityWithSpecifivMode("accu");
@@ -231,18 +188,45 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
 
     public class AttenuatorMainActivityReceiver extends BroadcastReceiver {
         final String LOG_TAG;
-        final WifiDataBuffer wifiDataBufffer;
 
-        public AttenuatorMainActivityReceiver(String LOG_TAG, WifiDataBuffer wifiDataBuffer){
+        public AttenuatorMainActivityReceiver(String LOG_TAG){
             this.LOG_TAG = LOG_TAG;
-            this.wifiDataBufffer = wifiDataBuffer;
+
         }
         @Override
         public void onReceive(Context arg0, Intent data) {
             Log.d(LOG_TAG, "MyActivityReceiver in onReceive");
             byte[] orgData = data.getByteArrayExtra(CommunicationService.DATA_BACK);
             if (orgData != null) {
-                wifiDataBufffer.enque_FromESP(orgData);
+
+                if(new String(split_packet(4, 7, orgData)).equals("PROG")) {
+                    Progress_Packet_Exposi progPack = new Progress_Packet_Exposi(orgData);
+                    progressBar.setProgress(progPack.get_progress());
+                    Log.d(LOG_TAG, "got PROG from ESP and set Progressbar");
+
+                    if(progressBar.getProgress() >= progressBar.getMax()){
+                        Log.d(LOG_TAG, "ProgressThread done");
+
+                        runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                progressBar.setVisibility(ProgressBar.GONE);
+                                layout_settings.setVisibility(View.VISIBLE);
+                                Log.d(LOG_TAG, "Progressbar GONE");
+                            }
+                        });
+                    }
+                }
+
+                if(new String(split_packet(4, 7, orgData)).equals("DRDY")) {
+                    Log.d(LOG_TAG, "got DRDY from ESP");
+                    Ready_Packet_Exposi ready_packet_exposi = new Ready_Packet_Exposi(orgData);
+                    int device_id = ready_packet_exposi.get_device_id();
+                    Cal_Packet_Trigger trigger = new Cal_Packet_Trigger(device_id, 0);
+                    sendTrigger(trigger.get_packet());
+                    Log.d(LOG_TAG, "sent calTrigger to ESP");
+                }
             }
 
         }

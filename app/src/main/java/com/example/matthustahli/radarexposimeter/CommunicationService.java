@@ -179,13 +179,7 @@ public class CommunicationService extends Service {
                     }
                     else {
                         byte[] received = wifiDataBuffer.deque_FromESP();
-                        if(new String(split_packet(4, 7, received)).equals("DRDY")){
-                            int device_id = byteArray2int(split_packet(8, 11, received));
-                            Cal_Packet_Trigger trigger = new Cal_Packet_Trigger(device_id, 0);
-                            wifiDataBuffer.enqueue_ToESP(trigger.get_packet());
-                            Log.d(Log_tag, "sent calTrigger to ESP");
-                        }
-                        else if (new String(split_packet(4, 7, received)).equals("CALD")){
+                        if (new String(split_packet(4, 7, received)).equals("CALD")){
                             callipack = received;
                             Log.d(Log_tag, "got CalTable from ESP");
                         }

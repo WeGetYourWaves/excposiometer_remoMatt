@@ -36,11 +36,14 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
 
     private final String CHOOSENMODE = "my_mode";
     private final String CHOOSENFREQ = "my_freq";
-    public double[] rms = new double [96];
-    public double[] peak = new double [96];
-    //public int[] peak = {302, 203, 340, 196, 191, 305, 256, 385, 119, 403, 304, 252, 152, 243, 254, 276, 131, 312, 116, 337, 457, 251, 330, 314, 201, 107, 235, 280, 470, 460, 394, 418, 378, 437, 260, 130, 449, 446, 277, 182, 240, 147, 316, 184, 350, 466, 441, 328, 411, 166, 127, 471, 248, 112, 226, 426, 319, 358, 149, 115, 408, 172, 436, 476, 361, 266, 366, 202, 375, 151, 171, 207, 106, 103, 224, 110, 410, 258, 297, 307, 209, 211, 262, 292, 370, 405, 417, 170, 220, 444, 176, 331, 190, 406, 430, 416, 494, 387, 348, 431, 246, 117, 145, 393, 129, 100, 447, 490, 404, 175, 395, 125, 478, 198, 159, 354, 452, 360, 162, 114, 433, 272, 222, 264, 458, 349, 329, 270, 438, 309, 100};
-    //public int[] rms = {348, 435, 332, 368, 271, 404, 346, 320, 371, 217, 126, 201, 118, 121, 199, 316, 310, 115, 361, 213, 196, 173, 114, 152, 480, 300, 285, 146, 194, 278, 353, 102, 179, 296, 182, 192, 272, 347, 407, 161, 448, 207, 256, 240, 253, 472, 153, 424, 323, 266, 185, 344, 484, 423, 134, 349, 209, 321, 269, 198, 302, 414, 254, 120, 224, 379, 488, 168, 382, 497, 359, 381, 243, 128, 410, 125, 291, 212, 276, 445, 474, 260, 362, 181, 372, 341, 401, 438, 406, 340, 113, 117, 363, 210, 178, 354, 314, 318, 384, 108, 400, 338, 233, 251, 208, 467, 479, 328, 288, 148, 216, 297, 265, 337, 249, 145, 174, 206, 277, 230, 171, 373, 186, 351, 376, 188, 315, 279, 331, 232, 100};
+    public double[] rms1 = new double [96];
+    public double[] peak1 = new double [96];
+    public int[] peak = {302, 203, 340, 196, 191, 305, 256, 385, 119, 403, 304, 252, 152, 243, 254, 276, 131, 312, 116, 337, 457, 251, 330, 314, 201, 107, 235, 280, 470, 460, 394, 418, 378, 437, 260, 130, 449, 446, 277, 182, 240, 147, 316, 184, 350, 466, 441, 328, 411, 166, 127, 471, 248, 112, 226, 426, 319, 358, 149, 115, 408, 172, 436, 476, 361, 266, 366, 202, 375, 151, 171, 207, 106, 103, 224, 110, 410, 258, 297, 307, 209, 211, 262, 292, 370, 405, 417, 170, 220, 444, 176, 331, 190, 406, 430, 416, 494, 387, 348, 431, 246, 117, 145, 393, 129, 100, 447, 490, 404, 175, 395, 125, 478, 198, 159, 354, 452, 360, 162, 114, 433, 272, 222, 264, 458, 349, 329, 270, 438, 309, 100};
+    public int[] rms = {348, 435, 332, 368, 271, 404, 346, 320, 371, 217, 126, 201, 118, 121, 199, 316, 310, 115, 361, 213, 196, 173, 114, 152, 480, 300, 285, 146, 194, 278, 353, 102, 179, 296, 182, 192, 272, 347, 407, 161, 448, 207, 256, 240, 253, 472, 153, 424, 323, 266, 185, 344, 484, 423, 134, 349, 209, 321, 269, 198, 302, 414, 254, 120, 224, 379, 488, 168, 382, 497, 359, 381, 243, 128, 410, 125, 291, 212, 276, 445, 474, 260, 362, 181, 372, 341, 401, 438, 406, 340, 113, 117, 363, 210, 178, 354, 314, 318, 384, 108, 400, 338, 233, 251, 208, 467, 479, 328, 288, 148, 216, 297, 265, 337, 249, 145, 174, 206, 277, 230, 171, 373, 186, 351, 376, 188, 315, 279, 331, 232, 100};
     public int[] valueToShow;
+    private int attenuator;
+    private int device_id;
+    private char measurement_type = 'P';
     WifiDataBuffer buffer = new WifiDataBuffer();
     final String LOG_TAG = "Overview";
     OverviewScanPlotActivityReceiver overviewScanPlotActivityReceiver = new OverviewScanPlotActivityReceiver(LOG_TAG, buffer);
@@ -142,6 +145,10 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         myMode = intent.getStringExtra("MODE");
+        if (myMode == "-21dB")  attenuator = 1;
+        else if (myMode == "accu")  attenuator = 3;
+        else if(myMode == "normal")   attenuator = 0;
+        else attenuator = 2;
         Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
     }
 
@@ -542,30 +549,51 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
             byte[] orgData = data.getByteArrayExtra(CommunicationService.DATA_BACK);
             if (orgData != null) {
                 if(new String(split_packet(4, 7, orgData)).equals("CALD")) {
+                    Cal_Packet_Exposi cal_packet_exposi = new Cal_Packet_Exposi(orgData);
+                    device_id = cal_packet_exposi.get_device_id();
                     calibration = new Activity_Superclass(orgData);
                     Log.d(LOG_TAG, "saved Calibration Tables");
+
+                    View_Packet_Trigger view_packet_trigger = new View_Packet_Trigger(device_id, attenuator, measurement_type);
+                    sendTrigger(view_packet_trigger.get_packet());
+                    Log.d(LOG_TAG, "sent SCAN Trigger");
+
                 }
                 else if(new String(split_packet(4, 7, orgData)).equals("SCAN")){
+
                     Log.d(LOG_TAG, "got SCAN data");
+                    Data_Packet_Exposi packetExposi = new Data_Packet_Exposi(orgData);
+                    int freq = packetExposi.get_frequency();
+                    int rms_exposi = packetExposi.get_rawData_rms();
+                    int peak_exposi = packetExposi.get_rawData_peak();
+
+                    double rms = calibration.get_rms(attenuator,freq, rms_exposi);
+                    double peak = calibration.get_peak(attenuator, freq, peak_exposi);
+                    updatePeak(peak, freq);
+                    updateRMS(rms, freq);
                 }
             }
         }
     }
 
     private synchronized void updatePeak(double newPeak, int freq){
-        peak[((freq - 500) / 100)] = newPeak;
+        peak1[((freq - 500) / 100)] = newPeak;
+        Log.d(LOG_TAG, "updated Peak");
+
     }
 
     private synchronized void updateRMS(double newRMS, int freq){
-        rms[((freq - 500) / 100)] = newRMS;
+        rms1[((freq - 500) / 100)] = newRMS;
+        Log.d(LOG_TAG, "updated RMS");
+
     }
 
     public synchronized double[] readPeak(){
-        return peak;
+        return peak1;
     }
 
     public synchronized double[] readRMS(){
-        return rms;
+        return rms1;
     }
 }
 
