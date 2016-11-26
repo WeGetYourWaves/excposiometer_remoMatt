@@ -40,7 +40,7 @@
         android:id="@+id/id_device"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ID: 125"
+        android:text="ID: waiting"
         android:textSize="18dp"
         />
 

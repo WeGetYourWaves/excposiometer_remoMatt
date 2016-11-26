@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import static java.lang.Thread.sleep;
 
@@ -28,6 +29,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
     Integer counter=0;
     WifiManager wifi_manager;
     Button b_modeNormal,b_mode21dB,b_mode41dB, b_mode_accumulation,b_chico;
+    TextView id_device;
     ProgressBar progressBar;
     LinearLayout layout_settings;
     Handler h = new Handler();
@@ -54,6 +56,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
 
     private void initializeButtons(){
         Log.d("AttenuatorMainActivity" , "initializeButtons called");
+        id_device = (TextView)findViewById(R.id.id_device);
         b_modeNormal = (Button) findViewById(R.id.b_mode_normal);
         b_mode21dB = (Button) findViewById(R.id.b_mode_21db);
         b_mode41dB = (Button) findViewById(R.id.b_mode_42db);
@@ -224,9 +227,9 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
 
                     Log.d(LOG_TAG, "got DRDY from ESP");
                     Ready_Packet_Exposi ready_packet_exposi = new Ready_Packet_Exposi(orgData);
-                    int device_id = ready_packet_exposi.get_device_id();
+                    setId_device(ready_packet_exposi.get_device_id());
                     setBatteryStatus(ready_packet_exposi.get_battery_charge());
-                    Cal_Packet_Trigger trigger = new Cal_Packet_Trigger(device_id, 0);
+                    Cal_Packet_Trigger trigger = new Cal_Packet_Trigger(ready_packet_exposi.get_device_id(), 0);
                     sendTrigger(trigger.get_packet());
                     Log.d(LOG_TAG, "sent calTrigger to ESP");
                 }
@@ -241,5 +244,11 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         else if (percentage < 70) b_batterie.setBackgroundResource(R.drawable.ic_batterie_middle);
         else b_batterie.setBackgroundResource(R.drawable.ic_batterie_high);
         Log.d(LOG_TAG, "battery percentage set");
+    }
+
+    void setId_device (int id){
+        id_device.setText("ID: " + Integer.toString(id));
+        Log.d(LOG_TAG, "id_device set");
+
     }
 }

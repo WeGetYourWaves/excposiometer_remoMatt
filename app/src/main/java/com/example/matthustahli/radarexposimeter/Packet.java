@@ -52,7 +52,7 @@ public class Packet {
             Integr = (int) ((byteArray[0] & 0xFF) * pow(2, 24));
             Integr += (int) ((byteArray[1] & 0xFF) * pow(2, 16));
             Integr += (int) ((byteArray[2] & 0xFF) * pow(2, 8));
-            Integr += byteArray[1] & 0xFF;
+            Integr += byteArray[3] & 0xFF;
         }
 
         return Integr;
