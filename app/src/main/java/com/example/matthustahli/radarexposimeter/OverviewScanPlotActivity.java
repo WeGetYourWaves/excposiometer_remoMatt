@@ -34,13 +34,11 @@ import static java.lang.Thread.sleep;
 
 public class OverviewScanPlotActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private final String CHOOSENMODE = "my_mode";
     private final String CHOOSENFREQ = "my_freq";
     public double[] rms1 = new double [96];
     public double[] peak1 = new double [96];
-    public int[] peak = {302, 203, 340, 196, 191, 305, 256, 385, 119, 403, 304, 252, 152, 243, 254, 276, 131, 312, 116, 337, 457, 251, 330, 314, 201, 107, 235, 280, 470, 460, 394, 418, 378, 437, 260, 130, 449, 446, 277, 182, 240, 147, 316, 184, 350, 466, 441, 328, 411, 166, 127, 471, 248, 112, 226, 426, 319, 358, 149, 115, 408, 172, 436, 476, 361, 266, 366, 202, 375, 151, 171, 207, 106, 103, 224, 110, 410, 258, 297, 307, 209, 211, 262, 292, 370, 405, 417, 170, 220, 444, 176, 331, 190, 406, 430, 416, 494, 387, 348, 431, 246, 117, 145, 393, 129, 100, 447, 490, 404, 175, 395, 125, 478, 198, 159, 354, 452, 360, 162, 114, 433, 272, 222, 264, 458, 349, 329, 270, 438, 309, 100};
-    public int[] rms = {348, 435, 332, 368, 271, 404, 346, 320, 371, 217, 126, 201, 118, 121, 199, 316, 310, 115, 361, 213, 196, 173, 114, 152, 480, 300, 285, 146, 194, 278, 353, 102, 179, 296, 182, 192, 272, 347, 407, 161, 448, 207, 256, 240, 253, 472, 153, 424, 323, 266, 185, 344, 484, 423, 134, 349, 209, 321, 269, 198, 302, 414, 254, 120, 224, 379, 488, 168, 382, 497, 359, 381, 243, 128, 410, 125, 291, 212, 276, 445, 474, 260, 362, 181, 372, 341, 401, 438, 406, 340, 113, 117, 363, 210, 178, 354, 314, 318, 384, 108, 400, 338, 233, 251, 208, 467, 479, 328, 288, 148, 216, 297, 265, 337, 249, 145, 174, 206, 277, 230, 171, 373, 186, 351, 376, 188, 315, 279, 331, 232, 100};
-    public int[] valueToShow;
+    public double[] peak = {302, 203, 340, 196, 191, 305, 256, 385, 119, 403, 304, 252, 152, 243, 254, 276, 131, 312, 116, 337, 457, 251, 330, 314, 201, 107, 235, 280, 470, 460, 394, 418, 378, 437, 260, 130, 449, 446, 277, 182, 240, 147, 316, 184, 350, 466, 441, 328, 411, 166, 127, 471, 248, 112, 226, 426, 319, 358, 149, 115, 408, 172, 436, 476, 361, 266, 366, 202, 375, 151, 171, 207, 106, 103, 224, 110, 410, 258, 297, 307, 209, 211, 262, 292, 370, 405, 417, 170, 220, 444, 176, 331, 190, 406, 430, 416, 494, 387, 348, 431, 246, 117, 145, 393, 129, 100, 447, 490, 404, 175, 395, 125, 478, 198, 159, 354, 452, 360, 162, 114, 433, 272, 222, 264, 458, 349, 329, 270, 438, 309, 100};
+    public double[] rms = {348, 435, 332, 368, 271, 404, 346, 320, 371, 217, 126, 201, 118, 121, 199, 316, 310, 115, 361, 213, 196, 173, 114, 152, 480, 300, 285, 146, 194, 278, 353, 102, 179, 296, 182, 192, 272, 347, 407, 161, 448, 207, 256, 240, 253, 472, 153, 424, 323, 266, 185, 344, 484, 423, 134, 349, 209, 321, 269, 198, 302, 414, 254, 120, 224, 379, 488, 168, 382, 497, 359, 381, 243, 128, 410, 125, 291, 212, 276, 445, 474, 260, 362, 181, 372, 341, 401, 438, 406, 340, 113, 117, 363, 210, 178, 354, 314, 318, 384, 108, 400, 338, 233, 251, 208, 467, 479, 328, 288, 148, 216, 297, 265, 337, 249, 145, 174, 206, 277, 230, 171, 373, 186, 351, 376, 188, 315, 279, 331, 232, 100};
     private int attenuator;
     private int device_id;
     private char measurement_type = 'P';
@@ -54,19 +52,20 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     //----------------------------------------------------------------------
     //setup variables
     Rectangle coord;
+    int colorFix, colorBar, colorActive ;
+    Paint paintFix, paintBar, paintActive;
     Display display;
     Point size;
     ImageView imageView;
     float abstandZwischenBalken = 5; //5dp
     int anzahlBalken = 96;
     Bitmap bitmap;
-    Paint paint;
     Canvas canvas;
     Integer activeBar = 0;
     TextView selectedFreq;
     ArrayList<Integer> fixedBars = new ArrayList<Integer>();
     LinearLayout settings;
-    private String myMode;
+    private String myMode, peakOrRms;
     private ArrayList<LiveMeasure> measures = new ArrayList<LiveMeasure>();
     //All what has something to do with buttons
     private Integer clickCounterStatusPlot = 0;
@@ -89,9 +88,9 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         initializeButtons();
         //handlesActivatingDropDown();
         setButtonsOnClickListener();
-        //this is MAIN, where magic happens
 
-        PaintABar();  //Makes the plot and draws it.
+        SetUpValuesForPlot();  //Makes the plot and draws it.
+        makePlot();
 
         ActivateTouchOnPlot();
         // ActivateAddButton();
@@ -151,61 +150,8 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
     }
 
-
-   /*private void saveToSharedPref(ArrayList<Integer> toSave){
-        SharedPreferences sp = getSharedPreferences("storedFrequencies", MODE_PRIVATE); //PreferenceManager.getDefaultSharedPreferences(SaveMainActivity.this);
-        SharedPreferences.Editor  edit= sp.edit();
-       // edit.putString("ArraySize", String.valueOf(fixedBars.size()));
-        for (int i=0; i < toSave.size();i++) {
-                                //if(fixedBars.size()< fixedBarsSize){fixedBars.add(0);}
-            edit.putInt(String.valueOf(i), toSave.get(i));
-        }
-        edit.commit();
-        Toast.makeText(OverviewScanPlotActivity.this,"saved"+ toSave.toString(),Toast.LENGTH_SHORT).show();
-
-    }
-
-    private void loadFromSharedPref(){
-        SharedPreferences sp = getSharedPreferences("myValue", MODE_PRIVATE); //PreferenceManager.getDefaultSharedPreferences(SaveMainActivity.this);
-        //String size = sp.getString("ArraySize", "0");
-        fixedBars.clear();
-
-        for (int i=0; i<8 ;i++){
-            fixedBars.add(sp.getInt(String.valueOf(i), 0));
-            Log.d("ArraySaved "+String.valueOf(i)+" : ",String.valueOf(fixedBars.get(i)));
-        }
-        for(int i=8;i>0; i--){
-            if(fixedBars.get(i-1) == 0){
-                Log.d("ArraySavedremove "+String.valueOf(i-1)+" : ",String.valueOf(fixedBars.get(i-1)));
-                fixedBars.remove(i-1);
-            }
-            else{Log.d("ArraySavedClear "+String.valueOf(i-1)+" : ",String.valueOf(fixedBars.get(i-1)));}
-        }
-    }*/
-
-
-    /*
-        //TODO restore the state from when i left   do i need resume here???
-        @Override
-        protected void onRestoreInstanceState(Bundle savedInstanceState) {
-            //get my values back..
-
-            super.onRestoreInstanceState(savedInstanceState);
-        }
-
-        //TODO SAVE MY ACTIVITY STATE HERE--save our array here, is this enougth or do i need to save to inner memory..
-        @Override
-        public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-            saveToSharedPref();
-            super.onSaveInstanceState(outState, outPersistentState);
-        }
-        //TODO get my values
-
-    */
     @Override
     protected void onPause() {
-        //here i need to save
-        //saveToSharedPref(fixedBars);
         Log.d(LOG_TAG, "in onPause");
         super.onPause();
         unregisterReceiver(overviewScanPlotActivityReceiver);
@@ -213,7 +159,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
 
     @Override
     protected void onResume() {
-        // loadFromSharedPref();
         super.onResume();
         Log.d(LOG_TAG, "in onResume");
         IntentFilter intentFilter = new IntentFilter();
@@ -242,7 +187,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     private void handlesActivatingDropDown(Integer downOrUp) {
         //sets listener, and handles drop down and drop up
         animationSlideDown = AnimationUtils.loadAnimation(this, R.anim.anim_drop_down);
-        //animationSlideDown.setAnimationListener(this);
         final LinearLayout layout_dropDown = (LinearLayout) findViewById(R.id.layout_dropDown);
         TextView allert_text = (TextView) findViewById(R.id.textView_dropDownAllert);
         if(downOrUp==0){
@@ -274,8 +218,13 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
 
         switch (v.getId()) {
             case R.id.b_mode_normal:
+<<<<<<< Updated upstream
                 myMode = "normal mode";
                 attenuator = 0;
+=======
+                myMode = "normal";
+                makePlot();
+>>>>>>> Stashed changes
                 settings.setVisibility(LinearLayout.GONE);
                 Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
                 View_Packet_Trigger view_packet_trigger0 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
@@ -283,8 +232,13 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 Log.d(LOG_TAG, "sent SCAN Trigger attenuator 0");
                 break;
             case R.id.b_mode_21db:
+<<<<<<< Updated upstream
                 myMode = "-21 dB";
                 attenuator = 1;
+=======
+                myMode = "21dB";
+                makePlot();
+>>>>>>> Stashed changes
                 settings.setVisibility(LinearLayout.GONE);
                 Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
                 View_Packet_Trigger view_packet_trigger1 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
@@ -292,17 +246,28 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 Log.d(LOG_TAG, "sent SCAN Trigger attenuator 1");
                 break;
             case R.id.b_mode_42db:
+<<<<<<< Updated upstream
                 myMode = "-42 dB";
                 attenuator = 2;
+=======
+                myMode = "42dB";
+                makePlot();
+>>>>>>> Stashed changes
                 settings.setVisibility(LinearLayout.GONE);
                 Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
                 View_Packet_Trigger view_packet_trigger2 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
                 sendTrigger(view_packet_trigger2.get_packet());
                 Log.d(LOG_TAG, "sent SCAN Trigger attenuator 2");
                 break;
+<<<<<<< Updated upstream
             case R.id.b_mode_LNA:
                 myMode = "LNA on";
                 attenuator = 3;
+=======
+            case R.id.b_mode_accumulator:
+                myMode = "accu";
+                makePlot();
+>>>>>>> Stashed changes
                 settings.setVisibility(LinearLayout.GONE);
                 Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
                 View_Packet_Trigger view_packet_trigger3 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
@@ -318,13 +283,17 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 clickCounterStatusPlot++;
                 if (measurement_type == 'P') {
                     //todo set plot to peak
+                    peakOrRms="PEAK";
                     b_peak.setText("RMS");
+                    makePlot();
                     TextView statusView = (TextView) findViewById(R.id.status_textview);
                     statusView.setText("PeakPlot");
                 }
                 if (measurement_type == 'R') {
                     //todo set plot to rms
+                    peakOrRms="RMS";
                     b_peak.setText("Peak");
+                    makePlot();
                     TextView statusView = (TextView) findViewById(R.id.status_textview);
                     statusView.setText("RmsPlot");
                 }
@@ -485,9 +454,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         //update textview
         selectedFreq.setText(String.valueOf(activeBar) + " MHz"); //sets selected freq into textVie
         //set color to active
-        int color = OverviewScanPlotActivity.this.getResources().getColor(R.color.activeBar);
-        paint.setColor(color);
-        canvas.drawRect(coord.getLeft(position), coord.getTop(position), coord.getRight(position), coord.getBottom(position), paint);
+        canvas.drawRect(coord.getLeft(position), coord.getTop(position), coord.getRight(position), coord.getBottom(position), paintActive);
         imageView.setImageBitmap(bitmap);
         chandeBarColorToFixed();
         // Log.d("activeBar_colorActive: ",String.valueOf(activeBar));
@@ -495,8 +462,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
 
     //changes Bar back to gray color
     private void changeBarColorToNOTactiv(Integer position) {
-        paint.setColor(Color.parseColor("#CCCCCC"));
-        canvas.drawRect(coord.getLeft(position), coord.getTop(position), coord.getRight(position), coord.getBottom(position), paint);
+        canvas.drawRect(coord.getLeft(position), coord.getTop(position), coord.getRight(position), coord.getBottom(position), paintBar);
         imageView.setImageBitmap(bitmap);
         chandeBarColorToFixed();
     }
@@ -505,9 +471,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     public void chandeBarColorToFixed() {
 
         for (int i = 0; i < fixedBars.size(); i++) {
-            int color = OverviewScanPlotActivity.this.getResources().getColor(R.color.fixedBar);
-            paint.setColor(color);
-            canvas.drawRect(coord.getLeft(fixedBars.get(i)), coord.getTop(fixedBars.get(i)), coord.getRight(fixedBars.get(i)), coord.getBottom(fixedBars.get(i)), paint);
+            canvas.drawRect(coord.getLeft(fixedBars.get(i)), coord.getTop(fixedBars.get(i)), coord.getRight(fixedBars.get(i)), coord.getBottom(fixedBars.get(i)), paintFix);
             imageView.setImageBitmap(bitmap);
         }
     }
@@ -515,39 +479,45 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     //clears all fixed bars and removes them from list
     public void clearAllFixedBars() {
         for (int i = 0; i < fixedBars.size(); i++) {
-            int color = OverviewScanPlotActivity.this.getResources().getColor(R.color.normalBar);
-            paint.setColor(color);
-            canvas.drawRect(coord.getLeft(fixedBars.get(i)), coord.getTop(fixedBars.get(i)), coord.getRight(fixedBars.get(i)), coord.getBottom(fixedBars.get(i)), paint);
+            canvas.drawRect(coord.getLeft(fixedBars.get(i)), coord.getTop(fixedBars.get(i)), coord.getRight(fixedBars.get(i)), coord.getBottom(fixedBars.get(i)), paintBar);
             imageView.setImageBitmap(bitmap);
         }
         fixedBars.clear();
     }
 
-    //Makes the plot and draws it.
-    public void PaintABar() {
-        // get size of display
+    public void SetUpValuesForPlot() {
         display = getWindowManager().getDefaultDisplay();
         size = new Point();
         display.getSize(size);
         imageView = (ImageView) findViewById(R.id.image_bitmap);
-        float height = 100;
-        float breiteBalken = (size.x-200) / anzahlBalken + ((1 - anzahlBalken) * abstandZwischenBalken) / anzahlBalken;
-        //initialize bitmap to draw on, create paint to set how we want our drawing element..
-        //paint sets colors ect. canvas then draws it on the bitmap.
         bitmap = Bitmap.createBitmap(size.x, size.y, Bitmap.Config.ARGB_8888);
-        paint = new Paint();
-        canvas = new Canvas(bitmap);  //needs to be conected to bitmap
-        //haw should our element look like?
-        int color = OverviewScanPlotActivity.this.getResources().getColor(R.color.normalBar);
-        paint.setColor(color);
-        paint.setStyle(Paint.Style.FILL);
-        //canvas.drawBitmapMesh();
-        // canvas.drawPoint(x,y,paint);
-        //Toast.makeText(XY_dataplot_MainActivity.this, "X: " + size.x + "Y: " + size.y, Toast.LENGTH_SHORT).show();
-        coord = new Rectangle(breiteBalken, anzahlBalken, abstandZwischenBalken, size.y, size.x);
-        for (int i = 0; i <= anzahlBalken; i++) {
-            canvas.drawRect(coord.getLeft(i), coord.getTop(i), coord.getRight(i), coord.getBottom(i), paint);      //somehow i get bottom wrong!
+        paintFix = new Paint();
+        paintBar = new Paint();
+        paintActive= new Paint();
+        colorFix = OverviewScanPlotActivity.this.getResources().getColor(R.color.fixedBar);
+        colorBar = OverviewScanPlotActivity.this.getResources().getColor(R.color.normalBar);
+        colorActive = OverviewScanPlotActivity.this.getResources().getColor(R.color.activeBar);
+        paintFix.setColor(colorFix);
+        paintFix.setStyle(Paint.Style.FILL);
+        paintBar.setColor(colorBar);
+        paintBar.setStyle(Paint.Style.FILL);
+        paintActive.setColor(colorActive);
+        paintActive.setStyle(Paint.Style.FILL);
+        canvas = new Canvas(bitmap);
+    }
+
+    public void makePlot() {
+        canvas.drawColor(Color.WHITE);
+        imageView.setImageBitmap(bitmap);
+        if(peakOrRms=="RMS") {
+            coord = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, rms, myMode);
+        }else {
+            coord = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, peak, myMode);
         }
+        for (int i = 0; i <= anzahlBalken; i++) {
+            canvas.drawRect(coord.getLeft(i), coord.getTop(i), coord.getRight(i), coord.getBottom(i), paintBar);      //somehow i get bottom wrong!
+        }
+        chandeBarColorToFixed();
         imageView.setImageBitmap(bitmap);
     }
 

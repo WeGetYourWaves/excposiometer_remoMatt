@@ -5,6 +5,8 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import static java.lang.Math.log;
+
 /**
  * Created by matthustahli on 06/10/16.
  */
@@ -13,41 +15,50 @@ import java.util.ArrayList;
 public class Rectangle extends AppCompatActivity {
 
     private int anzahlBalken;
-    private float frequency;
-    private float breiteBalken;
-    private float abgedekteLange;
+    private double abgedekteLange,sizeX,sizeY,breiteBalken,abstandZwischenBalken,maxHight ;
     private ArrayList<Float> left;
     private ArrayList<Float> right;
     private ArrayList<Float> top;
     private ArrayList<Float> bottom;
-    private float hans;
-    private int sizex;
-    public int[] height;
-    String active;
+    public double[] values;
+    String mode;
 
     //initialize
-    public Rectangle(float balkenBreite, int balkenAnzahl, float abstandZwischenBalken, int sisey, int sisex) {
+    public Rectangle( int anzahlBalkenIn, double abstandZwischenBalkenIn, int sizexIn, int sizeyIn, double[] valuesIn, String modeIn) {
         super();
-        hans = (float) sisey;
-        sizex = sisex;
-        breiteBalken = balkenBreite;
-        //frequency = height;
-        anzahlBalken = balkenAnzahl;
-        abgedekteLange = balkenBreite + abstandZwischenBalken;
-        OverviewScanPlotActivity helpMe = new OverviewScanPlotActivity();
-        height= helpMe.peak;
+        mode = modeIn;
+        maxHight = getRangeOfValues(mode);
+        sizeX = sizexIn;
+        sizeY = sizeyIn;
+        abstandZwischenBalken=abstandZwischenBalkenIn;
+        anzahlBalken = anzahlBalkenIn;
+        values = valuesIn;
+
+        breiteBalken = (sizeX-200) / anzahlBalken + ((1 - anzahlBalken) * abstandZwischenBalken) / anzahlBalken;
+        abgedekteLange = breiteBalken + abstandZwischenBalken;
         left = lengthFromLeft();
         right = lengthFromRight();
         top = lengthFromTop();
         bottom = lengthFromBottom();
-        Log.i("size_x: ", String.valueOf(sisex));
-        Log.i("size_y: ", String.valueOf(sisey));
-       // active = mode;
-
-
+        //Log.i("size_x: ", String.valueOf(sisex));
+        //Log.i("size_y: ", String.valueOf(sisey));
     }
 
-    //accessable funktions
+    private double getRangeOfValues(String mode) {
+        double returnValue=0;
+        switch (mode) {
+            case "normal": returnValue= log(50);
+                break;
+            case "-21dB": returnValue = log(500);
+                break;
+            case "-41dB": returnValue = log(5000);
+                break;
+            case "accu": returnValue = log(5);
+                break;
+        }
+        return returnValue;
+    }
+
     public ArrayList<Float> lengthFromLeft() {
         ArrayList<Float> toReturn = new ArrayList<Float>();
         for (int i = 0; i <= anzahlBalken; i++) {
@@ -70,12 +81,11 @@ public class Rectangle extends AppCompatActivity {
         return toReturn;
     }
 
-
     //represents the hight
     public ArrayList<Float> lengthFromTop() {
         ArrayList<Float> toReturn = new ArrayList<Float>();
         for (int i = 0; i <= anzahlBalken; i++) {
-            toReturn.add(i, (float)200+ height[i]);
+            toReturn.add(i,(float) (sizeY - maxHight/log(values[i])*sizeY));
         }
         Log.i("top hight: ", String.valueOf(toReturn.get(0)));
 
@@ -86,9 +96,9 @@ public class Rectangle extends AppCompatActivity {
     public ArrayList<Float> lengthFromBottom() {
         ArrayList<Float> toReturn = new ArrayList<Float>();
         for (int i = 0; i <= anzahlBalken; i++) {
-            toReturn.add(i, hans);
+            toReturn.add(i, (float)sizeY);
         }
-        Log.i("Value of Bottom: ", String.valueOf(hans));
+        Log.i("Value of Bottom: ", String.valueOf(sizeY));
 
         return toReturn;
     }

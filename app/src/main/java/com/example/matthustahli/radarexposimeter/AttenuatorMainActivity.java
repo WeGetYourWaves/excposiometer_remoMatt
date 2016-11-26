@@ -33,7 +33,6 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
     ProgressBar progressBar;
     LinearLayout layout_settings;
     Handler h = new Handler();
-    Intent service;
     final String LOG_TAG = "AttenuatorMainActivity";
     final AttenuatorMainActivityReceiver attenuatorMainActivityReceiver = new AttenuatorMainActivityReceiver(LOG_TAG);
 
