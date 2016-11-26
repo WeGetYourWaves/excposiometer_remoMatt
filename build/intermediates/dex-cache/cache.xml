@@ -187,7 +187,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="58bdb109901b4a27c1bb6d0df4aac6d642167826">
+        sha1="dc0d9f7c6bbcc3d726508565c1a94d99a66b8d95">
         <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_8fbf39bd9c82523274d16561e29558d029e01121\classes.dex" />
     </item>
     <item
@@ -196,7 +196,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="41c4b5d955c2369fabfca31da960874b0b457eb4">
+        sha1="1fa1de55e6d8d59fa5d05309b804b334705faf44">
         <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_6bfe878b9283481358178e64ad0ebb19966c724d\classes.dex" />
     </item>
     <item
