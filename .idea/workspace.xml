@@ -34,13 +34,13 @@
       <file leaf-file-name="OverviewScanPlotActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/OverviewScanPlotActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="281" column="36" selection-start-line="281" selection-start-column="36" selection-end-line="281" selection-end-column="36" />
+            <state relative-caret-position="178">
+              <caret line="230" column="34" selection-start-line="230" selection-start-column="34" selection-end-line="230" selection-end-column="34" />
               <folding>
                 <element signature="e#3492#3501#0" expanded="true" />
                 <element signature="e#3629#3642#0" expanded="true" />
-                <element signature="e#16339#17747#0" expanded="true" />
-                <element signature="e#17746#17747#0" expanded="true" />
+                <element signature="e#16296#17704#0" expanded="true" />
+                <element signature="e#17703#17704#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2332,8 +2332,8 @@
           <folding>
             <element signature="e#3492#3501#0" expanded="true" />
             <element signature="e#3629#3642#0" expanded="true" />
-            <element signature="e#16339#17747#0" expanded="true" />
-            <element signature="e#17746#17747#0" expanded="true" />
+            <element signature="e#16296#17704#0" expanded="true" />
+            <element signature="e#17703#17704#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2458,13 +2458,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/OverviewScanPlotActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="281" column="36" selection-start-line="281" selection-start-column="36" selection-end-line="281" selection-end-column="36" />
+        <state relative-caret-position="178">
+          <caret line="230" column="34" selection-start-line="230" selection-start-column="34" selection-end-line="230" selection-end-column="34" />
           <folding>
             <element signature="e#3492#3501#0" expanded="true" />
             <element signature="e#3629#3642#0" expanded="true" />
-            <element signature="e#16339#17747#0" expanded="true" />
-            <element signature="e#17746#17747#0" expanded="true" />
+            <element signature="e#16296#17704#0" expanded="true" />
+            <element signature="e#17703#17704#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -251,8 +251,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
 
             case R.id.b_mode_LNA:
                 myMode = "LNA on";
-
-            case R.id.b_mode_accumulator:
                 myMode = "accu";
                 attenuator = 3;
                 makePlot();
