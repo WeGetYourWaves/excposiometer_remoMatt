@@ -76,7 +76,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
 
 //----------------------------------------------------------------------
 
-    //this is like the MAIN
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -275,36 +274,55 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
 
         switch (v.getId()) {
             case R.id.b_mode_normal:
-                myMode = "normal";
+                myMode = "normal mode";
+                attenuator = 0;
                 settings.setVisibility(LinearLayout.GONE);
-                Toast.makeText(OverviewScanPlotActivity.this, "normal", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
+                View_Packet_Trigger view_packet_trigger0 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
+                sendTrigger(view_packet_trigger0.get_packet());
+                Log.d(LOG_TAG, "sent SCAN Trigger attenuator 0");
                 break;
             case R.id.b_mode_21db:
-                myMode = "21dB";
+                myMode = "-21 dB";
+                attenuator = 1;
                 settings.setVisibility(LinearLayout.GONE);
-                Toast.makeText(OverviewScanPlotActivity.this, "21 dB", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
+                View_Packet_Trigger view_packet_trigger1 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
+                sendTrigger(view_packet_trigger1.get_packet());
+                Log.d(LOG_TAG, "sent SCAN Trigger attenuator 1");
                 break;
             case R.id.b_mode_42db:
-                myMode = "42dB";
+                myMode = "-42 dB";
+                attenuator = 2;
                 settings.setVisibility(LinearLayout.GONE);
-                Toast.makeText(OverviewScanPlotActivity.this, "42 dB", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
+                View_Packet_Trigger view_packet_trigger2 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
+                sendTrigger(view_packet_trigger2.get_packet());
+                Log.d(LOG_TAG, "sent SCAN Trigger attenuator 2");
                 break;
             case R.id.b_mode_LNA:
-                myMode = "accu";
+                myMode = "LNA on";
+                attenuator = 3;
                 settings.setVisibility(LinearLayout.GONE);
-                Toast.makeText(OverviewScanPlotActivity.this, "verstärkt", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
+                View_Packet_Trigger view_packet_trigger3 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
+                sendTrigger(view_packet_trigger3.get_packet());
+                Log.d(LOG_TAG, "sent SCAN Trigger attenuator 3");
                 break;
             case R.id.switch_to_peak:
+                if (measurement_type == 'P')    measurement_type = 'R';
+                else measurement_type = 'P';
+
                 handlesActivatingDropDown(clickCounterStatusPlot%2); // to show connection bar
 
                 clickCounterStatusPlot++;
-                if (clickCounterStatusPlot % 2 == 0) {
+                if (measurement_type == 'P') {
                     //todo set plot to peak
                     b_peak.setText("RMS");
                     TextView statusView = (TextView) findViewById(R.id.status_textview);
                     statusView.setText("PeakPlot");
                 }
-                if (clickCounterStatusPlot % 2 == 1) {
+                if (measurement_type == 'R') {
                     //todo set plot to rms
                     b_peak.setText("Peak");
                     TextView statusView = (TextView) findViewById(R.id.status_textview);
@@ -334,6 +352,9 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
             case R.id.refresh_button:
                 Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
                 letButtonTurn(clickCounterStatusPlot);
+                View_Packet_Trigger view_packet_triggerRefresh = new View_Packet_Trigger(device_id, attenuator, measurement_type);
+                sendTrigger(view_packet_triggerRefresh.get_packet());
+                Log.d(LOG_TAG, "sent SCAN Trigger Refresh");
                 clickCounterStatusPlot++;
                 break;
             case R.id.setting_button:

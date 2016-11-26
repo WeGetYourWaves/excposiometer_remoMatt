@@ -34,7 +34,7 @@
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
         android:background="@color/choose_mode_button_color"
-        android:text="21dB"
+        android:text="-21 dB"
         android:textSize="@dimen/choose_mode_button_textsize"
 
         />
@@ -50,7 +50,7 @@
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
         android:background="@color/choose_mode_button_color"
-        android:text="42dB"
+        android:text="-42 dB"
         android:textSize="@dimen/choose_mode_button_textsize"
 
         />
@@ -65,7 +65,7 @@
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
         android:background="@color/choose_mode_button_color"
-        android:text="Accumulate"
+        android:text="LNA on"
         android:textSize="@dimen/choose_mode_button_textsize"
 
         />
