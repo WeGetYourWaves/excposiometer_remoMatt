@@ -162,7 +162,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                                             ByteArrayOutputStream ProgressPack = new ByteArrayOutputStream(14);
                                             ProgressPack.write(RD16);
                                             ProgressPack.write(PROG);
-                                            ProgressPack.write(int2byteArray((int) (100.0 * i/27.0), 2));
+                                            ProgressPack.write(int2byteArray((int) (100.0 * i/26.0), 2));
                                             ProgressPack.write(PEND);
                                             send(ProgressPack.toByteArray());
                                         }

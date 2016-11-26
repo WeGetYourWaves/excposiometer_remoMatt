@@ -26,7 +26,7 @@ public class CommunicationService extends Service {
 
     WifiManager wifi_manager;
     Boolean WifiWasOnWhenServiceWasStarted = false;
-    static WifiDataBuffer wifiDataBuffer = new WifiDataBuffer();
+    static final WifiDataBuffer wifiDataBuffer = new WifiDataBuffer();
     TCP_Data_dequeue_Thread TCP_Data_Sender = new TCP_Data_dequeue_Thread();
     byte[] callipack;
 
@@ -183,7 +183,13 @@ public class CommunicationService extends Service {
                             int device_id = byteArray2int(split_packet(8, 11, received));
                             Cal_Packet_Trigger trigger = new Cal_Packet_Trigger(device_id, 0);
                             wifiDataBuffer.enqueue_ToESP(trigger.get_packet());
-                        }else {
+                            Log.d(Log_tag, "sent calTrigger to ESP");
+                        }
+                        else if (new String(split_packet(4, 7, received)).equals("CALD")){
+                            callipack = received;
+                            Log.d(Log_tag, "got CalTable from ESP");
+                        }
+                        else {
                             SendDataToActivity(received);
                         }
                     }

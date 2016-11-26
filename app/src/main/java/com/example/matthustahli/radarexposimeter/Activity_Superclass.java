@@ -1,6 +1,7 @@
 package com.example.matthustahli.radarexposimeter;
 
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import java.io.Serializable;
 

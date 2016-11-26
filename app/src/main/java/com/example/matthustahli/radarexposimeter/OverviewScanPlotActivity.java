@@ -1,5 +1,7 @@
 package com.example.matthustahli.radarexposimeter;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
@@ -38,8 +40,8 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     public int[] rms = {348, 435, 332, 368, 271, 404, 346, 320, 371, 217, 126, 201, 118, 121, 199, 316, 310, 115, 361, 213, 196, 173, 114, 152, 480, 300, 285, 146, 194, 278, 353, 102, 179, 296, 182, 192, 272, 347, 407, 161, 448, 207, 256, 240, 253, 472, 153, 424, 323, 266, 185, 344, 484, 423, 134, 349, 209, 321, 269, 198, 302, 414, 254, 120, 224, 379, 488, 168, 382, 497, 359, 381, 243, 128, 410, 125, 291, 212, 276, 445, 474, 260, 362, 181, 372, 341, 401, 438, 406, 340, 113, 117, 363, 210, 178, 354, 314, 318, 384, 108, 400, 338, 233, 251, 208, 467, 479, 328, 288, 148, 216, 297, 265, 337, 249, 145, 174, 206, 277, 230, 171, 373, 186, 351, 376, 188, 315, 279, 331, 232, 100};
     public int[] valueToShow;
     WifiDataBuffer buffer = new WifiDataBuffer();
-    final String LOG_TAG = "overview";
-    MyActivityReceiver OverviewReceiver = new MyActivityReceiver(LOG_TAG, buffer);
+    final String LOG_TAG = "Overview";
+    OverviewScanPlotActivityReceiver overviewScanPlotActivityReceiver = new OverviewScanPlotActivityReceiver(LOG_TAG, buffer);
     Activity_Superclass calibration;
 
 
@@ -90,45 +92,31 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         ActivateTouchOnPlot();
         // ActivateAddButton();
         Log.d("activeBar(onCreate): ", String.valueOf(activeBar));
-
-        // todo elements from Remo
-        // View_Activity view_activity = new View_Activity(buffer, calibration, 125, 0, 'R'); //todo attenuator and type define Remo
     }
 
     private void RequestCALD(){
-        Log.d(LOG_TAG, "Requesteded Callipack");
+        Log.d(LOG_TAG, "Requested Calipack");
         Intent intent = new Intent();
         intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
         intent.putExtra(CommunicationService.COMMAND_Act2Serv, CommunicationService.CMD_getCALI);
         sendBroadcast(intent);
     }
 
+    private void sendTrigger(byte[] TriggerPack) {
+        Intent intent = new Intent();
+        intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
+        intent.putExtra(CommunicationService.TRIGGER_Act2Serv, TriggerPack);
+        sendBroadcast(intent);
+    }
+
     public void onStart() {
         Log.d(LOG_TAG , "onStart called");
         super.onStart();
+    }
 
-        boolean gotCALDPack = false;
-        //while(!gotCALDPack){
-            RequestCALD();
-            Log.d(LOG_TAG, "Requested Callipack");
-            if(!buffer.isDataWaiting_FromESP()){
-                Log.d(LOG_TAG, "No Data");
-                try {
-                    sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else {
-                Log.d(LOG_TAG, "Got Data !!!!!!!!!");
-                byte[] received = buffer.deque_FromESP();
-                if(new String(split_packet(4, 7, received)).equals("CALD")){
-                    calibration = new Activity_Superclass(received);
-                    gotCALDPack = true;
-                    Log.d(LOG_TAG, "got Calidata");
-                }
-            }
-        //}
+    public void onStop(){
+        Log.d(LOG_TAG , "onStop called");
+        super.onStop();
     }
 
     protected byte[] split_packet (int start, int end, byte[] packet){
@@ -209,14 +197,22 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     @Override
     protected void onPause() {
         //here i need to save
-        super.onPause();
         //saveToSharedPref(fixedBars);
+        Log.d(LOG_TAG, "in onPause");
+        super.onPause();
+        unregisterReceiver(overviewScanPlotActivityReceiver);
     }
 
     @Override
     protected void onResume() {
         // loadFromSharedPref();
         super.onResume();
+        Log.d(LOG_TAG, "in onResume");
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(CommunicationService.TRIGGER_Serv2Act);
+        registerReceiver(overviewScanPlotActivityReceiver, intentFilter);
+
+        RequestCALD();
     }
 
 
@@ -528,6 +524,30 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     private void StartService() {
         Intent intent = new Intent(this, CommunicationService.class);
         startService(intent);
+    }
+
+    public class OverviewScanPlotActivityReceiver extends BroadcastReceiver {
+        final String LOG_TAG;
+        final WifiDataBuffer wifiDataBufffer;
+
+        public OverviewScanPlotActivityReceiver(String LOG_TAG, WifiDataBuffer wifiDataBuffer){
+            this.LOG_TAG = LOG_TAG;
+            this.wifiDataBufffer = wifiDataBuffer;
+        }
+        @Override
+        public void onReceive(Context arg0, Intent data) {
+            Log.d(LOG_TAG, "MyActivityReceiver in onReceive");
+            byte[] orgData = data.getByteArrayExtra(CommunicationService.DATA_BACK);
+            if (orgData != null) {
+                if(new String(split_packet(4, 7, orgData)).equals("CALD")) {
+                    calibration = new Activity_Superclass(orgData);
+                    Log.d(LOG_TAG, "saved Calibration Tables");
+                }
+                else if(new String(split_packet(4, 7, orgData)).equals("SCAN")){
+                    Log.d(LOG_TAG, "got SCAN data");
+                }
+            }
+        }
     }
 
 }

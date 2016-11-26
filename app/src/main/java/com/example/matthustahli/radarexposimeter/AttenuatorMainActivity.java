@@ -1,5 +1,7 @@
 package com.example.matthustahli.radarexposimeter;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
@@ -31,8 +33,8 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
     Handler h = new Handler();
     Intent service;
     final String LOG_TAG = "AttenuatorMainActivity";
-    WifiDataBuffer buffer = new WifiDataBuffer();
-    final MyActivityReceiver myActivityReceiver = new MyActivityReceiver(LOG_TAG, buffer);
+    final WifiDataBuffer buffer = new WifiDataBuffer();
+    final AttenuatorMainActivityReceiver attenuatorMainActivityReceiver = new AttenuatorMainActivityReceiver(LOG_TAG, buffer);
 
 
 
@@ -43,6 +45,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attenuator_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
         initializeButtons();
         activateClickListener();
         testToLetprogressRun();
@@ -80,10 +83,9 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         Thread timer = new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("AttenuatorMainActivity" , "progressbar called");
+                Log.d(LOG_TAG, "progressbar called");
                 progressBar.setMax(100);
-                boolean gotCALD_DRDY = false;
-                while(!gotCALD_DRDY){
+                while(progressBar.getProgress() < progressBar.getMax()){
                     if(!buffer.isDataWaiting_FromESP()){
                         try {
                             sleep(100);
@@ -96,11 +98,6 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
                         if(new String(split_packet(4, 7, received)).equals("PROG")){
                             Progress_Packet_Exposi progPack = new Progress_Packet_Exposi(received);
                             progressBar.setProgress(progPack.get_progress());
-                            Log.d(LOG_TAG, "setProgressbar");
-                        }
-                        else {
-                            buffer.enque_FromESP(received);
-                            gotCALD_DRDY = true;
                             Log.d(LOG_TAG, "setProgressbar");
                         }
                     }
@@ -132,16 +129,8 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onStart() {
-
-
         Log.d("AttenuatorMainActivity" , "onStart called");
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(CommunicationService.TRIGGER_Serv2Act);
-        registerReceiver(myActivityReceiver, intentFilter);
-
         StartService();
-
-        sendTrigger(new byte[] {1, 2});
 
         super.onStart();
     }
@@ -151,12 +140,21 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         startService(intent);
     }
 
-    private void RequestCALD(){
-        Log.d(LOG_TAG, "StopService called");
-        Intent intent = new Intent();
-        intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
-        intent.putExtra(CommunicationService.COMMAND_Act2Serv, CommunicationService.CMD_getCALI);
-        sendBroadcast(intent);
+    @Override
+    public void onResume(){
+        super.onResume();
+        Log.d(LOG_TAG, "in onResume");
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(CommunicationService.TRIGGER_Serv2Act);
+        registerReceiver(attenuatorMainActivityReceiver, intentFilter);
+
+    }
+
+    @Override
+    public void onPause(){
+        Log.d(LOG_TAG, "in onPause");
+        super.onPause();
+        unregisterReceiver(attenuatorMainActivityReceiver);
     }
 
     private void sendTrigger(byte[] TriggerPack) {
@@ -168,12 +166,14 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onStop() {
-        unregisterReceiver(myActivityReceiver);
+        Log.d(LOG_TAG, "in onstop()");
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
+        Log.d(LOG_TAG, "in ondestroy()");
+
 /*        if(this.isFinishing()) {
             stopService(service);
             wifi_manager.setWifiEnabled(true);// sets wifi back on
@@ -184,6 +184,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
+        Log.d(LOG_TAG, "in onClick()");
         switch (v.getId()){
             case R.id.b_mode_normal:
                 goToNextActivityWithSpecifivMode("normal");
@@ -226,5 +227,24 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         }
 
         return splitted;
+    }
+
+    public class AttenuatorMainActivityReceiver extends BroadcastReceiver {
+        final String LOG_TAG;
+        final WifiDataBuffer wifiDataBufffer;
+
+        public AttenuatorMainActivityReceiver(String LOG_TAG, WifiDataBuffer wifiDataBuffer){
+            this.LOG_TAG = LOG_TAG;
+            this.wifiDataBufffer = wifiDataBuffer;
+        }
+        @Override
+        public void onReceive(Context arg0, Intent data) {
+            Log.d(LOG_TAG, "MyActivityReceiver in onReceive");
+            byte[] orgData = data.getByteArrayExtra(CommunicationService.DATA_BACK);
+            if (orgData != null) {
+                wifiDataBufffer.enque_FromESP(orgData);
+            }
+
+        }
     }
 }
