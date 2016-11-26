@@ -145,9 +145,9 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         myMode = intent.getStringExtra("MODE");
-        if (myMode == "-21dB")  attenuator = 1;
-        else if (myMode == "accu")  attenuator = 3;
-        else if(myMode == "normal")   attenuator = 0;
+        if (myMode == "-21 dB")  attenuator = 1;
+        else if (myMode == "LNA on")  attenuator = 3;
+        else if(myMode == "normal mode")   attenuator = 0;
         else attenuator = 2;
         Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
     }
@@ -289,7 +289,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 settings.setVisibility(LinearLayout.GONE);
                 Toast.makeText(OverviewScanPlotActivity.this, "42 dB", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.b_mode_accumulator:
+            case R.id.b_mode_LNA:
                 myMode = "accu";
                 settings.setVisibility(LinearLayout.GONE);
                 Toast.makeText(OverviewScanPlotActivity.this, "verstärkt", Toast.LENGTH_SHORT).show();
@@ -352,7 +352,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         b_normal = (Button) findViewById(R.id.b_mode_normal);
         b_21dB = (Button) findViewById(R.id.b_mode_21db);
         b_41dB = (Button) findViewById(R.id.b_mode_42db);
-        b_accu = (Button) findViewById(R.id.b_mode_accumulator);
+        b_accu = (Button) findViewById(R.id.b_mode_LNA);
         addButton = (ImageButton) findViewById(R.id.add_freq_button);
         nextButton = (ImageButton) findViewById(R.id.next_button);
         clearButton = (ImageButton) findViewById(R.id.clear_button);

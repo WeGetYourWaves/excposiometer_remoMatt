@@ -60,7 +60,7 @@
         android:layout_weight="@dimen/set_weight_between_mode_buttons" >
     </Space>
     <Button
-        android:id="@+id/b_mode_accumulator"
+        android:id="@+id/b_mode_LNA"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"

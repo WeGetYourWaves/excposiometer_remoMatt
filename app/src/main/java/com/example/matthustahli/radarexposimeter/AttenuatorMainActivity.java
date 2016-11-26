@@ -28,7 +28,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
     String myMode;
     Integer counter=0;
     WifiManager wifi_manager;
-    Button b_modeNormal,b_mode21dB,b_mode41dB, b_mode_accumulation,b_chico;
+    Button b_modeNormal,b_mode21dB,b_mode41dB, b_modeLNA, b_chico;
     TextView id_device;
     ProgressBar progressBar;
     LinearLayout layout_settings;
@@ -60,7 +60,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         b_modeNormal = (Button) findViewById(R.id.b_mode_normal);
         b_mode21dB = (Button) findViewById(R.id.b_mode_21db);
         b_mode41dB = (Button) findViewById(R.id.b_mode_42db);
-        b_mode_accumulation = (Button) findViewById(R.id.b_mode_accumulator);
+        b_modeLNA = (Button) findViewById(R.id.b_mode_LNA);
         b_batterie = (ImageButton) findViewById(R.id.b_batterie);
         b_chico = (Button) findViewById(R.id.b_chico);
         layout_settings= (LinearLayout) findViewById(R.id.settings_atStart);
@@ -70,7 +70,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
     private void activateClickListener(){
         b_modeNormal.setOnClickListener(this);
         b_batterie.setOnClickListener(this);
-        b_mode_accumulation.setOnClickListener(this);
+        b_modeLNA.setOnClickListener(this);
         b_mode41dB.setOnClickListener(this);
         b_mode21dB.setOnClickListener(this);
         b_chico.setOnClickListener(this);
@@ -147,16 +147,16 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         Log.d(LOG_TAG, "in onClick()");
         switch (v.getId()){
             case R.id.b_mode_normal:
-                goToNextActivityWithSpecifivMode("normal");
+                goToNextActivityWithSpecifivMode("normal mode");
                 break;
             case R.id.b_mode_21db:
-                goToNextActivityWithSpecifivMode("-21dB");
+                goToNextActivityWithSpecifivMode("-21 dB");
                 break;
             case R.id.b_mode_42db:
-                goToNextActivityWithSpecifivMode("-41dB");
+                goToNextActivityWithSpecifivMode("-41 dB");
                 break;
-            case R.id.b_mode_accumulator:
-                goToNextActivityWithSpecifivMode("accu");
+            case R.id.b_mode_LNA:
+                goToNextActivityWithSpecifivMode("LNA on");
                 break;
 /*            case R.id.b_batterie:
                 counter++;

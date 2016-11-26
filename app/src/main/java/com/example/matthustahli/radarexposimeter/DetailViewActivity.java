@@ -2,20 +2,12 @@ package com.example.matthustahli.radarexposimeter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Point;
-import android.os.PersistableBundle;
-import android.renderscript.Sampler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ListViewCompat;
-import android.text.Editable;
-import android.text.method.KeyListener;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,15 +17,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 import static java.lang.Math.log;
 
@@ -188,7 +177,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         b_normal = (Button) findViewById(R.id.b_mode_normal);
         b_21dB = (Button) findViewById(R.id.b_mode_21db);
         b_41dB = (Button) findViewById(R.id.b_mode_42db);
-        b_accu = (Button) findViewById(R.id.b_mode_accumulator);
+        b_accu = (Button) findViewById(R.id.b_mode_LNA);
         settings = (LinearLayout) findViewById(R.id.layout_setting);
         b_settings = (ImageButton) findViewById(R.id.setting_button);
         visibleList = (ListView) findViewById(R.id.list_live_data);
@@ -221,7 +210,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 closeSettingLayoutAndUpdateList();
                 Toast.makeText(this, "42 dB", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.b_mode_accumulator:
+            case R.id.b_mode_LNA:
                 myMode = "accu";
                 closeSettingLayoutAndUpdateList();
                 Toast.makeText(this, "verstärkt", Toast.LENGTH_SHORT).show();

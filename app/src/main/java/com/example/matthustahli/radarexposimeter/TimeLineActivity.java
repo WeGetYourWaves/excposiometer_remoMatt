@@ -52,7 +52,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         b_modeNormal = (Button) findViewById(R.id.b_mode_normal);
         b_mode21dB = (Button) findViewById(R.id.b_mode_21db);
         b_mode42dB = (Button) findViewById(R.id.b_mode_42db);
-        b_mode_accumulation = (Button) findViewById(R.id.b_mode_accumulator);
+        b_mode_accumulation = (Button) findViewById(R.id.b_mode_LNA);
         b_settings = (ImageButton) findViewById(R.id.setting_button);
         b_switchMode = (Button) findViewById(R.id.switch_to_peak);
         tv_status = (TextView) findViewById(R.id.tv_status);
@@ -80,7 +80,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
             case R.id.b_mode_42db:
                 myMode = "42dB";
                 break;
-            case R.id.b_mode_accumulator:
+            case R.id.b_mode_LNA:
                 myMode = "accu";
                 break;
             case R.id.setting_button:
