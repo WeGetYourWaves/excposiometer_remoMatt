@@ -220,7 +220,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(CommunicationService.TRIGGER_Serv2Act);
         registerReceiver(overviewScanPlotActivityReceiver, intentFilter);
-
+        StartService();
         RequestCALD();
     }
 

@@ -155,7 +155,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
             case R.id.b_mode_accumulator:
                 goToNextActivityWithSpecifivMode("accu");
                 break;
-            case R.id.b_batterie:
+/*            case R.id.b_batterie:
                 counter++;
                 if (counter % 4 == 0)
                     b_batterie.setBackgroundResource(R.drawable.ic_batterie_empty);
@@ -163,7 +163,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
                 if (counter % 4 == 2)
                     b_batterie.setBackgroundResource(R.drawable.ic_batterie_middle);
                 if (counter % 4 == 3) b_batterie.setBackgroundResource(R.drawable.ic_batterie_high);
-                break;
+                break;*/
             case R.id.b_chico:
                 counter++;
                 ImageView image = (ImageView) findViewById(R.id.andi);
@@ -186,6 +186,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         return splitted;
     }
 
+    //receiver of the AttenuatorMainActivity which receives the data from the CommunicationService
     public class AttenuatorMainActivityReceiver extends BroadcastReceiver {
         final String LOG_TAG;
 
@@ -220,9 +221,11 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
                 }
 
                 if(new String(split_packet(4, 7, orgData)).equals("DRDY")) {
+
                     Log.d(LOG_TAG, "got DRDY from ESP");
                     Ready_Packet_Exposi ready_packet_exposi = new Ready_Packet_Exposi(orgData);
                     int device_id = ready_packet_exposi.get_device_id();
+                    setBatteryStatus(ready_packet_exposi.get_battery_charge());
                     Cal_Packet_Trigger trigger = new Cal_Packet_Trigger(device_id, 0);
                     sendTrigger(trigger.get_packet());
                     Log.d(LOG_TAG, "sent calTrigger to ESP");
@@ -230,5 +233,13 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
             }
 
         }
+    }
+
+    void setBatteryStatus(int percentage){
+        if(percentage < 15) b_batterie.setBackgroundResource(R.drawable.ic_batterie_empty);
+        else if (percentage < 30) b_batterie.setBackgroundResource(R.drawable.ic_batterie_low);
+        else if (percentage < 70) b_batterie.setBackgroundResource(R.drawable.ic_batterie_middle);
+        else b_batterie.setBackgroundResource(R.drawable.ic_batterie_high);
+        Log.d(LOG_TAG, "battery percentage set");
     }
 }
