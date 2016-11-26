@@ -218,13 +218,9 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
 
         switch (v.getId()) {
             case R.id.b_mode_normal:
-<<<<<<< Updated upstream
-                myMode = "normal mode";
                 attenuator = 0;
-=======
                 myMode = "normal";
                 makePlot();
->>>>>>> Stashed changes
                 settings.setVisibility(LinearLayout.GONE);
                 Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
                 View_Packet_Trigger view_packet_trigger0 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
@@ -232,13 +228,9 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 Log.d(LOG_TAG, "sent SCAN Trigger attenuator 0");
                 break;
             case R.id.b_mode_21db:
-<<<<<<< Updated upstream
                 myMode = "-21 dB";
                 attenuator = 1;
-=======
-                myMode = "21dB";
                 makePlot();
->>>>>>> Stashed changes
                 settings.setVisibility(LinearLayout.GONE);
                 Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
                 View_Packet_Trigger view_packet_trigger1 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
@@ -246,28 +238,24 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 Log.d(LOG_TAG, "sent SCAN Trigger attenuator 1");
                 break;
             case R.id.b_mode_42db:
-<<<<<<< Updated upstream
                 myMode = "-42 dB";
                 attenuator = 2;
-=======
-                myMode = "42dB";
                 makePlot();
->>>>>>> Stashed changes
+
                 settings.setVisibility(LinearLayout.GONE);
                 Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
                 View_Packet_Trigger view_packet_trigger2 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
                 sendTrigger(view_packet_trigger2.get_packet());
                 Log.d(LOG_TAG, "sent SCAN Trigger attenuator 2");
                 break;
-<<<<<<< Updated upstream
+
             case R.id.b_mode_LNA:
                 myMode = "LNA on";
-                attenuator = 3;
-=======
+
             case R.id.b_mode_accumulator:
                 myMode = "accu";
+                attenuator = 3;
                 makePlot();
->>>>>>> Stashed changes
                 settings.setVisibility(LinearLayout.GONE);
                 Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
                 View_Packet_Trigger view_packet_trigger3 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
