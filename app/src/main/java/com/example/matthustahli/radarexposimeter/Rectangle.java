@@ -47,13 +47,13 @@ public class Rectangle extends AppCompatActivity {
     private double getRangeOfValues(String mode) {
         double returnValue=0;
         switch (mode) {
-            case "normal": returnValue= log(50);
+            case "normal mode": returnValue= log(50);
                 break;
-            case "-21dB": returnValue = log(500);
+            case "-21 dB": returnValue = log(500);
                 break;
-            case "-41dB": returnValue = log(5000);
+            case "-42 dB": returnValue = log(5000);
                 break;
-            case "accu": returnValue = log(5);
+            case "LNA on": returnValue = log(5);
                 break;
         }
         return returnValue;
@@ -85,7 +85,11 @@ public class Rectangle extends AppCompatActivity {
     public ArrayList<Float> lengthFromTop() {
         ArrayList<Float> toReturn = new ArrayList<Float>();
         for (int i = 0; i <= anzahlBalken; i++) {
-            toReturn.add(i,(float) (sizeY - maxHight/log(values[i])*sizeY));
+            if(values[i]<=1) {
+                toReturn.add(i,(float) (sizeY));
+            }else{
+            toReturn.add(i,(float) (sizeY - log(values[i])/maxHight*sizeY));
+            }
         }
         Log.i("top hight: ", String.valueOf(toReturn.get(0)));
 
