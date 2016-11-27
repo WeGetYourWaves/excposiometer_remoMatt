@@ -4,8 +4,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -17,21 +20,37 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class TimeLineActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Integer counter=0, anzahlBalken, activeBar;
+    Integer counterB=0, anzahlBalken, activeBar;
     Button b_modeNormal,b_mode21dB, b_mode42dB,b_mode_accumulation,b_switchMode;
     ImageButton b_settings;
     TextView tv_status;
     LinearLayout settings;
     String myMode;
-    Rectangle coord;
     Animation animationSlideDown;
-    Paint paint;
+
+
+    //variables for timer
+    Timer timer;
+    Runnable runnable;
+    Handler handler;
+    int counter=0;
+    //int size;
+
+    //variables for plot
+    Rectangle coord;
+    Display display;
+    int colorFix, colorBar, colorActive ;
+    Paint paintFix, paintBar, paintActive;
     ImageView imageView;
     Bitmap bitmap;
     Canvas canvas;
-
+    Point size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +58,51 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_time_line);
         initalizeButtonsAndIcons();
         activateOnclickListener();
-        startTimeLine();
+        ActivateTouchOnPlot();
+
+        //draws plot, not ready yet
+        //startTimeLine();
     }
 
     private void startTimeLine() {
-        //getValuesForPlot();  //(start von jedem der 30 balken)
+        counter =0;
+        handler = new Handler();
+        timer = new Timer();
+        runnable = new Runnable(){
+            public void run() {
+                //draw plot here!!!
+                //final int index = counter % size;
+                //measures.set(index, new LiveMeasure(fixedFreq.get(index), 0, rms[counter % rms.length], peak[counter % peak.length]));
+                counter++;
+            }
+        };
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(runnable);
+            }
+        },0,500);  // time when new bar appears.
+    }
 
-        //
+    public void SetUpValuesForPlot() {
+        display = getWindowManager().getDefaultDisplay();
+        size = new Point();
+        display.getSize(size);
+        imageView = (ImageView) findViewById(R.id.image_bitmap);
+        bitmap = Bitmap.createBitmap(size.x, size.y, Bitmap.Config.ARGB_8888);
+        paintFix = new Paint();
+        paintBar = new Paint();
+        paintActive= new Paint();
+        colorFix = TimeLineActivity.this.getResources().getColor(R.color.fixedBar);
+        colorBar = TimeLineActivity.this.getResources().getColor(R.color.normalBar);
+        colorActive = TimeLineActivity.this.getResources().getColor(R.color.activeBar);
+        paintFix.setColor(colorFix);
+        paintFix.setStyle(Paint.Style.FILL);
+        paintBar.setColor(colorBar);
+        paintBar.setStyle(Paint.Style.FILL);
+        paintActive.setColor(colorActive);
+        paintActive.setStyle(Paint.Style.FILL);
+        canvas = new Canvas(bitmap);
     }
 
     private void initalizeButtonsAndIcons() {
@@ -91,8 +148,8 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
             case R.id.switch_to_peak:
-                counter ++;
-                if(counter%2==0) {
+                counterB ++;
+                if(counterB%2==0) {
                     tv_status.setText("Peak");
                     b_switchMode.setText("RMS");
                 }else{
@@ -107,7 +164,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
        /* final TextView xCoord = (TextView) findViewById(R.id.coord_x);
         final TextView yCoord = (TextView) findViewById(R.id.coord_y);
         */
-        View touchView = findViewById(R.id.activity_overview_scan_plot);
+        View touchView = findViewById(R.id.activity_time_line);
         touchView.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View v, MotionEvent event) {
@@ -119,17 +176,13 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                                 settings.setVisibility(LinearLayout.GONE);
                             }
                         } catch (NullPointerException e) {}
-                        /*xCoord.setText(String.valueOf((int) event.getX()));
-                        yCoord.setText(String.valueOf((int) event.getY()));*/
-                        int position = returnPosition((int) event.getX());
-                        changeBarColorToActiv(position);
+                        //int position = returnPosition((int) event.getX());
+                        //changeBarColorToActiv(position);
                         break;
                     }
                     case MotionEvent.ACTION_MOVE: {
-                        /*xCoord.setText("x: " + String.valueOf((int) event.getX()));
-                        yCoord.setText("y: " + String.valueOf((int) event.getY()));*/
-                        int position = returnPosition((int) event.getX());
-                        changeBarColorToActiv(position);
+                        //int position = returnPosition((int) event.getX());
+                        //changeBarColorToActiv(position);
                         break;
                     }
                 }
@@ -162,16 +215,13 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         activeBar = position;       //with this position we can also use the add button to put it in a list!
         //update textview
         //set color to active
-        int color = TimeLineActivity.this.getResources().getColor(R.color.activeBar);
-        paint.setColor(color);
-        canvas.drawRect(coord.getLeft(position), coord.getTop(position), coord.getRight(position), coord.getBottom(position), paint);
+        canvas.drawRect(coord.getLeft(position), coord.getTop(position), coord.getRight(position), coord.getBottom(position), paintActive);
         imageView.setImageBitmap(bitmap);
     }
 
     //changes Bar back to gray color
     private void changeBarColorToNOTactiv(Integer position) {
-        paint.setColor(Color.parseColor("#CCCCCC"));
-        canvas.drawRect(coord.getLeft(position), coord.getTop(position), coord.getRight(position), coord.getBottom(position), paint);
+        canvas.drawRect(coord.getLeft(position), coord.getTop(position), coord.getRight(position), coord.getBottom(position), paintBar);
         imageView.setImageBitmap(bitmap);
     }
 

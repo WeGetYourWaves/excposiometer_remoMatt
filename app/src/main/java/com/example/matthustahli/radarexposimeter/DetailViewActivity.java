@@ -260,7 +260,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 handler.post(runnable);
                     }
         },0,500);
-
     }
 
     public void closeSettingLayoutAndUpdateList(){
