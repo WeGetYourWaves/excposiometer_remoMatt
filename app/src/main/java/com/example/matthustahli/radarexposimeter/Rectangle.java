@@ -15,7 +15,7 @@ import static java.lang.Math.log;
 public class Rectangle extends AppCompatActivity {
 
     private int anzahlBalken;
-    private double abgedekteLange,sizeX,sizeY,breiteBalken,abstandZwischenBalken,maxHight, scale=0.82 ;
+    private double abgedekteLange,sizeX,sizeY,breiteBalken,abstandZwischenBalken,maxHight, scaleY, scaleX  ;
     private ArrayList<Float> left;
     private ArrayList<Float> right;
     private ArrayList<Float> top;
@@ -24,11 +24,13 @@ public class Rectangle extends AppCompatActivity {
     String mode;
 
     //initialize
-    public Rectangle( int anzahlBalkenIn, double abstandZwischenBalkenIn, int sizexIn, int sizeyIn, double[] valuesIn, String modeIn) {
+    public Rectangle( int anzahlBalkenIn, double abstandZwischenBalkenIn, int sizexIn, int sizeyIn, double[] valuesIn, String modeIn,double scaleXIn, double scaleYIn) {
         super();
+        scaleX=scaleXIn;
+        scaleY=scaleYIn;
         mode = modeIn;
         maxHight = getRangeOfValues(mode);
-        sizeX = sizexIn;
+        sizeX = sizexIn*scaleX;
         sizeY = sizeyIn;
         abstandZwischenBalken=abstandZwischenBalkenIn;
         anzahlBalken = anzahlBalkenIn;
@@ -89,9 +91,9 @@ public class Rectangle extends AppCompatActivity {
                 toReturn.add(i,(float) (sizeY)); // empty size
             }
             if(log(values[i]) >= maxHight) {
-                toReturn.add(i, (float) (sizeY - sizeY * scale)); //full size
+                toReturn.add(i, (float) (sizeY - sizeY * scaleY)); //full size
             }else{
-                toReturn.add(i,(float) (sizeY - log(values[i])/maxHight*sizeY*scale));
+                toReturn.add(i,(float) (sizeY - log(values[i])/maxHight*sizeY*scaleY));
             }
         }
         Log.i("top hight: ", String.valueOf(toReturn.get(0)));

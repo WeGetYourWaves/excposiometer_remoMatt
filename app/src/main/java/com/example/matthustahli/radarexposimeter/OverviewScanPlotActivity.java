@@ -307,11 +307,13 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 OpenDetailViewActivity();
                 break;
             case R.id.refresh_button:
-                Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
-                letButtonTurn(clickCounterStatusPlot);
                 View_Packet_Trigger view_packet_triggerRefresh = new View_Packet_Trigger(device_id, attenuator, measurement_type);
                 sendTrigger(view_packet_triggerRefresh.get_packet());
                 Log.d(LOG_TAG, "sent SCAN Trigger Refresh");
+
+                //reloading and making new plot
+                letButtonTurn(clickCounterStatusPlot);
+                makePlot();
                 clickCounterStatusPlot++;
                 break;
             case R.id.setting_button:
@@ -497,9 +499,9 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         canvas.drawColor(Color.WHITE);
         imageView.setImageBitmap(bitmap);
         if(measurement_type=='R') {
-            coord = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, rms, myMode);
+            coord = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, rms, myMode,0.95,0.85);
         }else {
-            coord = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, peak, myMode);
+            coord = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, peak, myMode, 0.95, 0.85);
         }
         for (int i = 0; i <= anzahlBalken; i++) {
             canvas.drawRect(coord.getLeft(i), coord.getTop(i), coord.getRight(i), coord.getBottom(i), paintBar);      //somehow i get bottom wrong!
