@@ -56,7 +56,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
     Runnable runnable;
     Handler handler;
-    int counter;
+    int counter=0;
     int size;
 
     @Override
@@ -80,20 +80,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         activateTouch();
         activateEditText();
         activateAddButton();
-
-        //versuch timer mätthu
-        //new Timer().scheduleAtFixedRate(task, after, interval);
-        counter =0;
-        handler = new Handler();
-        runnable = new Runnable(){
-            public void run() {
-                size = measures.size();
-                final int index = counter % size;
-                measures.set(index, new LiveMeasure(fixedFreq.get(index), 0, rms[counter % rms.length], peak[counter % peak.length]));
-                adapter.notifyDataSetChanged();
-                counter++;
-            }
-        };
         activateValueUpdater(); // funktion von matthias für listenupdate alle x sec..
 
 
@@ -256,7 +242,18 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void activateValueUpdater(){
+        counter =0;
+        handler = new Handler();
         timer = new Timer();
+        runnable = new Runnable(){
+            public void run() {
+                size = measures.size();
+                final int index = counter % size;
+                measures.set(index, new LiveMeasure(fixedFreq.get(index), 0, rms[counter % rms.length], peak[counter % peak.length]));
+                adapter.notifyDataSetChanged();
+                counter++;
+            }
+        };
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
