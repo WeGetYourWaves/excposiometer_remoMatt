@@ -193,6 +193,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         TextView allert_text = (TextView) findViewById(R.id.textView_dropDownAllert);
         if(downOrUp==0){
             selectedFreq.setText("");
+            selectedValue.setText("");
             layout_dropDown.setVisibility(View.VISIBLE);
             ScaleAnimation scale = new ScaleAnimation(1,1,0,1);
             scale.setDuration(400);
@@ -302,6 +303,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                     changeBarColorToNOTactiv(lastAddedFreq);}
                 changeBarColorToNOTactiv(activeBar);
                 selectedFreq.setText("");
+                selectedValue.setText("");
                 break;
             case R.id.next_button:
                 OpenDetailViewActivity();

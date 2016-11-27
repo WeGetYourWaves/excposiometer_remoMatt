@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Point;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.LogRecord;
 
 import static java.lang.Math.log;
 
@@ -40,6 +45,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     private int attenuator;
     private int device_id;
     private char measurement_type = 'P';
+    Timer timer;
 
 
     //Everything about buttons
@@ -47,6 +53,11 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     Button b_normal, b_21dB, b_41dB, b_accu;
     LinearLayout settings;
     ListView visibleList;
+
+    Runnable runnable;
+    Handler handler;
+    int counter;
+    int size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +80,38 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         activateTouch();
         activateEditText();
         activateAddButton();
+
+        //versuch timer mätthu
+        //new Timer().scheduleAtFixedRate(task, after, interval);
+        counter =0;
+        handler = new Handler();
+        runnable = new Runnable(){
+            public void run() {
+                size = measures.size();
+                final int index = counter % size;
+                measures.set(index, new LiveMeasure(fixedFreq.get(index), 0, rms[counter % rms.length], peak[counter % peak.length]));
+                adapter.notifyDataSetChanged();
+                counter++;
+            }
+        };
+        activateValueUpdater(); // funktion von matthias für listenupdate alle x sec..
+
+
+
+
+
+
+
+
+
+
+
         // // TODO: 27.10.16 data from remo
     /*
     make clock for update.
     DetailView liveValues = new DetailView(array with frequencies);
     liveValues.peak    -- gets my an array with the values to the frequencies in the same order.
    liveValues.rms
-
      */
 
     }
@@ -117,20 +153,10 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
 */
 
-/*
-
     @Override
-    protected void onPause() {
-        super.onPause();
-        saveToSharedPref(fixedFreq);
+    protected void onStop() {
+        super.onStop();
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadFromSharedPref();
-    }
-    */
 
     //------------------------calculate the size of the value bar ------------------------
 
@@ -165,7 +191,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         float barWidth=size.x/3;
 
         returnSize = (myValue/maxValue)*barWidth;
-        Log.d("returnSize", String.valueOf(returnSize));
+        //Log.d("returnSize", String.valueOf(returnSize));
         return (float) returnSize;
     }
 
@@ -184,7 +210,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         settings = (LinearLayout) findViewById(R.id.layout_setting);
         b_settings = (ImageButton) findViewById(R.id.setting_button);
         visibleList = (ListView) findViewById(R.id.list_live_data);
-
     }
 
     private void setButtonsOnClickListener() {
@@ -228,6 +253,17 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
         }
+    }
+
+    private void activateValueUpdater(){
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(runnable);
+                    }
+        },0,500);
+
     }
 
     public void closeSettingLayoutAndUpdateList(){
@@ -297,6 +333,8 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             }
         });
     }
+
+
 
 
     //   ------------------------add new freq to list section----------------------------
@@ -400,7 +438,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             //Fill the text views
             //set frequency
             TextView freqText= (TextView) itemView.findViewById(R.id.textview_freq);
-            freqText.setText(String.valueOf(currentMeasure.getFrequency())+ " MHz");
+            freqText.setText(String.valueOf(updateActiveFrequency(currentMeasure.getFrequency()))+ " GHz");
 
             //set median
             TextView rmsBar = (TextView) itemView.findViewById(R.id.textview_rms);
@@ -425,5 +463,12 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
         intent.putExtra(CommunicationService.TRIGGER_Act2Serv, TriggerPack);
         sendBroadcast(intent);
+    }
+
+    private double updateActiveFrequency(int position) {
+        double toShow = 0.5 + 0.1 * position;
+        toShow = Math.round(toShow * 10);  // runden auf ##.#
+        toShow = toShow / 10;
+        return toShow;
     }
 }
