@@ -137,17 +137,17 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     public Integer modeMaxSize(){
         int maxSizeInVolt=0;
         switch (myMode){
-            case "normal":
-                maxSizeInVolt=40;
+            case "normal mode":
+                maxSizeInVolt=50;
                 break;
-            case "21dB":
-                maxSizeInVolt=400;
+            case "-21 dB":
+                maxSizeInVolt=500;
                 break;
-            case "42dB":
-                maxSizeInVolt=4000;
+            case "-42 dB":
+                maxSizeInVolt=5000;
                 break;
-            case "accu":
-                maxSizeInVolt=4;
+            case "LNA on":
+                maxSizeInVolt=5;
                 break;
         }
         return maxSizeInVolt;
@@ -199,22 +199,22 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
         switch (v.getId()) {
             case R.id.b_mode_normal:
-                myMode = "normal";
+                myMode = "normal mode";
                 closeSettingLayoutAndUpdateList();
                 Toast.makeText(this, "normal", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.b_mode_21db:
-                myMode = "21dB";
+                myMode = "-21 dB";
                 closeSettingLayoutAndUpdateList();
                 Toast.makeText(this, "21 dB", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.b_mode_42db:
-                myMode = "42dB";
+                myMode = "-42 dB";
                 closeSettingLayoutAndUpdateList();
                 Toast.makeText(this, "42 dB", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.b_mode_LNA:
-                myMode = "accu";
+                myMode = "LNA on";
                 closeSettingLayoutAndUpdateList();
                 Toast.makeText(this, "verstärkt", Toast.LENGTH_SHORT).show();
                 break;

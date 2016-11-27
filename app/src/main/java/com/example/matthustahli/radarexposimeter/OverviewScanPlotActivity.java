@@ -440,8 +440,11 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     }
 
     private void updateActiveFrequency(int position){
+        double toShow= 0.5 + 0.1*position;
+        toShow= Math.round(toShow*10);  // runden auf ##.#
+        toShow = toShow/10;
         //find the actiual freq repsresenting the the freq in the array
-        selectedFreq.setText(String.valueOf(activeBar) + " MHz"); //sets selected freq into textVie
+        selectedFreq.setText(String.valueOf(toShow) + " GHz"); //sets selected freq into textVie
         if(measurement_type=='R'){
             selectedValue.setText(String.valueOf(rms[position])+ " V/m ");
         }else{

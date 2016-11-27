@@ -48,7 +48,7 @@
 
     <TextView
         android:id="@+id/selected_freq"
-        android:layout_width="150dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp"
         android:layout_toLeftOf="@+id/add_freq_button"
