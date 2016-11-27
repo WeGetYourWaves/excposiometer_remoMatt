@@ -152,7 +152,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
                 goToNextActivityWithSpecifivMode("-21 dB");
                 break;
             case R.id.b_mode_42db:
-                goToNextActivityWithSpecifivMode("-41 dB");
+                goToNextActivityWithSpecifivMode("-42 dB");
                 break;
             case R.id.b_mode_LNA:
                 goToNextActivityWithSpecifivMode("LNA on");

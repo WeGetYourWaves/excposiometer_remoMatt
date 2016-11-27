@@ -37,7 +37,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     private final String CHOOSENFREQ = "my_freq";
     public double[] rms1 = new double [96];
     public double[] peak1 = new double [96];
-    public double[] peak = {302, 203, 345, 196, 191, 305, 256, 385, 119, 403, 304, 252, 152, 2403, 2454, 5276, 1131, 3812, 1186, 3037, 457, 251, 330, 314, 201, 107, 235, 280, 470, 460, 394, 418, 378, 437, 260, 130, 449, 446, 277, 182, 240, 147, 316, 184, 350, 466, 441, 328, 411, 166, 127, 471, 248, 112, 226, 426, 319, 358, 149, 115, 408, 172, 436, 476, 361, 266, 366, 202, 375, 151, 171, 207, 106, 103, 224, 110, 410, 258, 297, 307, 209, 211, 262, 292, 370, 405, 417, 170, 220, 444, 176, 331, 190, 406, 430, 416, 494, 387, 348, 431, 246, 117, 145, 393, 129, 100, 447, 490, 404, 175, 395, 125, 478, 198, 159, 354, 452, 360, 162, 114, 433, 272, 222, 264, 458, 349, 329, 270, 438, 309, 100};
+    public double[] peak = {302, 203, 345, 196, 191, 305, 256, 385, 6000, 4003, 304, 252, 152, 2403, 2454, 5276, 1131, 3812, 1186, 3037, 457, 251, 330, 314, 201, 107, 235, 280, 470, 460, 394, 418, 378, 437, 260, 130, 449, 446, 277, 182, 240, 147, 316, 184, 350, 466, 441, 328, 411, 166, 127, 471, 248, 112, 226, 426, 319, 358, 149, 115, 408, 172, 436, 476, 361, 266, 366, 202, 375, 151, 171, 207, 106, 103, 224, 110, 410, 258, 297, 307, 209, 211, 262, 292, 370, 405, 417, 170, 220, 444, 176, 331, 190, 406, 430, 416, 494, 387, 348, 431, 246, 117, 145, 393, 129, 100, 447, 490, 404, 175, 395, 125, 478, 198, 159, 354, 452, 360, 162, 114, 433, 272, 222, 264, 458, 349, 329, 270, 438, 309, 100};
     public double[] rms = {348, 435, 332, 368, 271, 404, 346, 320, 371, 217, 126, 201, 118, 121, 199, 316, 310, 115, 361, 213, 196, 173, 114, 152, 480, 300, 285, 146, 194, 278, 353, 102, 179, 296, 182, 192, 272, 347, 407, 161, 448, 207, 256, 240, 253, 472, 153, 424, 323, 266, 185, 344, 484, 423, 134, 349, 209, 321, 269, 198, 302, 414, 254, 120, 224, 379, 488, 168, 382, 497, 359, 381, 243, 128, 410, 125, 291, 212, 276, 445, 474, 260, 362, 181, 372, 341, 401, 438, 406, 340, 113, 117, 363, 210, 178, 354, 314, 318, 384, 108, 400, 338, 233, 251, 208, 467, 479, 328, 288, 148, 216, 297, 265, 337, 249, 145, 174, 206, 277, 230, 171, 373, 186, 351, 376, 188, 315, 279, 331, 232, 100};
     private int attenuator;
     private int device_id;
@@ -62,7 +62,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     Bitmap bitmap;
     Canvas canvas;
     Integer activeBar = 0;
-    TextView selectedFreq;
+    TextView selectedFreq, selectedValue;
     ArrayList<Integer> fixedBars = new ArrayList<Integer>();
     LinearLayout settings;
     private String myMode, peakOrRms;
@@ -146,7 +146,9 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         if (myMode == "-21 dB")  attenuator = 1;
         else if (myMode == "LNA on")  attenuator = 3;
         else if(myMode == "normal mode")   attenuator = 0;
-        else attenuator = 2;
+        else {
+            attenuator = 2;
+        }
         Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
     }
 
@@ -263,6 +265,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 if (measurement_type == 'P')    measurement_type = 'R';
                 else measurement_type = 'P';
 
+                //downOrUp: 0=godown, 1=goup
                 handlesActivatingDropDown(clickCounterStatusPlot%2); // to show connection bar
                 clickCounterStatusPlot++;
 
@@ -336,6 +339,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         b_settings = (ImageButton) findViewById(R.id.setting_button);
         // initialize Text
         selectedFreq = (TextView) findViewById(R.id.selected_freq);
+        selectedValue = (TextView) findViewById(R.id.textView_value);
         //initialize Layouts
         settings = (LinearLayout) findViewById(R.id.layout_setting);
 
@@ -375,9 +379,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     }
 
     public void ActivateTouchOnPlot() {
-        final TextView xCoord = (TextView) findViewById(R.id.coord_x);
-        final TextView yCoord = (TextView) findViewById(R.id.coord_y);
-
         View touchView = findViewById(R.id.activity_overview_scan_plot);
         touchView.setOnTouchListener(new View.OnTouchListener() {
 
@@ -390,20 +391,13 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                             if (settings.getVisibility() != LinearLayout.GONE) {
                                 settings.setVisibility(LinearLayout.GONE);
                             }
-                        } catch (NullPointerException e) {
-                        }
-
-                        xCoord.setText(String.valueOf((int) event.getX()));
-                        yCoord.setText(String.valueOf((int) event.getY()));
+                        } catch (NullPointerException e) {}
                         int position = returnPosition((int) event.getX());
                         changeBarColorToActiv(position);
                         break;
                     }
 
                     case MotionEvent.ACTION_MOVE: {
-
-                        xCoord.setText("x: " + String.valueOf((int) event.getX()));
-                        yCoord.setText("y: " + String.valueOf((int) event.getY()));
                         int position = returnPosition((int) event.getX());
                         changeBarColorToActiv(position);
                         break;
@@ -436,13 +430,21 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         //desactivate last visited bar
         changeBarColorToNOTactiv(activeBar);
         activeBar = position;       //with this position we can also use the add button to put it in a list!
-        //update textview
-        selectedFreq.setText(String.valueOf(activeBar) + " MHz"); //sets selected freq into textVie
+        updateActiveFrequency(position); //update textview
         //set color to active
         canvas.drawRect(coord.getLeft(position), coord.getTop(position), coord.getRight(position), coord.getBottom(position), paintActive);
         imageView.setImageBitmap(bitmap);
         chandeBarColorToFixed();
-        // Log.d("activeBar_colorActive: ",String.valueOf(activeBar));
+    }
+
+    private void updateActiveFrequency(int position){
+        //find the actiual freq repsresenting the the freq in the array
+        selectedFreq.setText(String.valueOf(activeBar) + " MHz"); //sets selected freq into textVie
+        if(measurement_type=='R'){
+            selectedValue.setText(String.valueOf(rms[position])+ " V/m ");
+        }else{
+            selectedValue.setText(String.valueOf(peak[position])+ " V/m ");
+        }
     }
 
     //changes Bar back to gray color

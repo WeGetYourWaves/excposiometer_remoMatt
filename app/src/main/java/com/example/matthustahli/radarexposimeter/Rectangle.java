@@ -15,7 +15,7 @@ import static java.lang.Math.log;
 public class Rectangle extends AppCompatActivity {
 
     private int anzahlBalken;
-    private double abgedekteLange,sizeX,sizeY,breiteBalken,abstandZwischenBalken,maxHight ;
+    private double abgedekteLange,sizeX,sizeY,breiteBalken,abstandZwischenBalken,maxHight, scale=0.82 ;
     private ArrayList<Float> left;
     private ArrayList<Float> right;
     private ArrayList<Float> top;
@@ -86,9 +86,12 @@ public class Rectangle extends AppCompatActivity {
         ArrayList<Float> toReturn = new ArrayList<Float>();
         for (int i = 0; i <= anzahlBalken; i++) {
             if(values[i]<=1) {
-                toReturn.add(i,(float) (sizeY));
+                toReturn.add(i,(float) (sizeY)); // empty size
+            }
+            if(log(values[i]) >= maxHight) {
+                toReturn.add(i, (float) (sizeY - sizeY * scale)); //full size
             }else{
-            toReturn.add(i,(float) (sizeY - log(values[i])/maxHight*sizeY));
+                toReturn.add(i,(float) (sizeY - log(values[i])/maxHight*sizeY*scale));
             }
         }
         Log.i("top hight: ", String.valueOf(toReturn.get(0)));

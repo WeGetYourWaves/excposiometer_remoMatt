@@ -47,32 +47,23 @@
         android:textSize="25dp" />
 
     <TextView
-        android:id="@+id/coord_x"
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/add_freq_button"
-        android:visibility="invisible" />
-
-    <TextView
-        android:id="@+id/coord_y"
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/coord_x"
-        android:visibility="invisible" />
-
-    <TextView
         android:id="@+id/selected_freq"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp"
         android:layout_toLeftOf="@+id/add_freq_button"
-        android:gravity="center"
-        android:textSize="50dp"
+        android:gravity="right"
+        android:textSize="40dp"
+        />
 
+    <TextView
+        android:id="@+id/textView_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/selected_freq"
+        android:gravity="center"
+        android:textSize="40dp"
         />
 
     <ImageButton
