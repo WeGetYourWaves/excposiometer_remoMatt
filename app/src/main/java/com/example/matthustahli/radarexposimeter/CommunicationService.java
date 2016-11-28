@@ -30,9 +30,9 @@ public class CommunicationService extends Service {
     TCP_Data_dequeue_Thread TCP_Data_Sender = new TCP_Data_dequeue_Thread();
     byte[] callipack;
 
-    static TCP_SERVER Socket = new Fake_TCP_Server(wifiDataBuffer); // Initialise Fake TCP to test
-    // static TCP_SERVER Socket = new TCPServer(wifiDataBuffer); // Initialise real TCP_Server to test ESP8266
-    // static TCP_SERVER Socket = new Excel_Facke_TCP_Server(wifiDataBuffer);
+    final static TCP_SERVER Socket = new Fake_TCP_Server(wifiDataBuffer); // Initialise Fake TCP to test
+    // final static TCP_SERVER Socket = new TCPServer(wifiDataBuffer); // Initialise real TCP_Server to test ESP8266
+    // final static TCP_SERVER Socket = new Excel_Facke_TCP_Server(wifiDataBuffer);
 
     IntentListenerForActivity ListenerForActivity; // receives Data from Activity via Broadcast
 
