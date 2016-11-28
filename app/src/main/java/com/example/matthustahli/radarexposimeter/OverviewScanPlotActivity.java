@@ -43,9 +43,8 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     private int attenuator;
     private int device_id;
     private char measurement_type = 'P';
-    WifiDataBuffer buffer = new WifiDataBuffer();
     final String LOG_TAG = "Overview";
-    OverviewScanPlotActivityReceiver overviewScanPlotActivityReceiver = new OverviewScanPlotActivityReceiver(LOG_TAG, buffer);
+    OverviewScanPlotActivityReceiver overviewScanPlotActivityReceiver = new OverviewScanPlotActivityReceiver(LOG_TAG);
     Activity_Superclass calibration;
 
 
@@ -527,11 +526,9 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
 
     public class OverviewScanPlotActivityReceiver extends BroadcastReceiver {
         final String LOG_TAG;
-        final WifiDataBuffer wifiDataBufffer;
 
-        public OverviewScanPlotActivityReceiver(String LOG_TAG, WifiDataBuffer wifiDataBuffer){
+        public OverviewScanPlotActivityReceiver(String LOG_TAG){
             this.LOG_TAG = LOG_TAG;
-            this.wifiDataBufffer = wifiDataBuffer;
         }
         @Override
         public void onReceive(Context arg0, Intent data) {

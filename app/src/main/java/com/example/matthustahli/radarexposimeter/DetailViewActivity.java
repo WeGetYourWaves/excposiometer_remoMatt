@@ -1,7 +1,9 @@
 package com.example.matthustahli.radarexposimeter;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.graphics.Point;
 import android.os.Handler;
@@ -47,6 +49,9 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     private int device_id;
     private char measurement_type = 'P';
     Timer timer;
+    final String LOG_TAG = "DetailView";
+    DetailViewActivityReceiver detailViewActivityReceiver = new DetailViewActivityReceiver(LOG_TAG);
+    Activity_Superclass calibration;
 
 
 
@@ -151,9 +156,32 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
 */
 
-    @Override
-    protected void onStop() {
+    public void onStart() {
+        Log.d(LOG_TAG , "onStart called");
+        super.onStart();
+    }
+
+    public void onStop(){
+        Log.d(LOG_TAG , "onStop called");
         super.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d(LOG_TAG, "in onPause");
+        super.onPause();
+        unregisterReceiver(detailViewActivityReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(LOG_TAG, "in onResume");
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(CommunicationService.TRIGGER_Serv2Act);
+        registerReceiver(detailViewActivityReceiver, intentFilter);
+        StartService();
+        RequestCALD();
     }
 
     //------------------------calculate the size of the value bar ------------------------
@@ -502,5 +530,69 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
     public synchronized int[] readFreq(){
         return freq;
+    }
+
+    protected byte[] split_packet (int start, int end, byte[] packet){
+
+        int length = end - start + 1;
+        byte[] splitted = new byte[length];
+        for (int i = 0; i < length; i++){
+            splitted[i] = packet[i + start];
+        }
+
+        return splitted;
+    }
+
+    public class DetailViewActivityReceiver extends BroadcastReceiver {
+        final String LOG_TAG;
+
+        public DetailViewActivityReceiver(String LOG_TAG){
+            this.LOG_TAG = LOG_TAG;
+        }
+        @Override
+        public void onReceive(Context arg0, Intent data) {
+            Log.d(LOG_TAG, "MyActivityReceiver in onReceive");
+            byte[] orgData = data.getByteArrayExtra(CommunicationService.DATA_BACK);
+            if (orgData != null) {
+                if(new String(split_packet(4, 7, orgData)).equals("CALD")) {
+                    Cal_Packet_Exposi cal_packet_exposi = new Cal_Packet_Exposi(orgData);
+                    device_id = cal_packet_exposi.get_device_id();
+                    calibration = new Activity_Superclass(orgData);
+                    Log.d(LOG_TAG, "saved Calibration Tables");
+
+                    DetailView_Packet_Trigger detailView_packet_trigger = new DetailView_Packet_Trigger(device_id, attenuator, freq, measurement_type);
+                    sendTrigger(detailView_packet_trigger.get_packet());
+                    Log.d(LOG_TAG, "sent SCAN Trigger");
+
+                }
+                else if(new String(split_packet(4, 7, orgData)).equals("DETV")){
+
+                    Log.d(LOG_TAG, "got DETV data");
+                    Data_Packet_Exposi packetExposi = new Data_Packet_Exposi(orgData);
+                    int freq = packetExposi.get_frequency();
+                    int rms_exposi = packetExposi.get_rawData_rms();
+                    int peak_exposi = packetExposi.get_rawData_peak();
+
+                    double rms = calibration.get_rms(attenuator,freq, rms_exposi);
+                    double peak = calibration.get_peak(attenuator, freq, peak_exposi);
+                    updatePeak(peak, freq);
+                    updateRMS(rms, freq);
+                    //TODO: makePlot();
+                }
+            }
+        }
+    }
+
+    private void StartService() {
+        Intent intent = new Intent(this, CommunicationService.class);
+        startService(intent);
+    }
+
+    private void RequestCALD(){
+        Log.d(LOG_TAG, "Requested Calipack");
+        Intent intent = new Intent();
+        intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
+        intent.putExtra(CommunicationService.COMMAND_Act2Serv, CommunicationService.CMD_getCALI);
+        sendBroadcast(intent);
     }
 }
