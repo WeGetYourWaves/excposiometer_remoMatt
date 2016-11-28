@@ -133,23 +133,22 @@ public class Cal_Packet_Exposi extends Packet_Exposimeter {
 
         int[] freq_list = byteArray_to_intArray(freq_listB, 2);
         int[] pow_levels = byteArray_to_intArray(pow_levelsB, 4);
-        int[][] caliTable = new int[freq_list.length][pow_levels.length];
+        int[][] caliTable = new int[freq_list.length + 1][pow_levels.length + 1];
+        caliTable[0][0] = -1;
 
         for (int i = 0; i < freq_list.length; ++i){
             int freq = freq_list[i];
-            if (freq < 500) freq = 500;
-            if (freq > 10000) freq = 10000;
-            caliTable[i][0] = freq;
+            caliTable[i + 1][0] = freq;
         }
 
         for (int j = 0; j < pow_levels.length; j++){
-            caliTable[0][j] = pow_levels[j];
+            caliTable[0][j + 1] = pow_levels[j];
         }
 
         for (int i = 0; i < freq_list.length; ++i){
             int[] dummy = byteArray_to_intArray(split_packet(i * 64, i * 64 + pow_levelsB.length - 1, raw_data), 4);
             for(int j = 0; j < pow_levels.length; ++j){
-                caliTable[i][j] = dummy[j];
+                caliTable[i + 1][j + 1] = dummy[j];
             }
         }
 
