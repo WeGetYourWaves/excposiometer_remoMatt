@@ -53,8 +53,8 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     //----------------------------------------------------------------------
     //setup variables
     Rectangle coord;
-    int colorFix, colorBar, colorActive ;
-    Paint paintFix, paintBar, paintActive;
+    int colorFix, colorBar, colorActive, colorLimit ;
+    Paint paintFix, paintBar, paintActive, paintLimit;
     Display display;
     Point size;
     ImageView imageView;
@@ -66,7 +66,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     TextView selectedFreq, selectedValue;
     ArrayList<Integer> fixedBars = new ArrayList<Integer>();
     LinearLayout settings;
-    private String myMode, peakOrRms;
+    private String myMode;
     private ArrayList<LiveMeasure> measures = new ArrayList<LiveMeasure>();
     //All what has something to do with buttons
     private Integer clickCounterStatusPlot = 0;
@@ -487,9 +487,13 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         paintFix = new Paint();
         paintBar = new Paint();
         paintActive= new Paint();
+        paintLimit = new Paint();
+        colorLimit = OverviewScanPlotActivity.this.getResources().getColor(R.color.limitBar);
         colorFix = OverviewScanPlotActivity.this.getResources().getColor(R.color.fixedBar);
         colorBar = OverviewScanPlotActivity.this.getResources().getColor(R.color.normalBar);
         colorActive = OverviewScanPlotActivity.this.getResources().getColor(R.color.activeBar);
+        paintLimit.setColor(colorLimit);
+        paintLimit.setStyle(Paint.Style.FILL);
         paintFix.setColor(colorFix);
         paintFix.setStyle(Paint.Style.FILL);
         paintBar.setColor(colorBar);
@@ -501,6 +505,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
 
     public void makePlot() {
         canvas.drawColor(Color.WHITE);
+        canvas.drawRect(0,(float) (size.y*0.15),size.x,(float) (size.y*0.14),paintLimit);
         imageView.setImageBitmap(bitmap);
         if(measurement_type=='R') {
             coord = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, readRMS(), myMode,0.95,0.85);

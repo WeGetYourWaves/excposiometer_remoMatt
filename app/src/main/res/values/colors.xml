@@ -10,6 +10,7 @@
     <color name="clear_button">#072a23</color>
     <color name="normalBar">#cccccc</color>
     <color name="activeBar">#3cf4d0</color>
+    <color name="limitBar">#ffff83</color>
     <color name="background_listview">#ebebeb</color>
     <color name="liveValues">#cccccc</color>
     <color name="reload">#448bf7</color>
