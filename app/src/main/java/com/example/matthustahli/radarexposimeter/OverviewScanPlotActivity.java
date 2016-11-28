@@ -59,7 +59,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     Point size;
     ImageView imageView;
     float abstandZwischenBalken = 5; //5dp
-    int anzahlBalken = 96;
+    int anzahlBalken = 96;//null zählt auch als balken
     Bitmap bitmap;
     Canvas canvas;
     Integer activeBar = 0;
@@ -419,16 +419,13 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         int i = 0;
         int fromLeftToRight = (int) coord.getLeft(i);
         while (fromLeftToRight < x) {
-            if (i == anzahlBalken) {        //boundary condition on right edge
+            if (i == anzahlBalken-1) {        //boundary condition on right edge
                 return i;
             }
             i++;
             fromLeftToRight = (int) coord.getLeft(i);
         }
-        if (i <= 0) {       //boundary condition on left edge
-            return 0;
-        }
-        return i - 1;
+        return i;
     }
 
     //change color of only one bar and sets up textview

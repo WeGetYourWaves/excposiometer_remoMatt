@@ -174,9 +174,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void ActivateTouchOnPlot() {
-       /* final TextView xCoord = (TextView) findViewById(R.id.coord_x);
-        final TextView yCoord = (TextView) findViewById(R.id.coord_y);
-        */
+
         View touchView = findViewById(R.id.activity_time_line);
         touchView.setOnTouchListener(new View.OnTouchListener() {
 
