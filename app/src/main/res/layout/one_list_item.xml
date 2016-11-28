@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/textview_freq"
-        android:layout_width="100dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:textSize="25dp"

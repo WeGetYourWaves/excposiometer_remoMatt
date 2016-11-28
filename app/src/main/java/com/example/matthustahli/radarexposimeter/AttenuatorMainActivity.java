@@ -237,6 +237,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         }
     }
 
+    //todo //percentage...
     void setBatteryStatus(int percentage){
         if(percentage < 15) b_batterie.setBackgroundResource(R.drawable.ic_batterie_empty);
         else if (percentage < 30) b_batterie.setBackgroundResource(R.drawable.ic_batterie_low);

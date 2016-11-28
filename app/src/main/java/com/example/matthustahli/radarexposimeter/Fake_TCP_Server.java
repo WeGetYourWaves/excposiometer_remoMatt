@@ -405,7 +405,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
 
 
         ByteArrayOutputStream result = new ByteArrayOutputStream(8);
-        byte[] zeros = int2byteArray(0, 4);
+        byte[] zeros = int2byteArray(10, 4);
 
         String messgrösse_tostring = new String(MODE);
         try{

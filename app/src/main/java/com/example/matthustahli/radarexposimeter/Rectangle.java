@@ -63,11 +63,10 @@ public class Rectangle extends AppCompatActivity {
 
     public ArrayList<Float> lengthFromLeft() {
         ArrayList<Float> toReturn = new ArrayList<Float>();
-        for (int i = 0; i <= anzahlBalken; i++) {
+        for (int i = 0; i < anzahlBalken; i++) {
             toReturn.add(i, (float) (abgedekteLange * i + i * 0.5));        //the 0.5 is for numerical reasons.. as somehow the distances change over groth of x.. dont know how to fix it.
         }
         Log.i("from left_first: ", String.valueOf(toReturn.get(0)));
-        Log.i("from left_last: ", String.valueOf(toReturn.get(anzahlBalken)));
 
 
         return toReturn;
@@ -75,10 +74,10 @@ public class Rectangle extends AppCompatActivity {
 
     public ArrayList<Float> lengthFromRight() {
         ArrayList<Float> toReturn = new ArrayList<Float>();
-        for (int i = 0; i <= anzahlBalken; i++) {
+        for (int i = 0; i < anzahlBalken; i++) {
             toReturn.add(i, (float) (breiteBalken + i * abgedekteLange + i * 0.5));
         }
-        Log.i("from right: ", String.valueOf(toReturn.get(anzahlBalken)));
+        //Log.i("from right: ", String.valueOf(toReturn.get(anzahlBalken)));
 
         return toReturn;
     }
@@ -86,7 +85,7 @@ public class Rectangle extends AppCompatActivity {
     //represents the hight
     public ArrayList<Float> lengthFromTop() {
         ArrayList<Float> toReturn = new ArrayList<Float>();
-        for (int i = 0; i <= anzahlBalken; i++) {
+        for (int i = 0; i < anzahlBalken; i++) {
             if(values[i]<=1) {
                 toReturn.add(i,(float) (sizeY)); // empty size
             }
@@ -104,7 +103,7 @@ public class Rectangle extends AppCompatActivity {
     //always start on bottom.
     public ArrayList<Float> lengthFromBottom() {
         ArrayList<Float> toReturn = new ArrayList<Float>();
-        for (int i = 0; i <= anzahlBalken; i++) {
+        for (int i = 0; i < anzahlBalken; i++) {
             toReturn.add(i, (float)sizeY);
         }
         Log.i("Value of Bottom: ", String.valueOf(sizeY));
