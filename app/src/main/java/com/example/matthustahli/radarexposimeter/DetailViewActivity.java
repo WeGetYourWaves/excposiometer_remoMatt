@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.LogRecord;
@@ -48,6 +49,16 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     Timer timer;
 
 
+
+    //TODO variablen für verbesserung
+    int[] freq= new int[4];//frequencies are in MHz  //beinhaltet die zu betrachtenden frequenzen    //make switch funktion that deletes element at certain place and reorders them
+    double[] rms1 = new double[4];
+    double[] peak1 = new double[4];
+    int freq_number = 4;        //tells how many freq are active.. the values of those freq are in freq, u to freq_number..
+
+
+
+
     //Everything about buttons
     ImageButton b_settings;
     Button b_normal, b_21dB, b_41dB, b_accu;
@@ -68,6 +79,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
         //load intent from previous activity
         getChoosenFreqFromIntent();
+        //putFrequenciesIntoDoubleArray();
 
         //everything with the list population and keeping it updated
         populateMeasurements();
@@ -82,6 +94,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         activateAddButton();
         activateValueUpdater(); // funktion von matthias für listenupdate alle x sec..
 
+       // Toast.makeText(this,String.valueOf(freq),Toast.LENGTH_SHORT).show();
 
 
 
@@ -101,7 +114,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
      */
 
     }
-
 
 
 
@@ -249,6 +261,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             public void run() {
                 size = measures.size();
                 final int index = counter % size;
+
                 measures.set(index, new LiveMeasure(fixedFreq.get(index), 0, rms[counter % rms.length], peak[counter % peak.length]));
                 adapter.notifyDataSetChanged();
                 counter++;
@@ -466,5 +479,28 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         toShow = Math.round(toShow * 10);  // runden auf ##.#
         toShow = toShow / 10;
         return toShow;
+    }
+
+
+    private synchronized void updatePeak(double newPeak, int freq_in){
+        int i = Arrays.binarySearch(freq, freq_in);
+        if (i < peak1.length && i >= 0) peak1[i] = newPeak;
+    }
+
+    private synchronized void updateRMS(double newRMS, int freq_in){
+        int i = Arrays.binarySearch(freq, freq_in);
+        if (i < rms1.length && i >= 0)rms1[i] = newRMS;
+    }
+
+    public synchronized double[] readPeak(){
+        return peak1;
+    }
+
+    public synchronized double[] readRMS(){
+        return rms1;
+    }
+
+    public synchronized int[] readFreq(){
+        return freq;
     }
 }
