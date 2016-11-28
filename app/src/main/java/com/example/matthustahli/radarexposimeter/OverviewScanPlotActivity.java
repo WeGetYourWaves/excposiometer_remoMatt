@@ -557,8 +557,8 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                     int rms_exposi = packetExposi.get_rawData_rms();
                     int peak_exposi = packetExposi.get_rawData_peak();
 
-                    double rms = calibration.get_rms(attenuator,freq, rms_exposi) + 10;
-                    double peak = calibration.get_peak(attenuator, freq, peak_exposi) + 100;
+                    double rms = calibration.get_rms(attenuator,freq, rms_exposi);
+                    double peak = calibration.get_peak(attenuator, freq, peak_exposi);
                     updatePeak(peak, freq);
                     updateRMS(rms, freq);
                     makePlot();
