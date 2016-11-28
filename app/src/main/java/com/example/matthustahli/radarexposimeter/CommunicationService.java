@@ -172,10 +172,10 @@ public class CommunicationService extends Service {
         public void run() {
             Log.d(Log_tag, "Thread started");
             while(running){ // && !TCP_Data_Sender.isInterrupted()
-                Log.d(LOG_TAG, "Thread runns");
+                // Log.d(LOG_TAG, "Thread runns");
                 try {
                     if(!wifiDataBuffer.isDataWaiting_FromESP()){
-                        Thread.sleep(500);
+                        Thread.sleep(50);
                     }
                     else {
                         byte[] received = wifiDataBuffer.deque_FromESP();

@@ -119,6 +119,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                                         send(DataFromESP.toByteArray());
                                         break;
                                     case Waiting:
+                                        Log.d(LOG_TAG, "Current State = "+ state.toString());
                                         try {
                                             sleep(500);
                                         } catch (InterruptedException e) {
@@ -264,7 +265,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                         if (byteArray2int(MODE) == 0) {
                             current_Pack = null;
                             new_state = STATE.Waiting;
-                            Log.d(LOG_TAG, "End Live because received a TIME-Stop-Package, going to wait");
+                            Log.d(LOG_TAG, "Received a TIME-Stop-Package, going to wait");
                         }
                         break;
                     case "DETV":
@@ -274,7 +275,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                         if (byteArray2int(MODE) == 0) {
                             current_Pack = null;
                             new_state = STATE.Waiting;
-                            Log.d(LOG_TAG, "End Scan because received a DETV-Stop-Package, going to wait");
+                            Log.d(LOG_TAG, "Received a DETV-Stop-Package, going to wait");
                         }
                         break;
                     case "SCAN":
@@ -405,7 +406,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
 
 
         ByteArrayOutputStream result = new ByteArrayOutputStream(8);
-        byte[] zeros = int2byteArray(10, 4);
+        byte[] zeros = int2byteArray(0, 4);
 
         String messgrösse_tostring = new String(MODE);
         try{
