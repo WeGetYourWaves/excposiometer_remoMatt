@@ -63,7 +63,7 @@ public class Packet {
         int[] result = new int[byteArray.length/bytes_per_int];
         for (int i = 0; i < byteArray.length/bytes_per_int; ++i){
             for (int j = 0; j < bytes_per_int; ++j){
-                oneInt[j] = byteArray[i + j];
+                oneInt[j] = byteArray[bytes_per_int*i + j];
             }
             result[i] = byteArray_to_int(oneInt);
         }
