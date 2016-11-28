@@ -127,6 +127,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                                         }
                                         break;
                                     case Time:
+                                        Log.d(LOG_TAG, "Current State = "+ state.toString());
                                         DataFromESP.write(RD16);
                                         DataFromESP.write(TIME);
                                         DataFromESP.write(device_id);
@@ -143,6 +144,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                                         send(DataFromESP.toByteArray());
                                         break;
                                     case Scan:
+                                        Log.d(LOG_TAG, "Current State = "+ state.toString());
                                         DataFromESP.write(RD16);
                                         DataFromESP.write(SCAN);
                                         DataFromESP.write(device_id);
@@ -158,6 +160,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                                         send(DataFromESP.toByteArray());
                                         break;
                                     case Callibrate:
+                                        Log.d(LOG_TAG, "Current State = "+ state.toString());
                                         for(int i = 0; i < 27; ++i){
                                             sleep(50);
                                             ByteArrayOutputStream ProgressPack = new ByteArrayOutputStream(14);
@@ -184,6 +187,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                                         current_Pack = null;
                                         break;
                                     case Detv:
+                                        Log.d(LOG_TAG, "Current State = "+ state.toString());
                                         for(int i = 0; i < frequencies.length/2; ++i) {
                                             DataFromESP.write(RD16);
                                             DataFromESP.write(DETV);
