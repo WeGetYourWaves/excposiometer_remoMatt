@@ -219,6 +219,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     //----------------------------------------------------------------
     @Override
     public void onClick(View v) {
+        View_Packet_Trigger viewStop = new View_Packet_Trigger(device_id, attenuator, (char) 0);
 
         switch (v.getId()) {
             case R.id.b_mode_normal:
@@ -227,6 +228,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 //makePlot();
                 settings.setVisibility(LinearLayout.GONE);
                 Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
+                sendTrigger(viewStop.get_packet());
                 View_Packet_Trigger view_packet_trigger0 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
                 sendTrigger(view_packet_trigger0.get_packet());
                 Log.d(LOG_TAG, "sent SCAN Trigger attenuator 0");
@@ -237,6 +239,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 //makePlot();
                 settings.setVisibility(LinearLayout.GONE);
                 Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
+                sendTrigger(viewStop.get_packet());
                 View_Packet_Trigger view_packet_trigger1 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
                 sendTrigger(view_packet_trigger1.get_packet());
                 Log.d(LOG_TAG, "sent SCAN Trigger attenuator 1");
@@ -248,6 +251,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
 
                 settings.setVisibility(LinearLayout.GONE);
                 Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
+                sendTrigger(viewStop.get_packet());
                 View_Packet_Trigger view_packet_trigger2 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
                 sendTrigger(view_packet_trigger2.get_packet());
                 Log.d(LOG_TAG, "sent SCAN Trigger attenuator 2");
@@ -259,6 +263,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 //makePlot();
                 settings.setVisibility(LinearLayout.GONE);
                 Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
+                sendTrigger(viewStop.get_packet());
                 View_Packet_Trigger view_packet_trigger3 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
                 sendTrigger(view_packet_trigger3.get_packet());
                 Log.d(LOG_TAG, "sent SCAN Trigger attenuator 3");
@@ -307,9 +312,11 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 selectedValue.setText("");
                 break;
             case R.id.next_button:
+                sendTrigger(viewStop.get_packet());
                 OpenDetailViewActivity();
                 break;
             case R.id.refresh_button:
+                sendTrigger(viewStop.get_packet());
                 View_Packet_Trigger view_packet_triggerRefresh = new View_Packet_Trigger(device_id, attenuator, measurement_type);
                 sendTrigger(view_packet_triggerRefresh.get_packet());
                 Log.d(LOG_TAG, "sent SCAN Trigger Refresh");
