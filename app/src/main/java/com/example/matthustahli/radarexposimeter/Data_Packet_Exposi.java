@@ -71,8 +71,6 @@ public class Data_Packet_Exposi extends Packet_Exposimeter{
 
     public int get_frequency(){
         int freq = byteArray_to_int(get_frequencyB());
-        if (freq < 500) freq = 500;
-        if (freq > 10000) freq = 10000;
         return freq;
     }
 

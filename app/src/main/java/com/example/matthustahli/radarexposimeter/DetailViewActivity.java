@@ -56,10 +56,10 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
 
     //TODO variablen für verbesserung
-    int[] freq= new int[4];//frequencies are in MHz  //beinhaltet die zu betrachtenden frequenzen    //make switch funktion that deletes element at certain place and reorders them
-    double[] rms1 = new double[4];
-    double[] peak1 = new double[4];
-    int freq_number = 4;        //tells how many freq are active.. the values of those freq are in freq, u to freq_number..
+    private int[] freq= new int[4];//frequencies are in MHz  //beinhaltet die zu betrachtenden frequenzen    //make switch funktion that deletes element at certain place and reorders them
+    private double[] rms1 = new double[4];
+    private double[] peak1 = new double[4];
+    private int freq_number = 4;        //tells how many freq are active.. the values of those freq are in freq, u to freq_number..
 
 
 
@@ -510,6 +510,10 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         return toShow;
     }
 
+    private synchronized void updateFreq_number(int newFREQNUMB){
+        freq_number = newFREQNUMB;
+    }
+
 
     private synchronized void updatePeak(double newPeak, int freq_in){
         int i = Arrays.binarySearch(freq, freq_in);
@@ -519,6 +523,10 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     private synchronized void updateRMS(double newRMS, int freq_in){
         int i = Arrays.binarySearch(freq, freq_in);
         if (i < rms1.length && i >= 0)rms1[i] = newRMS;
+    }
+
+    public synchronized int readFreq_number(){
+        return freq_number;
     }
 
     public synchronized double[] readPeak(){
