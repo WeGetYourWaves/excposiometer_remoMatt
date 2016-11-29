@@ -51,7 +51,7 @@
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp"
-        android:layout_toLeftOf="@+id/add_freq_button"
+        android:layout_toLeftOf="@+id/layout_buttons"
         android:gravity="right"
         android:textSize="40dp"
         />
@@ -71,6 +71,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_alignParentRight="true"
+        android:id="@+id/layout_buttons"
         >
 
     <ImageButton
