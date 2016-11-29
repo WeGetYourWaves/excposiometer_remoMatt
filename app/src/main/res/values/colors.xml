@@ -18,5 +18,6 @@
     <color name="setting_button">#f79844</color>
     <color name="dropDown_Background">#807a939e</color>
     <color name="allert">#ff6666</color>
+    <color name="background">#ffffff</color>
 
 </resources>

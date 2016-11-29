@@ -146,6 +146,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         timer = new Timer();
         runnable = new Runnable(){
             public void run() {
+                Log.d("latestvalue", String.valueOf(lastValue));
                 int next = counter %anzahlBalken;
                 int last =(counter-1)% anzahlBalken;
                 canvas.drawRect(coord.getLeft(last), lastValue, coord.getRight(last), coord.getBottom(last), paintBar);
@@ -225,7 +226,6 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         paintActive.setColor(colorActive);
         paintActive.setStyle(Paint.Style.FILL);
         canvas = new Canvas(bitmap);
-        double[] rms = {100.0}; //quickfix
         coord = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, qickFixArray, myMode, scaleX, scaleY);
     }
 

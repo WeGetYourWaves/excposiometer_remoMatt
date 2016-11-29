@@ -8,7 +8,7 @@
     <dimen name="margin_fromFreq_to_rms">330dp</dimen>
     <dimen name="valueBarHight">30dp</dimen>
     <dimen name="hightOfListElement">30dp</dimen>
-    <dimen name="button_distance_to_top">7dp</dimen>
+    <dimen name="button_distance_to_top">5dp</dimen>
     <item name="dropDown_duration" type="dimen" format="float">500</item>
     <item format="float" name="dropDown_fromXScale" type="dimen" >1.0</item>
     <item format="float" name="dropDown_fromYScale" type="dimen">0.0</item>
