@@ -1,5 +1,6 @@
 package com.example.matthustahli.radarexposimeter;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,6 +9,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,14 +49,16 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     //variables for plot
     Rectangle coord;
     Display display;
-    int colorFix, colorBar, colorActive ;
-    Paint paintFix, paintBar, paintActive;
+    int colorFix, colorBar, colorActive, colorLimit ;
+    double abstandZwischenBalken =5.0; //5dp
+    Paint paintFix, paintBar, paintActive, paintLimit;
     ImageView imageView;
     Bitmap bitmap;
     Canvas canvas;
     Point size;
 
     //TODO variablen für verbesserung
+    private char measurement_type = 'P';
     int freq;//frequencies are in MHz  //beinhaltet die zu betrachtenden frequenzen    //make switch funktion that deletes element at certain place and reorders them
     double rms1;
     double peak1;
@@ -74,6 +78,15 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         //draws plot, not ready yet
         //startTimeLine();
     }
+
+
+    public void getSettingsFromIntent() {
+        Intent intent = getIntent();
+        myMode = intent.getStringExtra("myMode");
+        freq = intent.getIntExtra("frequency",0);
+        freq = 500 + freq*100;        //freq = value of freq MHz;
+    }
+
 
     private void startTimeLine() {
         counter =0;
@@ -97,6 +110,25 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         },0,200);  // time when new bar appears.
     }
 
+    public void makePlot() {
+        double[] rms = {readRMS()}; //quickfix
+        double[] peak = {readPeak()};//quickfix
+        canvas.drawColor(Color.WHITE);
+        canvas.drawRect(0,(float) (size.y*0.15),size.x,(float) (size.y*0.14),paintLimit);
+        imageView.setImageBitmap(bitmap);
+        if(measurement_type=='R') {
+            coord = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, rms, myMode,0.95,0.85);
+        }else {
+            coord = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, peak, myMode, 0.95, 0.85);
+        }
+        for (int i = 0; i < anzahlBalken; i++) {
+            canvas.drawRect(coord.getLeft(i), coord.getTop(i), coord.getRight(i), coord.getBottom(i), paintBar);      //somehow i get bottom wrong!
+            Log.d("values plot", String.valueOf(coord.getTop(i)));
+        }
+        imageView.setImageBitmap(bitmap);
+    }
+
+
     public void SetUpValuesForPlot() {
         display = getWindowManager().getDefaultDisplay();
         size = new Point();
@@ -106,10 +138,13 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         paintFix = new Paint();
         paintBar = new Paint();
         paintActive= new Paint();
+        paintLimit= new Paint();
         colorFix = TimeLineActivity.this.getResources().getColor(R.color.fixedBar);
         colorBar = TimeLineActivity.this.getResources().getColor(R.color.normalBar);
         colorActive = TimeLineActivity.this.getResources().getColor(R.color.activeBar);
+        colorLimit = TimeLineActivity.this.getResources().getColor(R.color.limitBar);
         paintFix.setColor(colorFix);
+        paintLimit.setColor(colorLimit);
         paintFix.setStyle(Paint.Style.FILL);
         paintBar.setColor(colorBar);
         paintBar.setStyle(Paint.Style.FILL);
@@ -261,10 +296,6 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                 public void onAnimationRepeat(Animation animation) {}
             });
         }
-    }
-
-    public void getSettingsFromIntent() {
-        //freq = value of freq MHz;
     }
 
 

@@ -351,6 +351,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 //go to new activity
                 Intent intent = new Intent(DetailViewActivity.this, TimeLineActivity.class);
                 intent.putExtra("frequency" ,chosenFrequency.getFrequency());
+                intent.putExtra("myMode",myMode);
                 startActivity(intent);
             }
         });
