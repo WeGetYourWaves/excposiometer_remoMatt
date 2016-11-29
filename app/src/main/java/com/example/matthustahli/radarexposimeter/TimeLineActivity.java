@@ -25,19 +25,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static java.lang.Math.log;
+
 public class TimeLineActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Integer counterB=0, anzahlBalken, activeBar;
+    Integer counterB=0, anzahlBalken=30, activeBar;
     Button b_modeNormal,b_mode21dB, b_mode42dB,b_mode_accumulation,b_switchMode;
     ImageButton b_settings;
     TextView tv_status;
     LinearLayout settings;
     String myMode;
     Animation animationSlideDown;
+    double[] qickFixArray;
     Integer peak[]= {302, 400, 6000, 100, 191, 305, 256, 385, 119, 403, 304, 252, 152, 243, 254, 276, 131, 312, 116, 337, 457, 251, 330, 314, 201, 107, 235, 280, 470, 460, 394, 418, 378, 437, 260, 130, 449, 446, 277, 182, 240, 147, 316, 184, 350, 466, 441, 328, 411, 166, 127, 471, 248, 112, 226, 426, 319, 358, 149, 115, 408, 172, 436, 476, 361, 266, 366, 202, 375, 151, 171, 207, 106, 103, 224, 110, 410, 258, 297, 307, 209, 211, 262, 292, 370, 405, 417, 170, 220, 444, 176, 331, 190, 406, 430, 416, 494, 387, 348, 431, 246, 117, 145, 393, 129, 100, 447, 490, 404, 175, 395, 125, 478, 198, 159, 354, 452, 360, 162, 114, 433, 272, 222, 264, 458, 349, 329, 270, 438, 309, 100};
     Integer rms[]= {4000, 1, 200, 3000, 400, 200, 100, 10, 371, 217, 126, 201, 118, 121, 199, 316, 310, 115, 361, 213, 196, 173, 114, 152, 480, 300, 285, 146, 194, 278, 353, 102, 179, 296, 182, 192, 272, 347, 407, 161, 448, 207, 256, 240, 253, 472, 153, 424, 323, 266, 185, 344, 484, 423, 134, 349, 209, 321, 269, 198, 302, 414, 254, 120, 224, 379, 488, 168, 382, 497, 359, 381, 243, 128, 410, 125, 291, 212, 276, 445, 474, 260, 362, 181, 372, 341, 401, 438, 406, 340, 113, 117, 363, 210, 178, 354, 314, 318, 384, 108, 400, 338, 233, 251, 208, 467, 479, 328, 288, 148, 216, 297, 265, 337, 249, 145, 174, 206, 277, 230, 171, 373, 186, 351, 376, 188, 315, 279, 331, 232, 100};
     private int attenuator;
@@ -64,8 +69,11 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     Bitmap bitmap;
     Canvas canvas;
     Point size;
+    double scaleY = 0.8;
+    double scaleX = 0.9;
+    float lastValue =0,maxHight;
 
-    //TODO variablen für verbesserung
+    //valiables for data exchange
     private char measurement_type = 'P';
     int freq;//frequencies are in MHz  //beinhaltet die zu betrachtenden frequenzen    //make switch funktion that deletes element at certain place and reorders them
     double rms1;
@@ -82,9 +90,8 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         initalizeButtonsAndIcons();
         activateOnclickListener();
         ActivateTouchOnPlot();
-
-        //draws plot, not ready yet
-        //startTimeLine();
+        SetUpValuesForPlot();
+        makePlot();
     }
 
     public void onStart() {
@@ -124,17 +131,27 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-    private void startTimeLine() {
+    private void makePlot() {
+        if (timer != null){
+            timer.cancel();
+        }
         counter =0;
+        maxHight= modeMaxSize();
+        canvas.drawColor(Color.WHITE);
+        imageView.setImageBitmap(bitmap);
+        lastValue= CalcBarHight();
+        canvas.drawRect(coord.getLeft(counter), lastValue, coord.getRight(counter), coord.getBottom(counter), paintActive);
+        counter++;
         handler = new Handler();
         timer = new Timer();
         runnable = new Runnable(){
             public void run() {
-                //draw plot here!!!
-                //final int index = counter % size;
-                //measures.set(index, new LiveMeasure(fixedFreq.get(index), 0, rms[counter % rms.length], peak[counter % peak.length]));
-
-
+                int next = counter %anzahlBalken;
+                int last =(counter-1)% anzahlBalken;
+                canvas.drawRect(coord.getLeft(last), lastValue, coord.getRight(last), coord.getBottom(last), paintBar);
+                lastValue= CalcBarHight();// will be used, and then waits 500 milsec until recalculated for the next bar.
+                canvas.drawRect(coord.getLeft(next), lastValue, coord.getRight(next), coord.getBottom(next), paintActive);
+                imageView.setImageBitmap(bitmap);
                 counter++;
             }
         };
@@ -143,33 +160,54 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
             public void run() {
                 handler.post(runnable);
             }
-        },0,200);  // time when new bar appears.
+        },0,500);  // time when new bar appears.
     }
 
-    public void makePlot() {
-        double[] rms = {readRMS()}; //quickfix
-        double[] peak = {readPeak()};//quickfix
-        canvas.drawColor(Color.WHITE);
-        canvas.drawRect(0,(float) (size.y*0.15),size.x,(float) (size.y*0.14),paintLimit);
-        imageView.setImageBitmap(bitmap);
-        if(measurement_type=='R') {
-            coord = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, rms, myMode,0.95,0.85);
-        }else {
-            coord = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, peak, myMode, 0.95, 0.85);
+    public float modeMaxSize(){
+        int maxSizeInVolt=0;
+        switch (myMode){
+            case "normal mode":
+                maxSizeInVolt=50;
+                break;
+            case "-21 dB":
+                maxSizeInVolt=500;
+                break;
+            case "-42 dB":
+                maxSizeInVolt=5000;
+                break;
+            case "LNA on":
+                maxSizeInVolt=5;
+                break;
         }
-        for (int i = 0; i < anzahlBalken; i++) {
-            canvas.drawRect(coord.getLeft(i), coord.getTop(i), coord.getRight(i), coord.getBottom(i), paintBar);      //somehow i get bottom wrong!
-            Log.d("values plot", String.valueOf(coord.getTop(i)));
-        }
-        imageView.setImageBitmap(bitmap);
+        return (float) log(maxSizeInVolt);
+    }
+
+
+    private float CalcBarHight() {
+       double value;
+       if (measurement_type == 'R') {
+           value = readRMS();
+       }else {
+           value = readPeak();
+       }
+       if(value<=1) {
+           return (float) (size.y); // empty size
+       }
+       if(value >= maxHight) {
+           return (float) (size.y - size.y * scaleY); //full size
+       }else{
+           return (float) (size.y - log(value)/maxHight*size.y*scaleY);
+       }
     }
 
 
     public void SetUpValuesForPlot() {
+        qickFixArray = new double[anzahlBalken];
+        Arrays.fill(qickFixArray,0);
         display = getWindowManager().getDefaultDisplay();
         size = new Point();
         display.getSize(size);
-        imageView = (ImageView) findViewById(R.id.image_bitmap);
+        imageView = (ImageView) findViewById(R.id.imageView_timeline_bitmap);
         bitmap = Bitmap.createBitmap(size.x, size.y, Bitmap.Config.ARGB_8888);
         paintFix = new Paint();
         paintBar = new Paint();
@@ -187,6 +225,8 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         paintActive.setColor(colorActive);
         paintActive.setStyle(Paint.Style.FILL);
         canvas = new Canvas(bitmap);
+        double[] rms = {100.0}; //quickfix
+        coord = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, qickFixArray, myMode, scaleX, scaleY);
     }
 
     private void initalizeButtonsAndIcons() {
@@ -213,16 +253,20 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.b_mode_normal:
-                myMode = "normal";
+                myMode = "normal mode";
+                makePlot();
                 break;
             case R.id.b_mode_21db:
-                myMode = "21dB";
+                myMode = "-21 dB";
+                makePlot();
                 break;
             case R.id.b_mode_42db:
-                myMode = "42dB";
+                myMode = "-42 dB";
+                makePlot();
                 break;
             case R.id.b_mode_LNA:
-                myMode = "accu";
+                myMode = "LNA on";
+                makePlot();
                 break;
             case R.id.setting_button:
                 if (settings.getVisibility() == LinearLayout.VISIBLE) {
@@ -232,13 +276,16 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
             case R.id.switch_to_peak:
-                counterB ++;
-                if(counterB%2==0) {
+                if(measurement_type == 'R'){
+                    measurement_type = 'P';
                     tv_status.setText("Peak");
                     b_switchMode.setText("RMS");
+                    makePlot();
                 }else{
+                    measurement_type = 'R';
                     tv_status.setText("RMS");
                     b_switchMode.setText("Peak");
+                    makePlot();
                 }
                 break;
         }
