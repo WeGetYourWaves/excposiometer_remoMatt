@@ -1,4 +1,5 @@
-package group_project.test001;
+package com.example.matthustahli.radarexposimeter;
+
 
 /**
  * Created by Markus on 25.11.2016.

@@ -275,18 +275,20 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 clickCounterStatusPlot++;
 
                 if (measurement_type == 'P') {
-                    //todo set plot to peak
-                    //peakOrRms="PEAK";
+                    sendTrigger(viewStop.get_packet());
+                    View_Packet_Trigger view_packet_triggerP = new View_Packet_Trigger(device_id, attenuator, measurement_type);
+                    sendTrigger(view_packet_triggerP.get_packet());
+                    Log.d(LOG_TAG, "sent SCAN Trigger Peak");
                     b_peak.setText("RMS");
-                    makePlot();     //hier keine neuen päckli. da rms und peak ready sind.. einfach neu plotten.
                     TextView statusView = (TextView) findViewById(R.id.status_textview);
                     statusView.setText("PeakPlot");
                 }
                 if (measurement_type == 'R') {
-                    //todo set plot to rms
-                   //peakOrRms="RMS";
+                    sendTrigger(viewStop.get_packet());
+                    View_Packet_Trigger view_packet_triggerR = new View_Packet_Trigger(device_id, attenuator, measurement_type);
+                    sendTrigger(view_packet_triggerR.get_packet());
+                    Log.d(LOG_TAG, "sent SCAN Trigger RMS");
                     b_peak.setText("Peak");
-                    makePlot();      //hier keine neuen päckli. da rms und peak ready sind.. einfach neu plotten.
                     TextView statusView = (TextView) findViewById(R.id.status_textview);
                     statusView.setText("RmsPlot");
                 }
