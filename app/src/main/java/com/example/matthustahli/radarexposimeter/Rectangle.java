@@ -86,11 +86,12 @@ public class Rectangle extends AppCompatActivity {
     public ArrayList<Float> lengthFromTop() {
         ArrayList<Float> toReturn = new ArrayList<Float>();
         for (int i = 0; i < anzahlBalken; i++) {
-            if(values[i]<=1) {
-                toReturn.add(i,(float) (sizeY)); // empty size
-            }
-            if(log(values[i]) >= maxHight) {
-                toReturn.add(i, (float) (sizeY - sizeY * scaleY)); //full size
+            if(values[i]<-1){
+                if(values[i]<-2.5){
+                    toReturn.add(i,(float) (sizeY)); // empty size
+                }else{
+                    toReturn.add(i, (float) (sizeY - sizeY * scaleY)); //full size
+                }
             }else{
                 toReturn.add(i,(float) (sizeY - log(values[i])/maxHight*sizeY*scaleY));
             }

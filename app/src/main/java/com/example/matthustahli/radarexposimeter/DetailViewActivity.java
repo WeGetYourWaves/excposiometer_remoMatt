@@ -460,13 +460,13 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         public View getView(int position, View convertView, ViewGroup parent) {
             //make shure there is a view to work with
             View itemView = convertView;
-            if(convertView == null){
+            if (convertView == null) {
                 itemView = getLayoutInflater().inflate(R.layout.one_list_item, parent, false);          //??????????
             }
 
             //HERE I POPULATE THE UI OF THE LIST
             //find measurement to work with. the object at certain position
-            LiveMeasure currentMeasure= measures.get(position);
+            LiveMeasure currentMeasure = measures.get(position);
 
             //Fill the view, connect elements to layout item_view..
             // ImageView listImage = (ImageView) itemView.findViewById(R.id.list_icon);    //findview on this specific itemView..is new for every new list layer..
@@ -475,19 +475,36 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
             //Fill the text views
             //set frequency
-            TextView freqText= (TextView) itemView.findViewById(R.id.textview_freq);
-            freqText.setText(String.valueOf(updateActiveFrequency(currentMeasure.getFrequency()))+ " GHz");
+            TextView freqText = (TextView) itemView.findViewById(R.id.textview_freq);
+            freqText.setText(String.valueOf(updateActiveFrequency(currentMeasure.getFrequency())) + " GHz");
 
             //set median
             TextView rmsBar = (TextView) itemView.findViewById(R.id.textview_rms);
             TextView rmsText = (TextView) itemView.findViewById(R.id.show_rms);
-            rmsText.setText(String.valueOf(currentMeasure.getRMS())+" V/m");
+            if(currentMeasure.getRMS()<-1){
+                if(currentMeasure.getRMS()<-2.5){
+                    rmsText.setText(" < min");
+                }else{
+                    rmsText.setText(" > max");
+                }
+            }else{
+                rmsText.setText(String.valueOf(currentMeasure.getRMS()) + " V/m");
+            }
             rmsBar.setWidth((int) getMySizeComparedToMax(currentMeasure.getRMS()));
+
 
             //set peak
             TextView peakBar = (TextView) itemView.findViewById(R.id.textview_peak);
             TextView peakText = (TextView) itemView.findViewById(R.id.show_peak);
-            peakText.setText(String.valueOf(currentMeasure.getPeak())+" V/m");
+            if(currentMeasure.getPeak()<-1){
+                if(currentMeasure.getPeak()<-2.5){
+                    peakText.setText(" < min");
+                }else{
+                    peakText.setText(" > max");
+                }
+            }else{
+                peakText.setText(String.valueOf(currentMeasure.getPeak()) + " V/m");
+            }
             peakBar.setWidth((int) getMySizeComparedToMax(currentMeasure.getPeak()));
 
             return itemView;

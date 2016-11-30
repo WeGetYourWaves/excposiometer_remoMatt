@@ -454,15 +454,32 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         //find the actiual freq repsresenting the the freq in the array
         selectedFreq.setText(String.valueOf(freqToShow) + " GHz"); //sets selected freq into textVie
         if(measurement_type=='R'){
+            if(rms[position]<-1){
+                if(rms[position]<-2.5){
+                    selectedValue.setText("< min ");
+                }else{
+                    selectedValue.setText("> max ");
+                }
+            }else{
             double valueToShow = rms[position] ;
             valueToShow= Math.round(valueToShow*100);  // runden auf ##.#
             valueToShow = valueToShow/100;
             selectedValue.setText(String.valueOf(valueToShow)+ " V/m ");
+            }
         }else{
-            double valueToShow = peak[position] ;
-            valueToShow= Math.round(valueToShow*100);  // runden auf ##.#
-            valueToShow = valueToShow/100;
-            selectedValue.setText(String.valueOf(valueToShow)+ " V/m ");        }
+            if(peak[position]<-1){
+                if(peak[position]<-2.5){
+                    selectedValue.setText("< min ");
+                }else{
+                    selectedValue.setText("> max ");
+                }
+            }else {
+                double valueToShow = peak[position];
+                valueToShow = Math.round(valueToShow * 100);  // runden auf ##.#
+                valueToShow = valueToShow / 100;
+                selectedValue.setText(String.valueOf(valueToShow) + " V/m ");
+            }
+        }
     }
 
     //changes Bar back to gray color
