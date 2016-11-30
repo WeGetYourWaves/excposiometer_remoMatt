@@ -446,17 +446,23 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         chandeBarColorToFixed();
     }
 
+    //updates the textviews value of peak and choosen frequency
     private void updateActiveFrequency(int position){
-        double toShow= 0.5 + 0.1*position;
-        toShow= Math.round(toShow*10);  // runden auf ##.#
-        toShow = toShow/10;
+        double freqToShow= 0.5 + 0.1*position;
+        freqToShow= Math.round(freqToShow*10);  // runden auf ##.#
+        freqToShow = freqToShow/10;
         //find the actiual freq repsresenting the the freq in the array
-        selectedFreq.setText(String.valueOf(toShow) + " GHz"); //sets selected freq into textVie
+        selectedFreq.setText(String.valueOf(freqToShow) + " GHz"); //sets selected freq into textVie
         if(measurement_type=='R'){
-            selectedValue.setText(String.valueOf(rms[position])+ " V/m ");
+            double valueToShow = rms[position] ;
+            valueToShow= Math.round(valueToShow*100);  // runden auf ##.#
+            valueToShow = valueToShow/100;
+            selectedValue.setText(String.valueOf(valueToShow)+ " V/m ");
         }else{
-            selectedValue.setText(String.valueOf(peak[position])+ " V/m ");
-        }
+            double valueToShow = peak[position] ;
+            valueToShow= Math.round(valueToShow*100);  // runden auf ##.#
+            valueToShow = valueToShow/100;
+            selectedValue.setText(String.valueOf(valueToShow)+ " V/m ");        }
     }
 
     //changes Bar back to gray color
