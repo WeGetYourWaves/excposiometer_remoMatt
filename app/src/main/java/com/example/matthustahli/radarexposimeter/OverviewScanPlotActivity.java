@@ -52,8 +52,8 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     //----------------------------------------------------------------------
     //setup variables
     Rectangle coord;
-    int colorFix, colorBar, colorActive, colorLimit ;
-    Paint paintFix, paintBar, paintActive, paintLimit;
+    int colorFix, colorBar, colorActive, colorLimit, colorToHigh ;
+    Paint paintFix, paintBar, paintActive, paintLimit,paintToHigh;
     Display display;
     Point size;
     ImageView imageView;
@@ -496,6 +496,25 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
             canvas.drawRect(coord.getLeft(fixedBars.get(i)), coord.getTop(fixedBars.get(i)), coord.getRight(fixedBars.get(i)), coord.getBottom(fixedBars.get(i)), paintFix);
             imageView.setImageBitmap(bitmap);
         }
+        markTheHighOnes();
+    }
+
+    private void markTheHighOnes(){
+        if(measurement_type=='R'){
+            for (int i = 0; i < anzahlBalken; i++) {
+                if (rms[i]< -1.0 && rms[i] > -2.5) {
+                    canvas.drawRect(coord.getLeft(i), coord.getTop(i), coord.getRight(i), coord.getBottom(i), paintToHigh);
+                    imageView.setImageBitmap(bitmap);
+                } else {}
+            }
+        }else {
+            for (int i = 0; i < anzahlBalken; i++) {
+                    if (peak[i]<-1.0 && peak[i] > -2.5) {
+                        canvas.drawRect(coord.getLeft(i), coord.getTop(i), coord.getRight(i), coord.getBottom(i), paintToHigh);
+                        imageView.setImageBitmap(bitmap);
+                } else {}
+            }
+        }
     }
 
     //clears all fixed bars and removes them from list
@@ -517,10 +536,13 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         paintBar = new Paint();
         paintActive= new Paint();
         paintLimit = new Paint();
+        paintToHigh = new Paint();
         colorLimit = OverviewScanPlotActivity.this.getResources().getColor(R.color.limitBar);
         colorFix = OverviewScanPlotActivity.this.getResources().getColor(R.color.fixedBar);
         colorBar = OverviewScanPlotActivity.this.getResources().getColor(R.color.normalBar);
         colorActive = OverviewScanPlotActivity.this.getResources().getColor(R.color.activeBar);
+        colorToHigh = OverviewScanPlotActivity.this.getResources().getColor(R.color.toHighColor);
+        paintToHigh.setColor(colorToHigh);
         paintLimit.setColor(colorLimit);
         paintLimit.setStyle(Paint.Style.FILL);
         paintFix.setColor(colorFix);
