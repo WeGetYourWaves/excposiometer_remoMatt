@@ -147,9 +147,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         if (myMode == "-21 dB")  attenuator = 1;
         else if (myMode == "LNA on")  attenuator = 3;
         else if(myMode == "normal mode")   attenuator = 0;
-        else {
-            attenuator = 2;
-        }
+        else if(myMode == "-42 dB") attenuator = 2;
         Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
     }
 
