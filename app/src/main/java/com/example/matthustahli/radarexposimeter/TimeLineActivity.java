@@ -128,6 +128,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         myMode = intent.getStringExtra("myMode");
         freq = intent.getIntExtra("frequency",0);
         freq = 500 + freq*100;        //freq = value of freq MHz;
+        measurement_type = intent.getCharExtra("type", 'P');
     }
 
 

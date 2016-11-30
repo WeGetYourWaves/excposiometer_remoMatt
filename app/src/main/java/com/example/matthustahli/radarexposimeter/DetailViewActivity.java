@@ -352,6 +352,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 Intent intent = new Intent(DetailViewActivity.this, TimeLineActivity.class);
                 intent.putExtra("frequency" ,chosenFrequency.getFrequency());
                 intent.putExtra("myMode",myMode);
+                intent.putExtra("type", measurement_type);
                 startActivity(intent);
             }
         });
@@ -445,6 +446,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         else if (myMode == "LNA on")  attenuator = 3;
         else if(myMode == "normal mode")   attenuator = 0;
         else attenuator = 2;
+        measurement_type = intent.getCharExtra("type", 'P');
         Toast.makeText(DetailViewActivity.this,myMode,Toast.LENGTH_SHORT).show();
     }
 

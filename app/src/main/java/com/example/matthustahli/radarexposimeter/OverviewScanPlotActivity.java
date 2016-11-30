@@ -387,6 +387,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         bundle.putIntegerArrayList(CHOOSENFREQ, fixedBars);
         intent.putExtras(bundle);
         intent.putExtra("MODE", myMode);
+        intent.putExtra("type", measurement_type);
         startActivity(intent);
     }
 
