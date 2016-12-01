@@ -445,8 +445,9 @@ public class Fake_TCP_Server implements TCP_SERVER {
                     {k = i;}
                 }
                 if (k==0){throw new IllegalStateException("k is wrong, error in measure");}
-                lowerbound= meas_data_P[(17*k)+1];
-                upperbound= meas_data_P[(17*k)+16];
+                // von André: Messe oben drüber
+                lowerbound = meas_data_P[(17*k)+8]; // Richtig: [(17*k)+8]
+                upperbound = (12* meas_data_P[(17*k)+16])/10; // richtig: ohne 12*.../10
                 if (upperbound - lowerbound <= 0)
                 {throw new IllegalArgumentException("lowerbound - upperbound bigger than zero: at 1");}
                 meas = rand.nextInt(upperbound - lowerbound) + lowerbound;
@@ -479,8 +480,9 @@ public class Fake_TCP_Server implements TCP_SERVER {
                     {k = i;}
                 }
                 if (k==0){throw new IllegalStateException("k is wrong, error in measure");}
-                lowerbound= meas_data_R[(17*k)+1];
-                upperbound= meas_data_R[(17*k)+16];
+                // von André: Messe drunter, aber nicht drüber
+                lowerbound= meas_data_R[(17*k)+1]; // Richtig ist [(17*k)+1];
+                upperbound= meas_data_R[(17*k)+16]; // ist richtig
                 if (upperbound - lowerbound <= 0)
                 {throw new IllegalArgumentException("lowerbound - upperbound bigger than zero: at 2");}
                 meas = rand.nextInt(upperbound - lowerbound) + lowerbound;
