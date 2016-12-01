@@ -271,7 +271,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 else measurement_type = 'P';
 
                 //downOrUp: 0=godown, 1=goup
-                handlesActivatingDropDown(clickCounterStatusPlot%2); // to show connection bar
+                //handlesActivatingDropDown(clickCounterStatusPlot%2); // to show connection bar
                 clickCounterStatusPlot++;
 
                 if (measurement_type == 'P') {

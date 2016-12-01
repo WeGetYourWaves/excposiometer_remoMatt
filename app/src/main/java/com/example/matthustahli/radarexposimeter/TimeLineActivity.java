@@ -255,18 +255,22 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()){
             case R.id.b_mode_normal:
                 myMode = "normal mode";
+                settings.setVisibility(LinearLayout.GONE);
                 makePlot();
                 break;
             case R.id.b_mode_21db:
                 myMode = "-21 dB";
+                settings.setVisibility(LinearLayout.GONE);
                 makePlot();
                 break;
             case R.id.b_mode_42db:
                 myMode = "-42 dB";
+                settings.setVisibility(LinearLayout.GONE);
                 makePlot();
                 break;
             case R.id.b_mode_LNA:
                 myMode = "LNA on";
+                settings.setVisibility(LinearLayout.GONE);
                 makePlot();
                 break;
             case R.id.setting_button:
