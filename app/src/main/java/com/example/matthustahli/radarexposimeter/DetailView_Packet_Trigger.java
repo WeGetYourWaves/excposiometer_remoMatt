@@ -6,7 +6,7 @@ package com.example.matthustahli.radarexposimeter;
 public class DetailView_Packet_Trigger extends Packet_Trigger {
 
 
-    public DetailView_Packet_Trigger(int device_id_in, int attenuator_in, int[] frequencies_in, char measurement_type_in){
+    public DetailView_Packet_Trigger(int device_id_in, int attenuator_in, int frequency_number_in, int[] frequencies_in, char measurement_type_in){
 
         byte[] prefixB = init_prefix();
 
@@ -21,13 +21,13 @@ public class DetailView_Packet_Trigger extends Packet_Trigger {
         byte attenuatorB = (byte) attenuator_in;
 
         //frequency_number = frequencies_in.length;
-        byte frequency_numberB = (byte) frequencies_in.length;
+        byte frequency_numberB = (byte) frequency_number_in;
 
 
         //frequencies = frequencies_in;
-        byte[] frequenciesB = new byte[2 * frequency_numberB];
+        byte[] frequenciesB = new byte[2 * 6];
         byte[] one_freq = new byte[2];
-        for (int i = 0; i < frequenciesB.length - 1; i++){
+        for (int i = 0; i < 5; i++){
 
             one_freq = int_to_byteArray(frequencies_in[i/2], 2);
             frequenciesB[i] = one_freq[0];
@@ -38,7 +38,7 @@ public class DetailView_Packet_Trigger extends Packet_Trigger {
         //measurement_type = measurement_type_in;
         byte measurement_typeB = (byte) measurement_type_in;
 
-        byte[] reserved = new byte[6];
+        byte[] reserved = new byte[1];
 
         byte[] postfixB = init_postfix();
 

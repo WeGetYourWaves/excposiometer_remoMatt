@@ -519,7 +519,8 @@ public class Fake_TCP_Server implements TCP_SERVER {
                     if (freqency == meas_data_R[i*17])
                     {k = i;}
                 }
-                if (k==0){throw new IllegalStateException("k is wrong, error in measure");}
+                if (k==0){
+                    throw new IllegalStateException("k is wrong, error in measure");}
                 lowerbound= meas_data_R[(17*k)+1];
                 upperbound= meas_data_R[(17*k)+16];
                 if (upperbound - lowerbound <= 0)

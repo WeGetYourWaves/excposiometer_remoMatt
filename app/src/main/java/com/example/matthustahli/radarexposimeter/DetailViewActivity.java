@@ -194,7 +194,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void onClick(View v) {
-        DetailView_Packet_Trigger DetViewStop = new DetailView_Packet_Trigger(device_id, attenuator, freq, (char) 0);
+        DetailView_Packet_Trigger DetViewStop = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, (char) 0);
 
         switch (v.getId()) {
             case R.id.b_mode_normal:
@@ -203,7 +203,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 change_MinMaxPlot();
                 closeSettingLayoutAndUpdateList();
                 sendTrigger(DetViewStop.get_packet());
-                DetailView_Packet_Trigger detailView_packet_trigger0 = new DetailView_Packet_Trigger(device_id, attenuator, freq, measurement_type);
+                DetailView_Packet_Trigger detailView_packet_trigger0 = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, measurement_type);
                 sendTrigger(detailView_packet_trigger0.get_packet());
                 Toast.makeText(this, "normal", Toast.LENGTH_SHORT).show();
                 break;
@@ -213,7 +213,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 change_MinMaxPlot();
                 closeSettingLayoutAndUpdateList();
                 sendTrigger(DetViewStop.get_packet());
-                DetailView_Packet_Trigger detailView_packet_trigger1 = new DetailView_Packet_Trigger(device_id, attenuator, freq, measurement_type);
+                DetailView_Packet_Trigger detailView_packet_trigger1 = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, measurement_type);
                 sendTrigger(detailView_packet_trigger1.get_packet());
                 Toast.makeText(this, "21 dB", Toast.LENGTH_SHORT).show();
                 break;
@@ -223,7 +223,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 change_MinMaxPlot();
                 closeSettingLayoutAndUpdateList();
                 sendTrigger(DetViewStop.get_packet());
-                DetailView_Packet_Trigger detailView_packet_trigger2 = new DetailView_Packet_Trigger(device_id, attenuator, freq, measurement_type);
+                DetailView_Packet_Trigger detailView_packet_trigger2 = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, measurement_type);
                 sendTrigger(detailView_packet_trigger2.get_packet());
                 Toast.makeText(this, "42 dB", Toast.LENGTH_SHORT).show();
                 break;
@@ -233,7 +233,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 change_MinMaxPlot();
                 closeSettingLayoutAndUpdateList();
                 sendTrigger(DetViewStop.get_packet());
-                DetailView_Packet_Trigger detailView_packet_trigger3 = new DetailView_Packet_Trigger(device_id, attenuator, freq, measurement_type);
+                DetailView_Packet_Trigger detailView_packet_trigger3 = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, measurement_type);
                 sendTrigger(detailView_packet_trigger3.get_packet());
                 Toast.makeText(this, "verstärkt", Toast.LENGTH_SHORT).show();
                 break;
@@ -506,9 +506,9 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                     change_MinMaxPlot();
                     Log.d(LOG_TAG, "saved Calibration Tables");
 
-                    DetailView_Packet_Trigger detailView_packet_trigger = new DetailView_Packet_Trigger(device_id, attenuator, freq, measurement_type);
+                    DetailView_Packet_Trigger detailView_packet_trigger = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, measurement_type);
                     sendTrigger(detailView_packet_trigger.get_packet());
-                    Log.d(LOG_TAG, "sent SCAN Trigger");
+                    Log.d(LOG_TAG, "sent DETV Trigger");
 
                 }
                 else if(new String(split_packet(4, 7, orgData)).equals("DETV")){
@@ -563,7 +563,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     public void change_MinMaxPlot() {
         maxPlotP = calibration.get_maxPlot(attenuator, 'P');
         minPlotP = calibration.get_maxPlot(attenuator, 'P');
-        maxPlotR = calibration.get_maxPlot(attenuator, 'P');
+        maxPlotR = calibration.get_maxPlot(attenuator, 'R');
         minPlotR = calibration.get_minPlot(attenuator, 'R');
     }
 }
