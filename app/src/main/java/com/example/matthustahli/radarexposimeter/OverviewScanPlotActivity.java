@@ -74,7 +74,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     Animation animationSlideDown;
     Button b_normal, b_21dB, b_41dB, b_accu, b_peak;
     ImageButton b_settings, addButton, clearButton, refreshButton, nextButton;
-    double maxPlot, minPlot;
+    double maxPlotP, minPlotP, maxPlotR, minPlotR;
 
 //----------------------------------------------------------------------
 
@@ -651,6 +651,10 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
 
                     double rms = calibration.get_rms(attenuator,freq, rms_exposi);
                     double peak = calibration.get_peak(attenuator, freq, peak_exposi);
+                    maxPlotP = calibration.get_maxPlot(attenuator, 'P');
+                    minPlotP = calibration.get_maxPlot(attenuator, 'P');
+                    maxPlotR = calibration.get_maxPlot(attenuator, 'P');
+                    minPlotR = calibration.get_minPlot(attenuator, 'R');
                     if (peak != -1){
                         updatePeak(peak, freq);
                     }

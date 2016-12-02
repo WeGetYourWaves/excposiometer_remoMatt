@@ -70,7 +70,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     int counter=0;
     int size;
     int colorLimit, colorBar,colorEmpty;
-    double maxPlot, minPlot;
+    double maxPlotP, minPlotP, minPlotR, maxPlotR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -502,10 +502,20 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                     int rms_exposi = packetExposi.get_rawData_rms();
                     int peak_exposi = packetExposi.get_rawData_peak();
 
+                    maxPlotP = calibration.get_maxPlot(attenuator, 'P');
+                    minPlotP = calibration.get_maxPlot(attenuator, 'P');
+                    maxPlotR = calibration.get_maxPlot(attenuator, 'P');
+                    minPlotR = calibration.get_minPlot(attenuator, 'R');
                     double rms = calibration.get_rms(attenuator,freq, rms_exposi);
                     double peak = calibration.get_peak(attenuator, freq, peak_exposi);
-                    updatePeak(peak, freq);
-                    updateRMS(rms, freq);
+
+                    if (peak != -1){
+                        updatePeak(peak, freq);
+                    }
+                    if(rms != -1){
+                        updateRMS(rms, freq);
+
+                    }
                     //TODO: makePlot();
                 }
                 else if (new String(split_packet(4, 7, orgData)).equals("EROR")){
@@ -514,6 +524,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                     Error_Packet_Exposi error_packet = new Error_Packet_Exposi(orgData);
                     int errorCode = error_packet.get_errorCode();
                     String errorMessage = error_packet.get_errorMessage();
+
                     if (errorCode == 1){
                         //connection to ESP lost
                         //handlesActivatingDropDown(0);

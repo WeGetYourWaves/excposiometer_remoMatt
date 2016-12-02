@@ -286,18 +286,30 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.b_mode_21db:
                 myMode = "-21 dB";
+                attenuator = 1;
+                sendTrigger(timeStop.get_packet());
+                Timeline_Packet_Trigger timeline_packet_trigger1 = new Timeline_Packet_Trigger(device_id, attenuator, freq, measurement_type);
+                sendTrigger(timeline_packet_trigger1.get_packet());
                 settings.setVisibility(LinearLayout.GONE);
                 modeMaxSize();
                 resetPlotToBeginning();
                 break;
             case R.id.b_mode_42db:
                 myMode = "-42 dB";
+                attenuator = 2;
+                sendTrigger(timeStop.get_packet());
+                Timeline_Packet_Trigger timeline_packet_trigger2 = new Timeline_Packet_Trigger(device_id, attenuator, freq, measurement_type);
+                sendTrigger(timeline_packet_trigger2.get_packet());
                 settings.setVisibility(LinearLayout.GONE);
                 modeMaxSize();
                 resetPlotToBeginning();
                 break;
             case R.id.b_mode_LNA:
                 myMode = "LNA on";
+                attenuator = 3;
+                sendTrigger(timeStop.get_packet());
+                Timeline_Packet_Trigger timeline_packet_trigger3 = new Timeline_Packet_Trigger(device_id, attenuator, freq, measurement_type);
+                sendTrigger(timeline_packet_trigger3.get_packet());
                 settings.setVisibility(LinearLayout.GONE);
                 modeMaxSize();
                 resetPlotToBeginning();
@@ -449,8 +461,14 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                         minPlotR = calibration.get_minPlot(attenuator, 'R');
                         double rms = calibration.get_rms(attenuator,freq, rms_exposi);
                         double peak = calibration.get_peak(attenuator, freq, peak_exposi);
-                        updatePeak(peak);
-                        updateRMS(rms);
+
+                        if (peak != -1){
+                            updatePeak(peak);
+                        }
+                        if(rms != -1){
+                            updateRMS(rms);
+
+                        }
                         makePlot();
                     }
                 }
