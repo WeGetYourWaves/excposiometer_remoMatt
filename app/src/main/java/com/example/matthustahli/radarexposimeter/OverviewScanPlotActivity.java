@@ -38,6 +38,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     private final String CHOOSENFREQ = "my_freq";
     private double[] rms = new double [96];
     private double[] peak = new double [96];
+    private boolean[] isBarToHigh;
     //public double[] peak = {302, 203, 345, 196, 191, 305, 256, 385, 6000, 4003, 304, 252, 152, 2403, 2454, 5276, 1131, 3812, 1186, 3037, 457, 251, 330, 314, 201, 107, 235, 280, 470, 460, 394, 418, 378, 437, 260, 130, 449, 446, 277, 182, 240, 147, 316, 184, 350, 466, 441, 328, 411, 166, 127, 471, 248, 112, 226, 426, 319, 358, 149, 115, 408, 172, 436, 476, 361, 266, 366, 202, 375, 151, 171, 207, 106, 103, 224, 110, 410, 258, 297, 307, 209, 211, 262, 292, 370, 405, 417, 170, 220, 444, 176, 331, 190, 406, 430, 416, 494, 387, 348, 431, 246, 117, 145, 393, 129, 100, 447, 490, 404, 175, 395, 125, 478, 198, 159, 354, 452, 360, 162, 114, 433, 272, 222, 264, 458, 349, 329, 270, 438, 309, 100};
     //public double[] rms = {348, 435, 332, 368, 271, 404, 346, 320, 371, 217, 126, 201, 118, 121, 199, 316, 310, 115, 361, 213, 196, 173, 114, 152, 480, 300, 285, 146, 194, 278, 353, 102, 179, 296, 182, 192, 272, 347, 407, 161, 448, 207, 256, 240, 253, 472, 153, 424, 323, 266, 185, 344, 484, 423, 134, 349, 209, 321, 269, 198, 302, 414, 254, 120, 224, 379, 488, 168, 382, 497, 359, 381, 243, 128, 410, 125, 291, 212, 276, 445, 474, 260, 362, 181, 372, 341, 401, 438, 406, 340, 113, 117, 363, 210, 178, 354, 314, 318, 384, 108, 400, 338, 233, 251, 208, 467, 479, 328, 288, 148, 216, 297, 265, 337, 249, 145, 174, 206, 277, 230, 171, 373, 186, 351, 376, 188, 315, 279, 331, 232, 100};
     private int attenuator;
@@ -492,12 +493,13 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
 
     //fix added Frequencies and change theire color!
     public void chandeBarColorToFixed() {
-
+        //markTheHighOnes();
+        //canvas.drawRect(coord.getLeft(activeBar), coord.getTop(activeBar), coord.getRight(activeBar), coord.getBottom(activeBar), paintActive);
         for (int i = 0; i < fixedBars.size(); i++) {
             canvas.drawRect(coord.getLeft(fixedBars.get(i)), coord.getTop(fixedBars.get(i)), coord.getRight(fixedBars.get(i)), coord.getBottom(fixedBars.get(i)), paintFix);
             imageView.setImageBitmap(bitmap);
         }
-        markTheHighOnes();
+
     }
 
     private void markTheHighOnes(){
@@ -506,14 +508,16 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 if (rms[i]< -1.0 && rms[i] > -2.5) {
                     canvas.drawRect(coord.getLeft(i), coord.getTop(i), coord.getRight(i), coord.getBottom(i), paintToHigh);
                     imageView.setImageBitmap(bitmap);
-                } else {}
+                    isBarToHigh[i]= true;
+                } else {isBarToHigh[i]=false;}
             }
         }else {
             for (int i = 0; i < anzahlBalken; i++) {
                     if (peak[i]<-1.0 && peak[i] > -2.5) {
                         canvas.drawRect(coord.getLeft(i), coord.getTop(i), coord.getRight(i), coord.getBottom(i), paintToHigh);
                         imageView.setImageBitmap(bitmap);
-                } else {}
+                        isBarToHigh[i]= true;
+                } else {isBarToHigh[i]=false;}
             }
         }
     }
@@ -553,6 +557,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         paintActive.setColor(colorActive);
         paintActive.setStyle(Paint.Style.FILL);
         canvas = new Canvas(bitmap);
+        isBarToHigh = new boolean[anzahlBalken];
     }
 
     public void makePlot() {

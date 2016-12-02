@@ -34,8 +34,13 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
+<<<<<<< Updated upstream
         sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
         <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\commons-io-2.4_b2955a73e8fdec69863902c786dced8321b28c5c\classes.dex" />
+=======
+        sha1="93ac0273fb167e8ad987f6c5c0de39095b98fa1b">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_cbdb0b50784a09a9923bbf2138a833ec4328163c/classes.dex" />
+>>>>>>> Stashed changes
     </item>
     <item
         is-multidex="true"
@@ -61,8 +66,13 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
+<<<<<<< Updated upstream
         sha1="7011b4551a8451906759b05814c58b9eb829ea9b">
         <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\annotations-java5-15.0_2a411796aa9d117ce4ad89cad4e5156664088a20\classes.dex" />
+=======
+        sha1="5294a07f73a561354a285d80f27b67282616edaa">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_0f94ce6e33e8b834ed87002d562d3e186d2e2419/classes.dex" />
+>>>>>>> Stashed changes
     </item>
     <item
         is-multidex="true"
