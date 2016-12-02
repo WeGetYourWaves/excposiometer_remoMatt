@@ -456,6 +456,21 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                         updateRMS(rms);
                     }
                 }
+                else if (new String(split_packet(4, 7, orgData)).equals("EROR")){
+
+                    Log.d(LOG_TAG, "got EROR packet");
+                    Error_Packet_Exposi error_packet = new Error_Packet_Exposi(orgData);
+                    int errorCode = error_packet.get_errorCode();
+                    String errorMessage = error_packet.get_errorMessage();
+                    if (errorCode == 1){
+                        //connection to ESP lost
+                        //handlesActivatingDropDown(0);
+                    }
+                    else if (errorCode == 2){
+                        //handlesActivatingDropDown(1);
+                    }
+
+                }
             }
         }
     }
