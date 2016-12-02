@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -63,7 +64,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     Bitmap bitmap;
     Canvas canvas;
     Integer activeBar = 0;
-    TextView selectedFreq, selectedValue;
+    TextView selectedFreq, selectedValue, TVMaxValue,TVMinValue;
     ArrayList<Integer> fixedBars = new ArrayList<Integer>();
     LinearLayout settings;
     private String myMode;
@@ -354,6 +355,8 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         // initialize Text
         selectedFreq = (TextView) findViewById(R.id.selected_freq);
         selectedValue = (TextView) findViewById(R.id.textView_value);
+        TVMaxValue = (TextView) findViewById(R.id.tv_maxValueScale);
+        TVMinValue = (TextView) findViewById((R.id.tv_minValueScale));
         //initialize Layouts
         settings = (LinearLayout) findViewById(R.id.layout_setting);
 
@@ -559,6 +562,11 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         paintActive.setStyle(Paint.Style.FILL);
         canvas = new Canvas(bitmap);
         isBarToHigh = new boolean[anzahlBalken];
+        setMarginOfMaxValueView();
+    }
+    public void setMarginOfMaxValueView(){
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) TVMaxValue.getLayoutParams();
+        params.topMargin = (int) (size.y*0.15);
     }
 
     public void makePlot() {
@@ -576,6 +584,34 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         }
         chandeBarColorToFixed();
         imageView.setImageBitmap(bitmap);
+        setValueOfMaxAndMinInYAxe();
+    }
+
+    private void setValueOfMaxAndMinInYAxe(){
+        int maxSizeInVolt=0;
+        double minSizeInVolt=0;
+        switch (myMode){
+            case "normal mode":
+                maxSizeInVolt=50;
+                minSizeInVolt=0.5;
+                break;
+            case "-21 dB":
+                maxSizeInVolt=500;
+                minSizeInVolt=0.5;
+                break;
+            case "-42 dB":
+                maxSizeInVolt=5000;
+                minSizeInVolt=0.5;
+                break;
+            case "LNA on":
+                maxSizeInVolt=5;
+                minSizeInVolt=0.5;
+                break;
+        }
+        TVMaxValue.setText(String.valueOf(maxSizeInVolt)+" V/m");
+        TVMinValue.setText(String.valueOf(minSizeInVolt)+" V/m");
+        TVMinValue.bringToFront();
+        TVMaxValue.bringToFront();
     }
 
     private void StartService() {
