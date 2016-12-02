@@ -73,6 +73,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     Animation animationSlideDown;
     Button b_normal, b_21dB, b_41dB, b_accu, b_peak;
     ImageButton b_settings, addButton, clearButton, refreshButton, nextButton;
+    double maxPlot, minPlot;
 
 //----------------------------------------------------------------------
 

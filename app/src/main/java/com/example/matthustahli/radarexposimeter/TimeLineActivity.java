@@ -72,6 +72,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     double scaleY = 0.8;
     double scaleX = 0.9;
     float lastValue =0,maxHight;
+    double maxPlot, minPlot;
 
     //valiables for data exchange
     private char measurement_type = 'P';

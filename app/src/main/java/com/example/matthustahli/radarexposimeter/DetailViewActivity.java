@@ -74,6 +74,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     Handler handler;
     int counter=0;
     int size;
+    double maxPlot, minPlot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
