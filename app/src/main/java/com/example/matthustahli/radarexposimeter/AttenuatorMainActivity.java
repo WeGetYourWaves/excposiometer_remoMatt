@@ -266,9 +266,12 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
 
     private void StopService() {
         Log.d(LOG_TAG, "StopService called");
-        Intent intent = new Intent();
-        intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
-        intent.putExtra(CommunicationService.COMMAND_Act2Serv,
-                CommunicationService.CMD_STOP);
+        Intent i = new Intent(this, CommunicationService.class);
+        stopService(i);
+
+//        Intent intent = new Intent();
+//        intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
+//        intent.putExtra(CommunicationService.COMMAND_Act2Serv,
+//                CommunicationService.CMD_STOP);
     }
 }

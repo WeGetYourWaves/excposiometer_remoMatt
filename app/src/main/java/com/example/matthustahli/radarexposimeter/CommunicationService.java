@@ -78,6 +78,8 @@ public class CommunicationService extends Service {
 
         ListenerForActivity = new IntentListenerForActivity();
 
+        Toast.makeText(this, "Service started", Toast.LENGTH_SHORT).show();
+
         super.onCreate();
     }
 
@@ -103,15 +105,16 @@ public class CommunicationService extends Service {
             e.printStackTrace();
         }
 
-        Toast.makeText(this, "Service started", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "Service started", Toast.LENGTH_SHORT).show();
 
-        return super.onStartCommand(intent, flags, startId);
+        super.onStartCommand(intent, flags, startId);
+        return START_NOT_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        Toast.makeText(this, "Service stopped", Toast.LENGTH_SHORT).show();
         Log.d(LOG_TAG, "onDestroy called");
+        running = false;
         // turn Hotspot off.
         try {
             Method method = wifi_manager.getClass().getMethod("setWifiApEnabled", WifiConfiguration.class, boolean.class);
@@ -123,6 +126,7 @@ public class CommunicationService extends Service {
         // turn Wifi back on.
         wifi_manager.setWifiEnabled(WifiWasOnWhenServiceWasStarted);
         this.unregisterReceiver(ListenerForActivity);
+        Toast.makeText(this, "Service stopped", Toast.LENGTH_SHORT).show();
         super.onDestroy();
     }
 
