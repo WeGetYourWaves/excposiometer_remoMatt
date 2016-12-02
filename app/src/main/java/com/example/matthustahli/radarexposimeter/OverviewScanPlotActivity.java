@@ -634,10 +634,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                         //connection to ESP lost
                         handlesActivatingDropDown(0);
                     }
-                    else if (errorCode == 2){
-                        handlesActivatingDropDown(1);
-                    }
-
                 }
             }
         }

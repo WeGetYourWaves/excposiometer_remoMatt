@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static java.lang.Thread.sleep;
 
@@ -133,12 +134,12 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
     protected void onDestroy() {
         Log.d(LOG_TAG, "in ondestroy()");
 
-/*        if(this.isFinishing()) {
-            stopService(service);
-            wifi_manager.setWifiEnabled(true);// sets wifi back on
-            Toast.makeText(this, "app finaly closed", Toast.LENGTH_SHORT).show();
-        }*/
         super.onDestroy();
+
+        if(this.isFinishing()){
+            StopService();
+            Toast.makeText(this, "app finaly closed", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -232,6 +233,17 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
                     sendTrigger(trigger.get_packet());
                     Log.d(LOG_TAG, "sent calTrigger to ESP");
                 }
+                else if (new String(split_packet(4, 7, orgData)).equals("EROR")) {
+
+                    Log.d(LOG_TAG, "got EROR packet");
+                    Error_Packet_Exposi error_packet = new Error_Packet_Exposi(orgData);
+                    int errorCode = error_packet.get_errorCode();
+                    String errorMessage = error_packet.get_errorMessage();
+                    if (errorCode == 1) {
+                        //connection to ESP lost
+                        //handlesActivatingDropDown(0);
+                    }
+                }
             }
 
         }
@@ -250,5 +262,13 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         id_device.setText("ID: " + Integer.toString(id));
         Log.d(LOG_TAG, "id_device set");
 
+    }
+
+    private void StopService() {
+        Log.d(LOG_TAG, "StopService called");
+        Intent intent = new Intent();
+        intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
+        intent.putExtra(CommunicationService.COMMAND_Act2Serv,
+                CommunicationService.CMD_STOP);
     }
 }

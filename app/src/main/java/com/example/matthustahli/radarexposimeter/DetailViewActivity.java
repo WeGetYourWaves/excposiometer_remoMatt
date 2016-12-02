@@ -618,10 +618,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                         //connection to ESP lost
                         //handlesActivatingDropDown(0);
                     }
-                    else if (errorCode == 2){
-                        //handlesActivatingDropDown(1);
-                    }
-
                 }
             }
         }

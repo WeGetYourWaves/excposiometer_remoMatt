@@ -466,10 +466,6 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                         //connection to ESP lost
                         //handlesActivatingDropDown(0);
                     }
-                    else if (errorCode == 2){
-                        //handlesActivatingDropDown(1);
-                    }
-
                 }
             }
         }
