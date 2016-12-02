@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Handler;
 import android.os.Message;
@@ -39,8 +40,8 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     private final String CHOOSENFREQ = "my_freq";
     ArrayList<Integer> fixedFreq= new ArrayList<Integer>();
     private ArrayAdapter<LiveMeasure> adapter;
-    Integer peak[]= {302, 400, 6000, 100, 191, 305, 256, 385, 119, 403, 304, 252, 152, 243, 254, 276, 131, 312, 116, 337, 457, 251, 330, 314, 201, 107, 235, 280, 470, 460, 394, 418, 378, 437, 260, 130, 449, 446, 277, 182, 240, 147, 316, 184, 350, 466, 441, 328, 411, 166, 127, 471, 248, 112, 226, 426, 319, 358, 149, 115, 408, 172, 436, 476, 361, 266, 366, 202, 375, 151, 171, 207, 106, 103, 224, 110, 410, 258, 297, 307, 209, 211, 262, 292, 370, 405, 417, 170, 220, 444, 176, 331, 190, 406, 430, 416, 494, 387, 348, 431, 246, 117, 145, 393, 129, 100, 447, 490, 404, 175, 395, 125, 478, 198, 159, 354, 452, 360, 162, 114, 433, 272, 222, 264, 458, 349, 329, 270, 438, 309, 100};
-    Integer rms[]= {4000, 1, 200, 3000, 400, 200, 100, 10, 371, 217, 126, 201, 118, 121, 199, 316, 310, 115, 361, 213, 196, 173, 114, 152, 480, 300, 285, 146, 194, 278, 353, 102, 179, 296, 182, 192, 272, 347, 407, 161, 448, 207, 256, 240, 253, 472, 153, 424, 323, 266, 185, 344, 484, 423, 134, 349, 209, 321, 269, 198, 302, 414, 254, 120, 224, 379, 488, 168, 382, 497, 359, 381, 243, 128, 410, 125, 291, 212, 276, 445, 474, 260, 362, 181, 372, 341, 401, 438, 406, 340, 113, 117, 363, 210, 178, 354, 314, 318, 384, 108, 400, 338, 233, 251, 208, 467, 479, 328, 288, 148, 216, 297, 265, 337, 249, 145, 174, 206, 277, 230, 171, 373, 186, 351, 376, 188, 315, 279, 331, 232, 100};
+    Integer peak[]= {302, 400, -3, 100, 191, 305, -3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3, 254, 276, 131, 312, 116, 337, 457, 251, 330, 314, 201, 107, 235, 280, 470, 460, 394, 418, 378, 437, 260, 130, 449, 446, 277, 182, 240, 147, 316, 184, 350, 466, 441, 328, 411, 166, 127, 471, 248, 112, 226, 426, 319, 358, 149, 115, 408, 172, 436, 476, 361, 266, 366, 202, 375, 151, 171, 207, 106, 103, 224, 110, 410, 258, 297, 307, 209, 211, 262, 292, 370, 405, 417, 170, 220, 444, 176, 331, 190, 406, 430, 416, 494, 387, 348, 431, 246, 117, 145, 393, 129, 100, 447, 490, 404, 175, 395, 125, 478, 198, 159, 354, 452, 360, 162, 114, 433, 272, 222, 264, 458, 349, 329, 270, 438, 309, 100};
+    Integer rms[]= {4000, 1, 200, 3000, 400, 200, -2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2, 217, 126, 201, 118, 121, 199, 316, 310, 115, 361, 213, 196, 173, 114, 152, 480, 300, 285, 146, 194, 278, 353, 102, 179, 296, 182, 192, 272, 347, 407, 161, 448, 207, 256, 240, 253, 472, 153, 424, 323, 266, 185, 344, 484, 423, 134, 349, 209, 321, 269, 198, 302, 414, 254, 120, 224, 379, 488, 168, 382, 497, 359, 381, 243, 128, 410, 125, 291, 212, 276, 445, 474, 260, 362, 181, 372, 341, 401, 438, 406, 340, 113, 117, 363, 210, 178, 354, 314, 318, 384, 108, 400, 338, 233, 251, 208, 467, 479, 328, 288, 148, 216, 297, 265, 337, 249, 145, 174, 206, 277, 230, 171, 373, 186, 351, 376, 188, 315, 279, 331, 232, 100};
     private ArrayList<LiveMeasure> measures = new ArrayList<LiveMeasure>();
     Float maxPeak = 0f;
     Float maxRMS = 0f;
@@ -74,6 +75,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     Handler handler;
     int counter=0;
     int size;
+    int colorLimit, colorBar,colorEmpty;
     double maxPlot, minPlot;
 
     @Override
@@ -81,10 +83,11 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_view);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        adapter=new MyListAdapter();
+        adapter = new MyListAdapter();
 
         //load intent from previous activity
         getChoosenFreqFromIntent();
+        initializeValues();
         //putFrequenciesIntoDoubleArray();
 
         //everything with the list population and keeping it updated
@@ -100,63 +103,14 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         activateAddButton();
         activateValueUpdater(); // funktion von matthias für listenupdate alle x sec..
 
-       // Toast.makeText(this,String.valueOf(freq),Toast.LENGTH_SHORT).show();
-
-
-
-
-
-
-
-
-
-
-        // // TODO: 27.10.16 data from remo
-    /*
-    make clock for update.
-    DetailView liveValues = new DetailView(array with frequencies);
-    liveValues.peak    -- gets my an array with the values to the frequencies in the same order.
-   liveValues.rms
-     */
-
     }
 
 
-
-//ArrayList<ObjectName> arraylist  = extras.getParcelableArrayList("arraylist");
-
-//TODO save instance when leaving and comming back.
-/*
-  private void saveToSharedPref(ArrayList<Integer> toSave){
-        SharedPreferences sp = getSharedPreferences("storedFrequencies", MODE_PRIVATE); //PreferenceManager.getDefaultSharedPreferences(SaveMainActivity.this);
-        SharedPreferences.Editor  edit= sp.edit();
-        //edit.putString("ArraySize", String.valueOf(fixedFreq.size()));
-        for (int i=0; i < toSave.size();i++) {
-            edit.putInt(String.valueOf(i), toSave.get(i));
-        }
-        edit.commit();
+    private void initializeValues(){
+        colorBar = DetailViewActivity.this.getResources().getColor(R.color.normalBar);
+        colorLimit = DetailViewActivity.this.getResources().getColor(R.color.limitBar);
+        colorEmpty = Color.TRANSPARENT;
     }
-
-    private void loadFromSharedPref(){
-        SharedPreferences sp = getSharedPreferences("myValue", MODE_PRIVATE); //PreferenceManager.getDefaultSharedPreferences(SaveMainActivity.this);
-        //String size = sp.getString("ArraySize", "0");
-        fixedFreq.clear();
-
-        for (int i=0; i<8 ;i++){
-            fixedFreq.add(sp.getInt(String.valueOf(i), 0));
-            Log.d("ArraySavedShow "+String.valueOf(i)+" : ",String.valueOf(fixedFreq.get(i)));
-        }
-        for(int i=8;i>0; i--){
-            if(fixedFreq.get(i-1) == 0){
-                Log.d("ArraySavedShowremove "+String.valueOf(i-1)+" : ",String.valueOf(fixedFreq.get(i-1)));
-                fixedFreq.remove(i-1);
-            }
-            else{Log.d("ArraySavedshowClear "+String.valueOf(i-1)+" : ",String.valueOf(fixedFreq.get(i-1)));}
-        }
-    }
-
-*/
-
     public void onStart() {
         Log.d(LOG_TAG , "onStart called");
         super.onStart();
@@ -487,13 +441,17 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             if(currentMeasure.getRMS()<-1){
                 if(currentMeasure.getRMS()<-2.5){
                     rmsText.setText(" < min");
+                    rmsBar.setBackgroundColor(colorEmpty);
                 }else{
                     rmsText.setText(" > max");
+                    rmsBar.setBackgroundColor(colorLimit);
+                    rmsBar.setWidth((int) getMySizeComparedToMax(5500));
                 }
             }else{
                 rmsText.setText(String.valueOf(currentMeasure.getRMS()) + " V/m");
+                rmsBar.setBackgroundColor(colorBar);
+                rmsBar.setWidth((int) getMySizeComparedToMax(currentMeasure.getRMS()));
             }
-            rmsBar.setWidth((int) getMySizeComparedToMax(currentMeasure.getRMS()));
 
 
             //set peak
@@ -502,13 +460,16 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             if(currentMeasure.getPeak()<-1){
                 if(currentMeasure.getPeak()<-2.5){
                     peakText.setText(" < min");
+                    peakBar.setBackgroundColor(colorEmpty);
                 }else{
                     peakText.setText(" > max");
+                    peakBar.setBackgroundColor(colorLimit);
+                    peakBar.setWidth((int) getMySizeComparedToMax(5500));
                 }
             }else{
                 peakText.setText(String.valueOf(currentMeasure.getPeak()) + " V/m");
+                peakBar.setBackgroundColor(colorBar);
             }
-            peakBar.setWidth((int) getMySizeComparedToMax(currentMeasure.getPeak()));
 
             return itemView;
         }
