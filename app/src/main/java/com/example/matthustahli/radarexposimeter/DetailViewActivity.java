@@ -8,7 +8,6 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,11 +15,9 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -31,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.LogRecord;
 
 import static java.lang.Math.log;
 
@@ -40,8 +36,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     private final String CHOOSENFREQ = "my_freq";
     ArrayList<Integer> fixedFreq= new ArrayList<Integer>();
     private ArrayAdapter<LiveMeasure> adapter;
-    Integer peak[]= {302, 400, -3, 100, 191, 305, -3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3, 254, 276, 131, 312, 116, 337, 457, 251, 330, 314, 201, 107, 235, 280, 470, 460, 394, 418, 378, 437, 260, 130, 449, 446, 277, 182, 240, 147, 316, 184, 350, 466, 441, 328, 411, 166, 127, 471, 248, 112, 226, 426, 319, 358, 149, 115, 408, 172, 436, 476, 361, 266, 366, 202, 375, 151, 171, 207, 106, 103, 224, 110, 410, 258, 297, 307, 209, 211, 262, 292, 370, 405, 417, 170, 220, 444, 176, 331, 190, 406, 430, 416, 494, 387, 348, 431, 246, 117, 145, 393, 129, 100, 447, 490, 404, 175, 395, 125, 478, 198, 159, 354, 452, 360, 162, 114, 433, 272, 222, 264, 458, 349, 329, 270, 438, 309, 100};
-    Integer rms[]= {4000, 1, 200, 3000, 400, 200, -2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2, 217, 126, 201, 118, 121, 199, 316, 310, 115, 361, 213, 196, 173, 114, 152, 480, 300, 285, 146, 194, 278, 353, 102, 179, 296, 182, 192, 272, 347, 407, 161, 448, 207, 256, 240, 253, 472, 153, 424, 323, 266, 185, 344, 484, 423, 134, 349, 209, 321, 269, 198, 302, 414, 254, 120, 224, 379, 488, 168, 382, 497, 359, 381, 243, 128, 410, 125, 291, 212, 276, 445, 474, 260, 362, 181, 372, 341, 401, 438, 406, 340, 113, 117, 363, 210, 178, 354, 314, 318, 384, 108, 400, 338, 233, 251, 208, 467, 479, 328, 288, 148, 216, 297, 265, 337, 249, 145, 174, 206, 277, 230, 171, 373, 186, 351, 376, 188, 315, 279, 331, 232, 100};
     private ArrayList<LiveMeasure> measures = new ArrayList<LiveMeasure>();
     Float maxPeak = 0f;
     Float maxRMS = 0f;
@@ -57,9 +51,9 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
 
     //TODO variablen für verbesserung
-    private int[] freq= new int[4];//frequencies are in MHz  //beinhaltet die zu betrachtenden frequenzen    //make switch funktion that deletes element at certain place and reorders them
-    private double[] rms1 = new double[4];
-    private double[] peak1 = new double[4];
+    private int[] freq= {0,0,0,0};//frequencies are in MHz  //beinhaltet die zu betrachtenden frequenzen    //make switch funktion that deletes element at certain place and reorders them
+    private double[] rms = new double[4];
+    private double[] peak = new double[4];
     private int freq_number = 4;        //tells how many freq are active.. the values of those freq are in freq, u to freq_number..
 
 
@@ -99,8 +93,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         initializeButtons();
         setButtonsOnClickListener();
         activateTouch();
-        activateEditText();
-        activateAddButton();
         activateValueUpdater(); // funktion von matthias für listenupdate alle x sec..
 
     }
@@ -160,7 +152,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         return maxSizeInVolt;
     }
 
-    public float getMySizeComparedToMax(Integer myValueIn){
+    public float getMySizeComparedToMax(double myValueIn){
         if(myValueIn<=1){ return 0;}
         double maxValue= log(modeMaxSize());
         double myValue = log(myValueIn);
@@ -242,10 +234,8 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         timer = new Timer();
         runnable = new Runnable(){
             public void run() {
-                size = measures.size();
-                final int index = counter % size;
-
-                measures.set(index, new LiveMeasure(fixedFreq.get(index), 0, rms[counter % rms.length], peak[counter % peak.length]));
+                final int index = counter % freq_number;
+                measures.set(index, new LiveMeasure(freq[index], rms[index], peak[index]));
                 adapter.notifyDataSetChanged();
                 counter++;
             }
@@ -311,64 +301,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 startActivity(intent);
             }
         });
-
-
-        //todo, update bar size
-        //long click on iten- mark to be deleted
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick( AdapterView<?> parent, View view, int position, long id) {
-
-                //option 1. relode list activity
-                measures.remove(position);          //take from list
-                //option 2. remove from data and from adapter
-                adapter.notifyDataSetChanged();     //update list
-                return true;        //true means, i  have handled the event and it should stop here.. if i put false, it will trigger a normal click when removing my finger.
-            }
-        });
-    }
-
-
-
-
-    //   ------------------------add new freq to list section----------------------------
-//lets me add frequency to my listview
-    private void activateEditText(){
-        EditText editText = (EditText) findViewById(R.id.edittext_new_freq);
-        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                ImageButton b_add_freq = (ImageButton) findViewById(R.id.b_add_freq_to_list);
-                b_add_freq.setVisibility(ImageButton.VISIBLE);
-            }
-        });
-
-    }
-
-    //adds the new freq to my list
-    private void activateAddButton() {
-
-        final ImageButton b_add_freq = (ImageButton) findViewById(R.id.b_add_freq_to_list);
-        b_add_freq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText editText = (EditText) findViewById(R.id.edittext_new_freq);
-                if(editText.length()!=0){
-                    int freq = Integer.parseInt(editText.getText().toString());
-                    //close if textview is empty or not in range
-                    if(0<= freq && freq<=130){
-                        measures.add(new LiveMeasure(freq,0,rms[freq],peak[freq]));
-                        adapter.notifyDataSetChanged();
-                    }else{
-                        Toast.makeText(DetailViewActivity.this,"OUT OF RANGE", Toast.LENGTH_SHORT).show();}
-                }
-                editText.getText().clear();
-                editText.clearFocus();
-                InputMethodManager inputManager = (InputMethodManager) DetailViewActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(DetailViewActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                b_add_freq.setVisibility(ImageButton.GONE);
-            }
-        });
     }
 
     //   ----------------------------------------------------------------------------------------------------
@@ -381,21 +313,23 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
     //fill arrayList with values
     private void populateMeasurements() {
-        for(int i = 0; i< fixedFreq.size();i++){
-            int freq = fixedFreq.get(i);
-            measures.add(new LiveMeasure( freq ,0,rms[freq], peak[freq]));
+        for(int i = 0; i< freq_number;i++){
+            measures.add(new LiveMeasure( freq[i],rms[i], peak[i]));
         }
     }
 
 
     // get choosen frequencies from OverViewPlot
-    private void getChoosenFreqFromIntent() {
+    synchronized private void getChoosenFreqFromIntent() {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         fixedFreq = bundle.getIntegerArrayList(CHOOSENFREQ);
-        //String hello = fixedFreq.toString();
-        //Toast.makeText(DetailViewActivity.this, hello, Toast.LENGTH_SHORT).show();
-        //get my mode
+        freq_number = fixedFreq.size();
+        for(int i=0;i<freq_number;i++){
+            int quicky = 500+ 100*fixedFreq.get(i);
+            freq[i]= quicky;   //updateActiveFrequency macht aus übergebener arrayposition die frequenz in GHZ->*1000 = MHz
+        }
+        Toast.makeText(this,String.valueOf(freq[0]),Toast.LENGTH_SHORT).show();
         myMode = intent.getStringExtra("MODE");
         if (myMode == "-21 dB")  attenuator = 1;
         else if (myMode == "LNA on")  attenuator = 3;
@@ -433,7 +367,8 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             //Fill the text views
             //set frequency
             TextView freqText = (TextView) itemView.findViewById(R.id.textview_freq);
-            freqText.setText(String.valueOf(updateActiveFrequency(currentMeasure.getFrequency())) + " GHz");
+            //double quicky = currentMeasure.getFrequency()*0.001;
+            freqText.setText(String.valueOf(GHz(currentMeasure.getFrequency())) + " GHz");
 
             //set median
             TextView rmsBar = (TextView) itemView.findViewById(R.id.textview_rms);
@@ -450,7 +385,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             }else{
                 rmsText.setText(String.valueOf(currentMeasure.getRMS()) + " V/m");
                 rmsBar.setBackgroundColor(colorBar);
-                rmsBar.setWidth((int) getMySizeComparedToMax(currentMeasure.getRMS()));
+                rmsBar.setWidth( (int) getMySizeComparedToMax(currentMeasure.getRMS()));
             }
 
 
@@ -469,6 +404,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             }else{
                 peakText.setText(String.valueOf(currentMeasure.getPeak()) + " V/m");
                 peakBar.setBackgroundColor(colorBar);
+                peakBar.setWidth((int) getMySizeComparedToMax(currentMeasure.getPeak()));
             }
 
             return itemView;
@@ -484,10 +420,10 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         sendBroadcast(intent);
     }
 
-    private double updateActiveFrequency(int position) {
-        double toShow = 0.5 + 0.1 * position;
-        toShow = Math.round(toShow * 10);  // runden auf ##.#
-        toShow = toShow / 10;
+    private double GHz(int MHz) {
+        double toShow = MHz/1000.0;
+        //toShow = Math.round(toShow * 10);  // runden auf ##.#
+       // toShow = toShow / 10;
         return toShow;
     }
 
@@ -498,12 +434,12 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
     private synchronized void updatePeak(double newPeak, int freq_in){
         int i = Arrays.binarySearch(freq, freq_in);
-        if (i < peak1.length && i >= 0) peak1[i] = newPeak;
+        if (i < peak.length && i >= 0) peak[i] = newPeak;
     }
 
     private synchronized void updateRMS(double newRMS, int freq_in){
         int i = Arrays.binarySearch(freq, freq_in);
-        if (i < rms1.length && i >= 0)rms1[i] = newRMS;
+        if (i < rms.length && i >= 0) rms[i] = newRMS;
     }
 
     public synchronized int readFreq_number(){
@@ -511,11 +447,11 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     }
 
     public synchronized double[] readPeak(){
-        return peak1;
+        return peak;
     }
 
     public synchronized double[] readRMS(){
-        return rms1;
+        return rms;
     }
 
     public synchronized int[] readFreq(){

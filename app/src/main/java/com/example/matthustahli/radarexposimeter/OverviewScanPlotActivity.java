@@ -561,7 +561,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         isBarToHigh = new boolean[anzahlBalken];
     }
 
-    synchronized public void makePlot() {
+    public void makePlot() {
         canvas.drawColor(Color.WHITE);
         canvas.drawRect(0,(float) (size.y*0.15),size.x,(float) (size.y*0.14),paintLimit);
         imageView.setImageBitmap(bitmap);

@@ -9,9 +9,8 @@ import android.support.v7.app.AppCompatActivity;
  */
 public class LiveMeasure extends AppCompatActivity implements Parcelable {
     private int frequency;
-    private int rawData;
-    private int rms;
-    private int peak;
+    private double rms;
+    private double peak;
 
 
 
@@ -19,9 +18,8 @@ public class LiveMeasure extends AppCompatActivity implements Parcelable {
     //this is my connection to get the data..
 
     //construct
-    public LiveMeasure(int frequency, int rawData, int rms, int peak){
+    public LiveMeasure(int frequency, double rms, double peak){
         this.frequency = frequency;
-        this.rawData = rawData;
         this.rms = rms;
         this.peak = peak;
 
@@ -30,7 +28,6 @@ public class LiveMeasure extends AppCompatActivity implements Parcelable {
 
     protected LiveMeasure(Parcel in) {
         frequency = in.readInt();
-        rawData = in.readInt();
         rms = in.readInt();
         peak = in.readInt();
     }
@@ -54,10 +51,10 @@ public class LiveMeasure extends AppCompatActivity implements Parcelable {
     public int getFrequency(){
         return frequency;
     }
-    public int getRMS(){
+    public double getRMS(){
         return rms;
     }
-    public int getPeak(){
+    public double getPeak(){
         return peak;
     }
 
@@ -69,9 +66,8 @@ public class LiveMeasure extends AppCompatActivity implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(frequency);
-        dest.writeInt(rawData);
-        dest.writeInt(rms);
-        dest.writeInt(peak);
+        dest.writeDouble(rms);
+        dest.writeDouble(peak);
     }
 
 
