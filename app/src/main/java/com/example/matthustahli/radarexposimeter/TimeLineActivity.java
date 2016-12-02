@@ -87,7 +87,6 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         activateOnclickListener();
         ActivateTouchOnPlot();
         SetUpValuesForPlot();
-        makePlot();
     }
 
     public void onStart() {
@@ -225,6 +224,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         lastValuePeak= (float) readPeak();
         lastValueRms= (float) readRMS();
         Log.d("Timeline peak", String.valueOf(lastValuePeak));
+        Log.d("Timeline rms", String.valueOf(lastValueRms));
         //delet bar first
         canvas.drawRect(LargePeakBars.getLeft(next), 0, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintEmpty);
         //draw the bar
