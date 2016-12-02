@@ -25,17 +25,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import static java.lang.Math.log;
+import static java.lang.Math.random;
 
 public class TimeLineActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Integer counterB=0, anzahlBalken=30, activeBar;
+    Integer anzahlBalken=20, activeBar;
     Button b_modeNormal,b_mode21dB, b_mode42dB,b_mode_accumulation,b_switchMode;
     ImageButton b_settings;
     TextView tv_status;
@@ -43,8 +41,6 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     String myMode;
     Animation animationSlideDown;
     double[] qickFixArray;
-    Integer peak[]= {302, 400, 6000, 100, 191, 305, 256, 385, 119, 403, 304, 252, 152, 243, 254, 276, 131, 312, 116, 337, 457, 251, 330, 314, 201, 107, 235, 280, 470, 460, 394, 418, 378, 437, 260, 130, 449, 446, 277, 182, 240, 147, 316, 184, 350, 466, 441, 328, 411, 166, 127, 471, 248, 112, 226, 426, 319, 358, 149, 115, 408, 172, 436, 476, 361, 266, 366, 202, 375, 151, 171, 207, 106, 103, 224, 110, 410, 258, 297, 307, 209, 211, 262, 292, 370, 405, 417, 170, 220, 444, 176, 331, 190, 406, 430, 416, 494, 387, 348, 431, 246, 117, 145, 393, 129, 100, 447, 490, 404, 175, 395, 125, 478, 198, 159, 354, 452, 360, 162, 114, 433, 272, 222, 264, 458, 349, 329, 270, 438, 309, 100};
-    Integer rms[]= {4000, 1, 200, 3000, 400, 200, 100, 10, 371, 217, 126, 201, 118, 121, 199, 316, 310, 115, 361, 213, 196, 173, 114, 152, 480, 300, 285, 146, 194, 278, 353, 102, 179, 296, 182, 192, 272, 347, 407, 161, 448, 207, 256, 240, 253, 472, 153, 424, 323, 266, 185, 344, 484, 423, 134, 349, 209, 321, 269, 198, 302, 414, 254, 120, 224, 379, 488, 168, 382, 497, 359, 381, 243, 128, 410, 125, 291, 212, 276, 445, 474, 260, 362, 181, 372, 341, 401, 438, 406, 340, 113, 117, 363, 210, 178, 354, 314, 318, 384, 108, 400, 338, 233, 251, 208, 467, 479, 328, 288, 148, 216, 297, 265, 337, 249, 145, 174, 206, 277, 230, 171, 373, 186, 351, 376, 188, 315, 279, 331, 232, 100};
     private int attenuator;
     private int device_id;
     final String LOG_TAG = "Timeline";
@@ -62,23 +58,23 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     //variables for plot
     Rectangle coord;
     Display display;
-    int colorFix, colorBar, colorActive, colorLimit ;
+    int colorFix, colorBar, colorActive, colorLimit, colorEmpty;
     double abstandZwischenBalken =5.0; //5dp
-    Paint paintFix, paintBar, paintActive, paintLimit;
+    Paint paintFix, paintBar, paintActive, paintLimit,paintEmpty;
     ImageView imageView;
     Bitmap bitmap;
     Canvas canvas;
     Point size;
-    double scaleY = 0.8;
+    double scaleY = 0.9;
     double scaleX = 0.9;
-    float lastValue =0,maxHight;
     double maxPlot, minPlot;
+    float lastValuePeak,lastValueRms,maxHight;
 
     //valiables for data exchange
     private char measurement_type = 'P';
     int freq;//frequencies are in MHz  //beinhaltet die zu betrachtenden frequenzen    //make switch funktion that deletes element at certain place and reorders them
-    double rms1;
-    double peak1;
+    double rms;
+    double peak;
 
 
 
@@ -129,11 +125,13 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         myMode = intent.getStringExtra("myMode");
         freq = intent.getIntExtra("frequency",0);
         freq = 500 + freq*100;        //freq = value of freq MHz;
+        Log.d("Timeline freq", String.valueOf(freq));
         measurement_type = intent.getCharExtra("type", 'P');
+        modeMaxSize();
     }
 
 
-    private void makePlot() {
+    /*private void makePlot() {
         if (timer != null){
             timer.cancel();
         }
@@ -164,9 +162,11 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                 handler.post(runnable);
             }
         },0,500);  // time when new bar appears.
-    }
+    }*/
 
-    public float modeMaxSize(){
+
+
+    public void modeMaxSize(){
         int maxSizeInVolt=0;
         switch (myMode){
             case "normal mode":
@@ -182,27 +182,8 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                 maxSizeInVolt=5;
                 break;
         }
-        return (float) log(maxSizeInVolt);
+        maxHight= (float) log(maxSizeInVolt);
     }
-
-
-    private float CalcBarHight() {
-       double value;
-       if (measurement_type == 'R') {
-           value = readRMS();
-       }else {
-           value = readPeak();
-       }
-       if(value<=1) {
-           return (float) (size.y); // empty size
-       }
-       if(value >= maxHight) {
-           return (float) (size.y - size.y * scaleY); //full size
-       }else{
-           return (float) (size.y - log(value)/maxHight*size.y*scaleY);
-       }
-    }
-
 
     public void SetUpValuesForPlot() {
         qickFixArray = new double[anzahlBalken];
@@ -216,10 +197,15 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         paintBar = new Paint();
         paintActive= new Paint();
         paintLimit= new Paint();
+        paintEmpty= new Paint();
         colorFix = TimeLineActivity.this.getResources().getColor(R.color.fixedBar);
         colorBar = TimeLineActivity.this.getResources().getColor(R.color.normalBar);
         colorActive = TimeLineActivity.this.getResources().getColor(R.color.activeBar);
         colorLimit = TimeLineActivity.this.getResources().getColor(R.color.limitBar);
+        //colorEmpty= Color.WHITE;
+        colorEmpty =TimeLineActivity.this.getResources().getColor(R.color.background);
+        paintEmpty.setColor(colorEmpty);
+        paintEmpty.setStyle(Paint.Style.FILL);
         paintFix.setColor(colorFix);
         paintLimit.setColor(colorLimit);
         paintFix.setStyle(Paint.Style.FILL);
@@ -229,6 +215,40 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         paintActive.setStyle(Paint.Style.FILL);
         canvas = new Canvas(bitmap);
         coord = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, qickFixArray, myMode, scaleX, scaleY);
+    }
+
+    synchronized private void makePlot(){
+        int next = counter %anzahlBalken;
+        lastValuePeak= (float) readPeak();
+        lastValueRms= (float) readRMS();
+        lastValuePeak= (float) random()*1000;
+        lastValueRms=lastValuePeak-100;
+        Log.d("Timeline peak", String.valueOf(lastValuePeak));
+        //delet bar first
+        canvas.drawRect(coord.getLeft(next), 0, coord.getRight(next), coord.getBottom(next), paintEmpty);
+
+
+        //draw the bar
+        if(lastValuePeak<-1){
+            if(lastValuePeak<-2.5){}
+            else{
+                lastValuePeak = (float) (size.y- size.y* scaleY); //full size
+                canvas.drawRect(coord.getLeft(next), lastValuePeak, coord.getRight(next), coord.getBottom(next), paintFix);
+            }
+        }else{
+            lastValuePeak = (float) (size.y - log(lastValuePeak)/maxHight*size.y*scaleY);
+            canvas.drawRect(coord.getLeft(next), lastValuePeak, coord.getRight(next), coord.getBottom(next), paintFix);
+            lastValueRms = (float) (size.y - log(lastValueRms)/maxHight*size.y*scaleY);
+            canvas.drawRect(coord.getLeft(next), lastValueRms, coord.getRight(next), coord.getBottom(next), paintBar);
+        }
+        imageView.setImageBitmap(bitmap);
+        counter++;
+    }
+
+    synchronized private void resetPlotToBeginning(){
+        canvas.drawColor(Color.WHITE);
+        imageView.setImageBitmap(bitmap);
+        counter=0;
     }
 
     private void initalizeButtonsAndIcons() {
@@ -257,22 +277,26 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
             case R.id.b_mode_normal:
                 myMode = "normal mode";
                 settings.setVisibility(LinearLayout.GONE);
-                makePlot();
+                modeMaxSize();
+                resetPlotToBeginning();
                 break;
             case R.id.b_mode_21db:
                 myMode = "-21 dB";
                 settings.setVisibility(LinearLayout.GONE);
-                makePlot();
+                modeMaxSize();
+                resetPlotToBeginning();
                 break;
             case R.id.b_mode_42db:
                 myMode = "-42 dB";
                 settings.setVisibility(LinearLayout.GONE);
-                makePlot();
+                modeMaxSize();
+                resetPlotToBeginning();
                 break;
             case R.id.b_mode_LNA:
                 myMode = "LNA on";
                 settings.setVisibility(LinearLayout.GONE);
-                makePlot();
+                modeMaxSize();
+                resetPlotToBeginning();
                 break;
             case R.id.setting_button:
                 if (settings.getVisibility() == LinearLayout.VISIBLE) {
@@ -281,7 +305,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                     settings.setVisibility(LinearLayout.VISIBLE);
                 }
                 break;
-            case R.id.switch_to_peak:
+           /* case R.id.switch_to_peak:
                 if(measurement_type == 'R'){
                     measurement_type = 'P';
                     tv_status.setText("Peak");
@@ -293,7 +317,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                     b_switchMode.setText("Peak");
                     makePlot();
                 }
-                break;
+                break;*/
         }
     }
 
@@ -389,19 +413,19 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
 
 
     private synchronized void updatePeak(double newPeak){
-        peak1 = newPeak;
+        peak = newPeak;
     }
 
     private synchronized void updateRMS(double newRMS){
-        rms1 = newRMS;
+        rms = newRMS;
     }
 
     public synchronized double readPeak(){
-        return peak1;
+        return peak;
     }
 
     public synchronized double readRMS(){
-        return rms1;
+        return rms;
     }
 
     public synchronized int readFreq(){
@@ -454,6 +478,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                         double peak = calibration.get_peak(attenuator, freq, peak_exposi);
                         updatePeak(peak);
                         updateRMS(rms);
+                        makePlot();
                     }
                 }
                 else if (new String(split_packet(4, 7, orgData)).equals("EROR")){
