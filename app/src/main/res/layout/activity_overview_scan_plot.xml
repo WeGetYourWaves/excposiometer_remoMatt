@@ -4,7 +4,9 @@
     android:id="@+id/activity_overview_scan_plot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.matthustahli.radarexposimeter.OverviewScanPlotActivity">
+    tools:context="com.example.matthustahli.radarexposimeter.OverviewScanPlotActivity"
+    android:background="@color/background"
+    >
 
 
     <ImageView

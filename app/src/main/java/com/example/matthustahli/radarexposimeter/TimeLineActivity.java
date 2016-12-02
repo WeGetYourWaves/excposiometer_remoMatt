@@ -56,7 +56,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     //int size;
 
     //variables for plot
-    Rectangle coord;
+    Rectangle LargePeakBars, SmallRMSBars;
     Display display;
     int colorFix, colorBar, colorActive, colorLimit, colorEmpty;
     double abstandZwischenBalken =5.0; //5dp
@@ -214,32 +214,29 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         paintActive.setColor(colorActive);
         paintActive.setStyle(Paint.Style.FILL);
         canvas = new Canvas(bitmap);
-        coord = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, qickFixArray, myMode, scaleX, scaleY);
+        LargePeakBars = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, qickFixArray, myMode, scaleX, scaleY);
+        SmallRMSBars = new Rectangle(anzahlBalken, abstandZwischenBalken+16, size.x, size.y, qickFixArray, myMode, scaleX, scaleY);
     }
 
     synchronized private void makePlot(){
         int next = counter %anzahlBalken;
-        lastValuePeak= (float) readPeak();
-        lastValueRms= (float) readRMS();
-        lastValuePeak= (float) random()*1000;
-        lastValueRms=lastValuePeak-100;
+        lastValuePeak= (float) readPeak()+ (float) random()*1000;
+        lastValueRms= (float) readRMS()+(float) random()*100;
         Log.d("Timeline peak", String.valueOf(lastValuePeak));
         //delet bar first
-        canvas.drawRect(coord.getLeft(next), 0, coord.getRight(next), coord.getBottom(next), paintEmpty);
-
-
+        canvas.drawRect(LargePeakBars.getLeft(next), 0, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintEmpty);
         //draw the bar
         if(lastValuePeak<-1){
             if(lastValuePeak<-2.5){}
             else{
                 lastValuePeak = (float) (size.y- size.y* scaleY); //full size
-                canvas.drawRect(coord.getLeft(next), lastValuePeak, coord.getRight(next), coord.getBottom(next), paintFix);
+                canvas.drawRect(LargePeakBars.getLeft(next), lastValuePeak, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintLimit);
             }
         }else{
             lastValuePeak = (float) (size.y - log(lastValuePeak)/maxHight*size.y*scaleY);
-            canvas.drawRect(coord.getLeft(next), lastValuePeak, coord.getRight(next), coord.getBottom(next), paintFix);
+            canvas.drawRect(LargePeakBars.getLeft(next), lastValuePeak, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintBar);
             lastValueRms = (float) (size.y - log(lastValueRms)/maxHight*size.y*scaleY);
-            canvas.drawRect(coord.getLeft(next), lastValueRms, coord.getRight(next), coord.getBottom(next), paintBar);
+            canvas.drawRect(SmallRMSBars.getLeft(next), lastValueRms, SmallRMSBars.getRight(next), SmallRMSBars.getBottom(next), paintActive);
         }
         imageView.setImageBitmap(bitmap);
         counter++;
@@ -348,40 +345,6 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                 return true; //true= we handled the event!!
             }
         });
-    }
-
-    //gets position from coordinates
-    public int returnPosition(int x) {
-        int i = 0;
-        int fromLeftToRight = (int) coord.getLeft(i);
-        while (fromLeftToRight < x) {
-            if (i == anzahlBalken) {        //boundary condition on right edge
-                return i;
-            }
-            i++;
-            fromLeftToRight = (int) coord.getLeft(i);
-        }
-        if (i <= 0) {       //boundary condition on left edge
-            return 0;
-        }
-        return i - 1;
-    }
-
-    //change color of only one bar and sets up textview
-    public void changeBarColorToActiv(int position) {
-        //desactivate last visited bar
-        changeBarColorToNOTactiv(activeBar);
-        activeBar = position;       //with this position we can also use the add button to put it in a list!
-        //update textview
-        //set color to active
-        canvas.drawRect(coord.getLeft(position), coord.getTop(position), coord.getRight(position), coord.getBottom(position), paintActive);
-        imageView.setImageBitmap(bitmap);
-    }
-
-    //changes Bar back to gray color
-    private void changeBarColorToNOTactiv(Integer position) {
-        canvas.drawRect(coord.getLeft(position), coord.getTop(position), coord.getRight(position), coord.getBottom(position), paintBar);
-        imageView.setImageBitmap(bitmap);
     }
 
     //handles the allert bar, for example when connection is lost.
