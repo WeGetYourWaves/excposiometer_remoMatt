@@ -609,8 +609,13 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
 
                     double rms = calibration.get_rms(attenuator,freq, rms_exposi);
                     double peak = calibration.get_peak(attenuator, freq, peak_exposi);
-                    updatePeak(peak, freq);
-                    updateRMS(rms, freq);
+                    if (peak != -1){
+                        updatePeak(peak, freq);
+                    }
+                    if(rms != -1){
+                        updateRMS(rms, freq);
+
+                    }
                     makePlot();
                 }
             }
