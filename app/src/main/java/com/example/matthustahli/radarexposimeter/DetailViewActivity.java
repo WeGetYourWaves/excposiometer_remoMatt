@@ -194,11 +194,16 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void onClick(View v) {
+        View_Packet_Trigger viewStop = new View_Packet_Trigger(device_id, attenuator, (char) 0);
 
         switch (v.getId()) {
             case R.id.b_mode_normal:
+                attenuator = 0;
                 myMode = "normal mode";
                 closeSettingLayoutAndUpdateList();
+                sendTrigger(viewStop.get_packet());
+                View_Packet_Trigger view_packet_trigger0 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
+                sendTrigger(view_packet_trigger0.get_packet());
                 Toast.makeText(this, "normal", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.b_mode_21db:
@@ -297,7 +302,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 Intent intent = new Intent(DetailViewActivity.this, TimeLineActivity.class);
                 intent.putExtra("frequency" ,chosenFrequency.getFrequency());
                 intent.putExtra("myMode",myMode);
-                intent.putExtra("type", measurement_type);
                 startActivity(intent);
             }
         });
@@ -335,7 +339,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         else if (myMode == "LNA on")  attenuator = 3;
         else if(myMode == "normal mode")   attenuator = 0;
         else attenuator = 2;
-        measurement_type = intent.getCharExtra("type", 'P');
         Toast.makeText(DetailViewActivity.this,myMode,Toast.LENGTH_SHORT).show();
     }
 

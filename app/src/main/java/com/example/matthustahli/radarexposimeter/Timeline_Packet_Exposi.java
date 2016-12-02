@@ -88,7 +88,7 @@ public class Timeline_Packet_Exposi extends Packet_Exposimeter{
     }
 
     public int get_rawData_peak(){
-        return byteArray_to_int(get_rawData_rmsB());
+        return byteArray_to_int(get_rawData_peakB());
     }
 
     public byte[] get_reserved(){return split_packet(33, 48);}

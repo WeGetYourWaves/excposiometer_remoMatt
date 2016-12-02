@@ -29,7 +29,6 @@ import java.util.Arrays;
 import java.util.Timer;
 
 import static java.lang.Math.log;
-import static java.lang.Math.random;
 
 public class TimeLineActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -67,11 +66,11 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     Point size;
     double scaleY = 0.9;
     double scaleX = 0.9;
-    double maxPlot, minPlot;
+    double maxPlotR, minPlotR, maxPlotP, minPlotP;
     float lastValuePeak,lastValueRms,maxHight;
 
     //valiables for data exchange
-    private char measurement_type = 'P';
+    private char measurement_type = 'A';
     int freq;//frequencies are in MHz  //beinhaltet die zu betrachtenden frequenzen    //make switch funktion that deletes element at certain place and reorders them
     double rms;
     double peak;
@@ -123,10 +122,13 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     public void getSettingsFromIntent() {
         Intent intent = getIntent();
         myMode = intent.getStringExtra("myMode");
+        if (myMode == "-21 dB")  attenuator = 1;
+        else if (myMode == "LNA on")  attenuator = 3;
+        else if(myMode == "normal mode")   attenuator = 0;
+        else attenuator = 2;
         freq = intent.getIntExtra("frequency",0);
         //freq = 500 + freq*100;        //freq = value of freq MHz;
         Log.d("Timeline freq", String.valueOf(freq));
-        measurement_type = intent.getCharExtra("type", 'P');
         modeMaxSize();
     }
 
@@ -220,8 +222,8 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
 
     synchronized private void makePlot(){
         int next = counter %anzahlBalken;
-        lastValuePeak= (float) readPeak()+ (float) random()*1000;
-        lastValueRms= (float) readRMS()+(float) random()*100;
+        lastValuePeak= (float) readPeak();
+        lastValueRms= (float) readRMS();
         Log.d("Timeline peak", String.valueOf(lastValuePeak));
         //delet bar first
         canvas.drawRect(LargePeakBars.getLeft(next), 0, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintEmpty);
@@ -270,9 +272,14 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
+        Timeline_Packet_Trigger timeStop = new Timeline_Packet_Trigger(device_id, attenuator, freq, (char) 0);
         switch (v.getId()){
             case R.id.b_mode_normal:
                 myMode = "normal mode";
+                attenuator = 0;
+                sendTrigger(timeStop.get_packet());
+                Timeline_Packet_Trigger timeline_packet_trigger0 = new Timeline_Packet_Trigger(device_id, attenuator, freq, measurement_type);
+                sendTrigger(timeline_packet_trigger0.get_packet());
                 settings.setVisibility(LinearLayout.GONE);
                 modeMaxSize();
                 resetPlotToBeginning();
@@ -436,7 +443,10 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                     if (freq_exp == freq){
                         int rms_exposi = packetExposi.get_rawData_rms();
                         int peak_exposi = packetExposi.get_rawData_peak();
-
+                        maxPlotP = calibration.get_maxPlot(attenuator, 'P');
+                        minPlotP = calibration.get_maxPlot(attenuator, 'P');
+                        maxPlotR = calibration.get_maxPlot(attenuator, 'P');
+                        minPlotR = calibration.get_minPlot(attenuator, 'R');
                         double rms = calibration.get_rms(attenuator,freq, rms_exposi);
                         double peak = calibration.get_peak(attenuator, freq, peak_exposi);
                         updatePeak(peak);

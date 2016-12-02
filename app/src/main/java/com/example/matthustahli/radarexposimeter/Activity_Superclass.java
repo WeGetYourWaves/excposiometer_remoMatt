@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Created by Remo on 20.10.2016.
  */
-public class Activity_Superclass implements Serializable{
+public class Activity_Superclass implements Serializable {
 
     public Calibration cali_NormRMS;
     public Calibration cali_NormPeak;
@@ -19,34 +19,89 @@ public class Activity_Superclass implements Serializable{
     public Calibration cali_LNA_RMS;
     public Calibration cali_LNA_Peak;
 
-    Activity_Superclass (byte [] caliPack) {
+    Activity_Superclass(byte[] caliPack) {
         init_tables(caliPack);
     }
 
-    public double get_rms(int attenuator, int freq, int rms_exposi){
-        if (attenuator == 0){
+    public double get_rms(int attenuator, int freq, int rms_exposi) {
+        if (attenuator == 0) {
             return cali_NormRMS.get_field_strength(freq, rms_exposi);
-        }
-        else if (attenuator == 1){
+        } else if (attenuator == 1) {
             return cali_att21RMS.get_field_strength(freq, rms_exposi);
-        }
-        else if (attenuator == 2){
+        } else if (attenuator == 2) {
             return cali_att42RMS.get_field_strength(freq, rms_exposi);
-        }
-        else return cali_LNA_RMS.get_field_strength(freq, rms_exposi);
+        } else return cali_LNA_RMS.get_field_strength(freq, rms_exposi);
     }
 
-    public double get_peak(int attenuator, int freq, int peak_exposi){
-        if (attenuator == 0){
+    public double get_peak(int attenuator, int freq, int peak_exposi) {
+        if (attenuator == 0) {
             return cali_NormPeak.get_field_strength(freq, peak_exposi);
-        }
-        else if (attenuator == 1){
+        } else if (attenuator == 1) {
             return cali_att21Peak.get_field_strength(freq, peak_exposi);
-        }
-        else if (attenuator == 2){
+        } else if (attenuator == 2) {
             return cali_att42Peak.get_field_strength(freq, peak_exposi);
+        } else return cali_LNA_Peak.get_field_strength(freq, peak_exposi);
+    }
+
+    public int get_maxPlot(int attenuator, char measurement_type) {
+        int length;
+        if (measurement_type == 'P') {
+            if (attenuator == 0) {
+                length = cali_NormPeak.strength_indexes;
+                return cali_NormPeak.cali_table[0][length];
+            } else if (attenuator == 1) {
+                length = cali_att21Peak.strength_indexes;
+                return cali_att21Peak.cali_table[0][length];
+            } else if (attenuator == 2) {
+                length = cali_att42Peak.strength_indexes;
+                return cali_att42Peak.cali_table[0][length];
+            } else if (attenuator == 3) {
+                length = cali_LNA_Peak.strength_indexes;
+                return cali_LNA_Peak.cali_table[0][length];
+            }
         }
-        else return cali_LNA_Peak.get_field_strength(freq, peak_exposi);
+        if (measurement_type == 'R') {
+            if (attenuator == 0) {
+                length = cali_NormRMS.strength_indexes;
+                return cali_NormRMS.cali_table[0][length];
+            } else if (attenuator == 1) {
+                length = cali_att21RMS.strength_indexes;
+                return cali_att21RMS.cali_table[0][length];
+            } else if (attenuator == 2) {
+                length = cali_att42RMS.strength_indexes;
+                return cali_att42RMS.cali_table[0][length];
+            } else if (attenuator == 3) {
+                length = cali_LNA_RMS.strength_indexes;
+                return cali_LNA_RMS.cali_table[0][length];
+            }
+        }
+        return -1;
+    }
+
+    public int get_minPlot(int attenuator, char measurement_type) {
+        if (measurement_type == 'P') {
+            if (attenuator == 0) {
+                return cali_NormPeak.cali_table[0][1];
+            } else if (attenuator == 1) {
+                return cali_att21Peak.cali_table[0][1];
+            } else if (attenuator == 2) {
+                return cali_att42Peak.cali_table[0][1];
+            } else if (attenuator == 3) {
+                return cali_LNA_Peak.cali_table[0][1];
+            }
+        }
+        if (measurement_type == 'R') {
+            if (attenuator == 0) {
+                return cali_NormRMS.cali_table[0][1];
+            } else if (attenuator == 1) {
+                return cali_att21RMS.cali_table[0][1];
+            } else if (attenuator == 2) {
+                return cali_att42RMS.cali_table[0][1];
+            } else if (attenuator == 3) {
+                return cali_LNA_RMS.cali_table[0][1];
+            }
+        }
+        return -1;
     }
 
     public void init_tables(byte[] packet_in){
