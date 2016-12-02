@@ -74,7 +74,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     Animation animationSlideDown;
     Button b_normal, b_21dB, b_41dB, b_accu, b_peak;
     ImageButton b_settings, addButton, clearButton, refreshButton, nextButton;
-    double maxPlotP, minPlotP, maxPlotR, minPlotR;
+    double maxPlot, minPlot;
 
 //----------------------------------------------------------------------
 
@@ -225,6 +225,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         switch (v.getId()) {
             case R.id.b_mode_normal:
                 attenuator = 0;
+                change_MinMaxPlot();
                 myMode = "normal mode";
                 //makePlot();
                 settings.setVisibility(LinearLayout.GONE);
@@ -237,6 +238,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
             case R.id.b_mode_21db:
                 myMode = "-21 dB";
                 attenuator = 1;
+                change_MinMaxPlot();
                 //makePlot();
                 settings.setVisibility(LinearLayout.GONE);
                 Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
@@ -248,6 +250,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
             case R.id.b_mode_42db:
                 myMode = "-42 dB";
                 attenuator = 2;
+                change_MinMaxPlot();
                 //makePlot();
 
                 settings.setVisibility(LinearLayout.GONE);
@@ -261,6 +264,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
             case R.id.b_mode_LNA:
                 myMode = "LNA on";
                 attenuator = 3;
+                change_MinMaxPlot();
                 //makePlot();
                 settings.setVisibility(LinearLayout.GONE);
                 Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
@@ -272,6 +276,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
             case R.id.switch_to_peak:
                 if (measurement_type == 'P')    measurement_type = 'R';
                 else measurement_type = 'P';
+                change_MinMaxPlot();
 
                 //downOrUp: 0=godown, 1=goup
                 //handlesActivatingDropDown(clickCounterStatusPlot%2); // to show connection bar
@@ -634,6 +639,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                     Cal_Packet_Exposi cal_packet_exposi = new Cal_Packet_Exposi(orgData);
                     device_id = cal_packet_exposi.get_device_id();
                     calibration = new Activity_Superclass(orgData);
+                    change_MinMaxPlot();
                     Log.d(LOG_TAG, "saved Calibration Tables");
 
                     View_Packet_Trigger view_packet_trigger = new View_Packet_Trigger(device_id, attenuator, measurement_type);
@@ -651,10 +657,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
 
                     double rms = calibration.get_rms(attenuator,freq, rms_exposi);
                     double peak = calibration.get_peak(attenuator, freq, peak_exposi);
-                    maxPlotP = calibration.get_maxPlot(attenuator, 'P');
-                    minPlotP = calibration.get_maxPlot(attenuator, 'P');
-                    maxPlotR = calibration.get_maxPlot(attenuator, 'P');
-                    minPlotR = calibration.get_minPlot(attenuator, 'R');
+
                     if (peak != -1){
                         updatePeak(peak, freq);
                     }
@@ -702,6 +705,11 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     public synchronized void flushArrays() {
         Arrays.fill(rms, 0);
         Arrays.fill(peak, 0);
+    }
+
+    public void change_MinMaxPlot(){
+        maxPlot = calibration.get_maxPlot(attenuator, measurement_type);
+        minPlot = calibration.get_minPlot(attenuator, measurement_type);
     }
 }
 

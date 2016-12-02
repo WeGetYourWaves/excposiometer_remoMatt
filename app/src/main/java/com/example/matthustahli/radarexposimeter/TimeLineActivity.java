@@ -66,11 +66,11 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     Point size;
     double scaleY = 0.9;
     double scaleX = 0.9;
-    double maxPlotR, minPlotR, maxPlotP, minPlotP;
+    double minPlot, maxPlot;
     float lastValuePeak,lastValueRms,maxHight;
 
     //valiables for data exchange
-    private char measurement_type = 'A';
+    private final static char measurement_type = 'A';
     int freq;//frequencies are in MHz  //beinhaltet die zu betrachtenden frequenzen    //make switch funktion that deletes element at certain place and reorders them
     double rms;
     double peak;
@@ -277,6 +277,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
             case R.id.b_mode_normal:
                 myMode = "normal mode";
                 attenuator = 0;
+                change_MinMaxPlot();
                 sendTrigger(timeStop.get_packet());
                 Timeline_Packet_Trigger timeline_packet_trigger0 = new Timeline_Packet_Trigger(device_id, attenuator, freq, measurement_type);
                 sendTrigger(timeline_packet_trigger0.get_packet());
@@ -287,6 +288,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
             case R.id.b_mode_21db:
                 myMode = "-21 dB";
                 attenuator = 1;
+                change_MinMaxPlot();
                 sendTrigger(timeStop.get_packet());
                 Timeline_Packet_Trigger timeline_packet_trigger1 = new Timeline_Packet_Trigger(device_id, attenuator, freq, measurement_type);
                 sendTrigger(timeline_packet_trigger1.get_packet());
@@ -297,6 +299,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
             case R.id.b_mode_42db:
                 myMode = "-42 dB";
                 attenuator = 2;
+                change_MinMaxPlot();
                 sendTrigger(timeStop.get_packet());
                 Timeline_Packet_Trigger timeline_packet_trigger2 = new Timeline_Packet_Trigger(device_id, attenuator, freq, measurement_type);
                 sendTrigger(timeline_packet_trigger2.get_packet());
@@ -307,6 +310,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
             case R.id.b_mode_LNA:
                 myMode = "LNA on";
                 attenuator = 3;
+                change_MinMaxPlot();
                 sendTrigger(timeStop.get_packet());
                 Timeline_Packet_Trigger timeline_packet_trigger3 = new Timeline_Packet_Trigger(device_id, attenuator, freq, measurement_type);
                 sendTrigger(timeline_packet_trigger3.get_packet());
@@ -440,6 +444,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                     Cal_Packet_Exposi cal_packet_exposi = new Cal_Packet_Exposi(orgData);
                     device_id = cal_packet_exposi.get_device_id();
                     calibration = new Activity_Superclass(orgData);
+                    change_MinMaxPlot();
                     Log.d(LOG_TAG, "saved Calibration Tables");
 
                     Timeline_Packet_Trigger timeline_packet_trigger = new Timeline_Packet_Trigger(device_id, attenuator, freq, measurement_type);
@@ -455,10 +460,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                     if (freq_exp == freq){
                         int rms_exposi = packetExposi.get_rawData_rms();
                         int peak_exposi = packetExposi.get_rawData_peak();
-                        maxPlotP = calibration.get_maxPlot(attenuator, 'P');
-                        minPlotP = calibration.get_maxPlot(attenuator, 'P');
-                        maxPlotR = calibration.get_maxPlot(attenuator, 'P');
-                        minPlotR = calibration.get_minPlot(attenuator, 'R');
+
                         double rms = calibration.get_rms(attenuator,freq, rms_exposi);
                         double peak = calibration.get_peak(attenuator, freq, peak_exposi);
 
@@ -506,6 +508,11 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
         intent.putExtra(CommunicationService.TRIGGER_Act2Serv, TriggerPack);
         sendBroadcast(intent);
+    }
+
+    public void change_MinMaxPlot(){
+        maxPlot = calibration.get_maxPlot(attenuator, 'P');
+        minPlot = calibration.get_minPlot(attenuator, 'P');
     }
 
 }

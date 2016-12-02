@@ -42,7 +42,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     String myMode;
     private int attenuator;
     private int device_id;
-    private char measurement_type = 'P';
+    private static final char measurement_type = 'A';
     Timer timer;
     final String LOG_TAG = "DetailView";
     DetailViewActivityReceiver detailViewActivityReceiver = new DetailViewActivityReceiver(LOG_TAG);
@@ -194,31 +194,47 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void onClick(View v) {
-        View_Packet_Trigger viewStop = new View_Packet_Trigger(device_id, attenuator, (char) 0);
+        DetailView_Packet_Trigger DetViewStop = new DetailView_Packet_Trigger(device_id, attenuator, freq, (char) 0);
 
         switch (v.getId()) {
             case R.id.b_mode_normal:
                 attenuator = 0;
                 myMode = "normal mode";
+                change_MinMaxPlot();
                 closeSettingLayoutAndUpdateList();
-                sendTrigger(viewStop.get_packet());
-                View_Packet_Trigger view_packet_trigger0 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
-                sendTrigger(view_packet_trigger0.get_packet());
+                sendTrigger(DetViewStop.get_packet());
+                DetailView_Packet_Trigger detailView_packet_trigger0 = new DetailView_Packet_Trigger(device_id, attenuator, freq, measurement_type);
+                sendTrigger(detailView_packet_trigger0.get_packet());
                 Toast.makeText(this, "normal", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.b_mode_21db:
+                attenuator = 1;
                 myMode = "-21 dB";
+                change_MinMaxPlot();
                 closeSettingLayoutAndUpdateList();
+                sendTrigger(DetViewStop.get_packet());
+                DetailView_Packet_Trigger detailView_packet_trigger1 = new DetailView_Packet_Trigger(device_id, attenuator, freq, measurement_type);
+                sendTrigger(detailView_packet_trigger1.get_packet());
                 Toast.makeText(this, "21 dB", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.b_mode_42db:
+                attenuator = 2;
                 myMode = "-42 dB";
+                change_MinMaxPlot();
                 closeSettingLayoutAndUpdateList();
+                sendTrigger(DetViewStop.get_packet());
+                DetailView_Packet_Trigger detailView_packet_trigger2 = new DetailView_Packet_Trigger(device_id, attenuator, freq, measurement_type);
+                sendTrigger(detailView_packet_trigger2.get_packet());
                 Toast.makeText(this, "42 dB", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.b_mode_LNA:
+                attenuator = 3;
                 myMode = "LNA on";
+                change_MinMaxPlot();
                 closeSettingLayoutAndUpdateList();
+                sendTrigger(DetViewStop.get_packet());
+                DetailView_Packet_Trigger detailView_packet_trigger3 = new DetailView_Packet_Trigger(device_id, attenuator, freq, measurement_type);
+                sendTrigger(detailView_packet_trigger3.get_packet());
                 Toast.makeText(this, "verstärkt", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.setting_button:
@@ -487,6 +503,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                     Cal_Packet_Exposi cal_packet_exposi = new Cal_Packet_Exposi(orgData);
                     device_id = cal_packet_exposi.get_device_id();
                     calibration = new Activity_Superclass(orgData);
+                    change_MinMaxPlot();
                     Log.d(LOG_TAG, "saved Calibration Tables");
 
                     DetailView_Packet_Trigger detailView_packet_trigger = new DetailView_Packet_Trigger(device_id, attenuator, freq, measurement_type);
@@ -502,10 +519,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                     int rms_exposi = packetExposi.get_rawData_rms();
                     int peak_exposi = packetExposi.get_rawData_peak();
 
-                    maxPlotP = calibration.get_maxPlot(attenuator, 'P');
-                    minPlotP = calibration.get_maxPlot(attenuator, 'P');
-                    maxPlotR = calibration.get_maxPlot(attenuator, 'P');
-                    minPlotR = calibration.get_minPlot(attenuator, 'R');
                     double rms = calibration.get_rms(attenuator,freq, rms_exposi);
                     double peak = calibration.get_peak(attenuator, freq, peak_exposi);
 
@@ -545,5 +558,12 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         intent.setAction(CommunicationService.ACTION_FROM_ACTIVITY);
         intent.putExtra(CommunicationService.COMMAND_Act2Serv, CommunicationService.CMD_getCALI);
         sendBroadcast(intent);
+    }
+
+    public void change_MinMaxPlot() {
+        maxPlotP = calibration.get_maxPlot(attenuator, 'P');
+        minPlotP = calibration.get_maxPlot(attenuator, 'P');
+        maxPlotR = calibration.get_maxPlot(attenuator, 'P');
+        minPlotR = calibration.get_minPlot(attenuator, 'R');
     }
 }
