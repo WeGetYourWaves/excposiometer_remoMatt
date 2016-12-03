@@ -12,8 +12,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="0dp"
         android:layout_toRightOf="@+id/imageview_scale"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_maxValueScale"
+        android:textSize="15dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_middleValueScale"
+        android:textSize="15dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_minValueScale"
+        android:textSize="15dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
         />
 
     <ImageView

@@ -89,6 +89,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         populateMeasurements();
         populateListView();             // this plots the data to the layout
         handleClicksOnList();
+        Toast.makeText(this,String.valueOf(freq_number),Toast.LENGTH_SHORT).show();
 
         //activate all Buttons and listeners
         initializeButtons();
@@ -367,6 +368,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             if(frequency == freq[i]){index=i;}
         }
         measures.set(index, new LiveMeasure(freq[index], rms[index], peak[index]));
+        Log.i("data Update: ", String.valueOf(freq[index])+", "+ String.valueOf(peak[index]));
         adapter.notifyDataSetChanged();
     }
 
@@ -458,7 +460,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     }
 
     private double roundDouble(double toRound){
-        double output = toRound+100;
+        double output = toRound*100;
         output = round(output);
         output = output/100.0;
         return output;
@@ -548,7 +550,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
                     }
                     makePlot(freq);
-                    //TODO makePlot()
                 }
                 else if (new String(split_packet(4, 7, orgData)).equals("EROR")){
 

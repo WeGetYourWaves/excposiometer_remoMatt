@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
@@ -28,11 +29,14 @@ import android.widget.TextView;
 import java.util.Arrays;
 import java.util.Timer;
 
+import static java.lang.Math.incrementExact;
 import static java.lang.Math.log;
+import static java.lang.Math.pow;
+import static java.lang.Math.round;
 
 public class TimeLineActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Integer anzahlBalken=30, activeBar;
+    Integer anzahlBalken=40;
     Button b_modeNormal,b_mode21dB, b_mode42dB,b_mode_accumulation,b_switchMode;
     ImageButton b_settings;
     TextView tv_status;
@@ -60,6 +64,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     int colorFix, colorBar, colorActive, colorLimit, colorEmpty;
     double abstandZwischenBalken =5.0; //5dp
     Paint paintFix, paintBar, paintActive, paintLimit,paintEmpty;
+    TextView TVMaxValue, TVMinValue, TVMiddleValue;
     ImageView imageView;
     Bitmap bitmap;
     Canvas canvas;
@@ -116,7 +121,6 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         StartService();
         RequestCALD();
     }
-
 
     public void getSettingsFromIntent() {
         Intent intent = getIntent();
@@ -217,6 +221,20 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         canvas = new Canvas(bitmap);
         LargePeakBars = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, qickFixArray, myMode, scaleX, scaleY);
         SmallRMSBars = new Rectangle(anzahlBalken, abstandZwischenBalken+20, size.x, size.y, qickFixArray, myMode, scaleX, scaleY);
+        TVMaxValue = (TextView) findViewById(R.id.tv_maxValueScale);
+        TVMiddleValue = (TextView) findViewById(R.id.tv_middleValueScale);
+        TVMinValue = (TextView) findViewById(R.id.tv_minValueScale);
+        SetPositionOnScreenOfTextViews();
+    }
+
+    private void SetPositionOnScreenOfTextViews(){
+        ViewGroup.MarginLayoutParams top = (ViewGroup.MarginLayoutParams)TVMaxValue.getLayoutParams();
+        top.topMargin =(int) (size.y*(1.0-scaleY));
+        ViewGroup.MarginLayoutParams middle = (ViewGroup.MarginLayoutParams)TVMiddleValue.getLayoutParams();
+        middle.topMargin =(int) (size.y/2.0 + size.y*(1.0-scaleY)/2.0);
+        ViewGroup.MarginLayoutParams bottom = (ViewGroup.MarginLayoutParams)TVMinValue.getLayoutParams();
+        bottom.topMargin = (int) (size.y -size.y*(1.0-scaleY));
+
     }
 
     synchronized private void makePlot(){
@@ -325,8 +343,9 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                     settings.setVisibility(LinearLayout.VISIBLE);
                 }
                 break;
-           /* case R.id.switch_to_peak:
-                if(measurement_type == 'R'){
+            case R.id.switch_to_peak:
+                ConnectionLostDropDown(0);
+               /* if(measurement_type == 'R'){
                     measurement_type = 'P';
                     tv_status.setText("Peak");
                     b_switchMode.setText("RMS");
@@ -336,8 +355,8 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                     tv_status.setText("RMS");
                     b_switchMode.setText("Peak");
                     makePlot();
-                }
-                break;*/
+                }*/
+                break;
         }
     }
 
@@ -371,7 +390,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     }
 
     //handles the allert bar, for example when connection is lost.
-    private void opensLostConnection( Integer downOrUp) {
+    private void ConnectionLostDropDown( Integer downOrUp) {
         //sets listener, and handles drop down and drop up
         animationSlideDown = AnimationUtils.loadAnimation(this, R.anim.anim_drop_down);
         final LinearLayout layout_dropDown = (LinearLayout) findViewById(R.id.layout_dropDown);
@@ -482,7 +501,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                     String errorMessage = error_packet.get_errorMessage();
                     if (errorCode == 1){
                         //connection to ESP lost
-                        //handlesActivatingDropDown(0);
+                        ConnectionLostDropDown(0);
                     }
                 }
             }
@@ -513,6 +532,23 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     public void change_MinMaxPlot(){
         maxPlot = calibration.get_maxPlot(attenuator, 'P');
         minPlot = calibration.get_minPlot(attenuator, 'P');
+
+        TVMaxValue.setText(String.valueOf((maxPlot))+" V/m");
+        TVMinValue.setText(String.valueOf((minPlot))+" V/m");
+       // double middle = (log(maxHight)-log(minPlot))/2.0;
+       // middle = pow(2.718,middle);
+       // TVMiddleValue.setText(String.valueOf(roundDouble(middle))+" V/mMid");
+        //TVMiddleValue.bringToFront();
+        TVMiddleValue.setVisibility(View.GONE);
+        TVMinValue.bringToFront();
+        TVMaxValue.bringToFront();
+    }
+
+    private double roundDouble(double toRound){
+        double output = toRound*100;
+        output = round(output);
+        output = output/100.0;
+        return output;
     }
 
 }
