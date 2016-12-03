@@ -48,6 +48,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     final String LOG_TAG = "Overview";
     OverviewScanPlotActivityReceiver overviewScanPlotActivityReceiver = new OverviewScanPlotActivityReceiver(LOG_TAG);
     Activity_Superclass calibration;
+    boolean stateAddButton=true, stateNextButton=true;
 
 
 
@@ -91,6 +92,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         initializeButtons();
         //handlesActivatingDropDown();
         setButtonsOnClickListener();
+        refreshStatusButtons();
 
         SetUpValuesForPlot();  //Makes the plot and draws it.
         makePlot();
@@ -302,26 +304,38 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 }
                 break;
             case R.id.add_freq_button:
+                stateNextButton=true;       //because we just added something
                 if(checkIfFreqAlreadyAdded()){break;}
                 if (fixedBars.size() < 4) {
                     fixedBars.add(activeBar);
                     chandeBarColorToFixed();
-                } else {
+                }else{ //todo mätthu: make button inactive
+                    stateAddButton=false;
                     Toast.makeText(OverviewScanPlotActivity.this, "FULL ARRAY", Toast.LENGTH_SHORT).show();
                 }
+                //refresh status buttons
                 break;
             case R.id.clear_button:
+                stateAddButton=true;
                 if (fixedBars.size() > 0) {
+                    //setbuttonstatus
                     int lastAddedFreq = fixedBars.get(fixedBars.size() - 1);
                     fixedBars.remove(fixedBars.size() - 1);
-                    changeBarColorToNOTactiv(lastAddedFreq);}
+                    changeBarColorToNOTactiv(lastAddedFreq);
+                    if(fixedBars.size()==0){
+                        stateNextButton=false;
+                    }
+                }
                 changeBarColorToNOTactiv(activeBar);
                 selectedFreq.setText("");
                 selectedValue.setText("");
+                //refresh status buttons
                 break;
             case R.id.next_button:
-                sendTrigger(viewStop.get_packet());
-                OpenDetailViewActivity();
+                if(stateNextButton==true){
+                    sendTrigger(viewStop.get_packet());
+                    OpenDetailViewActivity();
+                }
                 break;
             case R.id.refresh_button:
                 sendTrigger(viewStop.get_packet());
@@ -342,6 +356,19 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 }
 
                 break;
+        }
+    }
+
+    private void refreshStatusButtons(){
+        if(stateNextButton==true){
+            //nextButton.setBackgroundColor();
+        }else{
+            //nextButton.setBackgroundColor();
+        }
+        if(stateAddButton==true){
+            //addButton.setBackground(drawable );
+        }else{
+            //addButton.setBackground(drawable inactive);
         }
     }
 

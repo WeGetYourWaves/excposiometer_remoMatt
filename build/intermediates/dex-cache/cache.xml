@@ -34,7 +34,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="1450bf3181595a9da3f30f5ee55aabad6ec6f867">
+        sha1="89c243269a3868e6546878ea7ed605dd83d93394">
         <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_cbdb0b50784a09a9923bbf2138a833ec4328163c/classes.dex" />
     </item>
     <item
@@ -61,7 +61,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="03e7f51cf1c09c6a2b9a734db9183de884ad0834">
+        sha1="c8e4ce91c63cee7b7242e479fb5a5c16e409bcfb">
         <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_0f94ce6e33e8b834ed87002d562d3e186d2e2419/classes.dex" />
     </item>
     <item
