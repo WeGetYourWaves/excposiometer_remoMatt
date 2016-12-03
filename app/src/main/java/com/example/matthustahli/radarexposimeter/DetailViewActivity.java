@@ -538,7 +538,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                     int freq = packetExposi.get_frequency();
                     int rms_exposi = packetExposi.get_rawData_rms();
                     int peak_exposi = packetExposi.get_rawData_peak();
-
                     double rms = calibration.get_rms(attenuator,freq, rms_exposi);
                     double peak = calibration.get_peak(attenuator, freq, peak_exposi);
 

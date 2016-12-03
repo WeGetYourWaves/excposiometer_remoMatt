@@ -479,7 +479,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                     if (freqency == meas_data_R[i*17])
                     {k = i;}
                 }
-                if (k==0){throw new IllegalStateException("k is wrong, error in measure");}
+                if (k==0){throw new IllegalStateException("k is wrong, error in measure() at freq: " + freqency + "MHz");}
                 // von André: Messe drunter, aber nicht drüber
                 lowerbound= meas_data_R[(17*k)+1]; // Richtig ist [(17*k)+1];
                 upperbound= meas_data_R[(17*k)+16]; // ist richtig
@@ -519,8 +519,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                     if (freqency == meas_data_R[i*17])
                     {k = i;}
                 }
-                if (k==0){
-                    throw new IllegalStateException("k is wrong, error in measure");}
+                if (k==0){throw new IllegalStateException("k is wrong, error while measure() at freq: " + freqency + "MHz");}
                 lowerbound= meas_data_R[(17*k)+1];
                 upperbound= meas_data_R[(17*k)+16];
                 if (upperbound - lowerbound <= 0)
@@ -534,7 +533,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                     if (freqency == meas_data_P[i*17])
                     {k = i;}
                 }
-                if (k==0){throw new IllegalStateException("k is wrong, error in measure, change freq");}
+                if (k==0){throw new IllegalStateException("k is wrong, error while measure() at freq: " + freqency);}
                 lowerbound= meas_data_P[(17*k)+1];
                 upperbound= meas_data_P[(17*k)+16];
                 if (upperbound - lowerbound <= 0)
