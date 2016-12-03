@@ -30,6 +30,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static java.lang.Math.log;
+import static java.lang.Math.round;
 
 public class DetailViewActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -93,7 +94,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         initializeButtons();
         setButtonsOnClickListener();
         activateTouch();
-        activateValueUpdater(); // funktion von matthias für listenupdate alle x sec..
+        //activateValueUpdater(); // funktion von matthias für listenupdate alle x sec..
 
     }
 
@@ -317,6 +318,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 //go to new activity
                 Intent intent = new Intent(DetailViewActivity.this, TimeLineActivity.class);
                 intent.putExtra("frequency" ,chosenFrequency.getFrequency());
+                Toast.makeText(DetailViewActivity.this, "given: "+String.valueOf(chosenFrequency.getFrequency()),Toast.LENGTH_SHORT).show();
                 intent.putExtra("myMode",myMode);
                 startActivity(intent);
             }
@@ -349,7 +351,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             int quicky = 500+ 100*fixedFreq.get(i);
             freq[i]= quicky;   //updateActiveFrequency macht aus übergebener arrayposition die frequenz in GHZ->*1000 = MHz
         }
-        Toast.makeText(this,String.valueOf(freq[0]),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,String.valueOf(freq[3]),Toast.LENGTH_SHORT).show();
         myMode = intent.getStringExtra("MODE");
         if (myMode == "-21 dB")  attenuator = 1;
         else if (myMode == "LNA on")  attenuator = 3;
@@ -358,6 +360,15 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         Toast.makeText(DetailViewActivity.this,myMode,Toast.LENGTH_SHORT).show();
     }
 
+
+    private void makePlot(int frequency){
+        int index=0;
+        for(int i=0; i<4; i++){
+            if(frequency == freq[i]){index=i;}
+        }
+        measures.set(index, new LiveMeasure(freq[index], rms[index], peak[index]));
+        adapter.notifyDataSetChanged();
+    }
 
     public class MyListAdapter extends ArrayAdapter<LiveMeasure> {
 
@@ -402,7 +413,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                     rmsBar.setWidth((int) getMySizeComparedToMax(5500));
                 }
             }else{
-                rmsText.setText(String.valueOf(currentMeasure.getRMS()) + " V/m");
+                rmsText.setText(String.valueOf(roundDouble(currentMeasure.getRMS())) + " V/m");
                 rmsBar.setBackgroundColor(colorBar);
                 rmsBar.setWidth( (int) getMySizeComparedToMax(currentMeasure.getRMS()));
             }
@@ -421,7 +432,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                     peakBar.setWidth((int) getMySizeComparedToMax(5500));
                 }
             }else{
-                peakText.setText(String.valueOf(currentMeasure.getPeak()) + " V/m");
+                peakText.setText(String.valueOf(roundDouble(currentMeasure.getPeak())) + " V/m");
                 peakBar.setBackgroundColor(colorBar);
                 peakBar.setWidth((int) getMySizeComparedToMax(currentMeasure.getPeak()));
             }
@@ -444,6 +455,13 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         //toShow = Math.round(toShow * 10);  // runden auf ##.#
        // toShow = toShow / 10;
         return toShow;
+    }
+
+    private double roundDouble(double toRound){
+        double output = toRound+100;
+        output = round(output);
+        output = output/100.0;
+        return output;
     }
 
     private synchronized void updateFreq_number(int newFREQNUMB){
@@ -529,7 +547,8 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                         updateRMS(rms, freq);
 
                     }
-                    //TODO: makePlot();
+                    makePlot(freq);
+                    //TODO makePlot()
                 }
                 else if (new String(split_packet(4, 7, orgData)).equals("EROR")){
 

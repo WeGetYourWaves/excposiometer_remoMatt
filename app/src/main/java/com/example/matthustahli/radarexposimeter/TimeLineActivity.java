@@ -32,7 +32,7 @@ import static java.lang.Math.log;
 
 public class TimeLineActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Integer anzahlBalken=20, activeBar;
+    Integer anzahlBalken=30, activeBar;
     Button b_modeNormal,b_mode21dB, b_mode42dB,b_mode_accumulation,b_switchMode;
     ImageButton b_settings;
     TextView tv_status;
@@ -216,7 +216,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         paintActive.setStyle(Paint.Style.FILL);
         canvas = new Canvas(bitmap);
         LargePeakBars = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, qickFixArray, myMode, scaleX, scaleY);
-        SmallRMSBars = new Rectangle(anzahlBalken, abstandZwischenBalken+16, size.x, size.y, qickFixArray, myMode, scaleX, scaleY);
+        SmallRMSBars = new Rectangle(anzahlBalken, abstandZwischenBalken+20, size.x, size.y, qickFixArray, myMode, scaleX, scaleY);
     }
 
     synchronized private void makePlot(){
