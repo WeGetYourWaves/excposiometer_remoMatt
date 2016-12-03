@@ -49,6 +49,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     final String LOG_TAG = "Timeline";
     TimelineActivityReceiver timelineActivityReceiver = new TimelineActivityReceiver(LOG_TAG);
     Activity_Superclass calibration;
+    boolean running = true;
 
 
     //variables for timer
@@ -238,28 +239,30 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     }
 
     synchronized private void makePlot(){
-        int next = counter %anzahlBalken;
-        lastValuePeak= (float) readPeak();
-        lastValueRms= (float) readRMS();
-        Log.d("Timeline peak", String.valueOf(lastValuePeak));
-        Log.d("Timeline rms", String.valueOf(lastValueRms));
-        //delet bar first
-        canvas.drawRect(LargePeakBars.getLeft(next), 0, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintEmpty);
-        //draw the bar
-        if(lastValuePeak<-1){
-            if(lastValuePeak<-2.5){}
-            else{
-                lastValuePeak = (float) (size.y- size.y* scaleY); //full size
-                canvas.drawRect(LargePeakBars.getLeft(next), lastValuePeak, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintLimit);
+        if(running==true){
+            int next = counter %anzahlBalken;
+            lastValuePeak= (float) readPeak();
+            lastValueRms= (float) readRMS();
+            Log.d("Timeline peak", String.valueOf(lastValuePeak));
+            Log.d("Timeline rms", String.valueOf(lastValueRms));
+            //delet bar first
+            canvas.drawRect(LargePeakBars.getLeft(next), 0, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintEmpty);
+            //draw the bar
+            if(lastValuePeak<-1){
+                if(lastValuePeak<-2.5){}
+                else{
+                    lastValuePeak = (float) (size.y- size.y* scaleY); //full size
+                    canvas.drawRect(LargePeakBars.getLeft(next), lastValuePeak, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintLimit);
+                }
+            }else{
+                lastValuePeak = (float) (size.y - log(lastValuePeak)/maxHight*size.y*scaleY);
+                canvas.drawRect(LargePeakBars.getLeft(next), lastValuePeak, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintBar);
+                lastValueRms = (float) (size.y - log(lastValueRms)/maxHight*size.y*scaleY);
+                canvas.drawRect(SmallRMSBars.getLeft(next), lastValueRms, SmallRMSBars.getRight(next), SmallRMSBars.getBottom(next), paintActive);
             }
-        }else{
-            lastValuePeak = (float) (size.y - log(lastValuePeak)/maxHight*size.y*scaleY);
-            canvas.drawRect(LargePeakBars.getLeft(next), lastValuePeak, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintBar);
-            lastValueRms = (float) (size.y - log(lastValueRms)/maxHight*size.y*scaleY);
-            canvas.drawRect(SmallRMSBars.getLeft(next), lastValueRms, SmallRMSBars.getRight(next), SmallRMSBars.getBottom(next), paintActive);
-        }
-        imageView.setImageBitmap(bitmap);
-        counter++;
+            imageView.setImageBitmap(bitmap);
+            counter++;
+        }else{}
     }
 
     synchronized private void resetPlotToBeginning(){
@@ -344,7 +347,18 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
             case R.id.switch_to_peak:
-                ConnectionLostDropDown(0);
+                if(running==true){
+                    //stop
+                    running = false;
+                    b_switchMode.setText("Start");
+                }else{
+                    running = true;
+                    //start
+                    b_switchMode.setText("Stop");
+                }
+                break;
+                //set variable on false
+
                /* if(measurement_type == 'R'){
                     measurement_type = 'P';
                     tv_status.setText("Peak");
@@ -356,7 +370,6 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                     b_switchMode.setText("Peak");
                     makePlot();
                 }*/
-                break;
         }
     }
 
