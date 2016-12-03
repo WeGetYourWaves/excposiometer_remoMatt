@@ -367,8 +367,8 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         for(int i=0; i<4; i++){
             if(frequency == freq[i]){index=i;}
         }
-        measures.set(index, new LiveMeasure(freq[index], rms[index], peak[index]));
-        Log.i("data Update: ", String.valueOf(freq[index])+", "+ String.valueOf(peak[index]));
+        measures.set(index, new LiveMeasure(readFreq()[index], readRMS()[index], readPeak()[index]));
+        Log.i("data Update: ", String.valueOf(readFreq()[index])+", "+ String.valueOf(readPeak()[index]));
         adapter.notifyDataSetChanged();
     }
 
@@ -472,13 +472,20 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
 
     private synchronized void updatePeak(double newPeak, int freq_in){
-        int i = Arrays.binarySearch(freq, freq_in);
-        if (i < peak.length && i >= 0) peak[i] = newPeak;
+        int index=0;
+        for(int i=0; i<6; i++){
+            if(freq_in == freq[i]){index=i;}
+        }
+        // int i = Arrays.binarySearch(freq, freq_in);
+        if (index < peak.length && index >= 0) peak[index] = newPeak;
     }
 
     private synchronized void updateRMS(double newRMS, int freq_in){
-        int i = Arrays.binarySearch(freq, freq_in);
-        if (i < rms.length && i >= 0) rms[i] = newRMS;
+        int index=0;
+        for(int i=0; i<6; i++){
+            if(freq_in == freq[i]){index=i;}
+        }
+        if (index < rms.length && index >= 0) rms[index] = newRMS;
     }
 
     public synchronized int readFreq_number(){
