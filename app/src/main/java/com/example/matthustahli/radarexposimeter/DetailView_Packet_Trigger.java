@@ -27,7 +27,7 @@ public class DetailView_Packet_Trigger extends Packet_Trigger {
         //frequencies = frequencies_in;
         byte[] frequenciesB = new byte[2 * 6];
         byte[] one_freq = new byte[2];
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 12; i++){
 
             one_freq = int_to_byteArray(frequencies_in[i/2], 2);
             frequenciesB[i] = one_freq[0];

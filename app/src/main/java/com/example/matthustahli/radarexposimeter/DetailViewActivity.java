@@ -52,7 +52,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
 
     //TODO variablen für verbesserung
-    private int[] freq= {0,0,0,0};//frequencies are in MHz  //beinhaltet die zu betrachtenden frequenzen    //make switch funktion that deletes element at certain place and reorders them
+    private int[] freq= {0,0,0,0,0,0};//frequencies are in MHz  //beinhaltet die zu betrachtenden frequenzen    //make switch funktion that deletes element at certain place and reorders them
     private double[] rms = new double[4];
     private double[] peak = new double[4];
     private int freq_number = 4;        //tells how many freq are active.. the values of those freq are in freq, u to freq_number..
