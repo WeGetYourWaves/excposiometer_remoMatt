@@ -22,12 +22,20 @@ public class WifiDataBuffer implements Serializable {
     LinkedBlockingQueue<byte[]> FromESP;
 
     public WifiDataBuffer() {
-        ToESP = new LinkedBlockingQueue<>(10); // Max Size = 10 
-        FromESP = new LinkedBlockingQueue<>(100); // Max 100 unprocessed Packages at same time allowed
+        ToESP = new LinkedBlockingQueue<>(5); // Max Size = 5
+        FromESP = new LinkedBlockingQueue<>(1000); // Max 1000 unprocessed Packages at same time allowed
     }
 
     public boolean enqueue_ToESP(byte[] packet) {
-        return ToESP.add(packet);
+        try{
+            ToESP.add(packet);
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+            dequeue_ToESP();
+            enqueue_ToESP(packet);
+            SendErrorToActivity(1, "No Connection; Thread probably died and does not dequeue any more");
+        }
+        return true;
     }
 
     public byte[] dequeue_ToESP() {
@@ -35,10 +43,15 @@ public class WifiDataBuffer implements Serializable {
     }
 
     public boolean enque_FromESP(byte[] packet) {
-//        if (Pack.Content.isEmpty()){ // Do not enqueue empty Strings
-//            return true;
-//        }
-        return FromESP.add(packet);
+
+        try {
+            FromESP.add(packet);
+        } catch (IllegalStateException e){
+            e.printStackTrace();
+            deque_FromESP();
+            enque_FromESP(packet);
+        }
+        return true;
     }
 
     public byte[] deque_FromESP() {
@@ -51,5 +64,21 @@ public class WifiDataBuffer implements Serializable {
 
     public boolean isDataWaiting_FromESP() {
         return !FromESP.isEmpty();
+    }
+
+    public void SendErrorToActivity (Integer Code, String Message){
+        ByteArrayOutputStream errorbuffer = new ByteArrayOutputStream(134);
+        try {
+            errorbuffer.write("RD16EROR".getBytes());
+            errorbuffer.write(new byte[]{0, Code.byteValue()});
+            errorbuffer.write(Message.getBytes());
+            for (int i = 0; i < 120-Message.length(); ++i){
+                errorbuffer.write(((Integer) 0).byteValue());
+            }
+            errorbuffer.write("PEND".getBytes());
+            enque_FromESP(errorbuffer.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

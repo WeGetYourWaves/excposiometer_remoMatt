@@ -92,18 +92,18 @@ public class CommunicationService extends Service {
         intentFilter.addAction(ACTION_FROM_ACTIVITY);
         registerReceiver(ListenerForActivity, intentFilter);
 
-        wifi_manager = (WifiManager) this.getSystemService(this.WIFI_SERVICE);
-        WifiConfiguration wifi_configuration = null;
-        wifi_manager.setWifiEnabled(false);
-        try {
-            // Source http://stackoverflow.com/questions/13946607/android-how-to-turn-on-hotspot-in-android-programmatically
-            Method method = wifi_manager.getClass().getMethod("setWifiApEnabled", WifiConfiguration.class, boolean.class);
-            method.invoke(wifi_manager, wifi_configuration, true);
-            Log.d(LOG_TAG,"in onStartCommand, turned Hotspot on");
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+//        wifi_manager = (WifiManager) this.getSystemService(this.WIFI_SERVICE);
+//        WifiConfiguration wifi_configuration = null;
+//        wifi_manager.setWifiEnabled(false);
+//        try {
+//            // Source http://stackoverflow.com/questions/13946607/android-how-to-turn-on-hotspot-in-android-programmatically
+//            Method method = wifi_manager.getClass().getMethod("setWifiApEnabled", WifiConfiguration.class, boolean.class);
+//            method.invoke(wifi_manager, wifi_configuration, true);
+//            Log.d(LOG_TAG,"in onStartCommand, turned Hotspot on");
+//        } catch (Exception e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
 
         // Toast.makeText(this, "Service started", Toast.LENGTH_SHORT).show();
 
