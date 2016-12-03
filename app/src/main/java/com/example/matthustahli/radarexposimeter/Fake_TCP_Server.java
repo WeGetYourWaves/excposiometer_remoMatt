@@ -524,7 +524,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                 upperbound= meas_data_R[(17*k)+16];
                 if (upperbound - lowerbound <= 0)
                 {throw new IllegalArgumentException("lowerbound - upperbound bigger than zero: at 3");}
-                meas = rand.nextInt(upperbound - lowerbound) + lowerbound;
+                meas = (int) (rand.nextInt(upperbound - lowerbound) + lowerbound);
                 result.write(int2byteArray(meas, 4));
                 //Peak
                 k=0;
@@ -538,7 +538,10 @@ public class Fake_TCP_Server implements TCP_SERVER {
                 upperbound= meas_data_P[(17*k)+16];
                 if (upperbound - lowerbound <= 0)
                 {throw new IllegalArgumentException("lowerbound - upperbound bigger than zero: at 4");}
-                meas = rand.nextInt(upperbound - lowerbound) + lowerbound;
+                // Varinate 1: "meas = rand.nextInt(upperbound - lowerbound) + lowerbound;"
+                // Aber dann ist RMS zu oft höher als Peak
+                // Deshalb ist meas_Peak einfach doppelt meas_RMS
+                meas = (int) (0.0000066*meas);//rand.nextInt(upperbound - lowerbound) + lowerbound;
                 result.write(int2byteArray(meas, 4));
             } else {
                 throw new IllegalArgumentException("raw_data() not correctly implemented");
@@ -582,7 +585,6 @@ public class Fake_TCP_Server implements TCP_SERVER {
 
 
     private byte[] tabelle(byte[] Peak_RMS_All, byte[] LNA_Settings, String Peak_RMS, int LNA)
-
     {
         ByteArrayOutputStream inStreamBuffer = new ByteArrayOutputStream(6666);
 

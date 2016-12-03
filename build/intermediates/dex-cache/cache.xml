@@ -88,7 +88,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="d3fcdfa89be1cb0d01acf0970c02f61fcaaaffc6">
+        sha1="5dd32cde6731af15666e9c6f88aa6d1bf683d21f">
         <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_956e793115621a6a9a66607264c64621c601196a/classes.dex" />
     </item>
     <item
@@ -196,7 +196,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="2809508f7ff03dd4c28252ea97dfbfaee42c6115">
+        sha1="c5e2245e316828ef3a67013c89c5809fbea5abe3">
         <dex dex="/home/andre_eggli/AndroidStudioProjects/excposiometer_remoMatt/excposiometer_remoMatt/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_b5682b5fe5510a1d8c2d53af1c6f55cbf28ded19/classes.dex" />
     </item>
     <item

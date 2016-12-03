@@ -22,7 +22,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/generated/mockable-android-24.jar" afterPath="$PROJECT_DIR$/build/generated/mockable-android-24.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/DetailViewActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/DetailViewActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/Fake_TCP_Server.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/Fake_TCP_Server.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
     </list>
@@ -70,8 +69,8 @@
       <file leaf-file-name="Fake_TCP_Server.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/Fake_TCP_Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="516" column="40" selection-start-line="516" selection-start-column="40" selection-end-line="516" selection-end-column="40" />
+            <state relative-caret-position="132">
+              <caret line="526" column="30" selection-start-line="526" selection-start-column="30" selection-end-line="526" selection-end-column="30" />
               <folding>
                 <element signature="method#int2byteArray#0;class#Fake_TCP_Server#0" expanded="false" />
                 <element signature="method#byteArray2int#0;class#Fake_TCP_Server#0" expanded="false" />
@@ -80,6 +79,9 @@
                 <element signature="method#getRTC#0;class#Fake_TCP_Server#0" expanded="false" />
                 <element signature="method#device_name#0;class#Fake_TCP_Server#0" expanded="false" />
                 <element signature="method#reserviert#0;class#Fake_TCP_Server#0" expanded="false" />
+                <element signature="method#tabelle#0;class#Fake_TCP_Server#0" expanded="false" />
+                <element signature="method#split_packet#0;class#Fake_TCP_Server#0" expanded="false" />
+                <element signature="method#checkForCorrectness#0;class#Fake_TCP_Server#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -2243,7 +2245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1480766560693</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="LogEintrag &quot;k is wrong, measure at frequency + MHz&quot; appended">
+      <created>1480773408092</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1480773408092</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2333,19 +2342,12 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Service Stoppen und Wifi wieder eischalten" />
     <MESSAGE value="Queue grösser" />
-    <option name="LAST_COMMIT_MESSAGE" value="Queue grösser" />
+    <MESSAGE value="LogEintrag &quot;k is wrong, measure at frequency + MHz&quot; appended" />
+    <option name="LAST_COMMIT_MESSAGE" value="LogEintrag &quot;k is wrong, measure at frequency + MHz&quot; appended" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/Fake_TCP_Server.java</url>
-          <line>276</line>
-          <properties />
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="5" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2370,6 +2372,9 @@
             <element signature="method#getRTC#0;class#Fake_TCP_Server#0" expanded="false" />
             <element signature="method#device_name#0;class#Fake_TCP_Server#0" expanded="false" />
             <element signature="method#reserviert#0;class#Fake_TCP_Server#0" expanded="false" />
+            <element signature="method#tabelle#0;class#Fake_TCP_Server#0" expanded="false" />
+            <element signature="method#split_packet#0;class#Fake_TCP_Server#0" expanded="false" />
+            <element signature="method#checkForCorrectness#0;class#Fake_TCP_Server#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2593,6 +2598,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="825">
           <caret line="69" column="25" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2673,8 +2679,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/Fake_TCP_Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="516" column="40" selection-start-line="516" selection-start-column="40" selection-end-line="516" selection-end-column="40" />
+        <state relative-caret-position="132">
+          <caret line="526" column="30" selection-start-line="526" selection-start-column="30" selection-end-line="526" selection-end-column="30" />
           <folding>
             <element signature="method#int2byteArray#0;class#Fake_TCP_Server#0" expanded="false" />
             <element signature="method#byteArray2int#0;class#Fake_TCP_Server#0" expanded="false" />
@@ -2683,6 +2689,9 @@
             <element signature="method#getRTC#0;class#Fake_TCP_Server#0" expanded="false" />
             <element signature="method#device_name#0;class#Fake_TCP_Server#0" expanded="false" />
             <element signature="method#reserviert#0;class#Fake_TCP_Server#0" expanded="false" />
+            <element signature="method#tabelle#0;class#Fake_TCP_Server#0" expanded="false" />
+            <element signature="method#split_packet#0;class#Fake_TCP_Server#0" expanded="false" />
+            <element signature="method#checkForCorrectness#0;class#Fake_TCP_Server#0" expanded="false" />
           </folding>
         </state>
       </provider>
