@@ -380,7 +380,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
 
     //this is for closing settings and registrating touch on plot
     public void ActivateTouchOnPlot() {
-        View touchView = findViewById(R.id.activity_time_line);
+        View touchView = findViewById(R.id.imageView_timeline_bitmap);
         touchView.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View v, MotionEvent event) {
