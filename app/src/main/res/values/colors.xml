@@ -20,5 +20,7 @@
     <color name="allert">#ff6666</color>
     <color name="background">#ffffff</color>
     <color name="toHighColor">#e4e3c8</color>
+    <color name="next_inactive_button">#bad4b4</color>
+    <color name="add_inactive_button">#d4b4d1</color>
 
 </resources>

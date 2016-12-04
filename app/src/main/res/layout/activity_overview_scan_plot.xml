@@ -106,7 +106,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        android:background="@drawable/oval"
+        android:background="@drawable/oval_add"
         android:src="@drawable/ic_add"
         android:layout_weight="1"/>
 

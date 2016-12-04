@@ -48,7 +48,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     final String LOG_TAG = "Overview";
     OverviewScanPlotActivityReceiver overviewScanPlotActivityReceiver = new OverviewScanPlotActivityReceiver(LOG_TAG);
     Activity_Superclass calibration;
-    boolean stateAddButton=true, stateNextButton=true;
+    boolean stateAddButton=true, stateNextButton=false;
 
 
 
@@ -69,7 +69,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     ArrayList<Integer> fixedBars = new ArrayList<Integer>();
     LinearLayout settings;
     private String myMode;
-    private ArrayList<LiveMeasure> measures = new ArrayList<LiveMeasure>();
     //All what has something to do with buttons
     private Integer clickCounterStatusPlot = 0;
     Animation animationSlideDown;
@@ -280,10 +279,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 else measurement_type = 'P';
                 change_MinMaxPlot();
 
-                //downOrUp: 0=godown, 1=goup
-                //handlesActivatingDropDown(clickCounterStatusPlot%2); // to show connection bar
-                clickCounterStatusPlot++;
-
                 if (measurement_type == 'P') {
                     sendTrigger(viewStop.get_packet());
                     View_Packet_Trigger view_packet_triggerP = new View_Packet_Trigger(device_id, attenuator, measurement_type);
@@ -306,14 +301,15 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
             case R.id.add_freq_button:
                 stateNextButton=true;       //because we just added something
                 if(checkIfFreqAlreadyAdded()){break;}
-                if (fixedBars.size() < 4) {
+                if (fixedBars.size() < 6) {
                     fixedBars.add(activeBar);
                     chandeBarColorToFixed();
-                }else{ //todo mätthu: make button inactive
-                    stateAddButton=false;
-                    Toast.makeText(OverviewScanPlotActivity.this, "FULL ARRAY", Toast.LENGTH_SHORT).show();
                 }
-                //refresh status buttons
+                if(fixedBars.size()>=6){
+                    stateAddButton=false;
+                    //Toast.makeText(OverviewScanPlotActivity.this, "FULL ARRAY", Toast.LENGTH_SHORT).show();
+                }
+                refreshStatusButtons();
                 break;
             case R.id.clear_button:
                 stateAddButton=true;
@@ -322,14 +318,15 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                     int lastAddedFreq = fixedBars.get(fixedBars.size() - 1);
                     fixedBars.remove(fixedBars.size() - 1);
                     changeBarColorToNOTactiv(lastAddedFreq);
-                    if(fixedBars.size()==0){
-                        stateNextButton=false;
-                    }
+
                 }
+                if(fixedBars.size()==0){
+                stateNextButton=false;
+            }
                 changeBarColorToNOTactiv(activeBar);
                 selectedFreq.setText("");
                 selectedValue.setText("");
-                //refresh status buttons
+                refreshStatusButtons();
                 break;
             case R.id.next_button:
                 if(stateNextButton==true){
@@ -361,14 +358,14 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
 
     private void refreshStatusButtons(){
         if(stateNextButton==true){
-            //nextButton.setBackgroundColor();
+            nextButton.setBackgroundResource(R.drawable.oval_next);
         }else{
-            //nextButton.setBackgroundColor();
+            nextButton.setBackgroundResource(R.drawable.oval_next_inactive);
         }
         if(stateAddButton==true){
-            //addButton.setBackground(drawable );
+            addButton.setBackgroundResource(R.drawable.oval_add);
         }else{
-            //addButton.setBackground(drawable inactive);
+            addButton.setBackgroundResource(R.drawable.oval_add_inactive);
         }
     }
 

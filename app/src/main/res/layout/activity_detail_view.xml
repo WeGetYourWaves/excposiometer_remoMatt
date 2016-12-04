@@ -45,7 +45,7 @@
         android:id="@+id/b_add_freq_to_list"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@drawable/oval"
+        android:background="@drawable/oval_add"
         android:src="@drawable/ic_add"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
