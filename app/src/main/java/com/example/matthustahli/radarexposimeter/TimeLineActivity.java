@@ -31,13 +31,12 @@ import java.util.Timer;
 
 import static java.lang.Math.incrementExact;
 import static java.lang.Math.log;
-import static java.lang.Math.pow;
 import static java.lang.Math.round;
 
 public class TimeLineActivity extends AppCompatActivity implements View.OnClickListener {
 
     Integer anzahlBalken=40;
-    Button b_modeNormal,b_mode21dB, b_mode42dB,b_mode_accumulation,b_switchMode;
+    Button b_modeNormal,b_mode21dB, b_mode42dB,b_mode_accumulation,b_startStop;
     ImageButton b_settings;
     TextView tv_status;
     LinearLayout settings;
@@ -49,7 +48,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     final String LOG_TAG = "Timeline";
     TimelineActivityReceiver timelineActivityReceiver = new TimelineActivityReceiver(LOG_TAG);
     Activity_Superclass calibration;
-    boolean running = true;
+    boolean makePlotRunning = true;
 
 
     //variables for timer
@@ -239,7 +238,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     }
 
     synchronized private void makePlot(){
-        if(running==true){
+        if(makePlotRunning ==true){
             int next = counter %anzahlBalken;
             lastValuePeak= (float) readPeak();
             lastValueRms= (float) readRMS();
@@ -277,7 +276,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         b_mode42dB = (Button) findViewById(R.id.b_mode_42db);
         b_mode_accumulation = (Button) findViewById(R.id.b_mode_LNA);
         b_settings = (ImageButton) findViewById(R.id.setting_button);
-        b_switchMode = (Button) findViewById(R.id.switch_to_peak);
+        b_startStop = (Button) findViewById(R.id.startStopButton);
         tv_status = (TextView) findViewById(R.id.tv_status);
         settings = (LinearLayout) findViewById(R.id.layout_setting);
     }
@@ -288,7 +287,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         b_mode42dB.setOnClickListener(this);
         b_mode_accumulation.setOnClickListener(this);
         b_settings.setOnClickListener(this);
-        b_switchMode.setOnClickListener(this);
+        b_startStop.setOnClickListener(this);
     }
 
     @Override
@@ -346,15 +345,15 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                     settings.setVisibility(LinearLayout.VISIBLE);
                 }
                 break;
-            case R.id.switch_to_peak:
-                if(running==true){
+            case R.id.startStopButton:
+                if(makePlotRunning ==true){
                     //stop
-                    running = false;
-                    b_switchMode.setText("Start");
+                    makePlotRunning = false;
+                    b_startStop.setText("Start");
                 }else{
-                    running = true;
+                    makePlotRunning = true;
                     //start
-                    b_switchMode.setText("Stop");
+                    b_startStop.setText("Stop");
                 }
                 break;
                 //set variable on false
