@@ -247,6 +247,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     synchronized private void makePlot() {
         if (makePlotRunning == true) {
             int next = counter % anzahlBalken;
+            if(next== activeBar){ tv_rmsValue.setText(""); tv_peakValue.setText("");}
             peakValues[next] = readPeak();
             rmsValues[next] = readRMS();
             lastValuePeak = (float) peakValues[next];
@@ -434,8 +435,12 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
 
     //changes Bar back to normal plot color
     private void changeBarColorToNOTactiv(Integer position) {
-        canvas.drawRect(LargePeakBars.getLeft(position), AllPlotValuesPeak[position], LargePeakBars.getRight(position), LargePeakBars.getBottom(position), paintBar);
-        canvas.drawRect(SmallRMSBars.getLeft(position), AllPlotValuesRms[position], SmallRMSBars.getRight(position), SmallRMSBars.getBottom(position), paintActive);
+        if(peakValues[position]== -2){
+            canvas.drawRect(LargePeakBars.getLeft(position), AllPlotValuesPeak[position], LargePeakBars.getRight(position), LargePeakBars.getBottom(position), paintLimit);
+        }else {
+            canvas.drawRect(LargePeakBars.getLeft(position), AllPlotValuesPeak[position], LargePeakBars.getRight(position), LargePeakBars.getBottom(position), paintBar);
+            canvas.drawRect(SmallRMSBars.getLeft(position), AllPlotValuesRms[position], SmallRMSBars.getRight(position), SmallRMSBars.getBottom(position), paintActive);
+        }
         imageView.setImageBitmap(bitmap);
     }
 
