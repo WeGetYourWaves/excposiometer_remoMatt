@@ -48,21 +48,22 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     final String LOG_TAG = "DetailView";
     DetailViewActivityReceiver detailViewActivityReceiver = new DetailViewActivityReceiver(LOG_TAG);
     Activity_Superclass calibration;
+    boolean makePlotRunning=true;
 
 
 
     //TODO variablen für verbesserung
     private int[] freq= {0,0,0,0,0,0};//frequencies are in MHz  //beinhaltet die zu betrachtenden frequenzen    //make switch funktion that deletes element at certain place and reorders them
-    private double[] rms = new double[4];
-    private double[] peak = new double[4];
-    private int freq_number = 4;        //tells how many freq are active.. the values of those freq are in freq, u to freq_number..
+    private double[] rms = new double[6];
+    private double[] peak = new double[6];
+    private int freq_number = 6;        //tells how many freq are active.. the values of those freq are in freq, u to freq_number..
 
 
 
 
     //Everything about buttons
     ImageButton b_settings;
-    Button b_normal, b_21dB, b_41dB, b_accu;
+    Button b_normal, b_21dB, b_41dB, b_accu, b_startStop;
     LinearLayout settings;
     ListView visibleList;
 
@@ -184,6 +185,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         b_accu = (Button) findViewById(R.id.b_mode_LNA);
         settings = (LinearLayout) findViewById(R.id.layout_setting);
         b_settings = (ImageButton) findViewById(R.id.setting_button);
+        b_startStop = (Button) findViewById(R.id.startStopButton);
         visibleList = (ListView) findViewById(R.id.list_live_data);
     }
 
@@ -193,6 +195,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         b_41dB.setOnClickListener(this);
         b_accu.setOnClickListener(this);
         b_settings.setOnClickListener(this);
+        b_startStop.setOnClickListener(this);
     }
 
     public void onClick(View v) {
@@ -246,6 +249,13 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 } else {
                     settings.setVisibility(LinearLayout.VISIBLE);
                     visibleList.setVisibility(ListView.GONE);
+                }
+                break;
+            case R.id.startStopButton:
+                if(makePlotRunning == true){
+                    makePlotRunning=false;
+                }else {
+                    makePlotRunning=true;
                 }
                 break;
         }
@@ -363,13 +373,17 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
 
     private void makePlot(int frequency){
-        int index=0;
-        for(int i=0; i<4; i++){
-            if(frequency == freq[i]){index=i;}
-        }
-        measures.set(index, new LiveMeasure(readFreq()[index], readRMS()[index], readPeak()[index]));
-        Log.i("data Update: ", String.valueOf(readFreq()[index])+", "+ String.valueOf(readPeak()[index]));
-        adapter.notifyDataSetChanged();
+        if(makePlotRunning == true) {
+            int index = 0;
+            for (int i = 0; i < 6; i++) {
+                if (frequency == freq[i]) {
+                    index = i;
+                }
+            }
+            measures.set(index, new LiveMeasure(readFreq()[index], readRMS()[index], readPeak()[index]));
+            Log.i("data Update: ", String.valueOf(readFreq()[index]) + ", " + String.valueOf(readPeak()[index]));
+            adapter.notifyDataSetChanged();
+        }else{}
     }
 
     public class MyListAdapter extends ArrayAdapter<LiveMeasure> {
