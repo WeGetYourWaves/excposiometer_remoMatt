@@ -38,7 +38,6 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     Integer anzahlBalken = 40;
     Button b_modeNormal, b_mode21dB, b_mode42dB, b_mode_accumulation, b_startStop;
     ImageButton b_settings;
-    TextView tv_status;
     LinearLayout settings;
     String myMode;
     Animation animationSlideDown;
@@ -64,7 +63,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     int colorFix, colorBar, colorActive, colorLimit, colorEmpty, activeBar = 0;
     double abstandZwischenBalken = 5.0; //5dp
     Paint paintFix, paintBar, paintActive, paintLimit, paintEmpty;
-    TextView TVMaxValue, TVMinValue, TVMiddleValue;
+    TextView TVMaxValue, TVMinValue, TVMiddleValue, tv_peakValue, tv_rmsValue;
     ImageView imageView;
     Bitmap bitmap;
     Canvas canvas;
@@ -296,7 +295,8 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         b_mode_accumulation = (Button) findViewById(R.id.b_mode_LNA);
         b_settings = (ImageButton) findViewById(R.id.setting_button);
         b_startStop = (Button) findViewById(R.id.startStopButton);
-        tv_status = (TextView) findViewById(R.id.tv_status);
+        tv_peakValue = (TextView) findViewById(R.id.tv_peakValue);
+        tv_rmsValue = (TextView) findViewById(R.id.tv_rmsValue);
         settings = (LinearLayout) findViewById(R.id.layout_setting);
     }
 
@@ -442,27 +442,27 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     private void updateTextViewsShowingValues(int position) {
         if (rmsValues[position] < -1) {
             if (rmsValues[position] < -2.5) {
-                //selectedValue.setText("< min ");
+                tv_rmsValue.setText("< min");
             } else {
-                //selectedValue.setText("> max ");
+                tv_rmsValue.setText("> max");
             }
         } else {
             double valueToShow = rmsValues[position];
             valueToShow = Math.round(valueToShow * 100);  // runden auf ##.#
             valueToShow = valueToShow / 100;
-            //selectedValue.setText(String.valueOf(valueToShow)+ " V/m ");
+            tv_rmsValue.setText(String.valueOf((valueToShow))+ " V/m");
         }
         if (peakValues[position] < -1) {
             if (peakValues[position] < -2.5) {
-                // selectedValue.setText("< min ");
-            } else {
-                // selectedValue.setText("> max ");
+                tv_peakValue.setText("< min");
+            }else {
+                tv_peakValue.setText("> max");
             }
         } else {
             double valueToShow = peakValues[position];
             valueToShow = Math.round(valueToShow * 100);  // runden auf ##.#
             valueToShow = valueToShow / 100;
-            //selectedValue.setText(String.valueOf(valueToShow) + " V/m ");
+            tv_peakValue.setText(String.valueOf(valueToShow)+ " V/m");
         }
     }
 

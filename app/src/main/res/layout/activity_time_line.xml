@@ -34,6 +34,8 @@
         android:layout_marginLeft="5dp"
         />
 
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,12 +51,49 @@
         android:id="@+id/imageview_scale"/>
 
     <TextView
-        android:id="@+id/tv_status"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_rmsValue"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="PEAK"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
         android:textSize="20dp"
-        android:layout_centerHorizontal="true"
+        android:gravity="right"
+        />
+    <TextView
+        android:id="@+id/tv_peakValue"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/tv_rms"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:gravity="right"
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_rms"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/tv_rmsValue"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:text="rms: "
+        android:textSize="20dp"
+        android:gravity="right"
+        />
+    <TextView
+        android:id="@+id/tv_peak"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/tv_peakValue"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:text="peak:"
+        android:gravity="right"
+        android:textSize="20dp"
         />
 
     <ImageButton
