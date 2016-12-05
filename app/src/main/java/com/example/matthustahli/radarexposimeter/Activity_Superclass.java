@@ -48,31 +48,31 @@ public class Activity_Superclass implements Serializable {
         if (measurement_type == 'P') {
             if (attenuator == 0) {
                 length = cali_NormPeak.strength_indexes;
-                return cali_NormPeak.cali_table[0][length - 1];
+                return cali_NormPeak.cali_table[0][length - 1] / 1000;
             } else if (attenuator == 1) {
                 length = cali_att21Peak.strength_indexes;
-                return cali_att21Peak.cali_table[0][length - 1];
+                return cali_att21Peak.cali_table[0][length - 1] / 1000;
             } else if (attenuator == 2) {
                 length = cali_att42Peak.strength_indexes;
-                return cali_att42Peak.cali_table[0][length - 1];
+                return cali_att42Peak.cali_table[0][length - 1] / 1000;
             } else if (attenuator == 3) {
                 length = cali_LNA_Peak.strength_indexes;
-                return cali_LNA_Peak.cali_table[0][length - 1];
+                return cali_LNA_Peak.cali_table[0][length - 1] / 1000;
             }
         }
         if (measurement_type == 'R') {
             if (attenuator == 0) {
                 length = cali_NormRMS.strength_indexes;
-                return cali_NormRMS.cali_table[0][length - 1];
+                return cali_NormRMS.cali_table[0][length - 1] / 1000;
             } else if (attenuator == 1) {
                 length = cali_att21RMS.strength_indexes;
-                return cali_att21RMS.cali_table[0][length - 1];
+                return cali_att21RMS.cali_table[0][length - 1] / 1000;
             } else if (attenuator == 2) {
                 length = cali_att42RMS.strength_indexes;
-                return cali_att42RMS.cali_table[0][length - 1];
+                return cali_att42RMS.cali_table[0][length - 1] / 1000;
             } else if (attenuator == 3) {
                 length = cali_LNA_RMS.strength_indexes;
-                return cali_LNA_RMS.cali_table[0][length - 1];
+                return cali_LNA_RMS.cali_table[0][length - 1] / 1000;
             }
         }
         return -1;
