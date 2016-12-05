@@ -320,6 +320,8 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                 myMode = "normal mode";
                 attenuator = 0;
                 change_MinMaxPlot();
+                makePlotRunning = true;
+                b_startStop.setText("Stop");
                 sendTrigger(timeStop.get_packet());
                 Timeline_Packet_Trigger timeline_packet_trigger0 = new Timeline_Packet_Trigger(device_id, attenuator, freq, measurement_type);
                 sendTrigger(timeline_packet_trigger0.get_packet());
@@ -331,6 +333,8 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                 myMode = "-21 dB";
                 attenuator = 1;
                 change_MinMaxPlot();
+                makePlotRunning = true;
+                b_startStop.setText("Stop");
                 sendTrigger(timeStop.get_packet());
                 Timeline_Packet_Trigger timeline_packet_trigger1 = new Timeline_Packet_Trigger(device_id, attenuator, freq, measurement_type);
                 sendTrigger(timeline_packet_trigger1.get_packet());
@@ -342,6 +346,8 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                 myMode = "-42 dB";
                 attenuator = 2;
                 change_MinMaxPlot();
+                makePlotRunning = true;
+                b_startStop.setText("Stop");
                 sendTrigger(timeStop.get_packet());
                 Timeline_Packet_Trigger timeline_packet_trigger2 = new Timeline_Packet_Trigger(device_id, attenuator, freq, measurement_type);
                 sendTrigger(timeline_packet_trigger2.get_packet());
@@ -353,6 +359,8 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                 myMode = "LNA on";
                 attenuator = 3;
                 change_MinMaxPlot();
+                makePlotRunning = true;
+                b_startStop.setText("Stop");
                 sendTrigger(timeStop.get_packet());
                 Timeline_Packet_Trigger timeline_packet_trigger3 = new Timeline_Packet_Trigger(device_id, attenuator, freq, measurement_type);
                 sendTrigger(timeline_packet_trigger3.get_packet());
@@ -369,12 +377,13 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.startStopButton:
                 if (makePlotRunning == true) {
-                    //stop
+                    sendTrigger(timeStop.get_packet());
                     makePlotRunning = false;
                     b_startStop.setText("Start");
                 } else {
                     makePlotRunning = true;
-                    //start
+                    Timeline_Packet_Trigger timeline_packet_triggerRun = new Timeline_Packet_Trigger(device_id, attenuator, freq, measurement_type);
+                    sendTrigger(timeline_packet_triggerRun.get_packet());
                     b_startStop.setText("Stop");
                 }
                 break;

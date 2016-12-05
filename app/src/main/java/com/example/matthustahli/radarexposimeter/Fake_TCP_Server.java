@@ -333,6 +333,9 @@ public class Fake_TCP_Server implements TCP_SERVER {
                 byteArray[0] = (byte)(Integr >> 8);
                 byteArray[1] = (byte)Integr;
             }
+            else if (byteArray_length == 1){
+                byteArray[0] = (byte) Integr;
+            }
             // problems with wifiDataBuffer overflow: byteArray = ByteBuffer.allocate(byteArray_length).putInt(Integr).array();
         }
         return byteArray;

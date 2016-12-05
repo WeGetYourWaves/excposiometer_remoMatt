@@ -227,7 +227,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
 
                     Log.d(LOG_TAG, "got DRDY from ESP");
                     Ready_Packet_Exposi ready_packet_exposi = new Ready_Packet_Exposi(orgData);
-                    setId_device(ready_packet_exposi.get_device_id());
+                    setId_device(ready_packet_exposi.get_device_id(), ready_packet_exposi.get_battery_charge());
                     setBatteryStatus(ready_packet_exposi.get_battery_charge());
                     Cal_Packet_Trigger trigger = new Cal_Packet_Trigger(ready_packet_exposi.get_device_id(), 0);
                     sendTrigger(trigger.get_packet());
@@ -258,8 +258,8 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         Log.d(LOG_TAG, "battery percentage set");
     }
 
-    void setId_device (int id){
-        id_device.setText("ID: " + Integer.toString(id));
+    void setId_device (int id, int percentage){
+        id_device.setText("Battery: " + Integer.toString(percentage) + "%" + '\n' + "ID: " + Integer.toString(id));
         Log.d(LOG_TAG, "id_device set");
 
     }

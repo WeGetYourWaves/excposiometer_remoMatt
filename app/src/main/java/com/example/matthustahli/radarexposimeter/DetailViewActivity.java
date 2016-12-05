@@ -206,6 +206,8 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 attenuator = 0;
                 myMode = "normal mode";
                 change_MinMaxPlot();
+                makePlotRunning = true;
+                b_startStop.setText("Stop");
                 closeSettingLayoutAndUpdateList();
                 sendTrigger(DetViewStop.get_packet());
                 DetailView_Packet_Trigger detailView_packet_trigger0 = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, measurement_type);
@@ -216,6 +218,8 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 attenuator = 1;
                 myMode = "-21 dB";
                 change_MinMaxPlot();
+                makePlotRunning = true;
+                b_startStop.setText("Stop");
                 closeSettingLayoutAndUpdateList();
                 sendTrigger(DetViewStop.get_packet());
                 DetailView_Packet_Trigger detailView_packet_trigger1 = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, measurement_type);
@@ -226,6 +230,8 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 attenuator = 2;
                 myMode = "-42 dB";
                 change_MinMaxPlot();
+                makePlotRunning = true;
+                b_startStop.setText("Stop");
                 closeSettingLayoutAndUpdateList();
                 sendTrigger(DetViewStop.get_packet());
                 DetailView_Packet_Trigger detailView_packet_trigger2 = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, measurement_type);
@@ -236,6 +242,8 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 attenuator = 3;
                 myMode = "LNA on";
                 change_MinMaxPlot();
+                makePlotRunning = true;
+                b_startStop.setText("Stop");
                 closeSettingLayoutAndUpdateList();
                 sendTrigger(DetViewStop.get_packet());
                 DetailView_Packet_Trigger detailView_packet_trigger3 = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, measurement_type);
@@ -253,9 +261,15 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.startStopButton:
                 if(makePlotRunning == true){
+                    sendTrigger(DetViewStop.get_packet());
                     makePlotRunning=false;
+                    b_startStop.setText("Start");
+
                 }else {
+                    DetailView_Packet_Trigger detailView_packet_triggerRun = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, measurement_type);
+                    sendTrigger(detailView_packet_triggerRun.get_packet());
                     makePlotRunning=true;
+                    b_startStop.setText("Stop");
                 }
                 break;
         }
@@ -373,7 +387,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
 
     private void makePlot(int frequency){
-        if(makePlotRunning == true) {
             int index = 0;
             for (int i = 0; i < 6; i++) {
                 if (frequency == freq[i]) {
@@ -383,7 +396,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             measures.set(index, new LiveMeasure(readFreq()[index], readRMS()[index], readPeak()[index]));
             Log.i("data Update: ", String.valueOf(readFreq()[index]) + ", " + String.valueOf(readPeak()[index]));
             adapter.notifyDataSetChanged();
-        }else{}
     }
 
     public class MyListAdapter extends ArrayAdapter<LiveMeasure> {
