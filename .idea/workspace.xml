@@ -46,44 +46,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OverviewScanPlotActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/OverviewScanPlotActivity.java">
+      <file leaf-file-name="activity_attenuator_main.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_attenuator_main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="221" column="0" selection-start-line="221" selection-start-column="0" selection-end-line="240" selection-end-column="5" />
+            <state relative-caret-position="240">
+              <caret line="28" column="48" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
               <folding />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="colors.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="58" selection-start-line="5" selection-start-column="58" selection-end-line="5" selection-end-column="58" />
-              <folding />
-            </state>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DetailViewActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/DetailViewActivity.java">
+      <file leaf-file-name="AttenuatorMainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/AttenuatorMainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="275" column="48" selection-start-line="275" selection-start-column="48" selection-end-line="275" selection-end-column="48" />
-              <folding>
-                <element signature="e#1175#1184#0" expanded="true" />
-                <element signature="e#1294#1307#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TimeLineActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/TimeLineActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2445">
-              <caret line="63" column="106" selection-start-line="63" selection-start-column="106" selection-end-line="63" selection-end-column="106" />
+            <state relative-caret-position="1152">
+              <caret line="229" column="40" selection-start-line="229" selection-start-column="40" selection-end-line="229" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -1811,7 +1791,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/WifiDataBuffer.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/Activity_Superclass.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/Fake_TCP_Server.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/AttenuatorMainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_time_line.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/Rectangle.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
@@ -1820,6 +1799,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/TimeLineActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/DetailViewActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/AttenuatorMainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_attenuator_main.xml" />
       </list>
     </option>
   </component>
@@ -1894,28 +1875,6 @@
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dimens.xml" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app25.11" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -1932,6 +1891,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app25.11" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2342,7 +2319,7 @@
     <layout>
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22521247" sideWeight="0.5193861" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32719547" sideWeight="0.51373184" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298153" sideWeight="0.49743262" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2351,12 +2328,12 @@
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33664772" sideWeight="0.74555737" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298153" sideWeight="0.49743262" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32719547" sideWeight="0.48949918" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32719547" sideWeight="0.48626816" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22521247" sideWeight="0.4806139" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22521247" sideWeight="0.4806139" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298153" sideWeight="0.49743262" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298153" sideWeight="0.49743262" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2467,16 +2444,16 @@
         <state relative-caret-position="7440">
           <caret line="540" column="0" selection-start-line="540" selection-start-column="0" selection-end-line="540" selection-end-column="0" />
           <folding>
-            <element signature="e#1175#1184#0" expanded="true" />
-            <element signature="e#1294#1307#0" expanded="true" />
-            <element signature="e#11627#11922#0" expanded="false" />
-            <element signature="e#11921#11922#0" expanded="false" />
-            <element signature="e#11958#12101#0" expanded="false" />
-            <element signature="e#12100#12101#0" expanded="false" />
-            <element signature="e#12571#13409#0" expanded="false" />
-            <element signature="e#13408#13409#0" expanded="false" />
-            <element signature="e#13633#14567#0" expanded="false" />
-            <element signature="e#14566#14567#0" expanded="false" />
+            <element signature="e#1150#1159#0" expanded="true" />
+            <element signature="e#1269#1282#0" expanded="true" />
+            <element signature="e#11604#11899#0" expanded="false" />
+            <element signature="e#11898#11899#0" expanded="false" />
+            <element signature="e#11935#12078#0" expanded="false" />
+            <element signature="e#12077#12078#0" expanded="false" />
+            <element signature="e#12548#13386#0" expanded="false" />
+            <element signature="e#13385#13386#0" expanded="false" />
+            <element signature="e#13610#14544#0" expanded="false" />
+            <element signature="e#14543#14544#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2534,16 +2511,16 @@
         <state relative-caret-position="2880">
           <caret line="160" column="26" selection-start-line="160" selection-start-column="26" selection-end-line="160" selection-end-column="26" />
           <folding>
-            <element signature="e#1175#1184#0" expanded="true" />
-            <element signature="e#1294#1307#0" expanded="true" />
-            <element signature="e#11627#11922#0" expanded="false" />
-            <element signature="e#11921#11922#0" expanded="false" />
-            <element signature="e#11958#12101#0" expanded="false" />
-            <element signature="e#12100#12101#0" expanded="false" />
-            <element signature="e#12571#13409#0" expanded="false" />
-            <element signature="e#13408#13409#0" expanded="false" />
-            <element signature="e#13633#14567#0" expanded="false" />
-            <element signature="e#14566#14567#0" expanded="false" />
+            <element signature="e#1150#1159#0" expanded="true" />
+            <element signature="e#1269#1282#0" expanded="true" />
+            <element signature="e#11604#11899#0" expanded="false" />
+            <element signature="e#11898#11899#0" expanded="false" />
+            <element signature="e#11935#12078#0" expanded="false" />
+            <element signature="e#12077#12078#0" expanded="false" />
+            <element signature="e#12548#13386#0" expanded="false" />
+            <element signature="e#13385#13386#0" expanded="false" />
+            <element signature="e#13610#14544#0" expanded="false" />
+            <element signature="e#14543#14544#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2579,16 +2556,16 @@
         <state relative-caret-position="1605">
           <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="151" selection-end-column="29" />
           <folding>
-            <element signature="e#1175#1184#0" expanded="true" />
-            <element signature="e#1294#1307#0" expanded="true" />
-            <element signature="e#11627#11922#0" expanded="false" />
-            <element signature="e#11921#11922#0" expanded="false" />
-            <element signature="e#11958#12101#0" expanded="false" />
-            <element signature="e#12100#12101#0" expanded="false" />
-            <element signature="e#12571#13409#0" expanded="false" />
-            <element signature="e#13408#13409#0" expanded="false" />
-            <element signature="e#13633#14567#0" expanded="false" />
-            <element signature="e#14566#14567#0" expanded="false" />
+            <element signature="e#1150#1159#0" expanded="true" />
+            <element signature="e#1269#1282#0" expanded="true" />
+            <element signature="e#11604#11899#0" expanded="false" />
+            <element signature="e#11898#11899#0" expanded="false" />
+            <element signature="e#11935#12078#0" expanded="false" />
+            <element signature="e#12077#12078#0" expanded="false" />
+            <element signature="e#12548#13386#0" expanded="false" />
+            <element signature="e#13385#13386#0" expanded="false" />
+            <element signature="e#13610#14544#0" expanded="false" />
+            <element signature="e#14543#14544#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2621,16 +2598,16 @@
         <state relative-caret-position="5880">
           <caret line="423" column="5" selection-start-line="423" selection-start-column="5" selection-end-line="423" selection-end-column="5" />
           <folding>
-            <element signature="e#1175#1184#0" expanded="true" />
-            <element signature="e#1294#1307#0" expanded="true" />
-            <element signature="e#11627#11922#0" expanded="false" />
-            <element signature="e#11921#11922#0" expanded="false" />
-            <element signature="e#11958#12101#0" expanded="false" />
-            <element signature="e#12100#12101#0" expanded="false" />
-            <element signature="e#12571#13409#0" expanded="false" />
-            <element signature="e#13408#13409#0" expanded="false" />
-            <element signature="e#13633#14567#0" expanded="false" />
-            <element signature="e#14566#14567#0" expanded="false" />
+            <element signature="e#1150#1159#0" expanded="true" />
+            <element signature="e#1269#1282#0" expanded="true" />
+            <element signature="e#11604#11899#0" expanded="false" />
+            <element signature="e#11898#11899#0" expanded="false" />
+            <element signature="e#11935#12078#0" expanded="false" />
+            <element signature="e#12077#12078#0" expanded="false" />
+            <element signature="e#12548#13386#0" expanded="false" />
+            <element signature="e#13385#13386#0" expanded="false" />
+            <element signature="e#13610#14544#0" expanded="false" />
+            <element signature="e#14543#14544#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2648,16 +2625,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1175#1184#0" expanded="true" />
-            <element signature="e#1294#1307#0" expanded="true" />
-            <element signature="e#11627#11922#0" expanded="false" />
-            <element signature="e#11921#11922#0" expanded="false" />
-            <element signature="e#11958#12101#0" expanded="false" />
-            <element signature="e#12100#12101#0" expanded="false" />
-            <element signature="e#12571#13409#0" expanded="false" />
-            <element signature="e#13408#13409#0" expanded="false" />
-            <element signature="e#13633#14567#0" expanded="false" />
-            <element signature="e#14566#14567#0" expanded="false" />
+            <element signature="e#1150#1159#0" expanded="true" />
+            <element signature="e#1269#1282#0" expanded="true" />
+            <element signature="e#11604#11899#0" expanded="false" />
+            <element signature="e#11898#11899#0" expanded="false" />
+            <element signature="e#11935#12078#0" expanded="false" />
+            <element signature="e#12077#12078#0" expanded="false" />
+            <element signature="e#12548#13386#0" expanded="false" />
+            <element signature="e#13385#13386#0" expanded="false" />
+            <element signature="e#13610#14544#0" expanded="false" />
+            <element signature="e#14543#14544#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2812,17 +2789,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_attenuator_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="92" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_overview_scan_plot.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-209">
@@ -2910,19 +2876,11 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/DetailViewActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
-          <caret line="275" column="48" selection-start-line="275" selection-start-column="48" selection-end-line="275" selection-end-column="48" />
+          <caret line="274" column="48" selection-start-line="274" selection-start-column="48" selection-end-line="274" selection-end-column="48" />
           <folding>
-            <element signature="e#1175#1184#0" expanded="true" />
-            <element signature="e#1294#1307#0" expanded="true" />
+            <element signature="e#1150#1159#0" expanded="true" />
+            <element signature="e#1269#1282#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/AttenuatorMainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1680">
-          <caret line="255" column="15" selection-start-line="255" selection-start-column="15" selection-end-line="255" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2937,9 +2895,28 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
-          <caret line="5" column="58" selection-start-line="5" selection-start-column="58" selection-end-line="5" selection-end-column="58" />
+          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/AttenuatorMainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1152">
+          <caret line="229" column="40" selection-start-line="229" selection-start-column="40" selection-end-line="229" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_attenuator_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="28" column="48" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
   </component>

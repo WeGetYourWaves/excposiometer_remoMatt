@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="choose_mode_button_color">#cccccc</color>
+    <color name="inactive_mode_button_color">#cccccc</color>
     <color name="active_mode_button_color">#848484</color>
     <color name="add_button">#FF409f</color>
     <color name="fixedBar">#2af030</color>

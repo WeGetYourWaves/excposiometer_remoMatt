@@ -217,7 +217,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         colorActive = TimeLineActivity.this.getResources().getColor(R.color.activeBar);
         colorLimit = TimeLineActivity.this.getResources().getColor(R.color.limitBar);
         colorButtonActiveMode = TimeLineActivity.this.getResources().getColor(R.color.active_mode_button_color);
-        colorButtonInactive = TimeLineActivity.this.getResources().getColor(R.color.choose_mode_button_color);
+        colorButtonInactive = TimeLineActivity.this.getResources().getColor(R.color.inactive_mode_button_color);
         colorEmpty = TimeLineActivity.this.getResources().getColor(R.color.background);
         paintEmpty.setColor(colorEmpty);
         paintEmpty.setStyle(Paint.Style.FILL);

@@ -572,7 +572,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         colorActive = OverviewScanPlotActivity.this.getResources().getColor(R.color.activeBar);
         colorToHigh = OverviewScanPlotActivity.this.getResources().getColor(R.color.toHighColor);
         colorButtonActiveMode = OverviewScanPlotActivity.this.getResources().getColor(R.color.active_mode_button_color);
-        colorButtonInactive = OverviewScanPlotActivity.this.getResources().getColor(R.color.choose_mode_button_color);
+        colorButtonInactive = OverviewScanPlotActivity.this.getResources().getColor(R.color.inactive_mode_button_color);
         paintToHigh.setColor(colorToHigh);
         paintLimit.setColor(colorLimit);
         paintLimit.setStyle(Paint.Style.FILL);

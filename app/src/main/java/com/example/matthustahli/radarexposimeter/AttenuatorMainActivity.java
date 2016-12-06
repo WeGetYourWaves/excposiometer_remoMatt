@@ -30,7 +30,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
     Integer counter=0;
     WifiManager wifi_manager;
     Button b_modeNormal,b_mode21dB,b_mode41dB, b_modeLNA, b_chico;
-    TextView id_device;
+    TextView id_device, text;
     ProgressBar progressBar;
     LinearLayout layout_settings;
     Handler h = new Handler();
@@ -65,6 +65,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
         b_chico = (Button) findViewById(R.id.b_chico);
         layout_settings= (LinearLayout) findViewById(R.id.settings_atStart);
         progressBar= (ProgressBar) findViewById(R.id.progress_bar);
+        text = (TextView) findViewById(R.id.tv_under_progressBar);
     }
 
     private void activateClickListener(){
@@ -158,22 +159,6 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
             case R.id.b_mode_LNA:
                 goToNextActivityWithSpecifivMode("LNA on");
                 break;
-/*           case R.id.b_batterie:
-                counter++;
-                if (counter % 4 == 0)
-                    b_batterie.setBackgroundResource(R.drawable.ic_batterie_empty);
-                if (counter % 4 == 1) b_batterie.setBackgroundResource(R.drawable.ic_batterie_low);
-                if (counter % 4 == 2)
-                    b_batterie.setBackgroundResource(R.drawable.ic_batterie_middle);
-                if (counter % 4 == 3) b_batterie.setBackgroundResource(R.drawable.ic_batterie_high);
-                break;*/
-            case R.id.b_chico:
-                counter++;
-                ImageView image = (ImageView) findViewById(R.id.andi);
-                if (counter%2==0){ image.setVisibility(ImageView.VISIBLE);
-                }else{
-                    image.setVisibility(ImageView.GONE);
-                }
         }
     }
 
@@ -217,6 +202,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
                             public void run() {
                                 progressBar.setVisibility(ProgressBar.GONE);
                                 layout_settings.setVisibility(View.VISIBLE);
+                                text.setVisibility(View.GONE);
                                 Log.d(LOG_TAG, "Progressbar GONE");
                             }
                         });
@@ -261,7 +247,7 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
     void setId_device (int id, int percentage){
         id_device.setText("Battery: " + Integer.toString(percentage) + "%" + '\n' + "ID: " + Integer.toString(id));
         Log.d(LOG_TAG, "id_device set");
-
+        text.setText("Calibrating");
     }
 
     private void StopService() {

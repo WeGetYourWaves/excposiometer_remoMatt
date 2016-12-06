@@ -25,7 +25,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -181,7 +180,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         barWidthMax=size.x/3;
         textViewSize = size.x/4;
         colorButtonActiveMode = DetailViewActivity.this.getResources().getColor(R.color.active_mode_button_color);
-        colorButtonInactive = DetailViewActivity.this.getResources().getColor(R.color.choose_mode_button_color);
+        colorButtonInactive = DetailViewActivity.this.getResources().getColor(R.color.inactive_mode_button_color);
     }
 
     private void setButtonsOnClickListener() {

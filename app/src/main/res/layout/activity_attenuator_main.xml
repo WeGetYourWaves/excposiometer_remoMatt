@@ -21,6 +21,17 @@
         android:layout_centerVertical="true"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_under_progressBar"
+        android:textSize="30dp"
+        android:text="Please turn on Exposimeter"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/progress_bar"
+        android:layout_centerHorizontal="true"
+        />
+
 <LinearLayout
 
     android:layout_width="wrap_content"
@@ -81,7 +92,7 @@
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/choose_mode_button_color"
+        android:background="@color/inactive_mode_button_color"
         android:text="Normal"
         android:textSize="@dimen/choose_mode_button_textsize"
         />
@@ -97,7 +108,7 @@
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/choose_mode_button_color"
+        android:background="@color/inactive_mode_button_color"
         android:text="-21 dB"
         android:textSize="@dimen/choose_mode_button_textsize"
 
@@ -113,7 +124,7 @@
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/choose_mode_button_color"
+        android:background="@color/inactive_mode_button_color"
         android:text="-42 DB"
         android:textSize="@dimen/choose_mode_button_textsize"
 
@@ -128,7 +139,7 @@
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/choose_mode_button_color"
+        android:background="@color/inactive_mode_button_color"
         android:text="LNA on"
         android:textSize="@dimen/choose_mode_button_textsize"
 
@@ -141,11 +152,4 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/andi"
-        android:visibility="gone"
-        android:src="@drawable/chico_andre"
-        />
 </RelativeLayout>
