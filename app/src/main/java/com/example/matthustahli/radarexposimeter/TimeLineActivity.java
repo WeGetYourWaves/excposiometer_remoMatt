@@ -268,7 +268,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                     canvas.drawRect(LargePeakBars.getLeft(next), lastValuePeak, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintLimit);
                 }
             } else {
-                lastValuePeak = (float) (((log(lastValuePeak)-log(minPlot)) / hightPlotScaled)*size.y*scaleY);
+                lastValuePeak = (float) (size.y- ((log(lastValuePeak)-log(minPlot)) / hightPlotScaled)*size.y*scaleY);
                 canvas.drawRect(LargePeakBars.getLeft(next), lastValuePeak, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintBar);
             }
             if (lastValueRms < -1) {
@@ -279,7 +279,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                     canvas.drawRect(SmallRMSBars.getLeft(next), lastValueRms, SmallRMSBars.getRight(next), SmallRMSBars.getBottom(next), paintLimit);
                 }
             } else {
-                lastValueRms = (float) (((log(lastValueRms)-log(minPlot)) / hightPlotScaled)*size.y*scaleY);
+                lastValueRms = (float) (size.y-((log(lastValueRms)-log(minPlot)) / hightPlotScaled)*size.y*scaleY);
                 canvas.drawRect(SmallRMSBars.getLeft(next), lastValueRms, SmallRMSBars.getRight(next), SmallRMSBars.getBottom(next), paintActive);
             }
 
@@ -635,6 +635,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     public void change_MinMaxPlot(){
         maxPlot = calibration.get_maxPlot(attenuator, 'P');
         minPlot = calibration.get_minPlot(attenuator, 'P');
+        minPlot=0.1;
         hightPlotScaled= log(maxPlot)-log(minPlot);
         TVMaxValue.setText(String.valueOf((maxPlot))+" V/m");
         TVMinValue.setText(String.valueOf((minPlot))+" V/m");
