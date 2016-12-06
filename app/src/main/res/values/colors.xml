@@ -5,11 +5,11 @@
     <color name="colorAccent">#FF4081</color>
     <color name="choose_mode_button_color">#cccccc</color>
     <color name="add_button">#FF409f</color>
-    <color name="fixedBar">#FF409f</color>
+    <color name="fixedBar">#2af030</color>
     <color name="next_button">#2af030</color>
     <color name="clear_button">#072a23</color>
     <color name="normalBar">#cccccc</color>
-    <color name="activeBar">#3cf4d0</color>
+    <color name="activeBar">#FF409f</color>
     <color name="limitBar">#ff0d00</color>
     <color name="background_listview">#ebebeb</color>
     <color name="liveValues">#cccccc</color>

@@ -258,7 +258,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
             Log.d("Timeline rms", String.valueOf(lastValueRms));
             //delet bar first
             canvas.drawRect(LargePeakBars.getLeft(next), 0, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintEmpty);
-            canvas.drawRect(0,(float) (size.y*(1-scaleY)),size.x,(float) (size.y*(1-scaleY)),paintLimit);   //draws limit bar horizontal
+            //canvas.drawRect(0,(float) (size.y*(1-scaleY)),size.x,(float) (size.y*(1-scaleY*0.99)),paintLimit);   //draws limit bar horizontal
             //draw the bar
             if (lastValuePeak < -1) {
                 if (lastValuePeak < -2.5) {
