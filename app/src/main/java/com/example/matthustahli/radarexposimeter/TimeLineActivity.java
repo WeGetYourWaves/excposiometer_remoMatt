@@ -71,7 +71,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     Point size;
     double scaleY = 0.9;
     double scaleX = 0.9;
-    double minPlot, maxPlot;
+    double minPlot, maxPlot,hightPlotScaled;
     float lastValuePeak, lastValueRms, maxHight;
     float[] AllPlotValuesPeak, AllPlotValuesRms;
     double[] rmsValues, peakValues;
@@ -250,7 +250,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         if (makePlotRunning == true) {
             int next = counter % anzahlBalken;
             if(next== activeBar){ tv_rmsValue.setText(""); tv_peakValue.setText("");}
-            peakValues[next] = readPeak();
+            peakValues[next] = readPeak();  //need that to be able to show values in textviews
             rmsValues[next] = readRMS();
             lastValuePeak = (float) peakValues[next];
             lastValueRms = (float) rmsValues[next];
@@ -258,22 +258,32 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
             Log.d("Timeline rms", String.valueOf(lastValueRms));
             //delet bar first
             canvas.drawRect(LargePeakBars.getLeft(next), 0, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintEmpty);
+            canvas.drawRect(0,(float) (size.y*(1-scaleY)),size.x,(float) (size.y*(1-scaleY)),paintLimit);   //draws limit bar horizontal
             //draw the bar
             if (lastValuePeak < -1) {
                 if (lastValuePeak < -2.5) {
                     lastValuePeak = size.y;
-                    lastValueRms = size.x;
                 } else {
                     lastValuePeak = (float) (size.y - size.y * scaleY); //full size
                     canvas.drawRect(LargePeakBars.getLeft(next), lastValuePeak, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintLimit);
                 }
             } else {
-                lastValuePeak = (float) (size.y - log(lastValuePeak) / maxHight * size.y * scaleY);
+                lastValuePeak = (float) (((log(lastValuePeak)-log(minPlot)) / hightPlotScaled)*size.y*scaleY);
                 canvas.drawRect(LargePeakBars.getLeft(next), lastValuePeak, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintBar);
-                lastValueRms = (float) (size.y - log(lastValueRms) / maxHight * size.y * scaleY);
+            }
+            if (lastValueRms < -1) {
+                if (lastValueRms < -2.5) {
+                    lastValueRms = size.y;
+                } else {
+                    lastValueRms = (float) (size.y - size.y * scaleY); //full size
+                    canvas.drawRect(SmallRMSBars.getLeft(next), lastValueRms, SmallRMSBars.getRight(next), SmallRMSBars.getBottom(next), paintLimit);
+                }
+            } else {
+                lastValueRms = (float) (((log(lastValueRms)-log(minPlot)) / hightPlotScaled)*size.y*scaleY);
                 canvas.drawRect(SmallRMSBars.getLeft(next), lastValueRms, SmallRMSBars.getRight(next), SmallRMSBars.getBottom(next), paintActive);
             }
-            AllPlotValuesPeak[next] = lastValuePeak;
+
+            AllPlotValuesPeak[next] = lastValuePeak;        //need that to be able to make the touch on bars possible, as i need to draw them back..
             AllPlotValuesRms[next] = lastValueRms;
             imageView.setImageBitmap(bitmap);
             counter++;
@@ -625,13 +635,9 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     public void change_MinMaxPlot(){
         maxPlot = calibration.get_maxPlot(attenuator, 'P');
         minPlot = calibration.get_minPlot(attenuator, 'P');
-
+        hightPlotScaled= log(maxPlot)-log(minPlot);
         TVMaxValue.setText(String.valueOf((maxPlot))+" V/m");
         TVMinValue.setText(String.valueOf((minPlot))+" V/m");
-       // double middle = (log(maxHight)-log(minPlot))/2.0;
-       // middle = pow(2.718,middle);
-       // TVMiddleValue.setText(String.valueOf(roundDouble(middle))+" V/mMid");
-        //TVMiddleValue.bringToFront();
         TVMiddleValue.setVisibility(View.GONE);
         TVMinValue.bringToFront();
         TVMaxValue.bringToFront();
