@@ -635,7 +635,6 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     public void change_MinMaxPlot(){
         maxPlot = calibration.get_maxPlot(attenuator, 'P');
         minPlot = calibration.get_minPlot(attenuator, 'P');
-        minPlot=0.1;
         hightPlotScaled= log(maxPlot)-log(minPlot);
         TVMaxValue.setText(String.valueOf((maxPlot))+" V/m");
         TVMinValue.setText(String.valueOf((minPlot))+" V/m");
