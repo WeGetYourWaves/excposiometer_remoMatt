@@ -49,6 +49,9 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     DetailViewActivityReceiver detailViewActivityReceiver = new DetailViewActivityReceiver(LOG_TAG);
     Activity_Superclass calibration;
     boolean makePlotRunning=true;
+    Display display;
+    Point size;
+    float barWidthMax, textViewSize;
 
 
 
@@ -70,7 +73,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     Runnable runnable;
     Handler handler;
     int counter=0;
-    int size;
     int colorLimit, colorBar,colorEmpty;
     double maxPlotP, minPlotP, minPlotR, maxPlotR;
 
@@ -136,39 +138,24 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
     //------------------------calculate the size of the value bar ------------------------
 
-    public Integer modeMaxSize(){
-        int maxSizeInVolt=0;
-        switch (myMode){
-            case "normal mode":
-                maxSizeInVolt=50;
-                break;
-            case "-21 dB":
-                maxSizeInVolt=500;
-                break;
-            case "-42 dB":
-                maxSizeInVolt=5000;
-                break;
-            case "LNA on":
-                maxSizeInVolt=5;
-                break;
+
+
+    public float getMySizeComparedToMax(double meassurement, char peakOrRms){
+        double rVal=0;
+        if(meassurement == 'P'){
+            if(meassurement<5100){      //if too high, we get 5500
+                rVal = (((log(meassurement)-log(minPlotP))/(log(maxPlotP)-log(minPlotP))*barWidthMax));
+            }else{
+                rVal=barWidthMax;
+            }
+        }else{
+            if(meassurement<5100){
+                rVal = (((log(meassurement)-log(minPlotR))/(log(maxPlotR)-log(minPlotR))*barWidthMax));
+            }else{
+                rVal=barWidthMax;
+            }
         }
-        return maxSizeInVolt;
-    }
-
-    public float getMySizeComparedToMax(double myValueIn){
-        if(myValueIn<=1){ return 0;}
-        double maxValue= log(modeMaxSize());
-        double myValue = log(myValueIn);
-        double returnSize;
-        if(maxValue<=myValue){myValue=maxValue;}
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        float barWidth=size.x/3;
-
-        returnSize = (myValue/maxValue)*barWidth;
-        //Log.d("returnSize", String.valueOf(returnSize));
-        return (float) returnSize;
+        return (float) rVal;
     }
 
 
@@ -187,6 +174,11 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         b_settings = (ImageButton) findViewById(R.id.setting_button);
         b_startStop = (Button) findViewById(R.id.startStopButton);
         visibleList = (ListView) findViewById(R.id.list_live_data);
+        display = getWindowManager().getDefaultDisplay();
+        size = new Point();
+        display.getSize(size);
+        barWidthMax=size.x/3;
+        textViewSize = size.x/4;
     }
 
     private void setButtonsOnClickListener() {
@@ -395,7 +387,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             }
             measures.set(index, new LiveMeasure(readFreq()[index], readRMS()[index], readPeak()[index]));
             Log.i("data Update: ", String.valueOf(readFreq()[index]) + ", " + String.valueOf(readPeak()[index]));
-            adapter.notifyDataSetChanged();
+            adapter.notifyDataSetChanged(); //thats where the magic happens.. see class below
     }
 
     public class MyListAdapter extends ArrayAdapter<LiveMeasure> {
@@ -427,6 +419,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             TextView freqText = (TextView) itemView.findViewById(R.id.textview_freq);
             //double quicky = currentMeasure.getFrequency()*0.001;
             freqText.setText(String.valueOf(GHz(currentMeasure.getFrequency())) + " GHz");
+            freqText.setMaxWidth((int)textViewSize);
 
             //set median
             TextView rmsBar = (TextView) itemView.findViewById(R.id.textview_rms);
@@ -438,12 +431,12 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 }else{
                     rmsText.setText(" > max");
                     rmsBar.setBackgroundColor(colorLimit);
-                    rmsBar.setWidth((int) getMySizeComparedToMax(5500));
+                    rmsBar.setWidth((int) getMySizeComparedToMax(5500,'R'));    //for shure to high..
                 }
             }else{
                 rmsText.setText(String.valueOf(roundDouble(currentMeasure.getRMS())) + " V/m");
                 rmsBar.setBackgroundColor(colorBar);
-                rmsBar.setWidth( (int) getMySizeComparedToMax(currentMeasure.getRMS()));
+                rmsBar.setWidth( (int) getMySizeComparedToMax(currentMeasure.getRMS(),'R'));
             }
 
 
@@ -457,14 +450,13 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 }else{
                     peakText.setText(" > max");
                     peakBar.setBackgroundColor(colorLimit);
-                    peakBar.setWidth((int) getMySizeComparedToMax(5500));
+                    peakBar.setWidth((int) getMySizeComparedToMax(5500,'P'));
                 }
             }else{
                 peakText.setText(String.valueOf(roundDouble(currentMeasure.getPeak())) + " V/m");
                 peakBar.setBackgroundColor(colorBar);
-                peakBar.setWidth((int) getMySizeComparedToMax(currentMeasure.getPeak()));
+                peakBar.setWidth((int) getMySizeComparedToMax(currentMeasure.getPeak(),'P'));
             }
-
             return itemView;
         }
     }
