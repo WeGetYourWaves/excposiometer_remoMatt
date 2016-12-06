@@ -228,8 +228,8 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         paintActive.setColor(colorActive);
         paintActive.setStyle(Paint.Style.FILL);
         canvas = new Canvas(bitmap);
-        LargePeakBars = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, qickFixArray, myMode, scaleX, scaleY);
-        SmallRMSBars = new Rectangle(anzahlBalken, abstandZwischenBalken + 20, size.x, size.y, qickFixArray, myMode, scaleX, scaleY);
+        LargePeakBars = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, qickFixArray, scaleX, scaleY,maxPlot,minPlot);
+        SmallRMSBars = new Rectangle(anzahlBalken, abstandZwischenBalken + 20, size.x, size.y, qickFixArray, scaleX, scaleY,maxPlot,minPlot);
         TVMaxValue = (TextView) findViewById(R.id.tv_maxValueScale);
         TVMiddleValue = (TextView) findViewById(R.id.tv_middleValueScale);
         TVMinValue = (TextView) findViewById(R.id.tv_minValueScale);

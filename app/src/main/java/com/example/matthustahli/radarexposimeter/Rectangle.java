@@ -6,6 +6,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import static java.lang.Math.log;
+import static java.lang.Math.min;
 
 /**
  * Created by matthustahli on 06/10/16.
@@ -15,21 +16,21 @@ import static java.lang.Math.log;
 public class Rectangle extends AppCompatActivity {
 
     private int anzahlBalken;
-    private double abgedekteLange,sizeX,sizeY,breiteBalken,abstandZwischenBalken,maxHight, scaleY, scaleX  ;
+    private double abgedekteLange,sizeX,sizeY,breiteBalken,abstandZwischenBalken,maxPlot,minPlot, scaleY, scaleX, deltaMaxToMin  ;
     private ArrayList<Float> left;
     private ArrayList<Float> right;
     private ArrayList<Float> top;
     private ArrayList<Float> bottom;
     public double[] values;
-    String mode;
 
     //initialize
-    public Rectangle( int anzahlBalkenIn, double abstandZwischenBalkenIn, int sizexIn, int sizeyIn, double[] valuesIn, String modeIn,double scaleXIn, double scaleYIn) {
+    public Rectangle( int anzahlBalkenIn, double abstandZwischenBalkenIn, int sizexIn, int sizeyIn, double[] valuesIn,double scaleXIn, double scaleYIn,double inMaxPlot, double inMinPlot) {
         super();
         scaleX=scaleXIn;
         scaleY=scaleYIn;
-        mode = modeIn;
-        maxHight = getRangeOfValues(mode);
+        maxPlot = inMaxPlot;
+        minPlot = inMinPlot;
+        deltaMaxToMin = log(maxPlot)-log(minPlot);
         sizeX = sizexIn*scaleX;
         sizeY = sizeyIn;
         abstandZwischenBalken=abstandZwischenBalkenIn;
@@ -46,20 +47,6 @@ public class Rectangle extends AppCompatActivity {
         //Log.i("size_y: ", String.valueOf(sisey));
     }
 
-    private double getRangeOfValues(String mode) {
-        double returnValue=0;
-        switch (mode) {
-            case "normal mode": returnValue= log(50);
-                break;
-            case "-21 dB": returnValue = log(500);
-                break;
-            case "-42 dB": returnValue = log(5000);
-                break;
-            case "LNA on": returnValue = log(5);
-                break;
-        }
-        return returnValue;
-    }
 
     public ArrayList<Float> lengthFromLeft() {
         ArrayList<Float> toReturn = new ArrayList<Float>();
@@ -86,18 +73,17 @@ public class Rectangle extends AppCompatActivity {
     public ArrayList<Float> lengthFromTop() {
         ArrayList<Float> toReturn = new ArrayList<Float>();
         for (int i = 0; i < anzahlBalken; i++) {
-            if(values[i]<-1){
-                if(values[i]<-2.5){
-                    toReturn.add(i,(float) (sizeY)); // empty size
-                }else{
-                    toReturn.add(i, (float) (sizeY - sizeY * scaleY)); //full size
+            if (values[i] < -1) {
+                if (values[i] < -2.5) {
+                    toReturn.add(i, (float) (sizeY)); // empty size
+                } else {
+                    toReturn.add(i, (float) (sizeY - sizeY*scaleY)); //full size
                 }
-            }else{
-                toReturn.add(i,(float) (sizeY - log(values[i])/maxHight*sizeY*scaleY));
+            } else {
+                double var = (log(values[i]) - log(minPlot)) / deltaMaxToMin;
+                toReturn.add(i, (float) (sizeY - var * sizeY * scaleY));
             }
         }
-        Log.i("top hight: ", String.valueOf(toReturn.get(0)));
-
         return toReturn;
     }
 
