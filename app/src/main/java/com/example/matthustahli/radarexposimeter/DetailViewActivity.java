@@ -419,11 +419,13 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             TextView freqText = (TextView) itemView.findViewById(R.id.textview_freq);
             //double quicky = currentMeasure.getFrequency()*0.001;
             freqText.setText(String.valueOf(GHz(currentMeasure.getFrequency())) + " GHz");
-            freqText.setMaxWidth((int)textViewSize);
+            freqText.setWidth((int) textViewSize);
+            //freqText.setMaxWidth((int)textViewSize);
 
             //set median
             TextView rmsBar = (TextView) itemView.findViewById(R.id.textview_rms);
             TextView rmsText = (TextView) itemView.findViewById(R.id.show_rms);
+            rmsText.setWidth((int)barWidthMax);
             if(currentMeasure.getRMS()<-1){
                 if(currentMeasure.getRMS()<-2.5){
                     rmsText.setText(" < min");
@@ -436,6 +438,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             }else{
                 rmsText.setText(String.valueOf(roundDouble(currentMeasure.getRMS())) + " V/m");
                 rmsBar.setBackgroundColor(colorBar);
+                //rmsBar.setWidth((int) getMySizeComparedToMax(5500,'R'));    //for shure to high..
                 rmsBar.setWidth( (int) getMySizeComparedToMax(currentMeasure.getRMS(),'R'));
             }
 
@@ -443,6 +446,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             //set peak
             TextView peakBar = (TextView) itemView.findViewById(R.id.textview_peak);
             TextView peakText = (TextView) itemView.findViewById(R.id.show_peak);
+            peakText.setWidth((int)barWidthMax);
             if(currentMeasure.getPeak()<-1){
                 if(currentMeasure.getPeak()<-2.5){
                     peakText.setText(" < min");
@@ -455,6 +459,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             }else{
                 peakText.setText(String.valueOf(roundDouble(currentMeasure.getPeak())) + " V/m");
                 peakBar.setBackgroundColor(colorBar);
+                //peakBar.setWidth((int) getMySizeComparedToMax(5500,'P'));
                 peakBar.setWidth((int) getMySizeComparedToMax(currentMeasure.getPeak(),'P'));
             }
             return itemView;
