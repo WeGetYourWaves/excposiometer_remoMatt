@@ -61,7 +61,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     //variables for plot
     Rectangle LargePeakBars, SmallRMSBars;
     Display display;
-    int colorFix, colorBar, colorActive, colorLimit, colorEmpty, activeBar = 0;
+    int colorFix, colorBar, colorActive, colorLimit, colorEmpty, colorButtonActiveMode,colorButtonInactive,activeBar = 0;
     double abstandZwischenBalken = 5.0; //5dp
     Paint paintFix, paintBar, paintActive, paintLimit, paintEmpty;
     TextView TVMaxValue, TVMinValue, TVMiddleValue, tv_peakValue, tv_rmsValue;
@@ -216,7 +216,8 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         colorBar = TimeLineActivity.this.getResources().getColor(R.color.normalBar);
         colorActive = TimeLineActivity.this.getResources().getColor(R.color.activeBar);
         colorLimit = TimeLineActivity.this.getResources().getColor(R.color.limitBar);
-        //colorEmpty= Color.WHITE;
+        colorButtonActiveMode = TimeLineActivity.this.getResources().getColor(R.color.active_mode_button_color);
+        colorButtonInactive = TimeLineActivity.this.getResources().getColor(R.color.choose_mode_button_color);
         colorEmpty = TimeLineActivity.this.getResources().getColor(R.color.background);
         paintEmpty.setColor(colorEmpty);
         paintEmpty.setStyle(Paint.Style.FILL);
@@ -322,6 +323,27 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         b_startStop.setOnClickListener(this);
     }
 
+    private void changeColorOfSelectedMode(){
+        b_modeNormal.setBackgroundColor(colorButtonInactive);
+        b_mode21dB.setBackgroundColor(colorButtonInactive);
+        b_mode42dB.setBackgroundColor(colorButtonInactive);
+        b_mode_accumulation.setBackgroundColor(colorButtonInactive);
+        switch (myMode){
+            case "normal mode":
+                b_modeNormal.setBackgroundColor(colorButtonActiveMode);
+                break;
+            case "-21 dB":
+                b_mode21dB.setBackgroundColor(colorButtonActiveMode);
+                break;
+            case "-42 dB":
+                b_mode42dB.setBackgroundColor(colorButtonActiveMode);
+                break;
+            case "LNA on":
+                b_mode_accumulation.setBackgroundColor(colorButtonActiveMode);
+                break;
+        }
+    }
+
     @Override
     public void onClick(View v) {
         Timeline_Packet_Trigger timeStop = new Timeline_Packet_Trigger(device_id, attenuator, freq, (char) 0);
@@ -383,6 +405,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                     settings.setVisibility(LinearLayout.GONE);
                 } else {
                     settings.setVisibility(LinearLayout.VISIBLE);
+                    changeColorOfSelectedMode();
                 }
                 break;
             case R.id.startStopButton:

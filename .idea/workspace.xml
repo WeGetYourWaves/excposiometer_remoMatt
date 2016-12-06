@@ -46,21 +46,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Rectangle.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/Rectangle.java">
+      <file leaf-file-name="OverviewScanPlotActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/OverviewScanPlotActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="79" column="71" selection-start-line="79" selection-start-column="71" selection-end-line="79" selection-end-column="71" />
+            <state relative-caret-position="150">
+              <caret line="221" column="0" selection-start-line="221" selection-start-column="0" selection-end-line="240" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DetailViewActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="colors.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="58" selection-start-line="5" selection-start-column="58" selection-end-line="5" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DetailViewActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/DetailViewActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="441" column="16" selection-start-line="441" selection-start-column="16" selection-end-line="441" selection-end-column="16" />
+            <state relative-caret-position="219">
+              <caret line="275" column="48" selection-start-line="275" selection-start-column="48" selection-end-line="275" selection-end-column="48" />
               <folding>
                 <element signature="e#1175#1184#0" expanded="true" />
                 <element signature="e#1294#1307#0" expanded="true" />
@@ -69,73 +79,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="drop_down_allert.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/drop_down_allert.xml">
+      <file leaf-file-name="TimeLineActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/TimeLineActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <state relative-caret-position="-2445">
+              <caret line="63" column="106" selection-start-line="63" selection-start-column="106" selection-end-line="63" selection-end-column="106" />
               <folding />
             </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_time_line.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_time_line.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="37" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="one_list_item.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/one_list_item.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="40" column="43" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
-              <folding>
-                <element signature="e#746#768#0" expanded="true" />
-                <element signature="e#1054#1076#0" expanded="true" />
-                <element signature="e#1396#1418#0" expanded="true" />
-                <element signature="e#1538#1566#0" expanded="true" />
-                <element signature="e#1748#1770#0" expanded="true" />
-                <element signature="e#1889#1917#0" expanded="true" />
-                <marker date="1481020853000" expanded="false" signature="2887:2909" ph="&quot;30dp&quot;" />
-              </folding>
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dimens.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="44" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_overview_scan_plot.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_overview_scan_plot.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-209">
-              <caret line="85" column="29" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
           </provider>
         </entry>
       </file>
@@ -1863,13 +1813,13 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/Fake_TCP_Server.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/AttenuatorMainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_time_line.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/OverviewScanPlotActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/Rectangle.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/TimeLineActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/one_list_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/OverviewScanPlotActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/TimeLineActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/DetailViewActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
       </list>
     </option>
   </component>
@@ -2037,7 +1987,7 @@
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="device.picker.selection" value="0109d97710c5a871 Galaxy_Nexus_API_25 Nexus_5X_API_25" />
+    <property name="device.picker.selection" value="0109d97710c5a871" />
     <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlPreviewForm.SHOW" value="false" />
     <property name="FullScreen" value="true" />
   </component>
@@ -2519,14 +2469,14 @@
           <folding>
             <element signature="e#1175#1184#0" expanded="true" />
             <element signature="e#1294#1307#0" expanded="true" />
-            <element signature="e#10513#10808#0" expanded="false" />
-            <element signature="e#10807#10808#0" expanded="false" />
-            <element signature="e#10844#10987#0" expanded="false" />
-            <element signature="e#10986#10987#0" expanded="false" />
-            <element signature="e#11457#12295#0" expanded="false" />
-            <element signature="e#12294#12295#0" expanded="false" />
-            <element signature="e#12519#13453#0" expanded="false" />
-            <element signature="e#13452#13453#0" expanded="false" />
+            <element signature="e#11627#11922#0" expanded="false" />
+            <element signature="e#11921#11922#0" expanded="false" />
+            <element signature="e#11958#12101#0" expanded="false" />
+            <element signature="e#12100#12101#0" expanded="false" />
+            <element signature="e#12571#13409#0" expanded="false" />
+            <element signature="e#13408#13409#0" expanded="false" />
+            <element signature="e#13633#14567#0" expanded="false" />
+            <element signature="e#14566#14567#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2586,14 +2536,14 @@
           <folding>
             <element signature="e#1175#1184#0" expanded="true" />
             <element signature="e#1294#1307#0" expanded="true" />
-            <element signature="e#10513#10808#0" expanded="false" />
-            <element signature="e#10807#10808#0" expanded="false" />
-            <element signature="e#10844#10987#0" expanded="false" />
-            <element signature="e#10986#10987#0" expanded="false" />
-            <element signature="e#11457#12295#0" expanded="false" />
-            <element signature="e#12294#12295#0" expanded="false" />
-            <element signature="e#12519#13453#0" expanded="false" />
-            <element signature="e#13452#13453#0" expanded="false" />
+            <element signature="e#11627#11922#0" expanded="false" />
+            <element signature="e#11921#11922#0" expanded="false" />
+            <element signature="e#11958#12101#0" expanded="false" />
+            <element signature="e#12100#12101#0" expanded="false" />
+            <element signature="e#12571#13409#0" expanded="false" />
+            <element signature="e#13408#13409#0" expanded="false" />
+            <element signature="e#13633#14567#0" expanded="false" />
+            <element signature="e#14566#14567#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2631,14 +2581,14 @@
           <folding>
             <element signature="e#1175#1184#0" expanded="true" />
             <element signature="e#1294#1307#0" expanded="true" />
-            <element signature="e#10513#10808#0" expanded="false" />
-            <element signature="e#10807#10808#0" expanded="false" />
-            <element signature="e#10844#10987#0" expanded="false" />
-            <element signature="e#10986#10987#0" expanded="false" />
-            <element signature="e#11457#12295#0" expanded="false" />
-            <element signature="e#12294#12295#0" expanded="false" />
-            <element signature="e#12519#13453#0" expanded="false" />
-            <element signature="e#13452#13453#0" expanded="false" />
+            <element signature="e#11627#11922#0" expanded="false" />
+            <element signature="e#11921#11922#0" expanded="false" />
+            <element signature="e#11958#12101#0" expanded="false" />
+            <element signature="e#12100#12101#0" expanded="false" />
+            <element signature="e#12571#13409#0" expanded="false" />
+            <element signature="e#13408#13409#0" expanded="false" />
+            <element signature="e#13633#14567#0" expanded="false" />
+            <element signature="e#14566#14567#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2673,14 +2623,14 @@
           <folding>
             <element signature="e#1175#1184#0" expanded="true" />
             <element signature="e#1294#1307#0" expanded="true" />
-            <element signature="e#10513#10808#0" expanded="false" />
-            <element signature="e#10807#10808#0" expanded="false" />
-            <element signature="e#10844#10987#0" expanded="false" />
-            <element signature="e#10986#10987#0" expanded="false" />
-            <element signature="e#11457#12295#0" expanded="false" />
-            <element signature="e#12294#12295#0" expanded="false" />
-            <element signature="e#12519#13453#0" expanded="false" />
-            <element signature="e#13452#13453#0" expanded="false" />
+            <element signature="e#11627#11922#0" expanded="false" />
+            <element signature="e#11921#11922#0" expanded="false" />
+            <element signature="e#11958#12101#0" expanded="false" />
+            <element signature="e#12100#12101#0" expanded="false" />
+            <element signature="e#12571#13409#0" expanded="false" />
+            <element signature="e#13408#13409#0" expanded="false" />
+            <element signature="e#13633#14567#0" expanded="false" />
+            <element signature="e#14566#14567#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2700,14 +2650,14 @@
           <folding>
             <element signature="e#1175#1184#0" expanded="true" />
             <element signature="e#1294#1307#0" expanded="true" />
-            <element signature="e#10513#10808#0" expanded="false" />
-            <element signature="e#10807#10808#0" expanded="false" />
-            <element signature="e#10844#10987#0" expanded="false" />
-            <element signature="e#10986#10987#0" expanded="false" />
-            <element signature="e#11457#12295#0" expanded="false" />
-            <element signature="e#12294#12295#0" expanded="false" />
-            <element signature="e#12519#13453#0" expanded="false" />
-            <element signature="e#13452#13453#0" expanded="false" />
+            <element signature="e#11627#11922#0" expanded="false" />
+            <element signature="e#11921#11922#0" expanded="false" />
+            <element signature="e#11958#12101#0" expanded="false" />
+            <element signature="e#12100#12101#0" expanded="false" />
+            <element signature="e#12571#13409#0" expanded="false" />
+            <element signature="e#13408#13409#0" expanded="false" />
+            <element signature="e#13633#14567#0" expanded="false" />
+            <element signature="e#14566#14567#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2817,14 +2767,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/DetailView_Packet_Trigger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="35" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/Fake_TCP_Server.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1515">
@@ -2835,14 +2777,6 @@
             <element signature="method#device_name#0;class#Fake_TCP_Server#0" expanded="false" />
             <element signature="method#reserviert#0;class#Fake_TCP_Server#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/AttenuatorMainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="255" column="15" selection-start-line="255" selection-start-column="15" selection-end-line="255" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2878,30 +2812,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/OverviewScanPlotActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="573" column="11" selection-start-line="573" selection-start-column="0" selection-end-line="574" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/TimeLineActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3586">
-          <caret line="634" column="36" selection-start-line="634" selection-start-column="36" selection-end-line="634" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_attenuator_main.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -2930,17 +2840,6 @@
           <caret line="79" column="71" selection-start-line="79" selection-start-column="71" selection-end-line="79" selection-end-column="71" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/drop_down_allert.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
@@ -2981,14 +2880,65 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/drop_down_allert.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="49" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/DetailView_Packet_Trigger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="35" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/OverviewScanPlotActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="221" column="0" selection-start-line="221" selection-start-column="0" selection-end-line="240" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/DetailViewActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="441" column="16" selection-start-line="441" selection-start-column="16" selection-end-line="441" selection-end-column="16" />
+        <state relative-caret-position="219">
+          <caret line="275" column="48" selection-start-line="275" selection-start-column="48" selection-end-line="275" selection-end-column="48" />
           <folding>
             <element signature="e#1175#1184#0" expanded="true" />
             <element signature="e#1294#1307#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/AttenuatorMainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1680">
+          <caret line="255" column="15" selection-start-line="255" selection-start-column="15" selection-end-line="255" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/matthustahli/radarexposimeter/TimeLineActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2445">
+          <caret line="63" column="106" selection-start-line="63" selection-start-column="106" selection-end-line="63" selection-end-column="106" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="58" selection-start-line="5" selection-start-column="58" selection-end-line="5" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>

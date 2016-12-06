@@ -55,7 +55,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     //----------------------------------------------------------------------
     //setup variables
     Rectangle coord;
-    int colorFix, colorBar, colorActive, colorLimit, colorToHigh ;
+    int colorFix, colorBar, colorActive, colorLimit, colorToHigh, colorButtonActiveMode, colorButtonInactive ;
     Paint paintFix, paintBar, paintActive, paintLimit,paintToHigh;
     Display display;
     Point size;
@@ -219,6 +219,27 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         }
     }
 
+    private void changeColorOfSelectedMode(){
+        b_normal.setBackgroundColor(colorButtonInactive);
+        b_21dB.setBackgroundColor(colorButtonInactive);
+        b_41dB.setBackgroundColor(colorButtonInactive);
+        b_accu.setBackgroundColor(colorButtonInactive);
+        switch (myMode){
+            case "normal mode":
+                b_normal.setBackgroundColor(colorButtonActiveMode);
+                break;
+            case "-21 dB":
+                b_21dB.setBackgroundColor(colorButtonActiveMode);
+                break;
+            case "-42 dB":
+                b_41dB.setBackgroundColor(colorButtonActiveMode);
+                break;
+            case "LNA on":
+                b_accu.setBackgroundColor(colorButtonActiveMode);
+                break;
+        }
+    }
+
     //----------------------------------------------------------------
     @Override
     public void onClick(View v) {
@@ -351,6 +372,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                     settings.setVisibility(LinearLayout.GONE);
                 } else {
                     settings.setVisibility(LinearLayout.VISIBLE);
+                    changeColorOfSelectedMode();
                 }
 
                 break;
@@ -549,6 +571,8 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         colorBar = OverviewScanPlotActivity.this.getResources().getColor(R.color.normalBar);
         colorActive = OverviewScanPlotActivity.this.getResources().getColor(R.color.activeBar);
         colorToHigh = OverviewScanPlotActivity.this.getResources().getColor(R.color.toHighColor);
+        colorButtonActiveMode = OverviewScanPlotActivity.this.getResources().getColor(R.color.active_mode_button_color);
+        colorButtonInactive = OverviewScanPlotActivity.this.getResources().getColor(R.color.choose_mode_button_color);
         paintToHigh.setColor(colorToHigh);
         paintLimit.setColor(colorLimit);
         paintLimit.setStyle(Paint.Style.FILL);
@@ -622,26 +646,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     }*/
 
     private void setValueOfMaxAndMinInYAxe(){
-        int maxSizeInVolt=0;
-        double minSizeInVolt=0;
-        switch (myMode){
-            case "normal mode":
-                maxSizeInVolt=50;
-                minSizeInVolt=0.5;
-                break;
-            case "-21 dB":
-                maxSizeInVolt=500;
-                minSizeInVolt=0.5;
-                break;
-            case "-42 dB":
-                maxSizeInVolt=5000;
-                minSizeInVolt=0.5;
-                break;
-            case "LNA on":
-                maxSizeInVolt=5;
-                minSizeInVolt=0.5;
-                break;
-        }
         TVMaxValue.setText(String.valueOf(maxPlot)+" V/m");
         TVMinValue.setText(String.valueOf(minPlot)+" V/m");
         TVMinValue.bringToFront();

@@ -52,6 +52,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     Display display;
     Point size;
     float barWidthMax, textViewSize;
+    int colorButtonActiveMode, colorButtonInactive;
 
 
 
@@ -179,6 +180,8 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         display.getSize(size);
         barWidthMax=size.x/3;
         textViewSize = size.x/4;
+        colorButtonActiveMode = DetailViewActivity.this.getResources().getColor(R.color.active_mode_button_color);
+        colorButtonInactive = DetailViewActivity.this.getResources().getColor(R.color.choose_mode_button_color);
     }
 
     private void setButtonsOnClickListener() {
@@ -188,6 +191,27 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         b_accu.setOnClickListener(this);
         b_settings.setOnClickListener(this);
         b_startStop.setOnClickListener(this);
+    }
+
+    private void changeColorOfSelectedMode(){
+        b_normal.setBackgroundColor(colorButtonInactive);
+        b_21dB.setBackgroundColor(colorButtonInactive);
+        b_41dB.setBackgroundColor(colorButtonInactive);
+        b_accu.setBackgroundColor(colorButtonInactive);
+        switch (myMode){
+            case "normal mode":
+                b_normal.setBackgroundColor(colorButtonActiveMode);
+                break;
+            case "-21 dB":
+                b_21dB.setBackgroundColor(colorButtonActiveMode);
+                break;
+            case "-42 dB":
+                b_41dB.setBackgroundColor(colorButtonActiveMode);
+                break;
+            case "LNA on":
+                b_accu.setBackgroundColor(colorButtonActiveMode);
+                break;
+        }
     }
 
     public void onClick(View v) {
@@ -249,6 +273,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 } else {
                     settings.setVisibility(LinearLayout.VISIBLE);
                     visibleList.setVisibility(ListView.GONE);
+                    changeColorOfSelectedMode();
                 }
                 break;
             case R.id.startStopButton:
