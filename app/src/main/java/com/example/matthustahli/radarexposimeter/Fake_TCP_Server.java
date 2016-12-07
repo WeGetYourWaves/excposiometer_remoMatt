@@ -321,6 +321,9 @@ public class Fake_TCP_Server implements TCP_SERVER {
                 byteArray[0] = (byte)(Integr >> 8);
                 byteArray[1] = (byte)Integr;
             }
+            else if (byteArray.length == 1){
+                byteArray[0] = (byte) Integr;
+            }
         }
         return byteArray;
     }

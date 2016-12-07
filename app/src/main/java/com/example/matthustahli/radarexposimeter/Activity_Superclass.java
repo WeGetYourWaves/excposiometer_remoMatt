@@ -43,62 +43,62 @@ public class Activity_Superclass implements Serializable {
         } else return cali_LNA_Peak.get_field_strength(freq, peak_exposi);
     }
 
-    public int get_maxPlot(int attenuator, char measurement_type) {
+    public double get_maxPlot(int attenuator, char measurement_type) {
         int length;
         if (measurement_type == 'P') {
             if (attenuator == 0) {
                 length = cali_NormPeak.strength_indexes;
-                return cali_NormPeak.cali_table[0][length - 1] / 1000;
+                return ((double) cali_NormPeak.cali_table[0][length - 1]) / 1000;
             } else if (attenuator == 1) {
                 length = cali_att21Peak.strength_indexes;
-                return cali_att21Peak.cali_table[0][length - 1] / 1000;
+                return ((double) cali_att21Peak.cali_table[0][length - 1]) / 1000;
             } else if (attenuator == 2) {
                 length = cali_att42Peak.strength_indexes;
-                return cali_att42Peak.cali_table[0][length - 1] / 1000;
+                return ((double) cali_att42Peak.cali_table[0][length - 1]) / 1000;
             } else if (attenuator == 3) {
                 length = cali_LNA_Peak.strength_indexes;
-                return cali_LNA_Peak.cali_table[0][length - 1] / 1000;
+                return ((double) cali_LNA_Peak.cali_table[0][length - 1]) / 1000;
             }
         }
         if (measurement_type == 'R') {
             if (attenuator == 0) {
                 length = cali_NormRMS.strength_indexes;
-                return cali_NormRMS.cali_table[0][length - 1] / 1000;
+                return ((double) cali_NormRMS.cali_table[0][length - 1]) / 1000;
             } else if (attenuator == 1) {
                 length = cali_att21RMS.strength_indexes;
-                return cali_att21RMS.cali_table[0][length - 1] / 1000;
+                return ((double) cali_att21RMS.cali_table[0][length - 1]) / 1000;
             } else if (attenuator == 2) {
                 length = cali_att42RMS.strength_indexes;
-                return cali_att42RMS.cali_table[0][length - 1] / 1000;
+                return ((double) cali_att42RMS.cali_table[0][length - 1]) / 1000;
             } else if (attenuator == 3) {
                 length = cali_LNA_RMS.strength_indexes;
-                return cali_LNA_RMS.cali_table[0][length - 1] / 1000;
+                return ((double) cali_LNA_RMS.cali_table[0][length - 1]) / 1000;
             }
         }
         return -1;
     }
 
-    public int get_minPlot(int attenuator, char measurement_type) {
+    public double get_minPlot(int attenuator, char measurement_type) {
         if (measurement_type == 'P') {
             if (attenuator == 0) {
-                return cali_NormPeak.cali_table[0][1];
+                return ((double) cali_NormPeak.cali_table[0][1])/ 1000;
             } else if (attenuator == 1) {
-                return cali_att21Peak.cali_table[0][1];
+                return ((double) cali_att21Peak.cali_table[0][1])/ 1000;
             } else if (attenuator == 2) {
-                return cali_att42Peak.cali_table[0][1];
+                return ((double) cali_att42Peak.cali_table[0][1])/ 1000;
             } else if (attenuator == 3) {
-                return cali_LNA_Peak.cali_table[0][1];
+                return ((double)cali_LNA_Peak.cali_table[0][1])/ 1000;
             }
         }
         if (measurement_type == 'R') {
             if (attenuator == 0) {
-                return cali_NormRMS.cali_table[0][1];
+                return ((double) cali_NormRMS.cali_table[0][1])/ 1000;
             } else if (attenuator == 1) {
-                return cali_att21RMS.cali_table[0][1];
+                return ((double) cali_att21RMS.cali_table[0][1])/ 1000;
             } else if (attenuator == 2) {
-                return cali_att42RMS.cali_table[0][1];
+                return ((double) cali_att42RMS.cali_table[0][1])/ 1000;
             } else if (attenuator == 3) {
-                return cali_LNA_RMS.cali_table[0][1];
+                return ((double) cali_LNA_RMS.cali_table[0][1])/ 1000;
             }
         }
         return -1;
