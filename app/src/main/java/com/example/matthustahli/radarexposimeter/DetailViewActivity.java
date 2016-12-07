@@ -635,7 +635,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
     public void change_MinMaxPlot() {
         maxPlotP = calibration.get_maxPlot(attenuator, 'P');
-        minPlotP = calibration.get_maxPlot(attenuator, 'P');
+        minPlotP = calibration.get_minPlot(attenuator, 'P');
         maxPlotR = calibration.get_maxPlot(attenuator, 'R');
         minPlotR = calibration.get_minPlot(attenuator, 'R');
     }
