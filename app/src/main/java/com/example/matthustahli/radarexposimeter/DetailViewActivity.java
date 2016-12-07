@@ -459,10 +459,10 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             rmsText.setWidth((int)barWidthMax);
             if(currentMeasure.getRMS()<-1){
                 if(currentMeasure.getRMS()<-2.5){
-                    rmsText.setText(" < min");
+                    rmsText.setText('<' + Double.toString(minPlotR));
                     rmsBar.setBackgroundColor(colorEmpty);
                 }else{
-                    rmsText.setText(" > max");
+                    rmsText.setText('>' + Double.toString(maxPlotR));
                     rmsBar.setBackgroundColor(colorLimit);
                     rmsBar.setWidth((int) getMySizeComparedToMax(5500,'R'));    //for shure to high..
                 }
@@ -480,10 +480,10 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             peakText.setWidth((int)barWidthMax);
             if(currentMeasure.getPeak()<-1){
                 if(currentMeasure.getPeak()<-2.5){
-                    peakText.setText(" < min");
+                    peakText.setText('<' + Double.toString(minPlotP));
                     peakBar.setBackgroundColor(colorEmpty);
                 }else{
-                    peakText.setText(" > max");
+                    peakText.setText('>' + Double.toString(maxPlotP));
                     peakBar.setBackgroundColor(colorLimit);
                     peakBar.setWidth((int) getMySizeComparedToMax(5500,'P'));
                 }
@@ -514,9 +514,9 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     }
 
     private double roundDouble(double toRound){
-        double output = toRound*100;
+        double output = toRound*1000;
         output = round(output);
-        output = output/100.0;
+        output = output/1000.0;
         return output;
     }
 

@@ -499,9 +499,9 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     private void updateTextViewsShowingValues(int position) {
         if (rmsValues[position] < -1) {
             if (rmsValues[position] < -2.5) {
-                tv_rmsValue.setText("< min");
+                tv_rmsValue.setText('<' + Double.toString(minPlot));
             } else {
-                tv_rmsValue.setText("> max");
+                tv_rmsValue.setText('>' + Double.toString(maxPlot));
             }
         } else {
             double valueToShow = rmsValues[position];
@@ -511,9 +511,9 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         }
         if (peakValues[position] < -1) {
             if (peakValues[position] < -2.5) {
-                tv_peakValue.setText("< min");
+                tv_peakValue.setText('<' + Double.toString(minPlot));
             }else {
-                tv_peakValue.setText("> max");
+                tv_peakValue.setText('>' + Double.toString(maxPlot));
             }
         } else {
             double valueToShow = peakValues[position];
@@ -675,9 +675,9 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private double roundDouble(double toRound){
-        double output = toRound*100;
+        double output = toRound*1000;
         output = round(output);
-        output = output/100.0;
+        output = output/1000.0;
         return output;
     }
 

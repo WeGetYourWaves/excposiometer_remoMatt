@@ -516,27 +516,27 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         if(measurement_type=='R'){
             if(rms[position]<-1){
                 if(rms[position]<-2.5){
-                    selectedValue.setText("< min ");
+                    selectedValue.setText('<' + Double.toString(minPlot));
                 }else{
-                    selectedValue.setText("> max ");
+                    selectedValue.setText('>' + Double.toString(maxPlot));
                 }
             }else{
             double valueToShow = rms[position] ;
-            valueToShow= Math.round(valueToShow*100);  // runden auf ##.#
-            valueToShow = valueToShow/100;
+            valueToShow= Math.round(valueToShow*1000);  // runden auf ##.#
+            valueToShow = valueToShow/1000;
             selectedValue.setText(String.valueOf(valueToShow)+ " V/m ");
             }
         }else{
             if(peak[position]<-1){
                 if(peak[position]<-2.5){
-                    selectedValue.setText("< min ");
+                    selectedValue.setText('<' + Double.toString(minPlot));
                 }else{
-                    selectedValue.setText("> max ");
+                    selectedValue.setText('>' + Double.toString(maxPlot));
                 }
             }else {
                 double valueToShow = peak[position];
-                valueToShow = Math.round(valueToShow * 100);  // runden auf ##.#
-                valueToShow = valueToShow / 100;
+                valueToShow = Math.round(valueToShow * 1000);  // runden auf ##.#
+                valueToShow = valueToShow / 1000;
                 selectedValue.setText(String.valueOf(valueToShow) + " V/m ");
             }
         }
