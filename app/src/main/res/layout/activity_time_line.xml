@@ -11,10 +11,10 @@
         android:id="@+id/imageView_timeline_bitmap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="10dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp"
-        android:layout_toRightOf="@+id/imageview_scale"
+        android:layout_toRightOf="@+id/tv_minValueScale"
         />
 
     <TextView
@@ -44,12 +44,9 @@
         android:textSize="15dp"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="5dp"
+        android:layout_alignBottom="@+id/image_bitmap"
         />
 
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="match_parent"
-        android:id="@+id/imageview_scale"/>
 
     <TextView
         android:id="@+id/tv_rmsValue"
