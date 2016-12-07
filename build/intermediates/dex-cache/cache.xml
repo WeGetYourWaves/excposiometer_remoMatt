@@ -3,219 +3,219 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_3a4a659fb1280d8db867975124846ab2504877d6\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_c61daa12060765a38f515be220bb9994e5184b89\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-appindexing-8.4.0_2e5dc6d1fb57603e8ac4eb4ea1ebbfabbc3cfe52\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Program Files\Android\Android Studio\gradle\m2repository\commons-io\commons-io\2.4\commons-io-2.4.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\commons-io-2.4_b2955a73e8fdec69863902c786dced8321b28c5c\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_a1e9b68de4bc493a3e8ed5fe05f97b54af4f3e9b\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_4038fc4f73c0cfd3a938820c43a26a38de6b9aef\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\.gradle\caches\modules-2\files-2.1\org.jetbrains\annotations-java5\15.0\7011b4551a8451906759b05814c58b9eb829ea9b\annotations-java5-15.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="7011b4551a8451906759b05814c58b9eb829ea9b">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\annotations-java5-15.0_2a411796aa9d117ce4ad89cad4e5156664088a20\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_1002284e924c5436e256c9b86b8dd5f3f22fa7cd\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_bfa1f988df998db3876a9b879c5356adea26aba2\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.2.1_3456071a96a8f3a8aa02d6c087f21c484cea2407\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_111fbb97d9d36be7762c7cd860d1a3dad104a07b\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.2.1\support-annotations-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.2.1_be5de4818c9396337f4cd6b127b8f947fc7787e4\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_1b134ed25c21fa8cf29e259a1372898655913576\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_b7b7ce8901cbd353fe7756c36a5a8a9c30c9c3b8\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-8.4.0_61b65a3e7c1e46d2e7ddae22401e104d10da5637\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.1_1bfebfb3ef0d447493e284f241c2ab0c05cb97ab\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="867dad63c33388ff8c7644b236579355036d075f">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_cb2fe84a4a756ba673c03677e355b068cddb6788\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\design\24.2.1\jars\classes.jar"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.android.support/design/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
         sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-24.2.1_02c57ff2ba4d6a79ebb0254426ba8ae9c3fd3ecc\classes.dex" />
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-24.2.1_e71e4472dcdf8619c0d783d6eae364363e321531/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-24.2.1_7d9ce1a72b756fdacd4f260a1b9fc345dd2f74fa\classes.dex" />
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-24.2.1_0e49f4190142b3182e6142ba0fee44475eb8fb0b/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-8.4.0_4f707164313ba91eda91e735be1a13a728449b8d\classes.dex" />
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-24.2.1_e2778129218b44ee9489bed7e3a4f35a43b3064a/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="58df2716bbd6cae25ed5d2d16c5e250da2c794ef">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_8fbf39bd9c82523274d16561e29558d029e01121\classes.dex" />
+        sha1="32dec62450dd2a26ead84d027dbb75315c9bb9c6">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_cbdb0b50784a09a9923bbf2138a833ec4328163c/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="bdd73a99659ca4eb71c4da32d1a7f71c827927f8">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_6bfe878b9283481358178e64ad0ebb19966c724d\classes.dex" />
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-24.2.1_dfae5546e72a157ee6d167f80759100328c8aa88/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_c4fdc7fb90c3b07ec64c6dbd00e612d67d81b486\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\classes.jar"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
         sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
-        <dex dex="C:\Users\Remo\AndroidStudioProjects\excposiometer_remoMatt\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-24.2.1_514b2502ddc5cb05ab8429c81a8feb23ca973115\classes.dex" />
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-24.2.1_c7a799f3a273958b3883710886b8b9b519bf0983/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="adf34d2c556b8ae69ffeee8d9815e9b7115eaa0b">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_0f94ce6e33e8b834ed87002d562d3e186d2e2419/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-24.2.1_8e6d78fb307c5c5e757e5b3c0b96cf0eb37a8fa2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-appindexing-8.4.0_90f1cd6060c875c471f4fc2a114db9712bf8ccce/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_cc78c9c0f4e8669bec76e815987ce5cc77c5e92f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_310593fe5e8fe4e170937e312b8e95a38d61453c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-24.2.1_410f4d21cf41beee6a60469c4b051fdbb7614709/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.2.1_ff40e1a6d3e7bb06c6dcf29d19da455f74b2be15/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations-java5/15.0/7011b4551a8451906759b05814c58b9eb829ea9b/annotations-java5-15.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="7011b4551a8451906759b05814c58b9eb829ea9b">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/annotations-java5-15.0_1978d6476a959a1a2410237814a5f1bb8a86e5bc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-24.2.1_bd2359a58d19463c5965bef08b003d56676fd89a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_63128fcf2dd46fb328b2dbf880d40fd08e9d6400/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-basement-8.4.0_30332742184004799e8e1594c6c079448a33aebc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Applications/Android Studio.app/Contents/gradle/m2repository/commons-io/commons-io/2.4/commons-io-2.4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/commons-io-2.4_db9d9c7f5dc9abc44c05f9a56b43532b2a4af315/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_f926f775fd1b90b9858ccd146457c8bd1bebb25f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-24.2.1_725e911409f485d3a5152daee84c8c0b969f34a0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_a12a5b4f29b4d3c72a615b15461a6d1127637048/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-24.2.1_6fa06ae342a489b8d064273735a5dae7a3ddcb50/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-base-8.4.0_6be1497aa3d4c657996b09be7abfa65d99ac82ca/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="/Users/matthustahli/Desktop/radarapp/app25.11/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-24.2.1_f0309fe04050301357636d12b99dcce667a53beb/classes.dex" />
     </item>
 
 </items>

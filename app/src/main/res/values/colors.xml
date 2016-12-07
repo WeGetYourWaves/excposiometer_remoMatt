@@ -15,7 +15,7 @@
     <color name="background_listview">#ebebeb</color>
     <color name="liveValues">#cccccc</color>
     <color name="reload">#448bf7</color>
-    <color name="status_plot">#eff744</color>
+    <color name="status_plot">#f2ff00</color>
     <color name="setting_button">#f79844</color>
     <color name="dropDown_Background">#807a939e</color>
     <color name="allert">#ff6666</color>
@@ -23,5 +23,6 @@
     <color name="toHighColor">#e4e3c8</color>
     <color name="next_inactive_button">#bad4b4</color>
     <color name="add_inactive_button">#d4b4d1</color>
+    <color name="upadeBar_inTimeline">#FFF2FF00</color>
 
 </resources>

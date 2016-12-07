@@ -83,6 +83,7 @@
         android:layout_marginTop="5dp"
         android:text="RMS: "
         android:textSize="20dp"
+        android:textColor="@color/add_button"
         android:gravity="right"
         />
     <TextView
@@ -94,6 +95,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="5dp"
         android:text="PEAK:"
+        android:textColor="@color/normalBar"
         android:gravity="right"
         android:textSize="20dp"
         />

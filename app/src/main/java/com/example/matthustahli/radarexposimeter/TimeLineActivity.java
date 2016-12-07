@@ -61,9 +61,9 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     //variables for plot
     Rectangle LargePeakBars, SmallRMSBars;
     Display display;
-    int colorFix, colorBar, colorActive, colorLimit, colorEmpty, colorButtonActiveMode,colorButtonInactive,activeBar = 0;
+    int colorFix, colorBar, colorActive, colorLimit, colorEmpty, colorButtonActiveMode,colorButtonInactive,colorStartStop,activeBar = 0;
     double abstandZwischenBalken = 5.0; //5dp
-    Paint paintFix, paintBar, paintActive, paintLimit, paintEmpty;
+    Paint paintFix, paintBar, paintActive, paintLimit, paintEmpty,paintStartStop;
     TextView TVMaxValue, TVMinValue, TVMiddleValue, tv_peakValue, tv_rmsValue;
     ImageView imageView;
     Bitmap bitmap;
@@ -212,6 +212,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         paintActive = new Paint();
         paintLimit = new Paint();
         paintEmpty = new Paint();
+        paintStartStop = new Paint();
         colorFix = TimeLineActivity.this.getResources().getColor(R.color.fixedBar);
         colorBar = TimeLineActivity.this.getResources().getColor(R.color.normalBar);
         colorActive = TimeLineActivity.this.getResources().getColor(R.color.activeBar);
@@ -219,6 +220,9 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         colorButtonActiveMode = TimeLineActivity.this.getResources().getColor(R.color.active_mode_button_color);
         colorButtonInactive = TimeLineActivity.this.getResources().getColor(R.color.inactive_mode_button_color);
         colorEmpty = TimeLineActivity.this.getResources().getColor(R.color.background);
+        colorStartStop = TimeLineActivity.this.getResources().getColor(R.color.status_plot);
+        paintStartStop.setColor(colorStartStop);
+        paintStartStop.setStyle(Paint.Style.FILL);
         paintEmpty.setColor(colorEmpty);
         paintEmpty.setStyle(Paint.Style.FILL);
         paintFix.setColor(colorFix);
@@ -230,11 +234,13 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         paintActive.setStyle(Paint.Style.FILL);
         canvas = new Canvas(bitmap);
         LargePeakBars = new Rectangle(anzahlBalken, abstandZwischenBalken, size.x, size.y, qickFixArray, scaleX, scaleY,maxPlot,minPlot);
-        SmallRMSBars = new Rectangle(anzahlBalken, abstandZwischenBalken + 20, size.x, size.y, qickFixArray, scaleX, scaleY,maxPlot,minPlot);
+        SmallRMSBars = new Rectangle(anzahlBalken, abstandZwischenBalken , size.x, size.y, qickFixArray, scaleX, scaleY,maxPlot,minPlot);
         TVMaxValue = (TextView) findViewById(R.id.tv_maxValueScale);
         TVMiddleValue = (TextView) findViewById(R.id.tv_middleValueScale);
         TVMinValue = (TextView) findViewById(R.id.tv_minValueScale);
         SetPositionOnScreenOfTextViews();
+        //tv_peakValue.setPaintFlags(paintActive.getColor());
+        //tv_peakValue.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
     }
 
     private void SetPositionOnScreenOfTextViews() {
@@ -250,6 +256,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     synchronized private void makePlot() {
         if (makePlotRunning == true) {
             int next = counter % anzahlBalken;
+            int updater = (counter+1)%anzahlBalken;
             if(next== activeBar){ tv_rmsValue.setText(""); tv_peakValue.setText("");}
             peakValues[next] = readPeak();  //need that to be able to show values in textviews
             rmsValues[next] = readRMS();
@@ -258,6 +265,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
             Log.d("Timeline peak", String.valueOf(lastValuePeak));
             Log.d("Timeline rms", String.valueOf(lastValueRms));
             //delet bar first
+            canvas.drawRect(LargePeakBars.getLeft(updater),(float) (size.y*(1-scaleY)), LargePeakBars.getRight(updater), LargePeakBars.getBottom(updater), paintStartStop); //paintEmpty also possible
             canvas.drawRect(LargePeakBars.getLeft(next), 0, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintEmpty);
             //canvas.drawRect(0,(float) (size.y*(1-scaleY)),size.x,(float) (size.y*(1-scaleY*0.99)),paintLimit);   //draws limit bar horizontal
             //draw the bar
