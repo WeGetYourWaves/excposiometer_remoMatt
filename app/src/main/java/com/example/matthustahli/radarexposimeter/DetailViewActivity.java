@@ -15,6 +15,9 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -52,6 +55,9 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     Point size;
     float barWidthMax, textViewSize;
     int colorButtonActiveMode, colorButtonInactive;
+    Animation animationSlideDown;
+    boolean goingToNextActivity = true;
+
 
 
 
@@ -348,22 +354,23 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
     private void handleClicksOnList() {
         final ListView listView = (ListView) findViewById(R.id.list_live_data);
-
-        //short click on item- go to specific plot
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override   //display choosen frequency in toast..
-            //from here, go to other activity which shows smaller plot..
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LiveMeasure chosenFrequency = measures.get(position);
-                Toast.makeText(DetailViewActivity.this, String.valueOf(chosenFrequency.getFrequency()), Toast.LENGTH_SHORT).show();
-                //go to new activity
-                Intent intent = new Intent(DetailViewActivity.this, TimeLineActivity.class);
-                intent.putExtra("frequency" ,chosenFrequency.getFrequency());
-                Toast.makeText(DetailViewActivity.this, "given: "+String.valueOf(chosenFrequency.getFrequency()),Toast.LENGTH_SHORT).show();
-                intent.putExtra("myMode",myMode);
-                startActivity(intent);
-            }
-        });
+            //short click on item- go to specific plot
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override   //display choosen frequency in toast..
+                //from here, go to other activity which shows smaller plot..
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if(goingToNextActivity==true){
+                    LiveMeasure chosenFrequency = measures.get(position);
+                    Toast.makeText(DetailViewActivity.this, String.valueOf(chosenFrequency.getFrequency()), Toast.LENGTH_SHORT).show();
+                    //go to new activity
+                    Intent intent = new Intent(DetailViewActivity.this, TimeLineActivity.class);
+                    intent.putExtra("frequency", chosenFrequency.getFrequency());
+                    Toast.makeText(DetailViewActivity.this, "given: " + String.valueOf(chosenFrequency.getFrequency()), Toast.LENGTH_SHORT).show();
+                    intent.putExtra("myMode", myMode);
+                    startActivity(intent);
+                    }
+                }
+            });
     }
 
     //   ----------------------------------------------------------------------------------------------------
@@ -613,7 +620,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
                     if (errorCode == 1){
                         //connection to ESP lost
-                        //handlesActivatingDropDown(0);
+                        ConnectionLostDropDown(0);
                     }
                 }
             }
@@ -639,4 +646,34 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         maxPlotR = calibration.get_maxPlot(attenuator, 'R');
         minPlotR = calibration.get_minPlot(attenuator, 'R');
     }
+
+    //handles the allert bar, for example when connection is lost.
+    private void ConnectionLostDropDown( Integer downOrUp) {
+        //sets listener, and handles drop down and drop up
+        animationSlideDown = AnimationUtils.loadAnimation(this, R.anim.anim_drop_down);
+        final LinearLayout layout_dropDown = (LinearLayout) findViewById(R.id.layout_dropDown);
+        TextView allert_text = (TextView) findViewById(R.id.textView_dropDownAllert);
+        if(downOrUp==0){
+            goingToNextActivity=false;
+            layout_dropDown.setVisibility(View.VISIBLE);
+            layout_dropDown.bringToFront();
+            ScaleAnimation scale = new ScaleAnimation(1,1,0,1);
+            scale.setDuration(400);
+            allert_text.startAnimation(scale);
+        }else{
+            ScaleAnimation scale = new ScaleAnimation(1,1,1,0);
+            scale.setDuration(400);
+            allert_text.startAnimation(scale);
+            scale.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {}
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    layout_dropDown.setVisibility(View.GONE);}
+                @Override
+                public void onAnimationRepeat(Animation animation) {}
+            });
+        }
+    }
+
 }

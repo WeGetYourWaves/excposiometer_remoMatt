@@ -18,6 +18,11 @@
         />
 
     <include
+        layout="@layout/drop_down_allert"
+        android:visibility="gone"
+        />
+
+    <include
         layout="@layout/settings"
         android:visibility="gone"
 

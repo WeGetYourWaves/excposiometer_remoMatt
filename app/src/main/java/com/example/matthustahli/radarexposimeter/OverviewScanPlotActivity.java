@@ -48,7 +48,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     final String LOG_TAG = "Overview";
     OverviewScanPlotActivityReceiver overviewScanPlotActivityReceiver = new OverviewScanPlotActivityReceiver(LOG_TAG);
     Activity_Superclass calibration;
-    boolean stateAddButton=true, stateNextButton=false;
+    boolean stateAddButton=true, stateNextButton=false, goingToNextActivity = true;
 
 
 
@@ -196,6 +196,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         final LinearLayout layout_dropDown = (LinearLayout) findViewById(R.id.layout_dropDown);
         TextView allert_text = (TextView) findViewById(R.id.textView_dropDownAllert);
         if(downOrUp==0){
+            goingToNextActivity=false;
             selectedFreq.setText("");
             selectedValue.setText("");
             layout_dropDown.setVisibility(View.VISIBLE);
@@ -351,7 +352,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 refreshStatusButtons();
                 break;
             case R.id.next_button:
-                if(stateNextButton==true){
+                if(stateNextButton==true && goingToNextActivity==true){
                     sendTrigger(viewStop.get_packet());
                     OpenDetailViewActivity();
                 }
