@@ -200,6 +200,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
             selectedFreq.setText("");
             selectedValue.setText("");
             layout_dropDown.setVisibility(View.VISIBLE);
+            layout_dropDown.bringToFront();
             ScaleAnimation scale = new ScaleAnimation(1,1,0,1);
             scale.setDuration(400);
             allert_text.startAnimation(scale);

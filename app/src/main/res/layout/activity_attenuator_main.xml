@@ -5,10 +5,7 @@
     android:layout_width="match_parent"
 
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+
     tools:context="com.example.matthustahli.radarexposimeter.AttenuatorMainActivity">
 
 
@@ -32,12 +29,18 @@
         android:layout_centerHorizontal="true"
         />
 
-<LinearLayout
+    <include
+        layout="@layout/drop_down_allert"
+        android:visibility="gone"
+        />
+
+    <LinearLayout
 
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_alignParentLeft="true"
+    android:layout_marginLeft="5dp" android:layout_marginTop="5dp"
     >
 
     <ImageButton
@@ -55,18 +58,7 @@
         android:textSize="18dp"
         />
 
-</LinearLayout>
-
-
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:id="@+id/b_chico"
-        android:background="@android:color/transparent"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        />
-
+    </LinearLayout>
 
 
     <LinearLayout
