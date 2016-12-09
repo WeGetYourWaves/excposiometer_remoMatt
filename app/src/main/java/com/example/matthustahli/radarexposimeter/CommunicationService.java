@@ -191,6 +191,7 @@ public class CommunicationService extends Service {
                 } else if (hostCmd == CMD_getCALI) {
                     SendDataToActivity(callipack);
                     Log.d(LOG_TAG, "someActivity requested callipack");
+                }
             }
             else if (intent.hasExtra(TRIGGER_Act2Serv)){
                 byte[] TriggerPack = intent.getByteArrayExtra(TRIGGER_Act2Serv);
