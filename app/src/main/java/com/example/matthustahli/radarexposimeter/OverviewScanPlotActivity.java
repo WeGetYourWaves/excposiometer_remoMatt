@@ -190,13 +190,14 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
     }
 
     //downOrUp: 0=godown, 1=goup
-    private void handlesActivatingDropDown(Integer downOrUp) {
+    private void handlesActivatingDropDown(Integer downOrUp, String errormessage) {
         //sets listener, and handles drop down and drop up
         animationSlideDown = AnimationUtils.loadAnimation(this, R.anim.anim_drop_down);
         final LinearLayout layout_dropDown = (LinearLayout) findViewById(R.id.layout_dropDown);
         TextView allert_text = (TextView) findViewById(R.id.textView_dropDownAllert);
         if(downOrUp==0){
             goingToNextActivity=false;
+            allert_text.setText(errormessage);
             selectedFreq.setText("");
             selectedValue.setText("");
             layout_dropDown.setVisibility(View.VISIBLE);
@@ -710,7 +711,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                     String errorMessage = error_packet.get_errorMessage();
                     if (errorCode == 1){
                         //connection to ESP lost
-                        handlesActivatingDropDown(0);
+                        handlesActivatingDropDown(0, errorMessage);
                     }
                 }
             }

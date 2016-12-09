@@ -620,7 +620,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
                     if (errorCode == 1){
                         //connection to ESP lost
-                        ConnectionLostDropDown(0);
+                        ConnectionLostDropDown(0, errorMessage);
                     }
                 }
             }
@@ -648,13 +648,14 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     }
 
     //handles the allert bar, for example when connection is lost.
-    private void ConnectionLostDropDown( Integer downOrUp) {
+    private void ConnectionLostDropDown( Integer downOrUp, String errormessage) {
         //sets listener, and handles drop down and drop up
         animationSlideDown = AnimationUtils.loadAnimation(this, R.anim.anim_drop_down);
         final LinearLayout layout_dropDown = (LinearLayout) findViewById(R.id.layout_dropDown);
         TextView allert_text = (TextView) findViewById(R.id.textView_dropDownAllert);
         if(downOrUp==0){
             goingToNextActivity=false;
+            allert_text.setText(errormessage);
             layout_dropDown.setVisibility(View.VISIBLE);
             layout_dropDown.bringToFront();
             ScaleAnimation scale = new ScaleAnimation(1,1,0,1);
