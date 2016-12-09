@@ -33,7 +33,7 @@ public class WifiDataBuffer implements Serializable {
             e.printStackTrace();
             dequeue_ToESP();
             enqueue_ToESP(packet);
-            SendErrorToActivity(1, "No Connection; Thread probably died and does not dequeue any more");
+            SendErrorToActivity(1, "There's no need to hurry. Relax it.");
         }
         return true;
     }

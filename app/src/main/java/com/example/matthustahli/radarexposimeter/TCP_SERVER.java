@@ -5,5 +5,5 @@ package com.example.matthustahli.radarexposimeter;
  */
 
 public interface TCP_SERVER {
-
+    void forceStop();
 }

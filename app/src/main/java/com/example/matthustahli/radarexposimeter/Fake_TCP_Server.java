@@ -48,18 +48,16 @@ public class Fake_TCP_Server implements TCP_SERVER {
     byte[] MODE = "P".getBytes(); // Peak, RMS, All
 
     Random rand = new Random();
-    final int TimeItTakesToMeasureRMS = 200; // milliseconds, used in measre()
-    final int TimeItTakesToMeasurePeak = 20; // milliseconds, used in measre()
-    private int cald_progress = 0;
+    final int TimeItTakesToMeasureRMS = 200; // milliseconds, used in measure()
+    final int TimeItTakesToMeasurePeak = 20; // milliseconds, used in measure()
+    Boolean ESPLostConnection = false;
+
+    public synchronized void  forceStop() {
+        this.ESPLostConnection = true;
+    }
 
     public enum STATE {Start, Waiting, Time, Scan, Detv, Callibrate, Stop}
 
-    public synchronized int get_Progress(){
-        return cald_progress;
-    }
-    public synchronized void increment_Progress() {
-        cald_progress += 1;
-    }
 
     public Fake_TCP_Server(final WifiDataBuffer wifiDataBuffer) throws IllegalStateException {
         Log.d(LOG_TAG,"Constructor of TCPServer called");
@@ -71,6 +69,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                 Log.d(LOG_TAG, "UncaughtExceptionHandler rethrows IllegalStateException " + ex.getMessage());
                 wifiDataBuffer.enque_FromESP(("ESP_ERROR: " + ex.getMessage()).getBytes());
                 ex.printStackTrace();
+                SendErrorToActivity(1, "UncaughtException -> Please restart App");
             }
         };
         Thread t = new Thread() {
@@ -88,119 +87,116 @@ public class Fake_TCP_Server implements TCP_SERVER {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                while (!Thread.currentThread().isInterrupted()) {
-                    //connect to ESP - serversocket.accept....
+                while (!Thread.currentThread().isInterrupted() && !ESPLostConnection) {
 
-                    while (!Thread.currentThread().isInterrupted() ) {
+                    for(STATE state = STATE.Start; state != STATE.Stop; state = getNextState(state)) {
 
-                        for(STATE state = STATE.Start; state != STATE.Stop; state = getNextState(state)) {
-
-                            ByteArrayOutputStream DataFromESP = new ByteArrayOutputStream();
-                            try {
-                                switch (state) {
-                                    case Start:
-                                        Log.d(LOG_TAG, "Current State = "+ state.toString());
-                                        sleep(2000); // 2 sec to turn on measurement device is fast
+                        ByteArrayOutputStream DataFromESP = new ByteArrayOutputStream();
+                        try {
+                            switch (state) {
+                                case Start:
+                                    Log.d(LOG_TAG, "Current State = "+ state.toString());
+                                    sleep(2000); // 2 sec to turn on measurement device is fast
+                                    DataFromESP.write(RD16);
+                                    DataFromESP.write(DRDY);
+                                    DataFromESP.write(device_id);
+                                    DataFromESP.write(LNA);
+                                    DataFromESP.write(reserviert(12, 0));
+                                    DataFromESP.write(battery_charge);
+                                    DataFromESP.write(battery_voltage);
+                                    DataFromESP.write(PEND);
+                                    send(DataFromESP.toByteArray());
+                                    break;
+                                case Waiting:
+                                    try {
+                                        sleep(500);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case Time:
+                                    DataFromESP.write(RD16);
+                                    DataFromESP.write(TIME);
+                                    DataFromESP.write(device_id);
+                                    DataFromESP.write(getSeqeneceNbr());
+                                    DataFromESP.write(getRTC());
+                                    DataFromESP.write(LNA);
+                                    DataFromESP.write(frequencies);
+                                    DataFromESP.write(measure(byteArray2int(frequencies)));
+                                    DataFromESP.write(reserviert(16, 0));
+                                    DataFromESP.write(reserviert(39, 0));
+                                    DataFromESP.write(battery_charge);
+                                    DataFromESP.write(battery_voltage);
+                                    DataFromESP.write(PEND);
+                                    send(DataFromESP.toByteArray());
+                                    break;
+                                case Scan:
+                                    DataFromESP.write(RD16);
+                                    DataFromESP.write(SCAN);
+                                    DataFromESP.write(device_id);
+                                    DataFromESP.write(getSeqeneceNbr());
+                                    DataFromESP.write(getRTC());
+                                    DataFromESP.write(LNA);
+                                    DataFromESP.write(frequencies);
+                                    DataFromESP.write(measure(byteArray2int(frequencies)));
+                                    DataFromESP.write(reserviert(16, 0));
+                                    DataFromESP.write(battery_charge);
+                                    DataFromESP.write(battery_voltage);
+                                    DataFromESP.write(PEND);
+                                    send(DataFromESP.toByteArray());
+                                    break;
+                                case Callibrate:
+                                    for(int i = 0; i < 28; ++i){
+                                        sleep(50);
+                                        ByteArrayOutputStream ProgressPack = new ByteArrayOutputStream(14);
+                                        ProgressPack.write(RD16);
+                                        ProgressPack.write(PROG);
+                                        ProgressPack.write(int2byteArray((int) (100.0 * i/27.0), 2));
+                                        ProgressPack.write(PEND);
+                                        send(ProgressPack.toByteArray());
+                                    }
+                                    DataFromESP.write(RD16);
+                                    DataFromESP.write(CALD);
+                                    DataFromESP.write(device_id);
+                                    DataFromESP.write(device_name());
+                                    DataFromESP.write(getRTC());
+                                    DataFromESP.write(LNA);
+                                    DataFromESP.write(anzahl_tabellen);
+                                    DataFromESP.write(freqs_N);
+                                    DataFromESP.write(levels_M);
+                                    DataFromESP.write(callibrationTable());
+                                    DataFromESP.write(battery_charge);
+                                    DataFromESP.write(battery_voltage);
+                                    DataFromESP.write("PEND".getBytes());
+                                    send(DataFromESP.toByteArray());
+                                    current_Pack = null;
+                                    break;
+                                case Detv:
+                                    for(int i = 0; i < frequencies.length/2; ++i) {
                                         DataFromESP.write(RD16);
-                                        DataFromESP.write(DRDY);
-                                        DataFromESP.write(device_id);
-                                        DataFromESP.write(LNA);
-                                        DataFromESP.write(reserviert(12, 0));
-                                        DataFromESP.write(battery_charge);
-                                        DataFromESP.write(battery_voltage);
-                                        DataFromESP.write(PEND);
-                                        send(DataFromESP.toByteArray());
-                                        break;
-                                    case Waiting:
-                                        try {
-                                            sleep(500);
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                        break;
-                                    case Time:
-                                        DataFromESP.write(RD16);
-                                        DataFromESP.write(TIME);
+                                        DataFromESP.write(DETV);
                                         DataFromESP.write(device_id);
                                         DataFromESP.write(getSeqeneceNbr());
                                         DataFromESP.write(getRTC());
                                         DataFromESP.write(LNA);
-                                        DataFromESP.write(frequencies);
-                                        DataFromESP.write(measure(byteArray2int(frequencies)));
-                                        DataFromESP.write(reserviert(16, 0));
-                                        DataFromESP.write(reserviert(39, 0));
-                                        DataFromESP.write(battery_charge);
-                                        DataFromESP.write(battery_voltage);
-                                        DataFromESP.write(PEND);
-                                        send(DataFromESP.toByteArray());
-                                        break;
-                                    case Scan:
-                                        DataFromESP.write(RD16);
-                                        DataFromESP.write(SCAN);
-                                        DataFromESP.write(device_id);
-                                        DataFromESP.write(getSeqeneceNbr());
-                                        DataFromESP.write(getRTC());
-                                        DataFromESP.write(LNA);
-                                        DataFromESP.write(frequencies);
-                                        DataFromESP.write(measure(byteArray2int(frequencies)));
+                                        DataFromESP.write(split_packet(2*i, 2*i + 1, frequencies));
+                                        DataFromESP.write(measure(byteArray2int(split_packet(2*i, 2*i + 1, frequencies))));
                                         DataFromESP.write(reserviert(16, 0));
                                         DataFromESP.write(battery_charge);
                                         DataFromESP.write(battery_voltage);
                                         DataFromESP.write(PEND);
                                         send(DataFromESP.toByteArray());
-                                        break;
-                                    case Callibrate:
-                                        for(int i = 0; i < 28; ++i){
-                                            sleep(50);
-                                            ByteArrayOutputStream ProgressPack = new ByteArrayOutputStream(14);
-                                            ProgressPack.write(RD16);
-                                            ProgressPack.write(PROG);
-                                            ProgressPack.write(int2byteArray((int) (100.0 * i/27.0), 2));
-                                            ProgressPack.write(PEND);
-                                            send(ProgressPack.toByteArray());
-                                        }
-                                        DataFromESP.write(RD16);
-                                        DataFromESP.write(CALD);
-                                        DataFromESP.write(device_id);
-                                        DataFromESP.write(device_name());
-                                        DataFromESP.write(getRTC());
-                                        DataFromESP.write(LNA);
-                                        DataFromESP.write(anzahl_tabellen);
-                                        DataFromESP.write(freqs_N);
-                                        DataFromESP.write(levels_M);
-                                        DataFromESP.write(callibrationTable());
-                                        DataFromESP.write(battery_charge);
-                                        DataFromESP.write(battery_voltage);
-                                        DataFromESP.write("PEND".getBytes());
-                                        send(DataFromESP.toByteArray());
-                                        current_Pack = null;
-                                        break;
-                                    case Detv:
-                                        for(int i = 0; i < frequencies.length/2; ++i) {
-                                            DataFromESP.write(RD16);
-                                            DataFromESP.write(DETV);
-                                            DataFromESP.write(device_id);
-                                            DataFromESP.write(getSeqeneceNbr());
-                                            DataFromESP.write(getRTC());
-                                            DataFromESP.write(LNA);
-                                            DataFromESP.write(split_packet(2*i, 2*i + 1, frequencies));
-                                            DataFromESP.write(measure(byteArray2int(split_packet(2*i, 2*i + 1, frequencies))));
-                                            DataFromESP.write(reserviert(16, 0));
-                                            DataFromESP.write(battery_charge);
-                                            DataFromESP.write(battery_voltage);
-                                            DataFromESP.write(PEND);
-                                            send(DataFromESP.toByteArray());
-                                            DataFromESP.reset();
-                                        }
-                                        break;
-                                    default:
-                                        throw new IllegalStateException("Unknown State is" + state.toString());
-                                }
-                            } catch (IOException e){
-                                e.printStackTrace();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                                        DataFromESP.reset();
+                                    }
+                                    break;
+                                default:
+                                    throw new IllegalStateException("Unknown State is" + state.toString());
                             }
+                        } catch (IOException e){
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
 
 
 //                            // sleeping outsourced to measure()
@@ -210,16 +206,17 @@ public class Fake_TCP_Server implements TCP_SERVER {
 //                                e.printStackTrace();
 //                            }
 
-                            if (wifiDataBuffer.isDataWaiting_ToESP()) { // send Trigger-Pack if one is available
-                                byte[] received_from_Remo = wifiDataBuffer.dequeue_ToESP();
-                                byte[] HeaderofTrigger = {received_from_Remo[4], received_from_Remo[5], received_from_Remo[6], received_from_Remo[7]};
-                                Log.d(LOG_TAG,"TCPServer_fake did receive a TriggerPackage of Type '"+ new String(HeaderofTrigger) +"' from Android");
-                                current_Pack = received_from_Remo;
-                                byte[] lna = {received_from_Remo[12]};
-                                LNA = lna;
-                            }
+                        if (wifiDataBuffer.isDataWaiting_ToESP()) { // send Trigger-Pack if one is available
+                            byte[] received_from_Remo = wifiDataBuffer.dequeue_ToESP();
+                            byte[] HeaderofTrigger = {received_from_Remo[4], received_from_Remo[5], received_from_Remo[6], received_from_Remo[7]};
+                            Log.d(LOG_TAG,"TCPServer_fake did receive a TriggerPackage of Type '"+ new String(HeaderofTrigger) +"' from Android");
+                            current_Pack = received_from_Remo;
+                            byte[] lna = {received_from_Remo[12]};
+                            LNA = lna;
                         }
                     }
+
+
                 }
             }
         };
@@ -235,6 +232,22 @@ public class Fake_TCP_Server implements TCP_SERVER {
         Log.d(LOG_TAG,"TCPServer_fake did send a DataPackage of Type '"+ new String(HeaderofData) +"' to Android");
         wifiDataBuffer.enque_FromESP(DataPack);
         incrementSeqenceNbr();
+    }
+
+    public void SendErrorToActivity (Integer Code, String Message){
+        ByteArrayOutputStream errorbuffer = new ByteArrayOutputStream(134);
+        try {
+            errorbuffer.write("RD16EROR".getBytes());
+            errorbuffer.write(new byte[]{0, Code.byteValue()});
+            errorbuffer.write(Message.getBytes());
+            for (int i = 0; i < 120-Message.length(); ++i){
+                errorbuffer.write(((Integer) 0).byteValue());
+            }
+            errorbuffer.write("PEND".getBytes());
+            wifiDataBuffer.enque_FromESP(errorbuffer.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private STATE getNextState(STATE old_state) {
