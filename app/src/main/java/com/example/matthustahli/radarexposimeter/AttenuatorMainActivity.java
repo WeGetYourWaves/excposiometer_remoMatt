@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import static java.lang.Thread.sleep;
 
@@ -140,7 +139,6 @@ public class AttenuatorMainActivity extends AppCompatActivity implements View.On
 
         if (this.isFinishing()) {
             StopService();
-            Toast.makeText(this, "app finaly closed", Toast.LENGTH_SHORT).show();
         }
     }
 

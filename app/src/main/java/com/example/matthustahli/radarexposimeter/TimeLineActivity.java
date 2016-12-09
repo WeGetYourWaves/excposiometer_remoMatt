@@ -137,41 +137,6 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         modeMaxSize();
     }
 
-
-    /*private void makePlot() {
-        if (timer != null){
-            timer.cancel();
-        }
-        counter =0;
-        maxHight= modeMaxSize();
-        canvas.drawColor(Color.WHITE);
-        imageView.setImageBitmap(bitmap);
-        lastValue= CalcBarHight();
-        canvas.drawRect(coord.getLeft(counter), lastValue, coord.getRight(counter), coord.getBottom(counter), paintActive);
-        counter++;
-        handler = new Handler();
-        timer = new Timer();
-        runnable = new Runnable(){
-            public void run() {
-                Log.d("latestvalue", String.valueOf(lastValue));
-                int next = counter %anzahlBalken;
-                int last =(counter-1)% anzahlBalken;
-                canvas.drawRect(coord.getLeft(last), lastValue, coord.getRight(last), coord.getBottom(last), paintBar);
-                lastValue= CalcBarHight();// will be used, and then waits 500 milsec until recalculated for the next bar.
-                canvas.drawRect(coord.getLeft(next), lastValue, coord.getRight(next), coord.getBottom(next), paintActive);
-                imageView.setImageBitmap(bitmap);
-                counter++;
-            }
-        };
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(runnable);
-            }
-        },0,500);  // time when new bar appears.
-    }*/
-
-
     public void modeMaxSize() {
         int maxSizeInVolt = 0;
         switch (myMode) {

@@ -27,8 +27,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -90,7 +88,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         getModeFromIntent();
 
         initializeButtons();
-        //handlesActivatingDropDown();
         setButtonsOnClickListener();
         refreshStatusButtons();
 
@@ -98,7 +95,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         makePlot();
 
         ActivateTouchOnPlot();
-        // ActivateAddButton();
         Log.d("activeBar(onCreate): ", String.valueOf(activeBar));
     }
 
@@ -153,7 +149,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         else if (myMode == "LNA on")  attenuator = 3;
         else if(myMode == "normal mode")   attenuator = 0;
         else if(myMode == "-42 dB") attenuator = 2;
-        Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -255,7 +250,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 myMode = "normal mode";
                 //makePlot();
                 settings.setVisibility(LinearLayout.GONE);
-                Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
                 sendTrigger(viewStop.get_packet());
                 View_Packet_Trigger view_packet_trigger0 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
                 sendTrigger(view_packet_trigger0.get_packet());
@@ -267,7 +261,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 change_MinMaxPlot();
                 //makePlot();
                 settings.setVisibility(LinearLayout.GONE);
-                Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
                 sendTrigger(viewStop.get_packet());
                 View_Packet_Trigger view_packet_trigger1 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
                 sendTrigger(view_packet_trigger1.get_packet());
@@ -280,7 +273,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 //makePlot();
 
                 settings.setVisibility(LinearLayout.GONE);
-                Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
                 sendTrigger(viewStop.get_packet());
                 View_Packet_Trigger view_packet_trigger2 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
                 sendTrigger(view_packet_trigger2.get_packet());
@@ -293,7 +285,6 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
                 change_MinMaxPlot();
                 //makePlot();
                 settings.setVisibility(LinearLayout.GONE);
-                Toast.makeText(OverviewScanPlotActivity.this, myMode, Toast.LENGTH_SHORT).show();
                 sendTrigger(viewStop.get_packet());
                 View_Packet_Trigger view_packet_trigger3 = new View_Packet_Trigger(device_id, attenuator, measurement_type);
                 sendTrigger(view_packet_trigger3.get_packet());

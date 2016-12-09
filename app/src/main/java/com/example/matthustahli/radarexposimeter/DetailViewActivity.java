@@ -25,7 +25,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -98,7 +97,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         populateMeasurements();
         populateListView();             // this plots the data to the layout
         handleClicksOnList();
-        Toast.makeText(this,String.valueOf(freq_number),Toast.LENGTH_SHORT).show();
 
         //activate all Buttons and listeners
         initializeButtons();
@@ -233,7 +231,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 sendTrigger(DetViewStop.get_packet());
                 DetailView_Packet_Trigger detailView_packet_trigger0 = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, measurement_type);
                 sendTrigger(detailView_packet_trigger0.get_packet());
-                Toast.makeText(this, "normal", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.b_mode_21db:
                 attenuator = 1;
@@ -245,7 +242,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 sendTrigger(DetViewStop.get_packet());
                 DetailView_Packet_Trigger detailView_packet_trigger1 = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, measurement_type);
                 sendTrigger(detailView_packet_trigger1.get_packet());
-                Toast.makeText(this, "21 dB", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.b_mode_42db:
                 attenuator = 2;
@@ -257,7 +253,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 sendTrigger(DetViewStop.get_packet());
                 DetailView_Packet_Trigger detailView_packet_trigger2 = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, measurement_type);
                 sendTrigger(detailView_packet_trigger2.get_packet());
-                Toast.makeText(this, "42 dB", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.b_mode_LNA:
                 attenuator = 3;
@@ -269,7 +264,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 sendTrigger(DetViewStop.get_packet());
                 DetailView_Packet_Trigger detailView_packet_trigger3 = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, measurement_type);
                 sendTrigger(detailView_packet_trigger3.get_packet());
-                Toast.makeText(this, "verstärkt", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.setting_button:
                 if (settings.getVisibility() == LinearLayout.VISIBLE) {
@@ -361,11 +355,9 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     if(goingToNextActivity==true){
                     LiveMeasure chosenFrequency = measures.get(position);
-                    Toast.makeText(DetailViewActivity.this, String.valueOf(chosenFrequency.getFrequency()), Toast.LENGTH_SHORT).show();
                     //go to new activity
                     Intent intent = new Intent(DetailViewActivity.this, TimeLineActivity.class);
                     intent.putExtra("frequency", chosenFrequency.getFrequency());
-                    Toast.makeText(DetailViewActivity.this, "given: " + String.valueOf(chosenFrequency.getFrequency()), Toast.LENGTH_SHORT).show();
                     intent.putExtra("myMode", myMode);
                     startActivity(intent);
                     }
@@ -405,7 +397,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         else if (myMode == "LNA on")  attenuator = 3;
         else if(myMode == "normal mode")   attenuator = 0;
         else attenuator = 2;
-        Toast.makeText(DetailViewActivity.this,myMode,Toast.LENGTH_SHORT).show();
     }
 
 
