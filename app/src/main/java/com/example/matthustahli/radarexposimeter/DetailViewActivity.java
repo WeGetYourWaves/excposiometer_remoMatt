@@ -25,8 +25,10 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -375,9 +377,23 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
 
     //fill arrayList with values
     private void populateMeasurements() {
+        sortArray();
         for(int i = 0; i< freq_number;i++){
             measures.add(new LiveMeasure( freq[i],rms[i], peak[i]));
         }
+    }
+
+    private void sortArray(){
+            for (int i = 0; i < freq_number; i++){
+                int min = i;
+                for (int j = i+1; j < freq_number; j++){
+                if (freq[j] < freq[min]) {
+                    min = j;
+                }}
+                int temp = freq[i];
+                freq[i] = freq[min];
+                freq[min] = temp;
+            }
     }
 
 
