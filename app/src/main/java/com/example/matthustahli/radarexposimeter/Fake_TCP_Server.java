@@ -450,7 +450,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                 if (k==0){throw new IllegalStateException("k is wrong, error in measure");}
                 // von André: measure also Data over maxValue
                 lowerbound = meas_data_P[(17*k)+1]; // Richtig: [(17*k)+8]
-                upperbound = (12/10* meas_data_P[(17*k)+16]); // richtig: ohne 12*.../10
+                upperbound = (12* meas_data_P[(17*k)+16])/10; // richtig: ohne 12*.../10
                 if (upperbound - lowerbound <= 0)
                 {throw new IllegalArgumentException("lowerbound - upperbound bigger than zero: at 1");}
                 meas = rand.nextInt(upperbound - lowerbound) + lowerbound;
@@ -484,7 +484,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                 }
                 if (k==0){throw new IllegalStateException("k is wrong, error in measure() at freq: " + freqency + "MHz");}
                 // von André: to test: measure smaler than lower bound, but not to high (as it is RMS)
-                lowerbound= meas_data_R[(17*k)+1]; // Correct is [(17*k)+1];
+                lowerbound= 0;//meas_data_R[(17*k)+1]; // Correct is [(17*k)+1];
                 upperbound= meas_data_R[(17*k)+10]; // Correct is [(17*k)+16]
                 if (upperbound - lowerbound <= 0)
                 {throw new IllegalArgumentException("lowerbound - upperbound bigger not than zero: at 2");}
@@ -524,8 +524,8 @@ public class Fake_TCP_Server implements TCP_SERVER {
                 }
                 if (k==0){throw new IllegalStateException("k is wrong, error while measure() at freq: " + freqency + "MHz");}
                 // if one measures RMS and Peak together, RMS value is always smaler than Peak
-                lowerbound= meas_data_R[(17*k)+1]; // Correct for full range: meas_data_R[(17*k)+1]
-                upperbound= meas_data_R[(17*k)+8]; // Correct for full range: meas_data_R[(17*k)+16]
+                lowerbound = 0;// meas_data_R[(17*k)+1]; // Correct for full range: meas_data_R[(17*k)+1]
+                upperbound = meas_data_R[(17*k)+8]; // Correct for full range: meas_data_R[(17*k)+16]
                 if (upperbound - lowerbound <= 0)
                 {throw new IllegalArgumentException("lowerbound - upperbound bigger than zero: at 3");}
                 meas = (int) (rand.nextInt(upperbound - lowerbound) + lowerbound);
@@ -538,8 +538,8 @@ public class Fake_TCP_Server implements TCP_SERVER {
                     {k = i;}
                 }
                 if (k==0){throw new IllegalStateException("k is wrong, error while measure() at freq: " + freqency);}
-                lowerbound= meas_data_P[(17*k)+7]; // Correct for full Range:  meas_data_P[(17*k)+1]
-                upperbound= meas_data_P[(17*k)+16];
+                lowerbound = meas_data_P[(17*k)+7]; // Correct for full Range:  meas_data_P[(17*k)+1]
+                upperbound = 12* meas_data_P[(17*k)+16]/11;
                 if (upperbound - lowerbound <= 0)
                 {throw new IllegalArgumentException("lowerbound - upperbound bigger than zero: at 4");}
                 meas = rand.nextInt(upperbound - lowerbound) + lowerbound;
