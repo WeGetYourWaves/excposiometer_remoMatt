@@ -96,7 +96,7 @@ public class Fake_TCP_Server implements TCP_SERVER {
                             switch (state) {
                                 case Start:
                                     Log.d(LOG_TAG, "Current State = "+ state.toString());
-                                    sleep(2000); // 2 sec to turn on measurement device is fast
+                                    sleep(6000); // 2 sec to turn on measurement device is fast
                                     DataFromESP.write(RD16);
                                     DataFromESP.write(DRDY);
                                     DataFromESP.write(device_id);

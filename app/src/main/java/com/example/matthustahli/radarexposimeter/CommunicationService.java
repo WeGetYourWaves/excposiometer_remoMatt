@@ -29,7 +29,6 @@ import android.net.wifi.WifiManager;
 import android.os.IBinder;
 import org.jetbrains.annotations.Nullable;
 import android.util.Log;
-import android.widget.Toast;
 import java.lang.reflect.Method;
 
 
@@ -64,7 +63,6 @@ public class CommunicationService extends Service {
     public IBinder onBind(Intent intent) {
         // Is never used but has to be implemented
         Log.d(LOG_TAG, "onBind called");
-        Toast.makeText(this, "onBind called", Toast.LENGTH_SHORT).show();
         return null;
     }
 
@@ -95,7 +93,6 @@ public class CommunicationService extends Service {
 
         ListenerForActivity = new IntentListenerForActivity();
 
-        Toast.makeText(this, "Service started", Toast.LENGTH_SHORT).show();
 
         super.onCreate();
     }
@@ -127,7 +124,6 @@ public class CommunicationService extends Service {
         // turn Wifi back on.
         wifi_manager.setWifiEnabled(WifiWasOnWhenServiceWasStarted);
         this.unregisterReceiver(ListenerForActivity);
-        Toast.makeText(this, "Service stopped", Toast.LENGTH_SHORT).show();
         super.onDestroy();
     }
 
