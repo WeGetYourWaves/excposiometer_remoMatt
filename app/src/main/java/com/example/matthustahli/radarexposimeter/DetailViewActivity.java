@@ -58,7 +58,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     int colorButtonActiveMode, colorButtonInactive;
     Animation animationSlideDown;
     boolean goingToNextActivity = true;
-
+    TextView tv_peak, tv_rms,tv_freq;
 
 
 
@@ -187,7 +187,14 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         textViewSize = size.x/4;
         colorButtonActiveMode = DetailViewActivity.this.getResources().getColor(R.color.active_mode_button_color);
         colorButtonInactive = DetailViewActivity.this.getResources().getColor(R.color.inactive_mode_button_color);
+        tv_freq = (TextView) findViewById(R.id.text_freq);
+        tv_freq.setWidth((int) textViewSize);
+        tv_peak= (TextView) findViewById(R.id.text_peak);
+        tv_peak.setWidth((int) barWidthMax);
+        tv_rms = (TextView) findViewById(R.id.text_rms);
     }
+
+
 
     private void setButtonsOnClickListener() {
         b_normal.setOnClickListener(this);
@@ -223,7 +230,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         DetailView_Packet_Trigger DetViewStop = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, (char) 0);
 
         switch (v.getId()) {
-            case R.id.b_mode_normal:
+            /*case R.id.b_mode_normal:
                 attenuator = 0;
                 myMode = "normal mode";
                 change_MinMaxPlot();
@@ -266,7 +273,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
                 sendTrigger(DetViewStop.get_packet());
                 DetailView_Packet_Trigger detailView_packet_trigger3 = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, measurement_type);
                 sendTrigger(detailView_packet_trigger3.get_packet());
-                break;
+                break;*/
             case R.id.setting_button:
                 if (settings.getVisibility() == LinearLayout.VISIBLE) {
                     settings.setVisibility(LinearLayout.GONE);
@@ -466,10 +473,10 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             rmsText.setWidth((int)barWidthMax);
             if(currentMeasure.getRMS()<-1){
                 if(currentMeasure.getRMS()<-2.5){
-                    rmsText.setText('<' + Double.toString(minPlotR));
+                    rmsText.setText("<" + Double.toString(minPlotR)+" V/m");
                     rmsBar.setBackgroundColor(colorEmpty);
                 }else{
-                    rmsText.setText('>' + Double.toString(maxPlotR));
+                    rmsText.setText(">" + Double.toString(maxPlotR)+" V/m");
                     rmsBar.setBackgroundColor(colorLimit);
                     rmsBar.setWidth((int) getMySizeComparedToMax(5500,'R'));    //for shure to high..
                 }
@@ -487,10 +494,10 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
             peakText.setWidth((int)barWidthMax);
             if(currentMeasure.getPeak()<-1){
                 if(currentMeasure.getPeak()<-2.5){
-                    peakText.setText('<' + Double.toString(minPlotP));
+                    peakText.setText("<" + Double.toString(minPlotP)+" V/m");
                     peakBar.setBackgroundColor(colorEmpty);
                 }else{
-                    peakText.setText('>' + Double.toString(maxPlotP));
+                    peakText.setText(">" + Double.toString(maxPlotP)+" V/m");
                     peakBar.setBackgroundColor(colorLimit);
                     peakBar.setWidth((int) getMySizeComparedToMax(5500,'P'));
                 }

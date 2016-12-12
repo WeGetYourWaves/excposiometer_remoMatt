@@ -78,7 +78,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="5dp"
         />
     <TextView
         android:id="@+id/text_peak"
@@ -86,8 +86,9 @@
         android:layout_height="wrap_content"
         android:text="PEAK"
         android:textSize="30dp"
-        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@+id/text_freq"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
         />
 
     <TextView
@@ -96,9 +97,9 @@
         android:layout_height="wrap_content"
         android:text="RMS"
         android:textSize="30dp"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="50dp"
+        android:layout_toRightOf="@+id/text_peak"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
 
         />

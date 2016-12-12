@@ -64,7 +64,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     int colorFix, colorBar, colorActive, colorLimit, colorEmpty, colorButtonActiveMode,colorButtonInactive,colorStartStop,activeBar = 0;
     double abstandZwischenBalken = 5.0; //5dp
     Paint paintFix, paintBar, paintActive, paintLimit, paintEmpty,paintStartStop;
-    TextView TVMaxValue, TVMinValue, TVMiddleValue, tv_peakValue, tv_rmsValue;
+    TextView TVMaxValue, TVMinValue, TVMiddleValue, tv_peakValue, tv_rmsValue, tv_selectedFreq;
     ImageView imageView;
     Bitmap bitmap;
     Canvas canvas;
@@ -204,13 +204,14 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         TVMiddleValue = (TextView) findViewById(R.id.tv_middleValueScale);
         TVMinValue = (TextView) findViewById(R.id.tv_minValueScale);
         SetPositionOnScreenOfTextViews();
+        tv_selectedFreq.setText(String.valueOf(freq/1000.0)+" GHz");
         //tv_peakValue.setPaintFlags(paintActive.getColor());
         //tv_peakValue.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
     }
 
     private void SetPositionOnScreenOfTextViews() {
         ViewGroup.MarginLayoutParams top = (ViewGroup.MarginLayoutParams) TVMaxValue.getLayoutParams();
-        top.topMargin = (int) (size.y * (1.0 - scaleY));
+        top.topMargin = (int) (size.y * (1.0 - scaleY)+33);
         ViewGroup.MarginLayoutParams middle = (ViewGroup.MarginLayoutParams) TVMiddleValue.getLayoutParams();
         middle.topMargin = (int) (size.y / 2.0 + size.y * (1.0 - scaleY) / 2.0);
         ViewGroup.MarginLayoutParams bottom = (ViewGroup.MarginLayoutParams) TVMinValue.getLayoutParams();
@@ -239,7 +240,8 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                     lastValuePeak = size.y;
                 } else {
                     lastValuePeak = (float) (size.y - size.y * scaleY); //full size
-                    canvas.drawRect(LargePeakBars.getLeft(next), lastValuePeak, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintLimit);
+                    //canvas.drawRect(LargePeakBars.getLeft(next), lastValuePeak, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintLimit);
+                    canvas.drawRect(LargePeakBars.getLeft(next), lastValuePeak, LargePeakBars.getRight(next), LargePeakBars.getBottom(next), paintBar);
                 }
             } else {
                 lastValuePeak = (float) (size.y- ((log(lastValuePeak)-log(minPlot)) / hightPlotScaled)*size.y*scaleY);
@@ -250,7 +252,8 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                     lastValueRms = size.y;
                 } else {
                     lastValueRms = (float) (size.y - size.y * scaleY); //full size
-                    canvas.drawRect(SmallRMSBars.getLeft(next), lastValueRms, SmallRMSBars.getRight(next), SmallRMSBars.getBottom(next), paintLimit);
+                    //canvas.drawRect(SmallRMSBars.getLeft(next), lastValueRms, SmallRMSBars.getRight(next), SmallRMSBars.getBottom(next), paintLimit);
+                    canvas.drawRect(SmallRMSBars.getLeft(next), lastValueRms, SmallRMSBars.getRight(next), SmallRMSBars.getBottom(next), paintActive);
                 }
             } else {
                 lastValueRms = (float) (size.y-((log(lastValueRms)-log(minPlot)) / hightPlotScaled)*size.y*scaleY);
@@ -284,6 +287,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         b_startStop = (Button) findViewById(R.id.startStopButton);
         tv_peakValue = (TextView) findViewById(R.id.tv_peakValue);
         tv_rmsValue = (TextView) findViewById(R.id.tv_rmsValue);
+        tv_selectedFreq = (TextView) findViewById(R.id.tv_selectedFreq_inTimeLine);
         settings = (LinearLayout) findViewById(R.id.layout_setting);
     }
 
@@ -321,7 +325,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         Timeline_Packet_Trigger timeStop = new Timeline_Packet_Trigger(device_id, attenuator, freq, (char) 0);
         switch (v.getId()) {
-            case R.id.b_mode_normal:
+            /*case R.id.b_mode_normal:
                 myMode = "normal mode";
                 attenuator = 0;
                 change_MinMaxPlot();
@@ -372,7 +376,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
                 settings.setVisibility(LinearLayout.GONE);
                 modeMaxSize();
                 resetPlotToBeginning();
-                break;
+                break;*/
             case R.id.setting_button:
                 if (settings.getVisibility() == LinearLayout.VISIBLE) {
                     settings.setVisibility(LinearLayout.GONE);
@@ -452,9 +456,11 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
 
     //changes Bar back to normal plot color
     private void changeBarColorToNOTactiv(Integer position) {
-        if(peakValues[position]== -2){
+        if(false){
+        //if(peakValues[position]== -2){
             canvas.drawRect(LargePeakBars.getLeft(position), AllPlotValuesPeak[position], LargePeakBars.getRight(position), LargePeakBars.getBottom(position), paintLimit);
         }else {
+
             canvas.drawRect(LargePeakBars.getLeft(position), AllPlotValuesPeak[position], LargePeakBars.getRight(position), LargePeakBars.getBottom(position), paintBar);
             canvas.drawRect(SmallRMSBars.getLeft(position), AllPlotValuesRms[position], SmallRMSBars.getRight(position), SmallRMSBars.getBottom(position), paintActive);
         }
