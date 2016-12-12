@@ -77,7 +77,7 @@ public class Rectangle extends AppCompatActivity {
                 if (values[i] < -2.5) {
                     toReturn.add(i, (float) (sizeY)); // empty size
                 } else {
-                    toReturn.add(i, (float) 0); //(sizeY - sizeY*scaleY)); //full size
+                    toReturn.add(i, (float) (sizeY - sizeY*scaleY)); //full size
                 }
             } else {
                 double var = (log(values[i]) - log(minPlot)) / deltaMaxToMin;

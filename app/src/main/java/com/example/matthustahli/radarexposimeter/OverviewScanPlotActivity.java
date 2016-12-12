@@ -508,9 +508,9 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         if(measurement_type=='R'){
             if(rms[position]<-1){
                 if(rms[position]<-2.5){
-                    selectedValue.setText('<' + Double.toString(minPlot));
+                    selectedValue.setText("<" + Double.toString(minPlot)+" V/m ");
                 }else{
-                    selectedValue.setText('>' + Double.toString(maxPlot));
+                    selectedValue.setText(">" + Double.toString(maxPlot)+" V/m ");
                 }
             }else{
             double valueToShow = rms[position] ;
@@ -521,9 +521,9 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         }else{
             if(peak[position]<-1){
                 if(peak[position]<-2.5){
-                    selectedValue.setText('<' + Double.toString(minPlot));
+                    selectedValue.setText("<" + Double.toString(minPlot)+" V/m ");
                 }else{
-                    selectedValue.setText('>' + Double.toString(maxPlot));
+                    selectedValue.setText(">" + Double.toString(maxPlot)+" V/m ");
                 }
             }else {
                 double valueToShow = peak[position];
