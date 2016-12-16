@@ -2,6 +2,7 @@ package com.example.matthustahli.radarexposimeter;
 
 /**
  * Created by Remo on 29.11.2016.
+ * Implements all required methods to parse the timeline Exposi-packet.
  */
 
 public class Timeline_Packet_Exposi extends Packet_Exposimeter{

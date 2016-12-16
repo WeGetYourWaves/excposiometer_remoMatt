@@ -2,6 +2,7 @@ package com.example.matthustahli.radarexposimeter;
 
 /**
  * Created by Remo on 18.10.2016.
+ * Implements all required methods to parse all data-packets.
  */
 public class Data_Packet_Exposi extends Packet_Exposimeter{
 

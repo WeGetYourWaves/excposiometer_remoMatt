@@ -4,6 +4,7 @@ import java.util.Objects;
 
 /**
  * Created by Remo on 11.10.2016.
+ * Superclass of all parsing-classes. Contains basic operation used in these subclasses.
  */
 public class Packet_Exposimeter extends Packet {
 

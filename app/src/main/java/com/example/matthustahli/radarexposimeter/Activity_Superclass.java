@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 /**
  * Created by Remo on 20.10.2016.
+ *Storing all calibration tables and implementing the whole calibration process
  */
 public class Activity_Superclass implements Serializable {
 

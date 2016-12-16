@@ -2,6 +2,7 @@ package com.example.matthustahli.radarexposimeter;
 
 /**
  * Created by Remo on 04.11.2016.
+ * Implements all required methods to parse the ready.packet.
  */
 
 public class Ready_Packet_Exposi extends Packet_Exposimeter {

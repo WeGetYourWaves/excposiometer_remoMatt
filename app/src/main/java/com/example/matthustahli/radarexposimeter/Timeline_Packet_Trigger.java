@@ -2,6 +2,7 @@ package com.example.matthustahli.radarexposimeter;
 
 /**
  * Created by Remo on 07.10.2016.
+ * Generates the Timeline trigger-packet.
  */
 public class Timeline_Packet_Trigger extends Packet_Trigger {
 

@@ -2,6 +2,7 @@ package com.example.matthustahli.radarexposimeter;
 
 /**
  * Created by Remo on 24.11.2016.
+ * Implements all required methods to parse the progress-packet.
  */
 
 public class Progress_Packet_Exposi extends Packet_Exposimeter {

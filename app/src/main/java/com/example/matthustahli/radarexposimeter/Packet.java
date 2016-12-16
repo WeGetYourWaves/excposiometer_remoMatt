@@ -10,6 +10,7 @@ import static java.lang.Math.pow;
 
 /**
  * Created by Remo on 10.10.2016.
+ * Contains all basic operations needed in packet parsing and generating.
  */
 public class Packet {
 
@@ -31,6 +32,9 @@ public class Packet {
             else if (byteArray.length == 2){
                 byteArray[0] = (byte)(Integr >> 8);
                 byteArray[1] = (byte)Integr;
+            }
+            else if (byteArray.length == 1){
+                byteArray[0] = (byte) Integr;
             }
 
             // problems with wifiDataBuffer overflow: byteArray = ByteBuffer.allocate(byteArray_length).putInt(Integr).array();

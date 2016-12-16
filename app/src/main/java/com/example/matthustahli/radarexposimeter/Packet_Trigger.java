@@ -4,6 +4,7 @@ import java.nio.ByteBuffer;
 
 /**
  * Created by Remo on 07.10.2016.
+ * Superclass of all generating trigger-classes. Contains basic operation used in these subclasses.
  */
 
 public class Packet_Trigger extends Packet{

@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 /**
  * Created by Remo on 11.10.2016.
+ * Implements all required methods to parse the calibration-packet.
  */
 public class Cal_Packet_Exposi extends Packet_Exposimeter {
 
