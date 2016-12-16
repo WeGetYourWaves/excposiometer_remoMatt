@@ -127,9 +127,9 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     public void getSettingsFromIntent() {
         Intent intent = getIntent();
         myMode = intent.getStringExtra("myMode");
-        if (myMode == "-21 dB") attenuator = 1;
-        else if (myMode == "LNA on") attenuator = 3;
-        else if (myMode == "normal mode") attenuator = 0;
+        if (myMode.equals("-21 dB")) attenuator = 1;
+        else if (myMode.equals("LNA on")) attenuator = 3;
+        else if (myMode.equals("normal mode")) attenuator = 0;
         else attenuator = 2;
         freq = intent.getIntExtra("frequency", 0);
         //freq = 500 + freq*100;        //freq = value of freq MHz;

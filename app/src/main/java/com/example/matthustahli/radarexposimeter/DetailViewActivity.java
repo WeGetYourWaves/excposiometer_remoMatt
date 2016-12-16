@@ -416,9 +416,9 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         }
         //Toast.makeText(this,String.valueOf(freq[3]),Toast.LENGTH_SHORT).show();
         myMode = intent.getStringExtra("MODE");
-        if (myMode == "-21 dB")  attenuator = 1;
-        else if (myMode == "LNA on")  attenuator = 3;
-        else if(myMode == "normal mode")   attenuator = 0;
+        if (myMode.equals("-21 dB"))  attenuator = 1;
+        else if (myMode.equals("LNA on"))  attenuator = 3;
+        else if(myMode.equals("normal mode"))   attenuator = 0;
         else attenuator = 2;
     }
 

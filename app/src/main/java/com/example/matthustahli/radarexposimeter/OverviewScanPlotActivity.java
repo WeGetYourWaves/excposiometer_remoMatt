@@ -145,10 +145,18 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         myMode = intent.getStringExtra("MODE");
-        if (myMode == "-21 dB")  attenuator = 1;
-        else if (myMode == "LNA on")  attenuator = 3;
-        else if(myMode == "normal mode")   attenuator = 0;
-        else if(myMode == "-42 dB") attenuator = 2;
+        if (myMode.equals("-21 dB"))  {
+            attenuator = 1;
+        }
+        else if (myMode.equals("LNA on"))  {
+            attenuator = 3;
+        }
+        else if(myMode.equals("normal mode"))   {
+            attenuator = 0;
+        }
+        else if(myMode.equals("-42 dB")) {
+            attenuator = 2;
+        }
     }
 
     @Override
