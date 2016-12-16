@@ -23,7 +23,7 @@ public class WifiDataBuffer implements Serializable {
 
     public WifiDataBuffer() {
         ToESP = new LinkedBlockingQueue<>(5); // Max Size = 5
-        FromESP = new LinkedBlockingQueue<>(1000); // Max 1000 unprocessed Packages at same time allowed
+        FromESP = new LinkedBlockingQueue<>(10); // Max 1000 unprocessed Packages at same time allowed
     }
 
     public boolean enqueue_ToESP(byte[] packet) {

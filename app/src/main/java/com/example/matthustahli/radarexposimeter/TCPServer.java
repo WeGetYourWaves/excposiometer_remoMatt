@@ -144,7 +144,7 @@ public class TCPServer implements TCP_SERVER {
                                     buffi.write(percent);
                                     buffi.write(PEND);
                                     wifiDataBuffer.enque_FromESP(buffi.toByteArray());
-                                    sleep(500);
+                                    sleep(50);
                                 }
                                 ByteArrayOutputStream End_ProgressPack = new ByteArrayOutputStream(14);
                                 End_ProgressPack.write(RD16);
