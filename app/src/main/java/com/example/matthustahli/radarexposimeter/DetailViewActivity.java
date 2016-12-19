@@ -41,8 +41,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     ArrayList<Integer> fixedFreq= new ArrayList<Integer>();
     private ArrayAdapter<LiveMeasure> adapter;
     private ArrayList<LiveMeasure> measures = new ArrayList<LiveMeasure>();
-    Float maxPeak = 0f;
-    Float maxRMS = 0f;
     String myMode;
     private int attenuator;
     private int device_id;
@@ -93,7 +91,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         //load intent from previous activity
         getChoosenFreqFromIntent();
         initializeValues();
-        //putFrequenciesIntoDoubleArray();
 
         //everything with the list population and keeping it updated
         populateMeasurements();
@@ -104,7 +101,6 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         initializeButtons();
         setButtonsOnClickListener();
         activateTouch();
-        //activateValueUpdater(); // funktion von matthias für listenupdate alle x sec..
 
     }
 
@@ -206,21 +202,29 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void changeColorOfSelectedMode(){
-        b_normal.setBackgroundColor(colorButtonInactive);
+        b_normal.setVisibility(View.GONE);
+        b_21dB.setVisibility(View.GONE);
+        b_41dB.setVisibility(View.GONE);
+        b_accu.setVisibility(View.GONE);
+        /*b_normal.setBackgroundColor(colorButtonInactive);
         b_21dB.setBackgroundColor(colorButtonInactive);
         b_41dB.setBackgroundColor(colorButtonInactive);
-        b_accu.setBackgroundColor(colorButtonInactive);
+        b_accu.setBackgroundColor(colorButtonInactive);*/
         switch (myMode){
             case "normal mode":
+                b_normal.setVisibility(View.VISIBLE);
                 b_normal.setBackgroundColor(colorButtonActiveMode);
                 break;
             case "-21 dB":
+                b_21dB.setVisibility(View.VISIBLE);
                 b_21dB.setBackgroundColor(colorButtonActiveMode);
                 break;
             case "-42 dB":
+                b_41dB.setVisibility(View.VISIBLE);
                 b_41dB.setBackgroundColor(colorButtonActiveMode);
                 break;
             case "LNA on":
+                b_accu.setVisibility(View.VISIBLE);
                 b_accu.setBackgroundColor(colorButtonActiveMode);
                 break;
         }
@@ -230,6 +234,22 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         DetailView_Packet_Trigger DetViewStop = new DetailView_Packet_Trigger(device_id, attenuator, freq_number, freq, (char) 0);
 
         switch (v.getId()) {
+            case R.id.b_mode_normal:
+                settings.setVisibility(View.GONE);
+                visibleList.setVisibility(ListView.VISIBLE);
+                break;
+            case R.id.b_mode_21db:
+                settings.setVisibility(LinearLayout.GONE);
+                visibleList.setVisibility(ListView.VISIBLE);
+                break;
+            case R.id.b_mode_42db:
+                settings.setVisibility(LinearLayout.GONE);
+                visibleList.setVisibility(ListView.VISIBLE);
+                break;
+            case R.id.b_mode_LNA:
+                settings.setVisibility(LinearLayout.GONE);
+                visibleList.setVisibility(ListView.VISIBLE);
+                break;
             /*case R.id.b_mode_normal:
                 attenuator = 0;
                 myMode = "normal mode";

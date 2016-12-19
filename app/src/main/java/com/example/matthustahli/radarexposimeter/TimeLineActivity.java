@@ -301,21 +301,29 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void changeColorOfSelectedMode(){
-        b_modeNormal.setBackgroundColor(colorButtonInactive);
+        b_modeNormal.setVisibility(View.GONE);
+        b_mode21dB.setVisibility(View.GONE);
+        b_mode42dB.setVisibility(View.GONE);
+        b_mode_accumulation.setVisibility(View.GONE);
+        /*b_modeNormal.setBackgroundColor(colorButtonInactive);
         b_mode21dB.setBackgroundColor(colorButtonInactive);
         b_mode42dB.setBackgroundColor(colorButtonInactive);
-        b_mode_accumulation.setBackgroundColor(colorButtonInactive);
+        b_mode_accumulation.setBackgroundColor(colorButtonInactive);*/
         switch (myMode){
             case "normal mode":
+                b_modeNormal.setVisibility(View.VISIBLE);
                 b_modeNormal.setBackgroundColor(colorButtonActiveMode);
                 break;
             case "-21 dB":
+                b_mode21dB.setVisibility(View.VISIBLE);
                 b_mode21dB.setBackgroundColor(colorButtonActiveMode);
                 break;
             case "-42 dB":
+                b_mode42dB.setVisibility(View.VISIBLE);
                 b_mode42dB.setBackgroundColor(colorButtonActiveMode);
                 break;
             case "LNA on":
+                b_mode_accumulation.setVisibility(View.VISIBLE);
                 b_mode_accumulation.setBackgroundColor(colorButtonActiveMode);
                 break;
         }
@@ -325,6 +333,18 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         Timeline_Packet_Trigger timeStop = new Timeline_Packet_Trigger(device_id, attenuator, freq, (char) 0);
         switch (v.getId()) {
+            case R.id.b_mode_normal:
+                settings.setVisibility(View.GONE);
+                break;
+            case R.id.b_mode_21db:
+                settings.setVisibility(LinearLayout.GONE);
+                break;
+            case R.id.b_mode_42db:
+                settings.setVisibility(LinearLayout.GONE);
+                break;
+            case R.id.b_mode_LNA:
+                settings.setVisibility(LinearLayout.GONE);
+                break;
             /*case R.id.b_mode_normal:
                 myMode = "normal mode";
                 attenuator = 0;
