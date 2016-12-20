@@ -574,6 +574,7 @@ public class TimeLineActivity extends AppCompatActivity implements View.OnClickL
         return splitted;
     }
 
+    //receiver of the TimeLineActivity which receives the data from the CommunicationService
     public class TimelineActivityReceiver extends BroadcastReceiver {
         final String LOG_TAG;
 

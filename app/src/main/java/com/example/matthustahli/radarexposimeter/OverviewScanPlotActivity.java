@@ -659,6 +659,7 @@ public class OverviewScanPlotActivity extends AppCompatActivity implements View.
         startService(intent);
     }
 
+    //receiver of the OverviewScanPlotActivity which receives the data from the CommunicationService
     public class OverviewScanPlotActivityReceiver extends BroadcastReceiver {
         final String LOG_TAG;
 

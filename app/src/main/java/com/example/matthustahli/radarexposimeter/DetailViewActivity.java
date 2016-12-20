@@ -603,6 +603,7 @@ public class DetailViewActivity extends AppCompatActivity implements View.OnClic
         return splitted;
     }
 
+    //receiver of the DetailViewActivity which receives the data from the CommunicationService
     public class DetailViewActivityReceiver extends BroadcastReceiver {
         final String LOG_TAG;
 
